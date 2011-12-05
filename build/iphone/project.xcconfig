@@ -1,6 +1,0 @@
-TI_VERSION=1.7.5
-TI_SDK_DIR=/Library/Application Support/Titanium/mobilesdk/osx/$(TI_VERSION)/iphone
-TI_APPID=com.thoughtworks.helloall
-OTHER_LDFLAGS[sdk=iphoneos*]=$(inherited) -weak_framework iAd
-OTHER_LDFLAGS[sdk=iphonesimulator*]=$(inherited) -weak_framework iAd
-#include "module"
