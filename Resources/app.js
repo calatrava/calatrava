@@ -1,6 +1,8 @@
 // this sets the background color of the master UIView (when there are no windows/tab groups on it)
 Titanium.UI.setBackgroundColor('#fff');
 
+//include our domain scripts.
+Ti.include('public/javascripts/domain/currency_converter.js');
 
 
 //
@@ -21,15 +23,39 @@ win.add(Ti.UI.createLabel({
 }));
 
 
-win.add(Ti.UI.createTextField({
+var inputCurrency = Ti.UI.createTextField({
 	hintText : 'Enter money value in USD',
 	height : '50'
-}));
+});
+win.add(inputCurrency);
 
-win.add(Ti.UI.createButton({
+button = Ti.UI.createButton({
 	title: "Convert",
-	backgroundColor: "#794289"
-}));
+	color: "#794289",
+	height : '50',
+	width: '200'
+	
+});
 
+win.add(button);
+
+
+var result = Ti.UI.createLabel({
+	text : 'Value',
+	color : 'black',
+	width : 'auto',
+	height : 'auto'
+});
+
+
+button.addEventListener('click',function(e)
+{
+   var convertedCurrency = converter.usdToEuro( +inputCurrency.value );
+   result.text = convertedCurrency;
+   Titanium.API.info("You clicked the button");
+});
+
+
+win.add(result);
 
 win.open();
