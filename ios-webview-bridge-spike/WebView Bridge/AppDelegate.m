@@ -10,15 +10,18 @@
 
 #import "ViewController.h"
 
+
 @implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize viewController = _viewController;
+@synthesize bridge = _bridge;
 
 - (void)dealloc
 {
     [_window release];
     [_viewController release];
+    [_bridge release];
     [super dealloc];
 }
 
@@ -29,6 +32,13 @@
     self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController" bundle:nil] autorelease];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    
+    
+    _bridge = [[Bridge alloc] init];
+    
+    self.viewController.bridge = _bridge;
+    self.viewController.didTouchConvertCallback = @"conversionScreen.convertButtonTouched";
+    
     return YES;
 }
 
