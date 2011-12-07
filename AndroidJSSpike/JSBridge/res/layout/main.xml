@@ -1,22 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
+              android:orientation="vertical"
+              android:background="#ffffff"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+
+    <EditText android:id="@+id/valueInUSD"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center_horizontal|center_vertical"
+              android:hint="currency in USD."
+            />
+
+    <Button android:id="@+id/convert"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Convert"
+
+            />
+
+    <TextView
+            android:id="@+id/labelForConvertedValue"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="Value in Euro."
+            android:textStyle="bold"
+            />
 
     <TextView
             android:id="@+id/textOnScreen"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:text="Hello World, SimpleActivity"
-    />
-
-    <WebView android:id="@+id/webView"
-             android:layout_width="fill_parent"
-                 android:layout_height="wrap_content"
-                 android:visibility="invisible"
-                />
-
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:textStyle="bold"
+            android:text=""
+            />
 </LinearLayout>
 

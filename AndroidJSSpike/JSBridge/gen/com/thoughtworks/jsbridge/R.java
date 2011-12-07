@@ -11,8 +11,10 @@ public final class R {
     public static final class attr {
     }
     public static final class id {
-        public static final int textOnScreen=0x7f040000;
-        public static final int webView=0x7f040001;
+        public static final int convert=0x7f040001;
+        public static final int labelForConvertedValue=0x7f040002;
+        public static final int textOnScreen=0x7f040003;
+        public static final int valueInUSD=0x7f040000;
     }
     public static final class layout {
         public static final int main=0x7f020000;
