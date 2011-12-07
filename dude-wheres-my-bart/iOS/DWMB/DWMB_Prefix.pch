@@ -1,0 +1,22 @@
+//
+// Prefix header for all source files of the 'DWMB' target in the 'DWMB' project
+//
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iPhone SDK 3.0 and later."
+#endif
+
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <UIKit/UIKit.h>
+#endif
+
+#import "YAJLiOS/YAJL.h"
+
+
+
+#define RELEASE_SAFELY(___PTR___){[___PTR___ release]; ___PTR___ = nil;}
+
+#define BART_BLUE ([UIColor colorWithRed:0.133 green:0.412 blue:0.553 alpha:1.0])

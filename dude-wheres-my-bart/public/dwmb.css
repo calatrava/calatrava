@@ -1,0 +1,68 @@
+body {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: none;
+  background: #f0f0f0;
+  font-family: Verdana, Geneva, sans-serif;
+}
+
+span.dest{
+  font-size: 120%;
+}
+
+span.minute{
+  font-size: 200%;
+}
+
+h2 {
+  text-align: center;
+}
+
+ul{
+  margin: 0 auto;
+  padding: 0;
+}
+
+li{
+  font-size: 16px;
+  list-style: none;
+  padding: 3px 10px 3px 10px;
+  margin: 5px;
+  border: 1px solid #CCC;
+  text-align: center;
+  min-height: 40px;
+  line-height: 40px;
+}
+
+ul.stations li{
+  font-size: 20px;
+}
+
+.choose-another-station{
+  text-align: center;
+}
+td.route-blue img { background-color: #0099cc; }
+td.route-green img { background-color: #339933; }
+td.route-orange img { background-color: #ff9933; }
+td.route-red img { background-color: #ff0000; }
+td.route-yellow img { background-color: #ffff33; }
+td.route-special img, td.route-white img { background-color: #ffffff; }
+
+.departures li.BLUE{
+  background-color: #0099cc;
+}
+
+.departures li.GREEN{
+  background-color: #339933;
+}
+
+ul.departures li.ORANGE{
+  background-color: #ff9933;
+}
+
+ul.departures li.YELLOW{
+  background-color: #ffff33;
+}
+
+ul.departures li.RED{
+  background-color: #ff0000;
+}

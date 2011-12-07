@@ -1,0 +1,17 @@
+source "http://rubygems.org"
+
+gem "bart"
+gem "sinatra"
+gem "haml"
+gem "hashie"
+gem "json"
+
+group :development do
+  gem "shotgun"
+  gem "heroku"
+end
+
+group :test do
+  gem "frank-cucumber"
+	gem "watir-webdriver"
+end

@@ -1,0 +1,260 @@
+{
+  "sfia": {
+    "lat": "37.6159",
+    "abbr": "SFIA",
+    "long": "-122.392534",
+    "name": "San Francisco Int'l Airport"
+  },
+  "sbrn": {
+    "lat": "37.637753",
+    "abbr": "SBRN",
+    "long": "-122.416038",
+    "name": "San Bruno"
+  },
+  "powl": {
+    "lat": "37.784991",
+    "abbr": "POWL",
+    "long": "-122.406857",
+    "name": "Powell St."
+  },
+  "24th": {
+    "lat": "37.752254",
+    "abbr": "24TH",
+    "long": "-122.418466",
+    "name": "24th St. Mission"
+  },
+  "sanl": {
+    "lat": "37.72261921",
+    "abbr": "SANL",
+    "long": "-122.1613112",
+    "name": "San Leandro"
+  },
+  "lafy": {
+    "lat": "37.893394",
+    "abbr": "LAFY",
+    "long": "-122.123801",
+    "name": "Lafayette"
+  },
+  "hayw": {
+    "lat": "37.670399",
+    "abbr": "HAYW",
+    "long": "-122.087967",
+    "name": "Hayward"
+  },
+  "frmt": {
+    "lat": "37.557355",
+    "abbr": "FRMT",
+    "long": "-121.9764",
+    "name": "Fremont"
+  },
+  "daly": {
+    "lat": "37.70612055",
+    "abbr": "DALY",
+    "long": "-122.4690807",
+    "name": "Daly City"
+  },
+  "conc": {
+    "lat": "37.973737",
+    "abbr": "CONC",
+    "long": "-122.029095",
+    "name": "Concord"
+  },
+  "ssan": {
+    "lat": "37.664174",
+    "abbr": "SSAN",
+    "long": "-122.444116",
+    "name": "South San Francisco"
+  },
+  "shay": {
+    "lat": "37.63479954",
+    "abbr": "SHAY",
+    "long": "-122.0575506",
+    "name": "South Hayward"
+  },
+  "nbrk": {
+    "lat": "37.87404",
+    "abbr": "NBRK",
+    "long": "-122.283451",
+    "name": "North Berkeley"
+  },
+  "colm": {
+    "lat": "37.684638",
+    "abbr": "COLM",
+    "long": "-122.466233",
+    "name": "Colma"
+  },
+  "dbrk": {
+    "lat": "37.869867",
+    "abbr": "DBRK",
+    "long": "-122.268045",
+    "name": "Downtown Berkeley"
+  },
+  "balb": {
+    "lat": "37.72198087",
+    "abbr": "BALB",
+    "long": "-122.4474142",
+    "name": "Balboa Park"
+  },
+  "16th": {
+    "lat": "37.765062",
+    "abbr": "16TH",
+    "long": "-122.419694",
+    "name": "16th St. Mission"
+  },
+  "mlbr": {
+    "lat": "37.599787",
+    "abbr": "MLBR",
+    "long": "-122.38666",
+    "name": "Millbrae"
+  },
+  "embr": {
+    "lat": "37.792976",
+    "abbr": "EMBR",
+    "long": "-122.396742",
+    "name": "Embarcadero"
+  },
+  "pitt": {
+    "lat": "38.018914",
+    "abbr": "PITT",
+    "long": "-121.945154",
+    "name": "Pittsburg/Bay Point"
+  },
+  "plza": {
+    "lat": "37.9030588",
+    "abbr": "PLZA",
+    "long": "-122.2992715",
+    "name": "El Cerrito Plaza"
+  },
+  "deln": {
+    "lat": "37.925655",
+    "abbr": "DELN",
+    "long": "-122.317269",
+    "name": "El Cerrito del Norte"
+  },
+  "bayf": {
+    "lat": "37.697185",
+    "abbr": "BAYF",
+    "long": "-122.126871",
+    "name": "Bay Fair"
+  },
+  "ashb": {
+    "lat": "37.853024",
+    "abbr": "ASHB",
+    "long": "-122.26978",
+    "name": "Ashby"
+  },
+  "woak": {
+    "lat": "37.80467476",
+    "abbr": "WOAK",
+    "long": "-122.2945822",
+    "name": "West Oakland"
+  },
+  "19th": {
+    "lat": "37.80787",
+    "abbr": "19TH",
+    "long": "-122.269029",
+    "name": "19th St. Oakland"
+  },
+  "phil": {
+    "lat": "37.928403",
+    "abbr": "PHIL",
+    "long": "-122.056013",
+    "name": "Pleasant Hill"
+  },
+  "mcar": {
+    "lat": "37.828415",
+    "abbr": "MCAR",
+    "long": "-122.267227",
+    "name": "MacArthur"
+  },
+  "glen": {
+    "lat": "37.732921",
+    "abbr": "GLEN",
+    "long": "-122.434092",
+    "name": "Glen Park"
+  },
+  "dubl": {
+    "lat": "37.701695",
+    "abbr": "DUBL",
+    "long": "-121.900367",
+    "name": "Dublin/Pleasanton"
+  },
+  "mont": {
+    "lat": "37.789256",
+    "abbr": "MONT",
+    "long": "-122.401407",
+    "name": "Montgomery St."
+  },
+  "lake": {
+    "lat": "37.797484",
+    "abbr": "LAKE",
+    "long": "-122.265609",
+    "name": "Lake Merritt"
+  },
+  "ftvl": {
+    "lat": "37.774963",
+    "abbr": "FTVL",
+    "long": "-122.224274",
+    "name": "Fruitvale"
+  },
+  "cols": {
+    "lat": "37.754006",
+    "abbr": "COLS",
+    "long": "-122.197273",
+    "name": "Coliseum/Oakland Airport"
+  },
+  "civc": {
+    "lat": "37.779528",
+    "abbr": "CIVC",
+    "long": "-122.413756",
+    "name": "Civic Center/UN Plaza"
+  },
+  "wcrk": {
+    "lat": "37.905628",
+    "abbr": "WCRK",
+    "long": "-122.067423",
+    "name": "Walnut Creek"
+  },
+  "rock": {
+    "lat": "37.844601",
+    "abbr": "ROCK",
+    "long": "-122.251793",
+    "name": "Rockridge"
+  },
+  "ncon": {
+    "lat": "38.003275",
+    "abbr": "NCON",
+    "long": "-122.024597",
+    "name": "North Concord/Martinez"
+  },
+  "cast": {
+    "lat": "37.690754",
+    "abbr": "CAST",
+    "long": "-122.075567",
+    "name": "Castro Valley"
+  },
+  "ucty": {
+    "lat": "37.591208",
+    "abbr": "UCTY",
+    "long": "-122.017867",
+    "name": "Union City"
+  },
+  "rich": {
+    "lat": "37.936887",
+    "abbr": "RICH",
+    "long": "-122.353165",
+    "name": "Richmond"
+  },
+  "orin": {
+    "lat": "37.87836087",
+    "abbr": "ORIN",
+    "long": "-122.1837911",
+    "name": "Orinda"
+  },
+  "12th": {
+    "lat": "37.803664",
+    "abbr": "12TH",
+    "long": "-122.271604",
+    "name": "12th St. Oakland City Center"
+  }
+}
