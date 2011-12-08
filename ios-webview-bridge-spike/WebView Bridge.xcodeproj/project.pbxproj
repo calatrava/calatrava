@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C12F8695148FFA340033AD3D /* Bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = C12F8694148FFA340033AD3D /* Bridge.m */; };
+		C12F869D148FFEFC0033AD3D /* YAJLiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C12F869C148FFEFC0033AD3D /* YAJLiOS.framework */; };
+		C12F869F1490029E0033AD3D /* core.js in Sources */ = {isa = PBXBuildFile; fileRef = C12F869E1490029E0033AD3D /* core.js */; };
+		C12F86A31490157F0033AD3D /* app.js in Sources */ = {isa = PBXBuildFile; fileRef = C12F86A21490157F0033AD3D /* app.js */; };
+		C12F86A51490159E0033AD3D /* core.js in Resources */ = {isa = PBXBuildFile; fileRef = C12F869E1490029E0033AD3D /* core.js */; };
+		C12F86A6149015A30033AD3D /* app.js in Resources */ = {isa = PBXBuildFile; fileRef = C12F86A21490157F0033AD3D /* app.js */; };
 		C1D7D47A148FE2E9009105EF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D7D479148FE2E9009105EF /* UIKit.framework */; };
 		C1D7D47C148FE2E9009105EF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D7D47B148FE2E9009105EF /* Foundation.framework */; };
 		C1D7D47E148FE2E9009105EF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1D7D47D148FE2E9009105EF /* CoreGraphics.framework */; };
@@ -18,6 +24,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C12F8693148FFA340033AD3D /* Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
+		C12F8694148FFA340033AD3D /* Bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bridge.m; sourceTree = "<group>"; };
+		C12F869C148FFEFC0033AD3D /* YAJLiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = YAJLiOS.framework; path = 3rdParty/YAJLiOS.framework; sourceTree = "<group>"; };
+		C12F869E1490029E0033AD3D /* core.js */ = {isa = PBXFileReference; explicitFileType = text.json; fileEncoding = 4; path = core.js; sourceTree = "<group>"; };
+		C12F86A21490157F0033AD3D /* app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = app.js; sourceTree = "<group>"; };
 		C1D7D475148FE2E9009105EF /* WebView Bridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WebView Bridge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1D7D479148FE2E9009105EF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C1D7D47B148FE2E9009105EF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -41,6 +52,7 @@
 				C1D7D47A148FE2E9009105EF /* UIKit.framework in Frameworks */,
 				C1D7D47C148FE2E9009105EF /* Foundation.framework in Frameworks */,
 				C1D7D47E148FE2E9009105EF /* CoreGraphics.framework in Frameworks */,
+				C12F869D148FFEFC0033AD3D /* YAJLiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +79,7 @@
 		C1D7D478148FE2E9009105EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C12F869C148FFEFC0033AD3D /* YAJLiOS.framework */,
 				C1D7D479148FE2E9009105EF /* UIKit.framework */,
 				C1D7D47B148FE2E9009105EF /* Foundation.framework */,
 				C1D7D47D148FE2E9009105EF /* CoreGraphics.framework */,
@@ -83,6 +96,10 @@
 				C1D7D48C148FE2E9009105EF /* ViewController.m */,
 				C1D7D48E148FE2E9009105EF /* ViewController.xib */,
 				C1D7D480148FE2E9009105EF /* Supporting Files */,
+				C12F8693148FFA340033AD3D /* Bridge.h */,
+				C12F8694148FFA340033AD3D /* Bridge.m */,
+				C12F869E1490029E0033AD3D /* core.js */,
+				C12F86A21490157F0033AD3D /* app.js */,
 			);
 			path = "WebView Bridge";
 			sourceTree = "<group>";
@@ -150,6 +167,8 @@
 			files = (
 				C1D7D484148FE2E9009105EF /* InfoPlist.strings in Resources */,
 				C1D7D490148FE2E9009105EF /* ViewController.xib in Resources */,
+				C12F86A6149015A30033AD3D /* app.js in Resources */,
+				C12F86A51490159E0033AD3D /* core.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +182,9 @@
 				C1D7D486148FE2E9009105EF /* main.m in Sources */,
 				C1D7D48A148FE2E9009105EF /* AppDelegate.m in Sources */,
 				C1D7D48D148FE2E9009105EF /* ViewController.m in Sources */,
+				C12F8695148FFA340033AD3D /* Bridge.m in Sources */,
+				C12F869F1490029E0033AD3D /* core.js in Sources */,
+				C12F86A31490157F0033AD3D /* app.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +230,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -226,6 +252,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -234,6 +264,10 @@
 		C1D7D494148FE2E9009105EF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/3rdParty\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WebView Bridge/WebView Bridge-Prefix.pch";
 				INFOPLIST_FILE = "WebView Bridge/WebView Bridge-Info.plist";
@@ -245,6 +279,10 @@
 		C1D7D495148FE2E9009105EF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/3rdParty\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WebView Bridge/WebView Bridge-Prefix.pch";
 				INFOPLIST_FILE = "WebView Bridge/WebView Bridge-Info.plist";
@@ -272,6 +310,7 @@
 				C1D7D495148FE2E9009105EF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

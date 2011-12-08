@@ -7,12 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Bridge.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<UITextFieldDelegate>
 
-@property (retain, nonatomic) IBOutlet UIWebView *webView;
+@property (retain, nonatomic) UIWebView *webView;
 @property (retain, nonatomic) IBOutlet UITextView *editorTextView;
+@property (retain, nonatomic) IBOutlet UITextField *currencyInput;
+@property (retain, nonatomic) IBOutlet UILabel *currencyOutput;
+
+@property (retain, nonatomic) Bridge *bridge;
+@property (retain, nonatomic) NSString *didTouchConvertCallback;
 
 - (IBAction)didTouchGoButton:(id)sender;
+- (IBAction)didTouchConvert:(id)sender;
 
 @end
