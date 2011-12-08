@@ -37,5 +37,11 @@
             android:textStyle="bold"
             android:text=""
             />
+
+    <WebView android:id="@+id/webView"
+             android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:visibility="invisible"
+                />
 </LinearLayout>
 
