@@ -11,6 +11,9 @@
 #include "JSCocoaController.h"
 #include "TWBridgePageRegistry.h"
 
+// Uncomment this line to profile execution
+//#define PROFILING_JS
+
 @implementation JSCocoaCurConvViewController
 @synthesize startCurrencyField;
 @synthesize convertedCurrencyLabel;
@@ -65,11 +68,15 @@
 
 - (IBAction)convertCurrency:(id)sender
 {
+#ifdef PROFILING_JS
   NSLog(@"About to start converting.");
   for (int i = 0; i < 100000; ++i) {
+#endif
     [self dispatchEvent:@"convertCurrency"];
+#ifdef PROFILING_JS
   }
   NSLog(@"Finished converting.");
+#endif
 }
 
 - (id)attachHandler:(NSString *)proxyId forEvent:(NSString *)event
