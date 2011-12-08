@@ -1,0 +1,489 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		020C3FA51491344A00DEF357 /* bridge.js in Sources */ = {isa = PBXBuildFile; fileRef = 020C3FA31491344A00DEF357 /* bridge.js */; };
+		020C3FA61491344A00DEF357 /* ccBoot.js in Sources */ = {isa = PBXBuildFile; fileRef = 020C3FA41491344A00DEF357 /* ccBoot.js */; };
+		020C3FA81491345700DEF357 /* bridge.js in Resources */ = {isa = PBXBuildFile; fileRef = 020C3FA31491344A00DEF357 /* bridge.js */; };
+		020C3FA91491345700DEF357 /* ccBoot.js in Resources */ = {isa = PBXBuildFile; fileRef = 020C3FA41491344A00DEF357 /* ccBoot.js */; };
+		020C3FAC149135DE00DEF357 /* TWBridgePageRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 020C3FAB149135DE00DEF357 /* TWBridgePageRegistry.m */; };
+		029F1B0314903E5B00E96B9D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029F1B0214903E5B00E96B9D /* UIKit.framework */; };
+		029F1B0514903E5B00E96B9D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029F1B0414903E5B00E96B9D /* Foundation.framework */; };
+		029F1B0714903E5B00E96B9D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 029F1B0614903E5B00E96B9D /* CoreGraphics.framework */; };
+		029F1B0D14903E5B00E96B9D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 029F1B0B14903E5B00E96B9D /* InfoPlist.strings */; };
+		029F1B0F14903E5B00E96B9D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B0E14903E5B00E96B9D /* main.m */; };
+		029F1B1314903E5B00E96B9D /* JSCocoaCurConvAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B1214903E5B00E96B9D /* JSCocoaCurConvAppDelegate.m */; };
+		029F1B1614903E5B00E96B9D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 029F1B1414903E5B00E96B9D /* MainWindow.xib */; };
+		029F1B1914903E5B00E96B9D /* JSCocoaCurConvViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B1814903E5B00E96B9D /* JSCocoaCurConvViewController.m */; };
+		029F1B1C14903E5B00E96B9D /* JSCocoaCurConvViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 029F1B1A14903E5B00E96B9D /* JSCocoaCurConvViewController.xib */; };
+		029F1B301490400A00E96B9D /* BridgeSupportController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B231490400A00E96B9D /* BridgeSupportController.m */; };
+		029F1B311490400A00E96B9D /* class.js in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B241490400A00E96B9D /* class.js */; };
+		029F1B321490400A00E96B9D /* JSCocoaController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B261490400A00E96B9D /* JSCocoaController.m */; };
+		029F1B331490400A00E96B9D /* JSCocoaFFIArgument.m in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B281490400A00E96B9D /* JSCocoaFFIArgument.m */; };
+		029F1B341490400A00E96B9D /* JSCocoaFFIClosure.m in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B2A1490400A00E96B9D /* JSCocoaFFIClosure.m */; };
+		029F1B351490400A00E96B9D /* JSCocoaLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B2C1490400A00E96B9D /* JSCocoaLib.m */; };
+		029F1B361490400A00E96B9D /* JSCocoaPrivateObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B2E1490400A00E96B9D /* JSCocoaPrivateObject.m */; };
+		029F1B371490400A00E96B9D /* jslint-jscocoa.js in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B2F1490400A00E96B9D /* jslint-jscocoa.js */; };
+		029F1B3B1490405C00E96B9D /* iPhone.bridgesupport in Resources */ = {isa = PBXBuildFile; fileRef = 029F1B3A1490405C00E96B9D /* iPhone.bridgesupport */; };
+		029F1B531490407D00E96B9D /* BurksPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B3D1490407D00E96B9D /* BurksPool.m */; };
+		029F1B541490407D00E96B9D /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B401490407D00E96B9D /* GDataXMLNode.m */; };
+		029F1B561490407D00E96B9D /* ffi-iphone.c in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B431490407D00E96B9D /* ffi-iphone.c */; };
+		029F1B571490407D00E96B9D /* ffi-iphonesimulator.c in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B451490407D00E96B9D /* ffi-iphonesimulator.c */; };
+		029F1B581490407D00E96B9D /* iphone-sysv.S in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B4D1490407D00E96B9D /* iphone-sysv.S */; };
+		029F1B591490407D00E96B9D /* iphonesimulator-darwin.S in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B4E1490407D00E96B9D /* iphonesimulator-darwin.S */; };
+		029F1B5B1490407D00E96B9D /* prep_cif.c in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B501490407D00E96B9D /* prep_cif.c */; };
+		029F1B5C1490407D00E96B9D /* raw_api.c in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B511490407D00E96B9D /* raw_api.c */; };
+		029F1B5D1490407D00E96B9D /* types.c in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B521490407D00E96B9D /* types.c */; };
+		029F1B68149040FF00E96B9D /* JavascriptCore-dlsym.m in Sources */ = {isa = PBXBuildFile; fileRef = 029F1B60149040FF00E96B9D /* JavascriptCore-dlsym.m */; };
+		029F1B6C1490507800E96B9D /* class.js in Resources */ = {isa = PBXBuildFile; fileRef = 029F1B241490400A00E96B9D /* class.js */; };
+		029F1B6D1490507800E96B9D /* jslint-jscocoa.js in Resources */ = {isa = PBXBuildFile; fileRef = 029F1B2F1490400A00E96B9D /* jslint-jscocoa.js */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		020C3FA31491344A00DEF357 /* bridge.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bridge.js; sourceTree = "<group>"; };
+		020C3FA41491344A00DEF357 /* ccBoot.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ccBoot.js; sourceTree = "<group>"; };
+		020C3FAA149135DE00DEF357 /* TWBridgePageRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TWBridgePageRegistry.h; sourceTree = "<group>"; };
+		020C3FAB149135DE00DEF357 /* TWBridgePageRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TWBridgePageRegistry.m; sourceTree = "<group>"; };
+		029F1AFE14903E5B00E96B9D /* JSCocoaCurConv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JSCocoaCurConv.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		029F1B0214903E5B00E96B9D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		029F1B0414903E5B00E96B9D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		029F1B0614903E5B00E96B9D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		029F1B0A14903E5B00E96B9D /* JSCocoaCurConv-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JSCocoaCurConv-Info.plist"; sourceTree = "<group>"; };
+		029F1B0C14903E5B00E96B9D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		029F1B0E14903E5B00E96B9D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		029F1B1014903E5B00E96B9D /* JSCocoaCurConv-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JSCocoaCurConv-Prefix.pch"; sourceTree = "<group>"; };
+		029F1B1114903E5B00E96B9D /* JSCocoaCurConvAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSCocoaCurConvAppDelegate.h; sourceTree = "<group>"; };
+		029F1B1214903E5B00E96B9D /* JSCocoaCurConvAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSCocoaCurConvAppDelegate.m; sourceTree = "<group>"; };
+		029F1B1514903E5B00E96B9D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		029F1B1714903E5B00E96B9D /* JSCocoaCurConvViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSCocoaCurConvViewController.h; sourceTree = "<group>"; };
+		029F1B1814903E5B00E96B9D /* JSCocoaCurConvViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSCocoaCurConvViewController.m; sourceTree = "<group>"; };
+		029F1B1B14903E5B00E96B9D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JSCocoaCurConvViewController.xib; sourceTree = "<group>"; };
+		029F1B221490400900E96B9D /* BridgeSupportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeSupportController.h; sourceTree = "<group>"; };
+		029F1B231490400A00E96B9D /* BridgeSupportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgeSupportController.m; sourceTree = "<group>"; };
+		029F1B241490400A00E96B9D /* class.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = class.js; sourceTree = "<group>"; };
+		029F1B251490400A00E96B9D /* JSCocoaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSCocoaController.h; sourceTree = "<group>"; };
+		029F1B261490400A00E96B9D /* JSCocoaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSCocoaController.m; sourceTree = "<group>"; };
+		029F1B271490400A00E96B9D /* JSCocoaFFIArgument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSCocoaFFIArgument.h; sourceTree = "<group>"; };
+		029F1B281490400A00E96B9D /* JSCocoaFFIArgument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSCocoaFFIArgument.m; sourceTree = "<group>"; };
+		029F1B291490400A00E96B9D /* JSCocoaFFIClosure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSCocoaFFIClosure.h; sourceTree = "<group>"; };
+		029F1B2A1490400A00E96B9D /* JSCocoaFFIClosure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSCocoaFFIClosure.m; sourceTree = "<group>"; };
+		029F1B2B1490400A00E96B9D /* JSCocoaLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSCocoaLib.h; sourceTree = "<group>"; };
+		029F1B2C1490400A00E96B9D /* JSCocoaLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSCocoaLib.m; sourceTree = "<group>"; };
+		029F1B2D1490400A00E96B9D /* JSCocoaPrivateObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSCocoaPrivateObject.h; sourceTree = "<group>"; };
+		029F1B2E1490400A00E96B9D /* JSCocoaPrivateObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSCocoaPrivateObject.m; sourceTree = "<group>"; };
+		029F1B2F1490400A00E96B9D /* jslint-jscocoa.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jslint-jscocoa.js"; sourceTree = "<group>"; };
+		029F1B3A1490405C00E96B9D /* iPhone.bridgesupport */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = iPhone.bridgesupport; sourceTree = "<group>"; };
+		029F1B3C1490407D00E96B9D /* BurksPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BurksPool.h; sourceTree = "<group>"; };
+		029F1B3D1490407D00E96B9D /* BurksPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BurksPool.m; sourceTree = "<group>"; };
+		029F1B3E1490407D00E96B9D /* GDataDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataDefines.h; sourceTree = "<group>"; };
+		029F1B3F1490407D00E96B9D /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		029F1B401490407D00E96B9D /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		029F1B431490407D00E96B9D /* ffi-iphone.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "ffi-iphone.c"; sourceTree = "<group>"; };
+		029F1B441490407D00E96B9D /* ffi-iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ffi-iphone.h"; sourceTree = "<group>"; };
+		029F1B451490407D00E96B9D /* ffi-iphonesimulator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "ffi-iphonesimulator.c"; sourceTree = "<group>"; };
+		029F1B461490407D00E96B9D /* ffi-iphonesimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ffi-iphonesimulator.h"; sourceTree = "<group>"; };
+		029F1B471490407D00E96B9D /* ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi.h; sourceTree = "<group>"; };
+		029F1B481490407D00E96B9D /* ffi_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_common.h; sourceTree = "<group>"; };
+		029F1B491490407D00E96B9D /* fficonfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fficonfig.h; sourceTree = "<group>"; };
+		029F1B4A1490407D00E96B9D /* ffitarget-iphone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ffitarget-iphone.h"; sourceTree = "<group>"; };
+		029F1B4B1490407D00E96B9D /* ffitarget-iphonesimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ffitarget-iphonesimulator.h"; sourceTree = "<group>"; };
+		029F1B4C1490407D00E96B9D /* ffitarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget.h; sourceTree = "<group>"; };
+		029F1B4D1490407D00E96B9D /* iphone-sysv.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = "iphone-sysv.S"; sourceTree = "<group>"; };
+		029F1B4E1490407D00E96B9D /* iphonesimulator-darwin.S */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = "iphonesimulator-darwin.S"; sourceTree = "<group>"; };
+		029F1B501490407D00E96B9D /* prep_cif.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = prep_cif.c; sourceTree = "<group>"; };
+		029F1B511490407D00E96B9D /* raw_api.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = raw_api.c; sourceTree = "<group>"; };
+		029F1B521490407D00E96B9D /* types.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = types.c; sourceTree = "<group>"; };
+		029F1B5F149040FF00E96B9D /* JavascriptCore-dlsym.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "JavascriptCore-dlsym.h"; sourceTree = "<group>"; };
+		029F1B60149040FF00E96B9D /* JavascriptCore-dlsym.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "JavascriptCore-dlsym.m"; sourceTree = "<group>"; };
+		029F1B61149040FF00E96B9D /* JavaScriptCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JavaScriptCore.h; sourceTree = "<group>"; };
+		029F1B62149040FF00E96B9D /* JSBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBase.h; sourceTree = "<group>"; };
+		029F1B63149040FF00E96B9D /* JSContextRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSContextRef.h; sourceTree = "<group>"; };
+		029F1B64149040FF00E96B9D /* JSObjectRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSObjectRef.h; sourceTree = "<group>"; };
+		029F1B65149040FF00E96B9D /* JSStringRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSStringRef.h; sourceTree = "<group>"; };
+		029F1B66149040FF00E96B9D /* JSStringRefCF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSStringRefCF.h; sourceTree = "<group>"; };
+		029F1B67149040FF00E96B9D /* JSValueRef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSValueRef.h; sourceTree = "<group>"; };
+		029F1B6B149045A500E96B9D /* JSCocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSCocoa.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		029F1AFB14903E5B00E96B9D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				029F1B0314903E5B00E96B9D /* UIKit.framework in Frameworks */,
+				029F1B0514903E5B00E96B9D /* Foundation.framework in Frameworks */,
+				029F1B0714903E5B00E96B9D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		029F1AF314903E5A00E96B9D = {
+			isa = PBXGroup;
+			children = (
+				029F1B0814903E5B00E96B9D /* JSCocoaCurConv */,
+				029F1B0114903E5B00E96B9D /* Frameworks */,
+				029F1AFF14903E5B00E96B9D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		029F1AFF14903E5B00E96B9D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				029F1AFE14903E5B00E96B9D /* JSCocoaCurConv.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		029F1B0114903E5B00E96B9D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				029F1B0214903E5B00E96B9D /* UIKit.framework */,
+				029F1B0414903E5B00E96B9D /* Foundation.framework */,
+				029F1B0614903E5B00E96B9D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		029F1B0814903E5B00E96B9D /* JSCocoaCurConv */ = {
+			isa = PBXGroup;
+			children = (
+				020C3FAA149135DE00DEF357 /* TWBridgePageRegistry.h */,
+				020C3FAB149135DE00DEF357 /* TWBridgePageRegistry.m */,
+				020C3FA31491344A00DEF357 /* bridge.js */,
+				020C3FA41491344A00DEF357 /* ccBoot.js */,
+				029F1B381490401000E96B9D /* JSCocoa */,
+				029F1B1114903E5B00E96B9D /* JSCocoaCurConvAppDelegate.h */,
+				029F1B1214903E5B00E96B9D /* JSCocoaCurConvAppDelegate.m */,
+				029F1B1414903E5B00E96B9D /* MainWindow.xib */,
+				029F1B1714903E5B00E96B9D /* JSCocoaCurConvViewController.h */,
+				029F1B1814903E5B00E96B9D /* JSCocoaCurConvViewController.m */,
+				029F1B1A14903E5B00E96B9D /* JSCocoaCurConvViewController.xib */,
+				029F1B0914903E5B00E96B9D /* Supporting Files */,
+			);
+			path = JSCocoaCurConv;
+			sourceTree = "<group>";
+		};
+		029F1B0914903E5B00E96B9D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				029F1B0A14903E5B00E96B9D /* JSCocoaCurConv-Info.plist */,
+				029F1B0B14903E5B00E96B9D /* InfoPlist.strings */,
+				029F1B0E14903E5B00E96B9D /* main.m */,
+				029F1B1014903E5B00E96B9D /* JSCocoaCurConv-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		029F1B381490401000E96B9D /* JSCocoa */ = {
+			isa = PBXGroup;
+			children = (
+				029F1B391490402300E96B9D /* iPhone */,
+				029F1B5E149040C200E96B9D /* JavaScriptCore */,
+				029F1B221490400900E96B9D /* BridgeSupportController.h */,
+				029F1B231490400A00E96B9D /* BridgeSupportController.m */,
+				029F1B241490400A00E96B9D /* class.js */,
+				029F1B6B149045A500E96B9D /* JSCocoa.h */,
+				029F1B251490400A00E96B9D /* JSCocoaController.h */,
+				029F1B261490400A00E96B9D /* JSCocoaController.m */,
+				029F1B271490400A00E96B9D /* JSCocoaFFIArgument.h */,
+				029F1B281490400A00E96B9D /* JSCocoaFFIArgument.m */,
+				029F1B291490400A00E96B9D /* JSCocoaFFIClosure.h */,
+				029F1B2A1490400A00E96B9D /* JSCocoaFFIClosure.m */,
+				029F1B2B1490400A00E96B9D /* JSCocoaLib.h */,
+				029F1B2C1490400A00E96B9D /* JSCocoaLib.m */,
+				029F1B2D1490400A00E96B9D /* JSCocoaPrivateObject.h */,
+				029F1B2E1490400A00E96B9D /* JSCocoaPrivateObject.m */,
+				029F1B2F1490400A00E96B9D /* jslint-jscocoa.js */,
+			);
+			name = JSCocoa;
+			sourceTree = "<group>";
+		};
+		029F1B391490402300E96B9D /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				029F1B3C1490407D00E96B9D /* BurksPool.h */,
+				029F1B3D1490407D00E96B9D /* BurksPool.m */,
+				029F1B3E1490407D00E96B9D /* GDataDefines.h */,
+				029F1B3F1490407D00E96B9D /* GDataXMLNode.h */,
+				029F1B401490407D00E96B9D /* GDataXMLNode.m */,
+				029F1B411490407D00E96B9D /* libffi */,
+				029F1B3A1490405C00E96B9D /* iPhone.bridgesupport */,
+			);
+			name = iPhone;
+			path = JSCocoaCurConv/iPhone;
+			sourceTree = SOURCE_ROOT;
+		};
+		029F1B411490407D00E96B9D /* libffi */ = {
+			isa = PBXGroup;
+			children = (
+				029F1B431490407D00E96B9D /* ffi-iphone.c */,
+				029F1B441490407D00E96B9D /* ffi-iphone.h */,
+				029F1B451490407D00E96B9D /* ffi-iphonesimulator.c */,
+				029F1B461490407D00E96B9D /* ffi-iphonesimulator.h */,
+				029F1B471490407D00E96B9D /* ffi.h */,
+				029F1B481490407D00E96B9D /* ffi_common.h */,
+				029F1B491490407D00E96B9D /* fficonfig.h */,
+				029F1B4A1490407D00E96B9D /* ffitarget-iphone.h */,
+				029F1B4B1490407D00E96B9D /* ffitarget-iphonesimulator.h */,
+				029F1B4C1490407D00E96B9D /* ffitarget.h */,
+				029F1B4D1490407D00E96B9D /* iphone-sysv.S */,
+				029F1B4E1490407D00E96B9D /* iphonesimulator-darwin.S */,
+				029F1B501490407D00E96B9D /* prep_cif.c */,
+				029F1B511490407D00E96B9D /* raw_api.c */,
+				029F1B521490407D00E96B9D /* types.c */,
+			);
+			path = libffi;
+			sourceTree = "<group>";
+		};
+		029F1B5E149040C200E96B9D /* JavaScriptCore */ = {
+			isa = PBXGroup;
+			children = (
+				029F1B5F149040FF00E96B9D /* JavascriptCore-dlsym.h */,
+				029F1B60149040FF00E96B9D /* JavascriptCore-dlsym.m */,
+				029F1B61149040FF00E96B9D /* JavaScriptCore.h */,
+				029F1B62149040FF00E96B9D /* JSBase.h */,
+				029F1B63149040FF00E96B9D /* JSContextRef.h */,
+				029F1B64149040FF00E96B9D /* JSObjectRef.h */,
+				029F1B65149040FF00E96B9D /* JSStringRef.h */,
+				029F1B66149040FF00E96B9D /* JSStringRefCF.h */,
+				029F1B67149040FF00E96B9D /* JSValueRef.h */,
+			);
+			path = JavaScriptCore;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		029F1AFD14903E5B00E96B9D /* JSCocoaCurConv */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 029F1B1F14903E5B00E96B9D /* Build configuration list for PBXNativeTarget "JSCocoaCurConv" */;
+			buildPhases = (
+				029F1AFA14903E5B00E96B9D /* Sources */,
+				029F1AFB14903E5B00E96B9D /* Frameworks */,
+				029F1AFC14903E5B00E96B9D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JSCocoaCurConv;
+			productName = JSCocoaCurConv;
+			productReference = 029F1AFE14903E5B00E96B9D /* JSCocoaCurConv.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		029F1AF514903E5B00E96B9D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = ThoughtWorks;
+			};
+			buildConfigurationList = 029F1AF814903E5B00E96B9D /* Build configuration list for PBXProject "JSCocoaCurConv" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 029F1AF314903E5A00E96B9D;
+			productRefGroup = 029F1AFF14903E5B00E96B9D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				029F1AFD14903E5B00E96B9D /* JSCocoaCurConv */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		029F1AFC14903E5B00E96B9D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				020C3FA81491345700DEF357 /* bridge.js in Resources */,
+				020C3FA91491345700DEF357 /* ccBoot.js in Resources */,
+				029F1B6C1490507800E96B9D /* class.js in Resources */,
+				029F1B6D1490507800E96B9D /* jslint-jscocoa.js in Resources */,
+				029F1B0D14903E5B00E96B9D /* InfoPlist.strings in Resources */,
+				029F1B1614903E5B00E96B9D /* MainWindow.xib in Resources */,
+				029F1B1C14903E5B00E96B9D /* JSCocoaCurConvViewController.xib in Resources */,
+				029F1B3B1490405C00E96B9D /* iPhone.bridgesupport in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		029F1AFA14903E5B00E96B9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				029F1B0F14903E5B00E96B9D /* main.m in Sources */,
+				029F1B1314903E5B00E96B9D /* JSCocoaCurConvAppDelegate.m in Sources */,
+				029F1B1914903E5B00E96B9D /* JSCocoaCurConvViewController.m in Sources */,
+				029F1B301490400A00E96B9D /* BridgeSupportController.m in Sources */,
+				029F1B311490400A00E96B9D /* class.js in Sources */,
+				029F1B321490400A00E96B9D /* JSCocoaController.m in Sources */,
+				029F1B331490400A00E96B9D /* JSCocoaFFIArgument.m in Sources */,
+				029F1B341490400A00E96B9D /* JSCocoaFFIClosure.m in Sources */,
+				029F1B351490400A00E96B9D /* JSCocoaLib.m in Sources */,
+				029F1B361490400A00E96B9D /* JSCocoaPrivateObject.m in Sources */,
+				029F1B371490400A00E96B9D /* jslint-jscocoa.js in Sources */,
+				029F1B531490407D00E96B9D /* BurksPool.m in Sources */,
+				029F1B541490407D00E96B9D /* GDataXMLNode.m in Sources */,
+				029F1B561490407D00E96B9D /* ffi-iphone.c in Sources */,
+				029F1B571490407D00E96B9D /* ffi-iphonesimulator.c in Sources */,
+				029F1B581490407D00E96B9D /* iphone-sysv.S in Sources */,
+				029F1B591490407D00E96B9D /* iphonesimulator-darwin.S in Sources */,
+				029F1B5B1490407D00E96B9D /* prep_cif.c in Sources */,
+				029F1B5C1490407D00E96B9D /* raw_api.c in Sources */,
+				029F1B5D1490407D00E96B9D /* types.c in Sources */,
+				029F1B68149040FF00E96B9D /* JavascriptCore-dlsym.m in Sources */,
+				020C3FA51491344A00DEF357 /* bridge.js in Sources */,
+				020C3FA61491344A00DEF357 /* ccBoot.js in Sources */,
+				020C3FAC149135DE00DEF357 /* TWBridgePageRegistry.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		029F1B0B14903E5B00E96B9D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				029F1B0C14903E5B00E96B9D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		029F1B1414903E5B00E96B9D /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				029F1B1514903E5B00E96B9D /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		029F1B1A14903E5B00E96B9D /* JSCocoaCurConvViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				029F1B1B14903E5B00E96B9D /* en */,
+			);
+			name = JSCocoaCurConvViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		029F1B1D14903E5B00E96B9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-lxml2";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		029F1B1E14903E5B00E96B9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-lxml2";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		029F1B2014903E5B00E96B9D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JSCocoaCurConv/JSCocoaCurConv-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				INFOPLIST_FILE = "JSCocoaCurConv/JSCocoaCurConv-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		029F1B2114903E5B00E96B9D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JSCocoaCurConv/JSCocoaCurConv-Prefix.pch";
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				INFOPLIST_FILE = "JSCocoaCurConv/JSCocoaCurConv-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		029F1AF814903E5B00E96B9D /* Build configuration list for PBXProject "JSCocoaCurConv" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				029F1B1D14903E5B00E96B9D /* Debug */,
+				029F1B1E14903E5B00E96B9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		029F1B1F14903E5B00E96B9D /* Build configuration list for PBXNativeTarget "JSCocoaCurConv" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				029F1B2014903E5B00E96B9D /* Debug */,
+				029F1B2114903E5B00E96B9D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 029F1AF514903E5B00E96B9D /* Project object */;
+}
