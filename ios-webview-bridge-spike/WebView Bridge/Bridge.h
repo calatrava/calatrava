@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Bridge : NSObject{
+@interface Bridge : NSObject<UIWebViewDelegate>{
     UIWebView *_webView;
+    NSMutableDictionary *_invocationTargets;
 }
 
+- (void) handleInvocation:(NSString *)invocationName withObject:(id)target andSelector:(SEL)selector;
 - (void) invokeCallback:(NSString *)callback withParams:(NSDictionary *)params;
 
 @end

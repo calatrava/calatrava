@@ -6,7 +6,7 @@
 
     function convertTouchedHandler(input) {
       var output = convert(+input);
-      window.alert( "converted output: "+output );
+      screen.updateConversionResult( output );
     };
 
     screen.onConvertTouched( convertTouchedHandler );
@@ -15,6 +15,10 @@
   };
 
   function createScreen(bridge){
+    function updateConversionResult(result) {
+      bridge.invoke( 'conversionScreen.updateConversionResult', { currencyResult: ""+result } );
+    }
+
     function onConvertTouched(handler) {
       bridge.bind( 'conversionScreen.convertButtonTouched', function(params) {
         handler(params.inputCurrency);
@@ -22,6 +26,7 @@
     }
 
     return {
+      updateConversionResult: updateConversionResult,
       onConvertTouched: onConvertTouched
     };
   };

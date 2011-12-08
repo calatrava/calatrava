@@ -29,6 +29,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    [bridge handleInvocation:@"conversionScreen.updateConversionResult" withObject:self andSelector:@selector(updateConversionResult:)];
+    
     [webView release];
     webView = [[UIWebView alloc] init];
 }
@@ -88,6 +90,11 @@
     [bridge release];
     [didTouchConvertCallback release];
     [super dealloc];
+}
+
+- (void)updateConversionResult:(NSDictionary *)params{
+    NSString *currencyResult = [params objectForKey:@"currencyResult"];
+    currencyOutput.text = currencyResult;
 }
 
 - (IBAction)didTouchGoButton:(id)sender {
