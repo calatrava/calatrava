@@ -75,6 +75,7 @@
     NSString *paramsAsJson = [params yajl_JSONString];
     NSString *javascriptToInvoke = [NSString stringWithFormat:@"ramp.trigger( '%@', %@ );", callback, paramsAsJson];
     [_webView stringByEvaluatingJavaScriptFromString:javascriptToInvoke];
+    CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.0, false);
 }
 
 - (BOOL)webView:(UIWebView *)theWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
@@ -89,10 +90,6 @@
         
         TargetAndSelector *invocation = [_invocationTargets objectForKey:targetName];
         [invocation invokeWithArg:params];
-
-    }else{
-        NSLog(@"Strange? got a request to load a non-bat url:%@",request.URL);
-        Debugger();
     }
     
     return NO;

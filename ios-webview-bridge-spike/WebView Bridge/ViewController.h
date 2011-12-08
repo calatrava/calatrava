@@ -11,15 +11,12 @@
 
 @interface ViewController : UIViewController<UITextFieldDelegate>
 
-@property (retain, nonatomic) UIWebView *webView;
-@property (retain, nonatomic) IBOutlet UITextView *editorTextView;
 @property (retain, nonatomic) IBOutlet UITextField *currencyInput;
 @property (retain, nonatomic) IBOutlet UILabel *currencyOutput;
 
 @property (retain, nonatomic) Bridge *bridge;
 @property (retain, nonatomic) NSString *didTouchConvertCallback;
 
-- (IBAction)didTouchGoButton:(id)sender;
 - (IBAction)didTouchConvert:(id)sender;
 
 @end

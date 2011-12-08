@@ -9,8 +9,6 @@
 #import "ViewController.h"
 
 @implementation ViewController
-@synthesize webView;
-@synthesize editorTextView;
 @synthesize currencyInput;
 @synthesize currencyOutput;
 @synthesize bridge;
@@ -30,14 +28,10 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     [bridge handleInvocation:@"conversionScreen.updateConversionResult" withObject:self andSelector:@selector(updateConversionResult:)];
-    
-    [webView release];
-    webView = [[UIWebView alloc] init];
 }
 
 - (void)viewDidUnload
 {
-    [self setEditorTextView:nil];
     [self setCurrencyInput:nil];
     [self setCurrencyOutput:nil];
     [super viewDidUnload];
@@ -47,10 +41,6 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if( editorTextView.isFirstResponder ){
-        [editorTextView resignFirstResponder];
-    }
-    
     if( currencyInput.isFirstResponder ){
         [currencyInput resignFirstResponder];
     }
@@ -83,8 +73,6 @@
 }
 
 - (void)dealloc {
-    [webView release];
-    [editorTextView release];
     [currencyInput release];
     [currencyOutput release];
     [bridge release];
@@ -95,25 +83,6 @@
 - (void)updateConversionResult:(NSDictionary *)params{
     NSString *currencyResult = [params objectForKey:@"currencyResult"];
     currencyOutput.text = currencyResult;
-}
-
-- (IBAction)didTouchGoButton:(id)sender {
-    [editorTextView resignFirstResponder];
-    
-    [bridge invokeCallback:@"testCallback" withParams:[NSDictionary dictionary]];
-    
-    NSString *js = editorTextView.text;
-    NSString *result = [webView stringByEvaluatingJavaScriptFromString:js];
-    if( [result isEqualToString:@""] )
-        return;
-    
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"JS says"
-                                                        message:result 
-                                                       delegate:nil 
-                                              cancelButtonTitle:@"Great, thanks for that." 
-                                              otherButtonTitles:nil, nil];
-    [alertView show];
-    [alertView release];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
