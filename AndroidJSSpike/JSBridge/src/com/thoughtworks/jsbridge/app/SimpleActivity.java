@@ -1,14 +1,16 @@
-package com.thoughtworks.jsbridge;
+package com.thoughtworks.jsbridge.app;
 
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.webkit.*;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.thoughtworks.jsbridge.R;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
@@ -19,9 +21,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.net.ResponseCache;
-import java.net.URL;
-import java.util.concurrent.Executor;
 
 public class SimpleActivity extends Activity {
 
