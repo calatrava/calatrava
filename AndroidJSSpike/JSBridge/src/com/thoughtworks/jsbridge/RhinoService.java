@@ -6,7 +6,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 import org.mozilla.javascript.Context;
-import org.mozilla.javascript.ScriptableObject;
+import org.mozilla.javascript.Scriptable;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -18,7 +18,7 @@ public class RhinoService extends Service {
     private static final BigDecimal DIVISOR = BigDecimal.valueOf(TimeUnit.NANOSECONDS.convert(1, TimeUnit.MILLISECONDS));
 
     private Context cx;
-    private ScriptableObject scope;
+    private Scriptable scope;
     private final IBinder mBinder = new LocalBinder();
 
     @Override
@@ -59,7 +59,11 @@ public class RhinoService extends Service {
             Log.e(TAG, "Error loading the file: " + name, e);
         }
 
-        Log.d("cc-android", "Loaded file: " + name);
+        Log.d(TAG, "Loaded file: " + name);
+    }
+
+    public Scriptable getScope() {
+        return scope;
     }
 
     @Override

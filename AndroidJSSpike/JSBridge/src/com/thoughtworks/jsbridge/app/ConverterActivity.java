@@ -6,10 +6,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.thoughtworks.jsbridge.R;
 import com.thoughtworks.jsbridge.ScriptActivity;
+import org.mozilla.javascript.ScriptableObject;
 
 public class ConverterActivity extends ScriptActivity {
     private static final String TAG = "cc-android";
     private EditText valueInUsd;
+    private TextView convertedValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,13 +19,11 @@ public class ConverterActivity extends ScriptActivity {
         setContentView(R.layout.main);
 
         valueInUsd = (EditText) findViewById(R.id.valueInUSD);
-        final TextView convertedValue = (TextView) findViewById(R.id.textOnScreen);
+        convertedValue = (TextView) findViewById(R.id.textOnScreen);
 
         findViewById(R.id.convert).setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                String result = getScriptService().eval("converter.usdToEuro(" + valueInUsd.getText() + ");");
-                convertedValue.setText(result);
-                android.util.Log.d(TAG, result);
+                getScriptService().eval("currencyHandler(" + valueInUsd.getText() + ");");
             }
         });
     }
@@ -33,7 +33,12 @@ public class ConverterActivity extends ScriptActivity {
     protected void initScripts() {
         super.initScripts();
         getScriptService().load(readAsset("domain/currency_converter.js"), "converter.js");
+        getScriptService().load(readAsset("controller/converter_controller.js"), "converter_controller.js");
+        ScriptableObject.putProperty(getScriptService().getScope(), "tw_page_currency_controller", this);
     }
 
 
+    public void renderScreen(String response) {
+        convertedValue.setText(response);
+    }
 }

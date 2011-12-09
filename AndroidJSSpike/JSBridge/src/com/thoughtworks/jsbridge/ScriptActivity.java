@@ -5,8 +5,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.util.Log;
+import org.mozilla.javascript.ScriptableObject;
 
 import java.io.*;
 
@@ -22,6 +25,21 @@ public class ScriptActivity extends Activity {
 
         public void onServiceDisconnected(ComponentName componentName) {
             Log.v(RhinoService.TAG, "Connection to " + componentName + "is disconnected");
+        }
+    };
+    private final Handler mNetworkHandler = new Handler() {
+        @Override
+        public void handleMessage(final Message msg) {
+            new FetchResponse() {
+                @Override
+                protected void onPostExecute(String response) {
+                    Log.d(FetchResponse.TAG, "Response: " + response);
+                    if (response != null) {
+                        String javascriptUrl = "javascript:" + msg.getData().getString("callback") + "( '" + response.replace("'", "\\'") + "' );";
+                        getScriptService().eval(javascriptUrl);
+                    }
+                }
+            }.execute(msg.getData().getString("url"));
         }
     };
 
@@ -46,15 +64,23 @@ public class ScriptActivity extends Activity {
             e.printStackTrace();
         }
 
-        return new BufferedReader(new InputStreamReader(stream));
+        return new BufferedReader(new InputStreamReader(stream), 5 * 1024);
     }
 
     protected void initScripts() {
+        //register console.log function
+        //associate equivalent of console.log
+        final Object consoleLog = org.mozilla.javascript.Context.javaToJS(System.out, getScriptService().getScope());
+        ScriptableObject.putProperty(getScriptService().getScope(), "out", consoleLog);
+
+        //bind Network Service
+        ScriptableObject.putProperty(getScriptService().getScope(), "tw_networkService", new NetworkService(mNetworkHandler));
+
         //load global scripts here.
+        getScriptService().load(readAsset("domain/network_service.js"), "network_service.js");
     }
 
     public RhinoService getScriptService() {
         return mScriptService;
     }
-
 }
