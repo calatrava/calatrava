@@ -1,0 +1,18 @@
+<html>
+<body>
+<script type="text/javascript" charset="utf-8" src="../domain/currency_converter.js"></script>
+<script type="text/javascript" charset="utf-8" src="../domain/network_service.js"></script>
+<script type='text/javascript'>
+    function currencyHandler(usdValue){
+        window.response.log("currency handler - instead calling - network service");
+        network.ajax("http://www.multimolti.com/apps/currencyapi/index.php?curr=EUR", function( response ){
+                converter.setExchangeRate(+response);
+                var euroValue = converter.usdToEuro(usdValue);
+                window.response.handleResponse(euroValue);
+            });
+    }
+</script>
+<p>Hello...
+</p>
+</body>
+</html>
