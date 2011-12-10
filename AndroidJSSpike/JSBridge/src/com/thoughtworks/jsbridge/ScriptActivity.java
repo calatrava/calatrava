@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
-import org.mozilla.javascript.ScriptableObject;
 
 import java.io.*;
 
@@ -70,11 +69,10 @@ public class ScriptActivity extends Activity {
     protected void initScripts() {
         //register console.log function
         //associate equivalent of console.log
-        final Object consoleLog = org.mozilla.javascript.Context.javaToJS(System.out, getScriptService().getScope());
-        ScriptableObject.putProperty(getScriptService().getScope(), "out", consoleLog);
+        getScriptService().bind("out", System.out);
 
         //bind Network Service
-        ScriptableObject.putProperty(getScriptService().getScope(), "tw_networkService", new NetworkService(mNetworkHandler));
+        getScriptService().bind("tw_networkService", new NetworkService(mNetworkHandler));
 
         //load global scripts here.
         getScriptService().load(readAsset("domain/network_service.js"), "network_service.js");

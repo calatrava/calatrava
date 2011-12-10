@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.util.Log;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -64,6 +65,10 @@ public class RhinoService extends Service {
 
     public Scriptable getScope() {
         return scope;
+    }
+
+    public void bind(String name, Object object){
+         ScriptableObject.putProperty(scope, name, object);
     }
 
     @Override

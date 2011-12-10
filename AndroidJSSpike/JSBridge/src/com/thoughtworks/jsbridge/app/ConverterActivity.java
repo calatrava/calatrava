@@ -6,7 +6,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.thoughtworks.jsbridge.R;
 import com.thoughtworks.jsbridge.ScriptActivity;
-import org.mozilla.javascript.ScriptableObject;
 
 public class ConverterActivity extends ScriptActivity {
     private static final String TAG = "cc-android";
@@ -34,7 +33,7 @@ public class ConverterActivity extends ScriptActivity {
         super.initScripts();
         getScriptService().load(readAsset("domain/currency_converter.js"), "converter.js");
         getScriptService().load(readAsset("controller/converter_controller.js"), "converter_controller.js");
-        ScriptableObject.putProperty(getScriptService().getScope(), "tw_page_currency_controller", this);
+        getScriptService().bind("tw_page_currency_controller", this);
     }
 
 
