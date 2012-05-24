@@ -1,1 +1,0 @@
-APP_BASE_URL = "file:///Users/Thoughtworks/Projects/MobileSpikes/CurrencyConverter/Resources/web/CurrencyConverter.html"
