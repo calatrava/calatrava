@@ -1,0 +1,33 @@
+!!!
+%html
+  %head
+    %script(type="text/javascript" src="scripts/env.js")
+    %script(type="text/javascript" src="scripts/zepto.js")
+    %script(type="text/javascript" src="scripts/ICanHaz.js")
+    %script(type="text/javascript" src="scripts/underscore.js")
+    %script(type="text/javascript" src="scripts/date.js")
+    %script(type="text/javascript" src="scripts/bridge.js")
+    %script(type="text/javascript" src="scripts/pageHelper.js")
+
+  %body
+    %div#app_container.container
+
+    #loader.hidden
+      .box.load
+        .text Loading...
+      .box.error.hidden
+        .text
+          .clear Error...
+          .clear Please try again
+          .clear
+            %a{:href => "#"} Ok
+
+    %footer
+      %a.help{:href => '#'} NEED HELP?
+      %a.contact-us{:href => '#'} CONTACT US >
+
+  %script(type="text/javascript" src="scripts/init.js")
+  %script(type="text/javascript")
+    calatrava.app.rootFeature().start();
+
+

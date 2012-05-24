@@ -1,0 +1,33 @@
+LoadModule ssl_module        <%=MODULES_PATH%>/mod_ssl.so
+LoadModule proxy_module      <%=MODULES_PATH%>/mod_proxy.so
+LoadModule proxy_http_module <%=MODULES_PATH%>/mod_proxy_http.so
+LoadModule headers_module    <%=MODULES_PATH%>/mod_headers.so
+<% if LOAD_LOG_MODULE %>
+LoadModule log_config_module <%=MODULES_PATH%>/mod_log_config.so
+<% end %>
+LoadModule mime_module       <%=MODULES_PATH%>/mod_mime.so
+LoadModule dir_module        <%=MODULES_PATH%>/mod_dir.so
+LoadModule alias_module      <%=MODULES_PATH%>/mod_alias.so
+
+ErrorLog "logs/error.log"
+LogLevel Debug
+
+LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\"" combined
+CustomLog "logs/access.log" combined
+
+PidFile logs/httpd.pid
+LockFile logs/run.lock
+
+TypesConfig conf/mime.types 
+
+Listen <%= configuration['web_port'] %>
+
+ProxyRequests off
+
+ProxyPass /api <%= configuration['service_endpoint'] %>/api
+
+SSLProxyEngine On
+
+DocumentRoot "wwwroot"
+
+DirectoryIndex index.html

@@ -1,0 +1,343 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		C6491839156EB903003DB282 /* bridge.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = bridge.js; sourceTree = "<group>"; };
+		C649183C156EB903003DB282 /* WebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
+		C649183F156EB903003DB282 /* BaseUITableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseUITableViewController.h; sourceTree = "<group>"; };
+		C6491840156EB903003DB282 /* BaseUITableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseUITableViewController.m; sourceTree = "<group>"; };
+		C6491841156EB903003DB282 /* BaseUIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseUIViewController.h; sourceTree = "<group>"; };
+		C6491842156EB903003DB282 /* BaseUIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseUIViewController.m; sourceTree = "<group>"; };
+		C6491845156EB903003DB282 /* AJAXConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AJAXConnection.h; sourceTree = "<group>"; };
+		C6491846156EB903003DB282 /* AJAXConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AJAXConnection.m; sourceTree = "<group>"; };
+		C6491847156EB903003DB282 /* TWBridgeURLRequestManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWBridgeURLRequestManager.h; sourceTree = "<group>"; };
+		C6491848156EB903003DB282 /* TWBridgeURLRequestManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWBridgeURLRequestManager.m; sourceTree = "<group>"; };
+		C649184A156EB903003DB282 /* BridgeSupportController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeSupportController.h; sourceTree = "<group>"; };
+		C649184B156EB903003DB282 /* BridgeSupportController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BridgeSupportController.m; sourceTree = "<group>"; };
+		C649184C156EB903003DB282 /* class.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = class.js; sourceTree = "<group>"; };
+		C649184E156EB903003DB282 /* BurksPool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BurksPool.h; sourceTree = "<group>"; };
+		C649184F156EB903003DB282 /* BurksPool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BurksPool.m; sourceTree = "<group>"; };
+		C6491850156EB903003DB282 /* GDataDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDataDefines.h; sourceTree = "<group>"; };
+		C6491851156EB903003DB282 /* GDataXMLNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		C6491852156EB903003DB282 /* GDataXMLNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		C6491853156EB903003DB282 /* iPhone.bridgesupport */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = iPhone.bridgesupport; sourceTree = "<group>"; };
+		C6491855156EB903003DB282 /* ffi-iphone.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "ffi-iphone.c"; sourceTree = "<group>"; };
+		C6491856156EB903003DB282 /* ffi-iphone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ffi-iphone.h"; sourceTree = "<group>"; };
+		C6491857156EB903003DB282 /* ffi-iphonesimulator.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "ffi-iphonesimulator.c"; sourceTree = "<group>"; };
+		C6491858156EB903003DB282 /* ffi-iphonesimulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ffi-iphonesimulator.h"; sourceTree = "<group>"; };
+		C6491859156EB903003DB282 /* ffi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ffi.h; sourceTree = "<group>"; };
+		C649185A156EB903003DB282 /* ffi_common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ffi_common.h; sourceTree = "<group>"; };
+		C649185B156EB903003DB282 /* fficonfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fficonfig.h; sourceTree = "<group>"; };
+		C649185C156EB903003DB282 /* ffitarget-iphone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ffitarget-iphone.h"; sourceTree = "<group>"; };
+		C649185D156EB903003DB282 /* ffitarget-iphonesimulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ffitarget-iphonesimulator.h"; sourceTree = "<group>"; };
+		C649185E156EB903003DB282 /* ffitarget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ffitarget.h; sourceTree = "<group>"; };
+		C649185F156EB903003DB282 /* iphone-sysv.S */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "iphone-sysv.S"; sourceTree = "<group>"; };
+		C6491860156EB903003DB282 /* iphonesimulator-darwin.S */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm; path = "iphonesimulator-darwin.S"; sourceTree = "<group>"; };
+		C6491861156EB903003DB282 /* prep_cif.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = prep_cif.c; sourceTree = "<group>"; };
+		C6491862156EB903003DB282 /* raw_api.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = raw_api.c; sourceTree = "<group>"; };
+		C6491863156EB903003DB282 /* types.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = types.c; sourceTree = "<group>"; };
+		C6491865156EB903003DB282 /* JavascriptCore-dlsym.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JavascriptCore-dlsym.h"; sourceTree = "<group>"; };
+		C6491866156EB903003DB282 /* JavascriptCore-dlsym.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JavascriptCore-dlsym.m"; sourceTree = "<group>"; };
+		C6491867156EB903003DB282 /* JavaScriptCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JavaScriptCore.h; sourceTree = "<group>"; };
+		C6491868156EB903003DB282 /* JSBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSBase.h; sourceTree = "<group>"; };
+		C6491869156EB903003DB282 /* JSContextRef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSContextRef.h; sourceTree = "<group>"; };
+		C649186A156EB903003DB282 /* JSObjectRef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSObjectRef.h; sourceTree = "<group>"; };
+		C649186B156EB903003DB282 /* JSStringRef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSStringRef.h; sourceTree = "<group>"; };
+		C649186C156EB903003DB282 /* JSStringRefCF.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSStringRefCF.h; sourceTree = "<group>"; };
+		C649186D156EB903003DB282 /* JSValueRef.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSValueRef.h; sourceTree = "<group>"; };
+		C649186E156EB903003DB282 /* JSCocoa.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSCocoa.h; sourceTree = "<group>"; };
+		C649186F156EB903003DB282 /* JSCocoaController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSCocoaController.h; sourceTree = "<group>"; };
+		C6491870156EB903003DB282 /* JSCocoaController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSCocoaController.m; sourceTree = "<group>"; };
+		C6491871156EB903003DB282 /* JSCocoaFFIArgument.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSCocoaFFIArgument.h; sourceTree = "<group>"; };
+		C6491872156EB903003DB282 /* JSCocoaFFIArgument.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSCocoaFFIArgument.m; sourceTree = "<group>"; };
+		C6491873156EB903003DB282 /* JSCocoaFFIClosure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSCocoaFFIClosure.h; sourceTree = "<group>"; };
+		C6491874156EB903003DB282 /* JSCocoaFFIClosure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSCocoaFFIClosure.m; sourceTree = "<group>"; };
+		C6491875156EB903003DB282 /* JSCocoaLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSCocoaLib.h; sourceTree = "<group>"; };
+		C6491876156EB903003DB282 /* JSCocoaLib.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSCocoaLib.m; sourceTree = "<group>"; };
+		C6491877156EB903003DB282 /* JSCocoaPrivateObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSCocoaPrivateObject.h; sourceTree = "<group>"; };
+		C6491878156EB903003DB282 /* JSCocoaPrivateObject.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSCocoaPrivateObject.m; sourceTree = "<group>"; };
+		C6491879156EB903003DB282 /* jslint-jscocoa.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "jslint-jscocoa.js"; sourceTree = "<group>"; };
+		C649187A156EB903003DB282 /* KernelBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KernelBridge.h; sourceTree = "<group>"; };
+		C649187B156EB903003DB282 /* KernelBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KernelBridge.m; sourceTree = "<group>"; };
+		C649187C156EB903003DB282 /* TWBridgePageRegistry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TWBridgePageRegistry.h; sourceTree = "<group>"; };
+		C649187D156EB903003DB282 /* TWBridgePageRegistry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWBridgePageRegistry.m; sourceTree = "<group>"; };
+		C649187F156EB903003DB282 /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		C6491880156EB903003DB282 /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		C6491882156EB903003DB282 /* WidgetController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WidgetController.h; sourceTree = "<group>"; };
+		C6491883156EB903003DB282 /* WidgetController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WidgetController.m; sourceTree = "<group>"; };
+		C649188D156EB961003DB282 /* AJAXConnectionTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AJAXConnectionTest.m; sourceTree = "<group>"; };
+		C649188E156EB961003DB282 /* CalatravaiOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CalatravaiOSTests-Info.plist"; sourceTree = "<group>"; };
+		C6491890156EB961003DB282 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C6491892156EB961003DB282 /* TWBridgePageRegistryTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TWBridgePageRegistryTest.m; sourceTree = "<group>"; };
+		C6491893156EB971003DB282 /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
+		C6491894156EBA35003DB282 /* AppTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppTests-Prefix.pch"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		C649182D156EB785003DB282 = {
+			isa = PBXGroup;
+			children = (
+				C6491836156EB8E8003DB282 /* Calatrava */,
+			);
+			sourceTree = "<group>";
+		};
+		C6491836156EB8E8003DB282 /* Calatrava */ = {
+			isa = PBXGroup;
+			children = (
+				C649183D156EB903003DB282 /* src */,
+				C6491837156EB903003DB282 /* res */,
+				C649188C156EB961003DB282 /* test */,
+			);
+			name = Calatrava;
+			sourceTree = "<group>";
+		};
+		C6491837156EB903003DB282 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				C6491893156EB971003DB282 /* public */,
+				C6491838156EB903003DB282 /* js */,
+				C649183A156EB903003DB282 /* xibs */,
+			);
+			name = res;
+			path = ../res;
+			sourceTree = "<group>";
+		};
+		C6491838156EB903003DB282 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				C6491839156EB903003DB282 /* bridge.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		C649183A156EB903003DB282 /* xibs */ = {
+			isa = PBXGroup;
+			children = (
+				C649183C156EB903003DB282 /* WebViewController.xib */,
+			);
+			path = xibs;
+			sourceTree = "<group>";
+		};
+		C649183D156EB903003DB282 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				C649183E156EB903003DB282 /* Base */,
+				C6491843156EB903003DB282 /* Bridge */,
+				C649187E156EB903003DB282 /* Shell */,
+				C6491881156EB903003DB282 /* Widgets */,
+			);
+			name = src;
+			path = ../src;
+			sourceTree = "<group>";
+		};
+		C649183E156EB903003DB282 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				C649183F156EB903003DB282 /* BaseUITableViewController.h */,
+				C6491840156EB903003DB282 /* BaseUITableViewController.m */,
+				C6491841156EB903003DB282 /* BaseUIViewController.h */,
+				C6491842156EB903003DB282 /* BaseUIViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		C6491843156EB903003DB282 /* Bridge */ = {
+			isa = PBXGroup;
+			children = (
+				C6491844156EB903003DB282 /* AJAXConnection */,
+				C6491849156EB903003DB282 /* JSCocoa */,
+				C649187A156EB903003DB282 /* KernelBridge.h */,
+				C649187B156EB903003DB282 /* KernelBridge.m */,
+				C649187C156EB903003DB282 /* TWBridgePageRegistry.h */,
+				C649187D156EB903003DB282 /* TWBridgePageRegistry.m */,
+			);
+			path = Bridge;
+			sourceTree = "<group>";
+		};
+		C6491844156EB903003DB282 /* AJAXConnection */ = {
+			isa = PBXGroup;
+			children = (
+				C6491845156EB903003DB282 /* AJAXConnection.h */,
+				C6491846156EB903003DB282 /* AJAXConnection.m */,
+				C6491847156EB903003DB282 /* TWBridgeURLRequestManager.h */,
+				C6491848156EB903003DB282 /* TWBridgeURLRequestManager.m */,
+			);
+			path = AJAXConnection;
+			sourceTree = "<group>";
+		};
+		C6491849156EB903003DB282 /* JSCocoa */ = {
+			isa = PBXGroup;
+			children = (
+				C649184A156EB903003DB282 /* BridgeSupportController.h */,
+				C649184B156EB903003DB282 /* BridgeSupportController.m */,
+				C649184C156EB903003DB282 /* class.js */,
+				C649184D156EB903003DB282 /* iPhone */,
+				C6491864156EB903003DB282 /* JavaScriptCore */,
+				C649186E156EB903003DB282 /* JSCocoa.h */,
+				C649186F156EB903003DB282 /* JSCocoaController.h */,
+				C6491870156EB903003DB282 /* JSCocoaController.m */,
+				C6491871156EB903003DB282 /* JSCocoaFFIArgument.h */,
+				C6491872156EB903003DB282 /* JSCocoaFFIArgument.m */,
+				C6491873156EB903003DB282 /* JSCocoaFFIClosure.h */,
+				C6491874156EB903003DB282 /* JSCocoaFFIClosure.m */,
+				C6491875156EB903003DB282 /* JSCocoaLib.h */,
+				C6491876156EB903003DB282 /* JSCocoaLib.m */,
+				C6491877156EB903003DB282 /* JSCocoaPrivateObject.h */,
+				C6491878156EB903003DB282 /* JSCocoaPrivateObject.m */,
+				C6491879156EB903003DB282 /* jslint-jscocoa.js */,
+			);
+			path = JSCocoa;
+			sourceTree = "<group>";
+		};
+		C649184D156EB903003DB282 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				C649184E156EB903003DB282 /* BurksPool.h */,
+				C649184F156EB903003DB282 /* BurksPool.m */,
+				C6491850156EB903003DB282 /* GDataDefines.h */,
+				C6491851156EB903003DB282 /* GDataXMLNode.h */,
+				C6491852156EB903003DB282 /* GDataXMLNode.m */,
+				C6491853156EB903003DB282 /* iPhone.bridgesupport */,
+				C6491854156EB903003DB282 /* libffi */,
+			);
+			path = iPhone;
+			sourceTree = "<group>";
+		};
+		C6491854156EB903003DB282 /* libffi */ = {
+			isa = PBXGroup;
+			children = (
+				C6491855156EB903003DB282 /* ffi-iphone.c */,
+				C6491856156EB903003DB282 /* ffi-iphone.h */,
+				C6491857156EB903003DB282 /* ffi-iphonesimulator.c */,
+				C6491858156EB903003DB282 /* ffi-iphonesimulator.h */,
+				C6491859156EB903003DB282 /* ffi.h */,
+				C649185A156EB903003DB282 /* ffi_common.h */,
+				C649185B156EB903003DB282 /* fficonfig.h */,
+				C649185C156EB903003DB282 /* ffitarget-iphone.h */,
+				C649185D156EB903003DB282 /* ffitarget-iphonesimulator.h */,
+				C649185E156EB903003DB282 /* ffitarget.h */,
+				C649185F156EB903003DB282 /* iphone-sysv.S */,
+				C6491860156EB903003DB282 /* iphonesimulator-darwin.S */,
+				C6491861156EB903003DB282 /* prep_cif.c */,
+				C6491862156EB903003DB282 /* raw_api.c */,
+				C6491863156EB903003DB282 /* types.c */,
+			);
+			path = libffi;
+			sourceTree = "<group>";
+		};
+		C6491864156EB903003DB282 /* JavaScriptCore */ = {
+			isa = PBXGroup;
+			children = (
+				C6491865156EB903003DB282 /* JavascriptCore-dlsym.h */,
+				C6491866156EB903003DB282 /* JavascriptCore-dlsym.m */,
+				C6491867156EB903003DB282 /* JavaScriptCore.h */,
+				C6491868156EB903003DB282 /* JSBase.h */,
+				C6491869156EB903003DB282 /* JSContextRef.h */,
+				C649186A156EB903003DB282 /* JSObjectRef.h */,
+				C649186B156EB903003DB282 /* JSStringRef.h */,
+				C649186C156EB903003DB282 /* JSStringRefCF.h */,
+				C649186D156EB903003DB282 /* JSValueRef.h */,
+			);
+			path = JavaScriptCore;
+			sourceTree = "<group>";
+		};
+		C649187E156EB903003DB282 /* Shell */ = {
+			isa = PBXGroup;
+			children = (
+				C649187F156EB903003DB282 /* WebViewController.h */,
+				C6491880156EB903003DB282 /* WebViewController.m */,
+			);
+			path = Shell;
+			sourceTree = "<group>";
+		};
+		C6491881156EB903003DB282 /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				C6491882156EB903003DB282 /* WidgetController.h */,
+				C6491883156EB903003DB282 /* WidgetController.m */,
+			);
+			path = Widgets;
+			sourceTree = "<group>";
+		};
+		C649188C156EB961003DB282 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				C6491894156EBA35003DB282 /* AppTests-Prefix.pch */,
+				C649188D156EB961003DB282 /* AJAXConnectionTest.m */,
+				C649188E156EB961003DB282 /* CalatravaiOSTests-Info.plist */,
+				C649188F156EB961003DB282 /* InfoPlist.strings */,
+				C6491892156EB961003DB282 /* TWBridgePageRegistryTest.m */,
+			);
+			name = test;
+			path = ../test;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		C649182F156EB785003DB282 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = ThoughtWorks;
+			};
+			buildConfigurationList = C6491832156EB785003DB282 /* Build configuration list for PBXProject "App" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C649182D156EB785003DB282;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXVariantGroup section */
+		C649188F156EB961003DB282 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C6491890156EB961003DB282 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C6491834156EB785003DB282 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		C6491835156EB785003DB282 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C6491832156EB785003DB282 /* Build configuration list for PBXProject "App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6491834156EB785003DB282 /* Debug */,
+				C6491835156EB785003DB282 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C649182F156EB785003DB282 /* Project object */;
+}

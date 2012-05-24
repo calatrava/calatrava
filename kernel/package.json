@@ -1,0 +1,20 @@
+{
+    "name": "kernel-features"
+  , "version": "0.0.1"
+  , "private": true
+  , "dependencies" : {
+      "coffee-script" : "1.2.0"
+    , "sinon"         : "*"
+    , "cucumber"      : "latest"
+    , "jsdom"         : "latest"
+    , "mime"          : "latest"
+    , "ws"            : "0.4.8"
+    , "jasmine-node"  : "*"
+    , "should"        : "*"
+    , "underscore"    : "*"
+    , "jasmine-reporters" : "*"
+    , "walkdir"       : "*"
+    , "request"       : "*"
+    , "cssom"       : "*"
+  }
+}

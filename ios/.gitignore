@@ -1,0 +1,6 @@
+.DS_Store
+chromedriver.log
+*xcuserdata*
+
+FlightsApp/DerivedData/
+
