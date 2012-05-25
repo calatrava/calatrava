@@ -80,6 +80,7 @@ directory BUILD_CORE_DIR
 directory BUILD_CORE_CSS_DIR
 directory BUILD_CORE_KERNEL_DIR
 
+require "bundler/gem_tasks"
 require 'task_support/assets'
 require 'task_support/calatrava_kernel'
 require 'task_support/haml'
