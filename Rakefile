@@ -1,3 +1,5 @@
+require "bundler/gem_tasks"
+
 $: << File.dirname(__FILE__)
 
 ROOT_DIR         = File.dirname(__FILE__).freeze
@@ -80,7 +82,6 @@ directory BUILD_CORE_DIR
 directory BUILD_CORE_CSS_DIR
 directory BUILD_CORE_KERNEL_DIR
 
-require "bundler/gem_tasks"
 require 'task_support/assets'
 require 'task_support/calatrava_kernel'
 require 'task_support/haml'
@@ -90,75 +91,7 @@ require 'task_support/configuration'
 
 Dir.glob('tasks/*.rake').each { |r| import r }
 
-namespace :core do
-  desc "Convert core scss to css"
-  task :scss => BUILD_CORE_CSS_DIR do
-    sh "sass --update #{ASSETS_CSS_DIR}"
-    sh "cp #{ASSETS_CSS_DIR}/*.css #{BUILD_CORE_CSS_DIR}"
-  end
-
-  desc "Build shell js files"
-  task :shell => BUILD_CORE_KERNEL_DIR do
-    coffee SHELL_JS_DIR, BUILD_CORE_KERNEL_DIR
-  end
-
-  desc "Build kernel js files"
-  task :kernel => BUILD_CORE_KERNEL_DIR do
-    coffee KERNEL_JS_DIR, BUILD_CORE_KERNEL_DIR
-  end
-
-  desc "clean core build directory"
-  task :clean do
-    rm_rf BUILD_CORE_DIR
-  end
-end
-
 desc "Clean all directories"
 task :clean => ["core:clean", "ios:clean", "bb:clean", "web:clean", "artifact:clean", "droid:clean"] do
   rm_rf BUILD_DIR
-end
-
-namespace :kernel do
-  desc "Run jasmine test. If specs not given in argument, runs all test"
-  task :spec => 'kernel/.node_updated' do |t, args|
-    src_paths = CalatravaKernel.src_paths
-    cd "kernel" do
-      ENV['NODE_PATH'] = "app:#{src_paths}:spec:../assets/lib"
-      sh "node_modules/jasmine-node/bin/jasmine-node --coffee --test-dir #{KERNEL_SPEC_DIR}"
-    end
-  end
-
-  desc "Run cucumber.js features for kernel"
-  task :features, [:file] => ['kernel/.node_updated', :create_sim_link] do |t, args|
-    src_paths = CalatravaKernel.src_paths
-    cd "kernel" do
-      ENV['NODE_PATH'] = "#{src_paths}:features/support:../assets/lib:features/step_definitions:../features/testdata"
-      features_to_be_run = args[:file] ? "#{FEATURES_DIR}/#{args[:file]}" : FEATURES_DIR
-      sh "node_modules/cucumber/bin/cucumber.js --tags @all,@kernel --tags ~@wip '#{features_to_be_run}'"
-    end
-  end
-
-  namespace :features do
-    task :wip => ['kernel/.node_updated', :create_sim_link] do
-      src_paths = CalatravaKernel.src_paths
-      cd "kernel" do
-        ENV['NODE_PATH'] = "#{src_paths}:features/support:../assets/lib:features/step_definitions:../features/testdata"
-        sh "node_modules/cucumber/bin/cucumber.js --tags @wip --tags @kernel #{FEATURES_DIR}"
-      end
-    end
-  end
-
-  file 'kernel/.node_updated' => 'kernel/package.json' do
-    cd "kernel" do
-      sh "npm install"
-      sh "touch .node_updated"
-    end
-  end
-
-  desc "create sim link for the kernels step_definitions and support folder"
-  task :create_sim_link do
-    sh "rm -f #{FEATURES_DIR}/*.rb"
-    sh "ln -sFfh #{KERNEL_DIR}/features/step_definitions/ #{FEATURES_DIR}/step_definitions"
-    sh "ln -sFfh #{KERNEL_DIR}/features/support/ #{FEATURES_DIR}/support"
-  end
 end
