@@ -48,3 +48,15 @@ mobile app.
 5. `rake [droid|ios|web]:build CALATRAVA_ENV=development`
 
 And you're away! Or at least, you should be.
+
+# Working with Calatrava while it's under Development
+
+1. Clone this repo.
+
+2. `cd` into the repo.
+
+3. Run `bin/calatrava create &lt;project-name&gt; --dev`
+
+The `--dev` switch will create a new project that refers to the
+`calatrava` gem as a path on disk. This is much more convenient if
+you're experimenting with Calatrava, or working on it.
