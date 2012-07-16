@@ -14,7 +14,7 @@ namespace :droid do
 
   desc "Compile droid-specific coffee to javascript"
   task :coffee => CONFIG[:droid][:assets] do
-    sh "coffee --compile --output #{CONFIG[:droid][:js]} #{File.join(CONFIG[:droid][:root], "app")}"
+    coffee File.join(CONFIG[:droid][:root], "app"), CONFIG[:droid][:js]
   end
 
   desc "Copies required assets for droid"

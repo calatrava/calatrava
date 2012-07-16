@@ -10,18 +10,18 @@ namespace :web do
     coffee File.join(CONFIG[:web][:root], "app", "source"), CONFIG[:web][:js]
   end
 
-  task :shared => ["core:scss", "core:shell", "core:kernel", :haml, :coffee,
+  task :shared => ["shell:scss", "shell:coffee", "kernel:coffee", :haml, :coffee,
                   CONFIG[:web][:css], CONFIG[:web][:imgs], CONFIG[:web][:js], CONFIG[:web][:fonts]] do
-    sh "cp #{BUILD_CORE_CSS_DIR}/*.css #{CONFIG[:web][:css]}"
-    sh "cp #{ASSETS_IMG_DIR}/* #{CONFIG[:web][:imgs]}"
-    sh "cp #{ASSETS_LIB_DIR}/*.js #{CONFIG[:web][:js]}"
+    cp_ne "#{BUILD_CORE_CSS_DIR}/*.css", CONFIG[:web][:css]
+    cp_ne "#{ASSETS_IMG_DIR}/*", CONFIG[:web][:imgs]
+    cp_ne "#{ASSETS_LIB_DIR}/*.js", CONFIG[:web][:js]
 
     CalatravaKernel.modules.each do |library|
       sh "cp #{BUILD_CORE_KERNEL_DIR}/#{library}/*.js #{CONFIG[:web][:js]}"
     end
 
-    sh "cp #{BUILD_CORE_KERNEL_DIR}/*.js #{CONFIG[:web][:js]}"
-    sh "cp #{ASSETS_FONTS_DIR}/* #{CONFIG[:web][:fonts]}"
+    cp_ne "#{BUILD_CORE_KERNEL_DIR}/*.js", CONFIG[:web][:js]
+    cp_ne "#{ASSETS_FONTS_DIR}/*", CONFIG[:web][:fonts]
   end
 
   desc "Prepares config for the app"

@@ -1,5 +1,4 @@
-require "calatrava/version"
-
-module Calatrava
-  # Your code goes here...
-end
+require 'calatrava/version'
+require 'calatrava/app'
+require 'calatrava/project'
+require 'calatrava/template'

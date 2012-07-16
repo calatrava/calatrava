@@ -4,9 +4,9 @@ require "calatrava/version"
 
 Gem::Specification.new do |s|
   s.name        = "calatrava"
-  s.version     = Calatrava::VERSION
+  s.version     = Calatrava::Version
   s.authors     = ["Giles Alexander"]
-  s.email       = ["giles.alexander@gmail.com"]
+  s.email       = ["gga@thoughtworks.com"]
   s.homepage    = ""
   s.summary     = %q{TODO: Write a gem summary}
   s.description = %q{TODO: Write a gem description}
@@ -18,7 +18,8 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  # specify any dependencies here; for example:
   # s.add_development_dependency "rspec"
-  # s.add_runtime_dependency "rest-client"
+  s.add_runtime_dependency "mustache"
+  s.add_runtime_dependency "haml"
+  s.add_runtime_dependency "sass"
 end

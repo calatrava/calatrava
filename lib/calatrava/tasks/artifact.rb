@@ -13,3 +13,12 @@ end
 def artifact_path(sub_path)
   File.join("artifacts", sub_path)
 end
+
+namespace :artifact do
+  
+  desc "Removes all pre-existing artifacts"
+  task :clean do
+    rm_rf "artifacts/*.*"
+  end
+
+end
