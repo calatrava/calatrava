@@ -5,6 +5,14 @@ module Calatrava
 
   class Project
 
+    def self.here(directory)
+      @@current = Project.new(directory)
+    end
+
+    def self.current
+      @@current
+    end
+
     attr_reader :name
 
     def initialize(name, overrides = {})
@@ -25,6 +33,8 @@ module Calatrava
       create_project(template)
       create_directory_tree(template)
       create_files(template)
+
+      create_android_tree(template)
     end
 
     def create_project(template)
@@ -49,6 +59,19 @@ module Calatrava
         else
           FileUtils.cp(file_info[:path], File.join(@name, file_info[:name]))
         end
+      end
+    end
+
+    def create_android_tree(template)
+      Dir.chdir(File.join(@name, "droid")) do
+        system("android create project --name #{@name} --path #{@name} --package com.#{@name} --target android-10 --activity Launcher")
+
+        Dir.walk("calatrava") do |item|
+          FileUtils.mkdir_p(item) if File.directory? item
+          FileUtils.cp(item, item) if File.file? item
+        end
+
+        FileUtils.rm_rf "calatrava"
       end
     end
 

@@ -7,6 +7,5 @@
               android:layout_height="wrap_content"
               android:gravity="center_horizontal|center_vertical"
               android:text="Calatrava Launcher Page"
-              android:background="@drawable/backgroundmain"
               />
 </LinearLayout>

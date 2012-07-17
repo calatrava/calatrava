@@ -1,11 +1,11 @@
 $: << File.dirname(__FILE__)
 require 'calatrava/project'
 
+Calatrava::Project.here('.')
+
 def cp_ne(source, dest_dir)
   cp Dir[source], dest_dir
 end
-
-project = Calatrava::Project.new(".")
 
 ROOT_DIR         = "."
 BUILD_DIR        = File.join(ROOT_DIR, 'build').freeze
@@ -53,7 +53,7 @@ CONFIG = {}
                           File.join(CONFIG[os][:root], 'Shopping.Booking', 'ShoppingResources', 'public').freeze
                         else
                           if os == :droid
-                            File.join(CONFIG[os][:root], project.name, 'assets', 'hybrid').freeze
+                            File.join(CONFIG[os][:root], Calatrava::Project.current.name, 'assets', 'hybrid').freeze
                           else
                             File.join(CONFIG[os][:root], 'public').freeze
                           end
@@ -79,8 +79,8 @@ CONFIG = {}
   directory CONFIG[os][:fonts]
 end
 
-CONFIG[:ios][:project_name] = project.name
-CONFIG[:ios][:app_dir]      = File.join(CONFIG[:ios][:root], 'Source', project.name)
+CONFIG[:ios][:project_name] = Calatrava::Project.current.name
+CONFIG[:ios][:app_dir]      = File.join(CONFIG[:ios][:root], 'Source', Calatrava::Project.current.name)
 CONFIG[:ios][:cucumber]     = FEATURES_DIR
 
 directory BUILD_CORE_DIR

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
-import com.calatrava.mobile.android.booking.*;
 import org.mozilla.javascript.ScriptableObject;
 
 import java.util.*;
