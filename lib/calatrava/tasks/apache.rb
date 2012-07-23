@@ -16,13 +16,12 @@ else
   LOAD_LOG_MODULE = true
 end
 
-def configure_apache
-    cp config_path("httpd.conf"), File.join(APACHE_DIR, 'conf')
+def httpd(command)
+  exec %Q|#{HTTPD} -d #{APACHE_DIR} -f conf/httpd.conf -e DEBUG -k #{command} -DNO_DETACH -DFOREGROUND|
 end
 
-def create_plist
-  erb = ERB.new(File.read("#{APACHE_DIR}/com.jenkins.calatrava.apache.plist.erb"))
-  File.open("#{APACHE_DIR}/com.jenkins.calatrava.apache.plist", "w") { |f| f.write(erb.result) }
+def configure_apache
+  cp config_path("httpd.conf"), File.join(APACHE_DIR, 'conf')
 end
 
 def launch_apache
@@ -32,10 +31,14 @@ def launch_apache
   puts "\t\t" + "*"*40
   puts
 
-  exec %Q|#{HTTPD} -d #{APACHE_DIR} -f conf/httpd.conf -e DEBUG -DNO_DETACH -DFOREGROUND|
+  httpd :start
+end
+
+def stop_apache
+  httpd :stop
 end
 
 def reload_apache
-  sh %{#{HTTPD} -d #{APACHE_DIR} -f conf/httpd.conf -k restart}
+  httpd :restart
 end
 
