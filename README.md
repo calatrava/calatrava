@@ -37,9 +37,9 @@ mobile app.
 1. Install the Calatrava gem: `gem install calatrava`
 
 2. Create your Calatrava project: `calatrava create
-   &lt;project-name&gt;`
+   <project-name>`
 
-3. `cd &lt;project-name&gt;`
+3. `cd <project-name>`
 
 4. `rake bootstrap`
 
@@ -55,7 +55,7 @@ And you're away! Or at least, you should be.
 
 2. `cd` into the repo.
 
-3. Run `bin/calatrava create &lt;project-name&gt; --dev`
+3. Run `bin/calatrava create <project-name> --dev`
 
 The `--dev` switch will create a new project that refers to the
 `calatrava` gem as a path on disk. This is much more convenient if
