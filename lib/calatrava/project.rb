@@ -76,6 +76,15 @@ module Calatrava
       end
     end
 
+    def modules
+      Dir['kernel/app/*'].select { |n| File.directory? n }.collect { |n| File.basename n }
+    end
+
+    def src_paths
+      modules.collect { |m| "app/#{m}" }.join(':')
+    end
+
+
     def build_ios(options = {})
       proj = Xcode.project("ios/App/App.xcodeproj")
       builder = proj.target(options[:target]).config(options[:config]).builder
