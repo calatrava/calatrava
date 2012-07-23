@@ -1,5 +1,6 @@
 require 'mustache'
 require 'yaml'
+require 'xcoder'
 
 module Calatrava
 
@@ -73,6 +74,15 @@ module Calatrava
 
         FileUtils.rm_rf "calatrava"
       end
+    end
+
+    def build_ios(options = {})
+      proj = Xcode.project("ios/App/App.xcodeproj")
+      builder = proj.target(options[:target]).config(options[:config]).builder
+      builder.clean
+      builder.sdk = options[:sdk] || :iphonesimulator
+      builder.build
+      builder.package
     end
 
   end

@@ -12,6 +12,7 @@ gem 'frank-cucumber'
 gem 'watir-webdriver'
 gem 'thor'
 gem 'mustache'
+gem 'xcoder'
 
 group :development do
   gem 'aruba'

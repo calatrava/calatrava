@@ -22,4 +22,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "mustache"
   s.add_runtime_dependency "haml"
   s.add_runtime_dependency "sass"
+  s.add_runtime_dependency "xcoder"
 end
