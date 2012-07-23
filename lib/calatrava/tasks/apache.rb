@@ -12,7 +12,7 @@ elsif `uname`.chomp == "Linux"
   LOAD_LOG_MODULE = false
 else
   HTTPD = "httpd"
-  MODULES_PATH = "modules_mac"
+  MODULES_PATH = "/usr/libexec/apache2"
   LOAD_LOG_MODULE = true
 end
 

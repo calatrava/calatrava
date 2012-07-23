@@ -41,8 +41,15 @@ namespace :web do
   end
 
   namespace :apache do
+
+    file 'web/apache/public' do
+      cd 'web/apache' do
+        ln_s "../public", "public"
+      end
+    end
+
     desc "launch a non-daemon apache instance on port 8888 which will serve our local app and also proxy to backend services"
-    task :start => [:build, APACHE_LOGS_DIR] do
+    task :start => [:build, 'web/apache/public', APACHE_LOGS_DIR] do
       configure_apache
       launch_apache
     end

@@ -24,10 +24,10 @@ Listen <%= configuration['web_port'] %>
 
 ProxyRequests off
 
-ProxyPass /api <%= configuration['service_endpoint'] %>/api
+ProxyPass /api <%= configuration['api_endpoint'] %>/api
 
 SSLProxyEngine On
 
-DocumentRoot "wwwroot"
+DocumentRoot "public"
 
 DirectoryIndex index.html
