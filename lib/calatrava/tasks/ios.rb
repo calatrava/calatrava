@@ -31,7 +31,7 @@ namespace :ios do
 
   desc "Builds the iOS app"
   task :build => [:shared, :config] do
-    Calatrava::Project.current.build_ios(:config => 
+    Calatrava::Project.current.build_ios
   end
 
   desc "Publish the iOS app as an artifact"
