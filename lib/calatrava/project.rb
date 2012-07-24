@@ -20,6 +20,7 @@ module Calatrava
       @name = name
       @options = {}
       if File.exists?(@name) && File.directory?(@name)
+        @path = File.expand_path(@name)
         @options = YAML.load(IO.read(File.join(@name, 'calatrava.yml')))
         @name = @options[:project_name]
       end
@@ -77,7 +78,7 @@ module Calatrava
     end
 
     def modules
-      Dir['kernel/app/*'].select { |n| File.directory? n }.collect { |n| File.basename n }
+      Dir[File.join(@path, 'kernel/app/*')].select { |n| File.directory? n }.collect { |n| File.basename n }
     end
 
     def src_paths

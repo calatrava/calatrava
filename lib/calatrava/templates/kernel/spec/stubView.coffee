@@ -11,7 +11,7 @@ stubView =
 
     render: (viewObject) ->
 
-    get: (field) ->
+    get: jasmine.createSpy('get')
 
     hideErrors: ()->
 
