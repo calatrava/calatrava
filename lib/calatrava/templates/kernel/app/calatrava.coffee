@@ -1,0 +1,6 @@
+calatrava ?= {}
+
+calatrava.app =
+
+  rootFeature: ->
+

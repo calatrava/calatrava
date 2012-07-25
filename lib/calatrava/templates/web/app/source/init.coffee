@@ -1,4 +1,10 @@
-root = exports ? this
+root = this
+root.calatrava ?= {}
+calatrava = root.calatrava
+
+# Replace with your namespace
+root.example ?= {}
+example = root.example
 
 # Hide all the sub-pages when first launching the app
 $('body > .page').hide()

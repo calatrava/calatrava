@@ -1,3 +1,5 @@
+calatrava.shell ?= {}
+
 calatrava.shell.pageHelper = ($page) ->
 
   handlers = {}

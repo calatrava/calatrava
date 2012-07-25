@@ -10,19 +10,25 @@ namespace :web do
     coffee File.join(CONFIG[:web][:root], "app", "source"), CONFIG[:web][:js]
   end
 
-  task :shared => ["shell:scss", "shell:coffee", "kernel:coffee", :haml, :coffee,
+  task :shared => ["shell:scss", "shell:coffee", "kernel:coffee",
                   CONFIG[:web][:css], CONFIG[:web][:imgs], CONFIG[:web][:js], CONFIG[:web][:fonts]] do
-    cp_ne "#{BUILD_CORE_CSS_DIR}/*.css", CONFIG[:web][:css]
+    cp_ne "build/shell/css/*.css", CONFIG[:web][:css]
     cp_ne "#{ASSETS_IMG_DIR}/*", CONFIG[:web][:imgs]
-    cp_ne "#{ASSETS_LIB_DIR}/*.js", CONFIG[:web][:js]
+    cp_ne "assets/lib/*.js", CONFIG[:web][:js]
 
-    CalatravaKernel.modules.each do |library|
-      sh "cp #{BUILD_CORE_KERNEL_DIR}/#{library}/*.js #{CONFIG[:web][:js]}"
+    web_manifest = Calatrava::Manifest.new('web')
+
+    web_manifest.js_files.each do |js_file|
+      sh "cp #{js_file} #{CONFIG[:web][:js]}"
     end
 
-    cp_ne "#{BUILD_CORE_KERNEL_DIR}/*.js", CONFIG[:web][:js]
+    web_manifest.load_file('web/app/views', 'scripts', :type => :haml, :include_pages => true)
+
+    cp_ne "build/kernel/js/*.js", CONFIG[:web][:js]
     cp_ne "#{ASSETS_FONTS_DIR}/*", CONFIG[:web][:fonts]
   end
+
+  task :app => [:shared, :haml, :coffee]
 
   desc "Prepares config for the app"
   task :config do
@@ -31,7 +37,7 @@ namespace :web do
   end
 
   desc "Build the web app"
-  task :build => [:shared, :config]
+  task :build => [:app, :config]
 
   desc "Publishes the built web app as an artifact"
   task :publish => :build do

@@ -18,18 +18,24 @@ namespace :droid do
   end
 
   desc "Copies required assets for droid"
-  task :shared => ["shell:scss", "shell:coffee", "kernel:coffee", :haml, :coffee, CONFIG[:droid][:css], CONFIG[:droid][:imgs], CONFIG[:droid][:js], :config, CONFIG[:droid][:fonts]] do
+  task :shared => ["shell:scss", "shell:coffee", "kernel:coffee",
+                    CONFIG[:droid][:css], CONFIG[:droid][:imgs], CONFIG[:droid][:js],
+                    :config, CONFIG[:droid][:fonts]] do
     cp_ne "#{BUILD_CORE_CSS_DIR}/*.css", CONFIG[:droid][:css]
     cp_ne "#{ASSETS_IMG_DIR}/*", CONFIG[:droid][:imgs]
-    cp_ne "#{ASSETS_LIB_DIR}/*.js", CONFIG[:droid][:js]
+    cp_ne "assets/lib/*.js", CONFIG[:droid][:js]
 
-    CalatravaKernel.modules.each do |library|
-      cp_ne "#{BUILD_CORE_KERNEL_DIR}/#{library}/*.js", CONFIG[:droid][:js]
+    droid_manifest = Calatrava::Manifest.new('droid')
+    droid_manifest.js_files.each do |js_file|
+      sh "cp #{js_file} #{CONFIG[:droid][:js]}"
     end
+    droid_manifest.load_file("droid/#{Calatrava::Project.current.name}/assets/hybrid", 'hybrid/scripts', :type => :text, :include_pages => false)
 
     cp_ne "#{BUILD_CORE_KERNEL_DIR}/*.js", CONFIG[:droid][:js]
     cp_ne "#{ASSETS_FONTS_DIR}/*", CONFIG[:droid][:fonts]
   end
+
+  task :app => [:shared, :haml, :coffee]
 
   desc "Prepares config for the app"
   task :config do
@@ -38,7 +44,7 @@ namespace :droid do
   end
 
   desc "Builds the complete Android app"
-  task :build => [:shared, :config, :write_build_number] do
+  task :build => [:app, :config, :write_build_number] do
     cd "droid/#{Calatrava::Project.current.name}" do
       sh "ant clean debug"
     end

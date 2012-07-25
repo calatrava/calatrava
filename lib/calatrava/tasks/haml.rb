@@ -16,7 +16,7 @@ module HamlSupport
     end
 
     def render_partial(partial_name, locals = {})
-      partial_template = IO.read(File.join(ENV['VIEWS_DIR'], 'partials', "#{partial_name}.haml"))
+      partial_template = IO.read("#{partial_name}.haml")
       Haml::Engine.new(partial_template).render(self, locals)
     end
 
