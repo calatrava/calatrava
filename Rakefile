@@ -15,3 +15,9 @@ end
 
 desc "Run all tests"
 task :test => ['test:rspec', 'test:features']
+
+desc "Create a test project"
+task :run do
+  rm_rf "test"
+  sh "bin/calatrava create test --dev"
+end

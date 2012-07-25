@@ -1,6 +1,7 @@
 require 'mustache'
 require 'yaml'
 require 'xcoder'
+require 'xcodeproj'
 
 module Calatrava
 
@@ -37,6 +38,7 @@ module Calatrava
       create_files(template)
 
       create_android_tree(template)
+      create_ios_tree(template)
     end
 
     def create_project(template)
@@ -75,6 +77,34 @@ module Calatrava
 
         FileUtils.rm_rf "calatrava"
       end
+    end
+
+    def create_ios_tree(template)
+      require 'pry'
+      proj = Xcodeproj::Project.new
+
+      # walk thru dir tree
+      # -create group for dir
+      # -add each file to group
+
+      current_group = proj.main_group
+
+      base_dir = Pathname.new(@name) + "ios"
+      walker = lambda do |item|
+        #binding.pry
+        if item.directory?
+          group_name = item.basename
+          current_group = current_group.create_group group_name
+          item.each_child &walker
+        elsif item.file?
+          current_group.create_file item.relative_path_from(base_dir).to_s
+        else
+          raise 'what is it then?!'
+        end
+      end
+      (base_dir + "src").each_child &walker
+
+      proj.save_as (base_dir + "#{@name}.xcodeproj").to_s
     end
 
     def modules

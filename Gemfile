@@ -13,6 +13,7 @@ gem 'watir-webdriver'
 gem 'thor'
 gem 'mustache'
 gem 'xcoder'
+gem 'xcodeproj'
 
 group :development do
   gem 'aruba'
