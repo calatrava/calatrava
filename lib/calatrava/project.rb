@@ -19,6 +19,7 @@ module Calatrava
 
     def initialize(name, overrides = {})
       @name = name
+      @slug = name.gsub(" ", "_").downcase
       @options = {}
       if File.exists?(@name) && File.directory?(@name)
         @path = File.expand_path(@name)
@@ -56,19 +57,20 @@ module Calatrava
 
     def create_files(template)
       template.walk_files do |file_info|
+        target_name = file_info[:name].gsub("CALATRAVA_TMPL", @name)
         if File.extname(file_info[:name]) == ".calatrava"
-          File.open(File.join(@name, file_info[:name].gsub(".calatrava", "")), "w+") do |f|
-            f.print(Mustache.render(IO.read(file_info[:path]), :project_name => @name, :dev? => dev?))
+          File.open(File.join(@name, target_name.gsub(".calatrava", "")), "w+") do |f|
+            f.print(Mustache.render(IO.read(file_info[:path]), :project_name => @name, :project_slug => @slug, :dev? => dev?))
           end
         else
-          FileUtils.cp(file_info[:path], File.join(@name, file_info[:name]))
+          FileUtils.cp(file_info[:path], File.join(@name, target_name))
         end
       end
     end
 
     def create_android_tree(template)
       Dir.chdir(File.join(@name, "droid")) do
-        system("android create project --name #{@name} --path #{@name} --package com.#{@name} --target android-10 --activity Launcher")
+        system("android create project --name '#{@slug}' --path '#{@name}' --package com.#{@slug} --target android-10 --activity Launcher")
 
         Dir.walk("calatrava") do |item|
           FileUtils.mkdir_p(item) if File.directory? item
@@ -120,10 +122,10 @@ module Calatrava
           config.build_settings.merge!(extra_settings)
         end
         config.build_settings.merge!({
-          "GCC_PREFIX_HEADER" => 'src/test-Prefix.pch',
+          "GCC_PREFIX_HEADER" => "src/#{@name}-Prefix.pch",
           "OTHER_LDFLAGS" => ['-ObjC', '-lxml2'],
           "HEADER_SEARCH_PATHS" => '/usr/include/libxml2',
-          "INFOPLIST_FILE" => "src/test-Info.plist",
+          "INFOPLIST_FILE" => "src/#{@name}-Info.plist",
           "SKIP_INSTALL" => "NO",
           "IPHONEOS_DEPLOYMENT_TARGET" => "5.0",
         })
