@@ -57,15 +57,11 @@
                                                  delegate:self
                                          startImmediately:YES];
     requestTimer = [NSTimer scheduledTimerWithTimeInterval:REQUEST_TIMEOUT target:self selector:@selector(requestDidTimeout:) userInfo:nil repeats:NO];
-        
-    progressViewController = [[ProgressViewController alloc] init];
-    [root.topViewController.view addSubview:progressViewController.view];
 }
 
 - (void)requestDidTimeout:(id)sender {
   NSLog(@"connection request timed out");
   [[self delegate] failedWithError:nil from:reqId];
-  [progressViewController.view removeFromSuperview];
   [connection cancel];
 }
 
@@ -94,14 +90,12 @@
   [requestTimer invalidate];
   NSLog(@"connection didFailWithError: %@", error);
   [[self delegate] failedWithError:error from:reqId];
-  [progressViewController.view removeFromSuperview];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
   NSString *jsonString = [[NSString alloc] initWithData:accumulatedData encoding:NSUTF8StringEncoding];
   NSLog(@"Json Val: %@", jsonString);
   [[self delegate] receivedData:jsonString from:reqId];
-  [progressViewController.view removeFromSuperview];
 }
 
 @end

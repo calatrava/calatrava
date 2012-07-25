@@ -79,30 +79,69 @@ module Calatrava
       end
     end
 
-    def create_ios_tree(template)
-      require 'pry'
-      proj = Xcodeproj::Project.new
+    def create_ios_project
+      Xcodeproj::Project.new.tap do |proj|
+        %w{Foundation UIKit CoreGraphics}.each { |fw| proj.add_system_framework fw }
+      end
+    end
 
-      # walk thru dir tree
-      # -create group for dir
-      # -add each file to group
+    def create_ios_project_groups(base_dir, proj, target)
+      source_files_for_target = []
 
-      current_group = proj.main_group
-
-      base_dir = Pathname.new(@name) + "ios"
-      walker = lambda do |item|
-        #binding.pry
+      walker = lambda do |item, group|
         if item.directory?
           group_name = item.basename
-          current_group = current_group.create_group group_name
-          item.each_child &walker
+          child_group = group.create_group group_name
+          item.each_child { |item| walker.call(item, child_group) }
         elsif item.file?
-          current_group.create_file item.relative_path_from(base_dir).to_s
+          file_path = item.relative_path_from(base_dir)
+          group.create_file file_path.to_s
+          source_files_for_target << Xcodeproj::Project::Object::PBXNativeTarget::SourceFileDescription.new(file_path, "", nil)
         else
           raise 'what is it then?!'
         end
       end
-      (base_dir + "src").each_child &walker
+      (base_dir + "src").each_child { |item| walker.call(item, proj.main_group) }
+      target.add_source_files source_files_for_target
+    end
+
+    def create_ios_project_target(proj)
+      target = Xcodeproj::Project::Object::PBXNativeTarget.new(proj,
+        nil,
+        'productType' => 'com.apple.product-type.application',
+        'productName' => @name)
+
+      target.build_configurations.each do |config|
+        config.build_settings.merge!(Xcodeproj::Project::Object::XCBuildConfiguration::COMMON_BUILD_SETTINGS[:ios])
+
+        # E.g. [:ios, :release]
+        extra_settings_key = [:ios, config.name.downcase.to_sym]
+        if extra_settings = Xcodeproj::Project::Object::XCBuildConfiguration::COMMON_BUILD_SETTINGS[extra_settings_key]
+          config.build_settings.merge!(extra_settings)
+        end
+        config.build_settings.merge!({
+          "GCC_PREFIX_HEADER" => 'src/test-Prefix.pch',
+          "OTHER_LDFLAGS" => ['-ObjC', '-lxml2'],
+          "HEADER_SEARCH_PATHS" => '/usr/include/libxml2',
+          "INFOPLIST_FILE" => "src/test-Info.plist",
+          "SKIP_INSTALL" => "NO",
+          "IPHONEOS_DEPLOYMENT_TARGET" => "5.0",
+        })
+        config.build_settings.delete "DSTROOT"
+        config.build_settings.delete "INSTALL_PATH"
+
+      end
+
+      proj.targets << target
+      target
+    end
+
+    def create_ios_tree(template)
+      proj = create_ios_project
+      base_dir = Pathname.new(@name) + "ios"
+
+      target = create_ios_project_target(proj)
+      create_ios_project_groups(base_dir, proj, target)
 
       proj.save_as (base_dir + "#{@name}.xcodeproj").to_s
     end

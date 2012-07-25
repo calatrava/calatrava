@@ -1,5 +1,4 @@
 #import "WebViewController.h"
-#import "SBJson.h"
 #import "WidgetController.h"
 
 @interface WebViewController()
@@ -90,8 +89,8 @@
 
 - (id)refreshWebView {
   if(responseData && webViewReady) {
-    SBJsonWriter *writer = [[SBJsonWriter alloc] init];
-    NSString *responseJson = [writer stringWithObject:responseData];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:responseData options:kNilOptions error:nil];
+    NSString *responseJson = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     NSLog(@"Web data: %@", responseJson);
     NSLog(@"Page name: %@", [self pageName]);
 

@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ProgressViewController.h"
+#import <UIKit/UIKit.h>
 
 @protocol AJAXConnectionDelegate <NSObject>
 @required
@@ -25,8 +25,6 @@
     NSMutableData *accumulatedData;
     
     id <AJAXConnectionDelegate> delegate;
-
-    ProgressViewController *progressViewController;
 }
 
 @property (retain) id delegate;
