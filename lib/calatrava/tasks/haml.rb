@@ -20,9 +20,9 @@ module HamlSupport
       Haml::Engine.new(partial_template).render(self, locals)
     end
 
-    def render_shell_partial(partial_name, locals = {})
-      partial_template = IO.read(File.join(SHELL_PARTIALS_DIR, "#{partial_name}.haml"))
-      Haml::Engine.new(partial_template).render(self, locals)
+    def render_page(page_name, locals = {})
+      page_template = IO.read(File.join('shell/pages', "#{page_name}.haml"))
+      Haml::Engine.new(page_template).render(self, locals)
     end
 
   end

@@ -6,7 +6,7 @@ module Calatrava
     end
 
     def js_files
-      @feature_list.collect { |f| Dir.glob("build/kernel/js/#{f}/*.js") }.flatten
+      @feature_list.collect { |f| Dir["build/{kernel,shell}/js/#{f}/*.js"] }.flatten
     end
 
     def load_file(target_dir, js_load_path, options)
@@ -21,7 +21,7 @@ module Calatrava
     end
 
     def coffee_files(feature, opts)
-      coffee_files = Dir["kernel/app/#{feature}/*.coffee"]
+      coffee_files = Dir["{kernel,shell}/{app,pages}/#{feature}/*.coffee"]
       if !opts[:include_pages]
         coffee_files = coffee_files.reject { |f| f =~ /page\./ }
       end

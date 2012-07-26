@@ -1,12 +1,8 @@
 !!!
 %html
   %head
-    %script(type="text/javascript" src="scripts/env.js")
-    %script(type="text/javascript" src="scripts/zepto.js")
-    %script(type="text/javascript" src="scripts/ICanHaz.js")
-    %script(type="text/javascript" src="scripts/underscore.js")
-    %script(type="text/javascript" src="scripts/bridge.js")
-    %script(type="text/javascript" src="scripts/pageHelper.js")
+    -%w{env zepto ICanHaz underscore calatrava bridge pageHelper}.each do |filename|
+      %script(type="text/javascript" src="scripts/#{filename}.js")
 
     %script(type="text/javascript" src="scripts/init.js")
     -# Load all feature JS files
@@ -14,6 +10,7 @@
 
   %body
     %div#app_container.container
+      = render_page "converter/conversionForm"
 
     #loader.hidden
       .box.load

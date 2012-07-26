@@ -1,7 +1,7 @@
 example.converter ?= {}
 
 example.converter.start = ->
-  converter.controller
+  example.converter.controller
     views:
       conversionForm: tw.bridge.pages.pageNamed "conversionForm"
     changePage: tw.bridge.changePage

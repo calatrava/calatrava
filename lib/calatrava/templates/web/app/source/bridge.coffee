@@ -30,7 +30,7 @@ class tw.bridge.pages
   pageObjects = {}
 
   pages.pageNamed = (pageName) ->
-    pageObjects[pageName] = tw.bridge.pageProxy(pageName, realPageForName(pageName)) if !pageObjects[pageName]
+    pageObjects[pageName] = tw.bridge.pageProxy(pageName, calatrava.pageView[pageName]) if !pageObjects[pageName]
     pageObjects[pageName]
 
 tw.bridge.changePage = (page, options = {}) ->
