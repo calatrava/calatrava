@@ -13,16 +13,21 @@
     
   // Load iPhone bridgeSupport
   NSString *bundle = [[NSBundle mainBundle] bundlePath];
-  [[BridgeSupportController sharedController] loadBridgeSupport:[NSString stringWithFormat:@"%@/iPhone.bridgesupport",  bundle]];
   id c = [JSCocoaController sharedController];
   [c setUseJSLint:NO];
   // Load js libraries
   [c evalJSFile:[NSString stringWithFormat:@"%@/public/assets/scripts/underscore.js", bundle]];
-  [c evalJSFile:[NSString stringWithFormat:@"%@/public/assets/scripts/date.js", bundle]];
     
   // Load js bridge
   [c evalJSFile:[NSString stringWithFormat:@"%@/public/assets/scripts/env.js", bundle]];
-  [c evalJSFile:[NSString stringWithFormat:@"%@/js/bridge.js", bundle]];
+  [c evalJSFile:[NSString stringWithFormat:@"%@/public/assets/scripts/bridge.js", bundle]];
+  NSString *loadFileText = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@/public/assets/load_file.text", bundle]
+                                                     encoding:NSASCIIStringEncoding
+                                                        error:nil];
+  NSArray *jsFiles = [loadFileText componentsSeparatedByString:@"\n"];
+  for (NSString *jsFile in jsFiles) {
+    [c evalJSFile:[NSString stringWithFormat:jsFile, bundle]];
+  }
     
   [[TWBridgePageRegistry sharedRegistry] setRoot:root];
   [[TWBridgeURLRequestManager sharedManager] setRoot:root];
@@ -32,7 +37,7 @@
 {
   NSString *bundle = [[NSBundle mainBundle] bundlePath];
   id c = [JSCocoaController sharedController];
-  [c evalJSString:@"calatrava.app.rootFeature().start()"];
+  [c evalJSString:flow];
 }
 
 @end

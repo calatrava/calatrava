@@ -8,17 +8,9 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        handlers = [NSMutableDictionary dictionaryWithCapacity:5];
+        handlers = [[NSMutableDictionary dictionaryWithCapacity:5] retain];
     }
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 400, 44)];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont boldSystemFontOfSize:20.0];
-    label.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-    label.textAlignment = UITextAlignmentCenter;
-    label.textColor =[UIColor whiteColor];
-    label.text=self.navigationItem.title;  
-    self.navigationItem.titleView = label;      
+  
     return self;
 }
 
@@ -51,18 +43,15 @@
   return self;
 }
 
+- (void) scrollToTop{
+  // Noop default implemenatation. Feel free to override in your derived class.
+}
+
 #pragma mark - View lifecycle
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
-  [self performSelector:@selector(showNav) withObject:nil afterDelay:.01];
 	
   [[TWBridgePageRegistry sharedRegistry] setCurrentPage:self];
 }
@@ -71,23 +60,6 @@
   [super viewDidDisappear:animated];
 }
 
-- (void)showNav
-{
-	[self.navigationController setNavigationBarHidden:NO animated:YES];
-}
-
-- (void)hideNav
-{
-	[self.navigationController setNavigationBarHidden:YES animated:YES];
-}
-
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"gradientBG.png"]];
-}
 
 - (void)viewDidUnload
 {
@@ -100,25 +72,6 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)setTitle:(NSString *)title
-{
-    //[super setTitle:title];
-    UILabel *titleView = (UILabel *)self.navigationItem.titleView;
-    //if (!titleView) {
-    titleView = [[UILabel alloc] initWithFrame:CGRectZero];
-    titleView.backgroundColor = [UIColor clearColor];
-    titleView.font = [UIFont fontWithName:@"Whitney-Medium" size:26];//[UIFont fontWithName:@"System-Bold" size:(25.0)];
-    titleView.shadowColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-    
-    titleView.textColor = [UIColor whiteColor];
-    
-    self.navigationItem.titleView = titleView;
-    //[titleView release];
-    //}
-    titleView.text = title;
-    [titleView sizeToFit];
 }
 
 @end

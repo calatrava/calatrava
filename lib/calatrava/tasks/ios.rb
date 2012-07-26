@@ -17,6 +17,7 @@ namespace :ios do
     cp_ne "#{BUILD_CORE_CSS_DIR}/*.css", CONFIG[:ios][:css]
     cp_ne "#{ASSETS_IMG_DIR}/*", CONFIG[:ios][:imgs]
     cp_ne "assets/lib/*.js", CONFIG[:ios][:js]
+    cp_ne "ios/res/js/*.js", CONFIG[:ios][:js]
 
     ios_manifest = Calatrava::Manifest.new('ios')
     ios_manifest.js_files.each do |js_file|

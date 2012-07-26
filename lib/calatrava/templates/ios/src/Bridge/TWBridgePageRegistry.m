@@ -27,14 +27,8 @@ static TWBridgePageRegistry *bridge_instance = nil;
   self = [super init];
   if (self)
   {
-    pageFactories = [NSDictionary dictionaryWithObjects:
-                        [NSArray arrayWithObjects:nil]
-                      forKeys:
-                        [NSArray arrayWithObjects:nil]
-                      ];
-    
-    pageProxyIds = [NSMutableDictionary dictionaryWithCapacity:8];
-    pageObjects  = [NSMutableDictionary dictionaryWithCapacity:8];
+    pageProxyIds = [[NSMutableDictionary dictionaryWithCapacity:8] retain];
+    pageObjects  = [[NSMutableDictionary dictionaryWithCapacity:8] retain];
   }
   
   return self;
@@ -167,13 +161,11 @@ static TWBridgePageRegistry *bridge_instance = nil;
   
   if (!page)
   {
-    id factory = [pageFactories objectForKey:pageName];
-      
-      NSLog(@"factory: %@", factory);
-      NSString *viewControllerName = NSStringFromClass(factory);
-      NSLog(@"VC: %@", viewControllerName);
-      page = [[factory alloc] initWithNibName:viewControllerName bundle:nil];
-      [pageObjects setObject:page forKey:pageName];
+    NSString *viewControllerName = [pageName stringByAppendingString:@"ViewController"];
+    id factory = NSClassFromString(viewControllerName);
+    NSLog(@"VC: %@", viewControllerName);
+    page = [[factory alloc] initWithNibName:nil bundle:nil];
+    [pageObjects setObject:page forKey:pageName];
   }
   
   return page;

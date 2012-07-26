@@ -140,7 +140,7 @@ module Calatrava
         end
         config.build_settings.merge!({
           "GCC_PREFIX_HEADER" => "src/#{@name}-Prefix.pch",
-          "OTHER_LDFLAGS" => ['-ObjC', '-lxml2'],
+          "OTHER_LDFLAGS" => ['-ObjC', '-all_load', '-lxml2'],
           "HEADER_SEARCH_PATHS" => '/usr/include/libxml2',
           "INFOPLIST_FILE" => "src/#{@name}-Info.plist",
           "SKIP_INSTALL" => "NO",

@@ -41,7 +41,7 @@ example.converter.controller = ({views, changePage, ajax}) ->
     renderOutCurrencyList()
 
 
-  views.conversionForm.bind 'selectedOutCurrency', (selectedCurrency) ->  
+  views.conversionForm.bind 'selectedOutCurrency', (selectedCurrency) ->
     outCurrency = selectedCurrency
     renderInCurrencyList()
 
