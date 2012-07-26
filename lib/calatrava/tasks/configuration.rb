@@ -10,8 +10,8 @@ def evaluate_template(template_path, configuration)
 end
 
 def config_path(file)
-  env = ENV['CALATRAVA_ENV']
-  fail "Don't know which environment to build for. Have you set CALATRAVA_ENV?" unless env
+  env = ENV['CALATRAVA_ENV'] || "development"
+  puts "CALATRAVA_ENV = '#{env}'"
   full_path = artifact_path(File.join(env, file))
   fail "Could not find '#{file}' in environment '#{env}'" unless File.exists? full_path
   full_path

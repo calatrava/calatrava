@@ -3,6 +3,8 @@ require 'yaml'
 require 'xcoder'
 require 'xcodeproj'
 
+require 'calatrava/resources_build_phase'
+
 module Calatrava
 
   class Project
@@ -107,6 +109,21 @@ module Calatrava
       target.add_source_files source_files_for_target
     end
 
+    def create_ios_folder_references(base_dir, proj, target)
+      FileUtils.mkdir_p "ios/public"
+      public_folder = proj.main_group.create_file "public"
+      public_folder.last_known_file_type = 'folder'
+      build_file = public_folder.build_files.new 
+
+      shared_phase = Xcodeproj::Project::Object::PBXResourcesBuildPhase.new(proj,nil,{})
+
+      # require 'pry'; binding.pry
+
+      shared_phase << build_file
+      target.build_phases << shared_phase
+
+    end
+
     def create_ios_project_target(proj)
       target = Xcodeproj::Project::Object::PBXNativeTarget.new(proj,
         nil,
@@ -140,7 +157,7 @@ module Calatrava
       calatrava_phase.name = "Build Calatrava Kernel & Shell"
       calatrava_phase.shell_script = <<-EOS.split("\n").collect(&:strip).join("\n")
         source ${SRCROOT}/../build_env.sh
-        bundle exec rake configure:development ios:build CALATRAVA_ENV=development
+        bundle exec rake ios:xcode:prebuild
       EOS
 
       proj.targets << target
@@ -153,6 +170,7 @@ module Calatrava
 
       target = create_ios_project_target(proj)
       create_ios_project_groups(base_dir, proj, target)
+      create_ios_folder_references(base_dir, proj, target)
 
       proj.save_as (base_dir + "#{@name}.xcodeproj").to_s
     end

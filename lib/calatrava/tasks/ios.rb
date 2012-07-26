@@ -9,8 +9,10 @@ namespace :ios do
   desc "Creates html from haml using iPhone layout"
   task :haml => [CONFIG[:ios][:html]] + html_views
 
+  directory 'ios/public/assets'
+
   desc "Copies required assets for ios"
-  task :shared => ["shell:scss", "shell:coffee", "kernel:coffee",
+  task :shared => ["shell:scss", "shell:coffee", "kernel:coffee", 'ios/public/assets',
                     CONFIG[:ios][:css], CONFIG[:ios][:imgs], CONFIG[:ios][:js], :config, CONFIG[:ios][:fonts]] do
     cp_ne "#{BUILD_CORE_CSS_DIR}/*.css", CONFIG[:ios][:css]
     cp_ne "#{ASSETS_IMG_DIR}/*", CONFIG[:ios][:imgs]
@@ -34,8 +36,11 @@ namespace :ios do
     coffee env_coffee, CONFIG[:ios][:js]
   end
 
+  task :configured_app => [:app, :config]
+
   desc "Builds the iOS app"
-  task :build => [:app, :config] do
+  task :build => :configured_app do
+    ENV['CMDLINE_BUILD'] = 'true'
     Calatrava::Project.current.build_ios
   end
 
@@ -47,5 +52,14 @@ namespace :ios do
   desc "Clean ios public directory"
   task :clean do
     sh "rm -rf #{CONFIG[:ios][:public]}/*"
+  end
+
+  namespace :xcode do
+    task :prebuild do
+      if !ENV['CMDLINE_BUILD']
+        Rake::Task['configure:development'].invoke
+        Rake::Task['ios:configured_app'].invoke
+      end
+    end
   end
 end

@@ -49,21 +49,19 @@ CONFIG = {}
 [:ios, :droid, :web].each do |os|
   CONFIG[os] = {}
   CONFIG[os][:root]   = File.join(ROOT_DIR, os.to_s)
-  CONFIG[os][:public] = if os == :ios
-                          File.join(CONFIG[os][:root], 'Shopping.Booking', 'ShoppingResources', 'public').freeze
-                        else
-                          if os == :droid
-                            File.join(CONFIG[os][:root], Calatrava::Project.current.name, 'assets', 'hybrid').freeze
-                          else
-                            File.join(CONFIG[os][:root], 'public').freeze
-                          end
-                        end
+  CONFIG[os][:public] = case os
+  when :droid
+    File.join(CONFIG[os][:root], Calatrava::Project.current.name, 'assets', 'hybrid').freeze
+  else
+    File.join(CONFIG[os][:root], 'public').freeze
+  end
   CONFIG[os][:html]   = File.join(CONFIG[os][:public], 'views').freeze
-  CONFIG[os][:assets] = if os == :ios
-                          File.join(CONFIG[os][:public], 'assets').freeze
-                        else
-                          CONFIG[os][:public]
-                        end
+  CONFIG[os][:assets] = case os 
+  when :ios
+    File.join(CONFIG[os][:public], 'assets').freeze
+  else
+    CONFIG[os][:public]
+  end
   CONFIG[os][:imgs]   = File.join(CONFIG[os][:assets], 'images').freeze
   CONFIG[os][:js]     = File.join(CONFIG[os][:assets], 'scripts').freeze
   CONFIG[os][:css]    = File.join(CONFIG[os][:assets], 'styles').freeze
