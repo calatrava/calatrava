@@ -1,0 +1,12 @@
+%div#conversionForm.page
+  
+  %script#currencyDropdownTmpl(type="text/html")
+    {{#currencies}}
+    <option value="{{code}}" {{^enabled}}disabled{{/enabled}} {{#selected}}selected{{/selected}}> {{code}} </option>
+    {{/currencies}}
+
+  %h3 THE BEST CURRENCY CONVERTER EVER
+  %select.in_currency
+  %input.in_amount(type='number' placeholder='amount')
+  %select.out_currency
+  %button GO

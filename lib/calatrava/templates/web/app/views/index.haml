@@ -12,21 +12,7 @@
     %div#app_container.container
       = render_page "converter/conversionForm"
 
-    #loader.hidden
-      .box.load
-        .text Loading...
-      .box.error.hidden
-        .text
-          .clear Error...
-          .clear Please try again
-          .clear
-            %a{:href => "#"} Ok
-
-    %footer
-      %a.help{:href => '#'} NEED HELP?
-      %a.contact-us{:href => '#'} CONTACT US >
-
-  %script(type="text/javascript")
-    example.converter.start()
-
-
+  :javascript
+    $(document).ready(function(){
+      example.converter.start();      
+    });
