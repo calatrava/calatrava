@@ -8,7 +8,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        handlers = [[NSMutableDictionary dictionaryWithCapacity:5] retain];
+        handlers = [NSMutableDictionary dictionaryWithCapacity:5];
     }
   
     return self;
@@ -45,6 +45,20 @@
 
 - (void) scrollToTop{
   // Noop default implemenatation. Feel free to override in your derived class.
+}
+
+
+- (id)valueForField:(NSString *)field{
+  // default implementation.
+  return nil;
+}
+
+- (void)render:(NSDictionary *)viewMessage{
+  // Noop default implementation. Override in your derived class.
+}
+
+- (void)displayDialog:(NSString *)message{
+  // Noop default implementation. Override in your derived class.
 }
 
 #pragma mark - View lifecycle

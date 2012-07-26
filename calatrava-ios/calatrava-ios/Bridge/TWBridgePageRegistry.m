@@ -27,8 +27,8 @@ static TWBridgePageRegistry *bridge_instance = nil;
   self = [super init];
   if (self)
   {
-    pageProxyIds = [[NSMutableDictionary dictionaryWithCapacity:8] retain];
-    pageObjects  = [[NSMutableDictionary dictionaryWithCapacity:8] retain];
+    pageProxyIds = [NSMutableDictionary dictionaryWithCapacity:8];
+    pageObjects  = [NSMutableDictionary dictionaryWithCapacity:8];
   }
   
   return self;
@@ -50,20 +50,21 @@ static TWBridgePageRegistry *bridge_instance = nil;
 
 - (id)valueForField:(NSString *)name onProxy:(NSString *)proxyId
 {
-  id pageObject = [self ensurePageWithProxyId:proxyId];
+  BaseUIViewController *pageObject = [self ensurePageWithProxyId:proxyId];
   
   return [pageObject valueForField:name];
 }
 
 - (id)render:(JSValueRefAndContextRef)jsViewObject onProxy:(NSString *)proxyId
 {
-  id pageObject = [self ensurePageWithProxyId:proxyId];
+  BaseUIViewController *pageObject = [self ensurePageWithProxyId:proxyId];
+  
   NSObject* objectFromJavascript = nil;
   [JSCocoaFFIArgument unboxJSValueRef:jsViewObject.value
                              toObject:&objectFromJavascript
                             inContext:jsViewObject.ctx];
   
-  [pageObject render:objectFromJavascript];
+  [pageObject render:(NSDictionary *)objectFromJavascript];
   return self;
 }
 

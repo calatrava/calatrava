@@ -13,6 +13,7 @@
     
   // Load iPhone bridgeSupport
   NSString *bundle = [[NSBundle mainBundle] bundlePath];
+//  [[BridgeSupportController sharedController] loadBridgeSupport:[NSString stringWithFormat:@"%@/iPhone.bridgesupport",  bundle]];
   id c = [JSCocoaController sharedController];
   [c setUseJSLint:NO];
   // Load js libraries

@@ -138,6 +138,7 @@ module Calatrava
         if extra_settings = Xcodeproj::Project::Object::XCBuildConfiguration::COMMON_BUILD_SETTINGS[extra_settings_key]
           config.build_settings.merge!(extra_settings)
         end
+
         config.build_settings.merge!({
           "GCC_PREFIX_HEADER" => "src/#{@name}-Prefix.pch",
           "OTHER_LDFLAGS" => ['-ObjC', '-all_load', '-lxml2'],

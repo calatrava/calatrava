@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
 
 #include "JSCocoa.h"
+#import "BaseUIViewController.h"
+
 
 @interface TWBridgePageRegistry : NSObject
 {
@@ -10,7 +12,7 @@
   NSMutableDictionary *pageProxyIds;
   NSMutableDictionary *pageObjects;
   
-  id currentPage;
+  BaseUIViewController *currentPage;
 }
 
 @property (nonatomic, retain) UINavigationController *root;

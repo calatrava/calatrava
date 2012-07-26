@@ -1,0 +1,10 @@
+//
+// Prefix header for all source files of the 'calatrava-ios' target in the 'calatrava-ios' project
+//
+
+#ifdef __OBJC__
+  #import <Foundation/Foundation.h>
+  #import <UIKit/UIKit.h>
+#endif
+
+#import "JavaScriptCore.h"
