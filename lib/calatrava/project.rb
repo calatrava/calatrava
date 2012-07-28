@@ -9,6 +9,11 @@ module Calatrava
 
   class Project
 
+    def sh(cmd)
+      $stdout.puts cmd
+      system(cmd)
+    end
+
     def self.here(directory)
       @@current = Project.new(directory)
     end
@@ -72,7 +77,7 @@ module Calatrava
 
     def create_android_tree(template)
       Dir.chdir(File.join(@name, "droid")) do
-        system("android create project --name '#{@slug}' --path '#{@name}' --package com.#{@slug} --target android-10 --activity Launcher")
+        sh "android create project --name '#{@slug}' --path '#{@name}' --package com.#{@slug} --target android-10 --activity Launcher"
 
         Dir.walk("calatrava") do |item|
           FileUtils.mkdir_p(item) if File.directory? item

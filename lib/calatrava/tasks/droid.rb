@@ -60,7 +60,12 @@ namespace :droid do
 
   desc "Publishes the built Android app as an artifact"
   task :publish => :build do
-    artifact("droid/#{Calatrava::Project.current.name}/bin/#{Calatrava::Project.current.name}.apk", ENV['CALATRAVA_ENV'])
+    artifact("droid/#{Calatrava::Project.current.name}/bin/#{Calatrava::Project.current.name}-debug.apk", ENV['CALATRAVA_ENV'])
+  end
+
+  desc "Deploy app to device/emulator"
+  task :deploy => :publish do
+    sh "adb uninstall com.#{Calatrava::Project.current.name} ; adb install -r artifacts/#{ENV['CALATRAVA_ENV']}/#{Calatrava::Project.current.name}-debug.apk"
   end
 
   desc "Clean droid public directory"
