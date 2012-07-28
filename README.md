@@ -39,15 +39,25 @@ mobile app.
 2. Create your Calatrava project: `calatrava create
    <project-name>`
 
-3. `cd <project-name>`
+3. `cd <project-name>`. If you're using `rvm` you will be prompted to
+   trust a new `.rvmrc`.
+   
+4. `bundle install`
 
-4. `rake bootstrap`
+5. `rake bootstrap`
 
-5. `rake configure:development`
+6. `rake configure:development`
 
-5. `rake [droid|ios|web]:build CALATRAVA_ENV=development`
+7. `rake web:apache:start`
+
+8. Browse to [`http://localhost:8888`](http://localhost:8888) in your
+   favourite browser.
 
 And you're away! Or at least, you should be.
+
+To build the iOS app, open the Xcode project in the iOS directory. To
+build and run the Android app, connect a device or start an emulator
+and then `rake droid:deploy`
 
 # Working with Calatrava while it's under Development
 
