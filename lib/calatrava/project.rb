@@ -96,6 +96,7 @@ module Calatrava
         end
         Dir.chdir "#{@name}/src/com/#{@name}" do
           FileUtils.mv "Title.java", "#{@title}.java"
+          FileUtils.mv "AndroidManifest.xml", "../../../AndroidManifest.xml"
         end
 
         FileUtils.rm_rf "calatrava"

@@ -13,7 +13,6 @@ public class KernelBridge {
 
     //load js libraries
     loadLibrary("hybrid/scripts/underscore.js");
-    loadLibrary("hybrid/scripts/date.js");
 
     //load bridge
     loadLibrary("hybrid/scripts/env.js");

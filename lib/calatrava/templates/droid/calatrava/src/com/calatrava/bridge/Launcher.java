@@ -17,6 +17,7 @@ public class Launcher {
   private static RhinoService rhino;
   private static Context appContext;
   private static Application application;
+  private static Runnable startUp;
 
   static ServiceConnection connection = new ServiceConnection() {
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -24,6 +25,7 @@ public class Launcher {
       PageRegistry.setSharedRegistry(new PageRegistry(appContext, application, rhino));
       AjaxRequestManager.setSharedManager(new AjaxRequestManager(appContext, rhino));
       initBridge();
+      startUp.run();
     }
 
     public void onServiceDisconnected(ComponentName componentName) {
@@ -31,9 +33,12 @@ public class Launcher {
     }
   };
 
-  public static void launchKernel(Context appContext, Application application) {
+  public static void launchKernel(Context appContext,
+                                  Application application,
+                                  Runnable startUp) {
     Launcher.appContext = appContext;
     Launcher.application = application;
+    Launcher.startUp = startUp;
 
     Intent serviceIntent = new Intent(appContext, RhinoService.class);
     appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
@@ -60,7 +65,6 @@ public class Launcher {
       {
         bridge.loadLibrary(line);
       }
-      bridge.loadLibrary("hybrid/scripts/app.constants.js");
 
     } catch (IOException e) {
       Log.d("AuthenticatedCustomer Activity", "LauncherActivity failed to start: " + e);
