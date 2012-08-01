@@ -12,6 +12,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.calatrava.bridge.RegisteredActivity;
+import com.calatrava.bridge.RhinoService;
+import com.calatrava.bridge.PageRegistry;
 
 import java.util.HashMap;
 import java.util.List;
@@ -123,8 +125,8 @@ public abstract class WebViewActivity extends RegisteredActivity {
   protected void loadPage() {
     PageRegistry.sharedRegistry().registerPage(getPageName(), this);
 
-    setContentView(R.layout.fullscreenwebview);
-    webView = (WebView) findViewById(R.id.webView);
+    webView = new WebView(this);
+    setContentView(webView);
 
     webView.getSettings().setJavaScriptEnabled(true);
     webView.getSettings().setDomStorageEnabled(true);

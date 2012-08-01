@@ -9,6 +9,8 @@ import android.os.IBinder;
 import android.util.Log;
 
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class Launcher {
 
@@ -37,6 +39,11 @@ public class Launcher {
     appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
   }
 
+  public static void launchFlow(String flow)
+  {
+    rhino.callJsFunction(flow);
+  }
+
   private static void initBridge() {
     AssetRepository assets = new AssetRepository(appContext);
 
@@ -47,6 +54,12 @@ public class Launcher {
       Log.d("AuthenticatedCustomer Activity", "About to load and start kernel");
       // Load all the application JS
       KernelBridge bridge = new KernelBridge(assets, rhino);
+      BufferedReader loadFileReader = new BufferedReader(new InputStreamReader(appContext.getAssets().open("hybrid/load_file.text")));
+      String line = null;
+      while ((line = loadFileReader.readLine()) != null)
+      {
+        bridge.loadLibrary(line);
+      }
       bridge.loadLibrary("hybrid/scripts/app.constants.js");
 
     } catch (IOException e) {

@@ -27,6 +27,7 @@ module Calatrava
     def initialize(name, overrides = {})
       @name = name
       @slug = name.gsub(" ", "_").downcase
+      @title = @name[0..0].upcase + @name[1..-1]
       @options = {}
       if File.exists?(@name) && File.directory?(@name)
         @path = File.expand_path(@name)
@@ -56,18 +57,27 @@ module Calatrava
       end
     end
 
+    def target_item(item)
+      item.gsub("CALATRAVA_TMPL", @name)
+    end
+
     def create_directory_tree(template)
       template.walk_directories do |dir|
-        FileUtils.mkdir_p(File.join(@name, dir))
+        FileUtils.mkdir_p(File.join(@name, target_item(dir)))
       end
     end
 
     def create_files(template)
       template.walk_files do |file_info|
-        target_name = file_info[:name].gsub("CALATRAVA_TMPL", @name)
+        target_name = target_item(file_info[:name])
         if File.extname(file_info[:name]) == ".calatrava"
           File.open(File.join(@name, target_name.gsub(".calatrava", "")), "w+") do |f|
-            f.print(Mustache.render(IO.read(file_info[:path]), :project_name => @name, :project_slug => @slug, :dev? => dev?))
+            expanded = Mustache.render(IO.read(file_info[:path]),
+                                       :project_name => @name,
+                                       :project_slug => @slug,
+                                       :project_title => @title,
+                                       :dev? => dev?)
+            f.print(expanded)
           end
         else
           FileUtils.cp(file_info[:path], File.join(@name, target_name))
@@ -77,11 +87,15 @@ module Calatrava
 
     def create_android_tree(template)
       Dir.chdir(File.join(@name, "droid")) do
-        sh "android create project --name '#{@slug}' --path '#{@name}' --package com.#{@slug} --target android-10 --activity Launcher"
+        sh "android create project --name '#{@slug}' --path '#{@name}' --package com.#{@slug} --target android-10 --activity #{@title}"
 
         Dir.walk("calatrava") do |item|
-          FileUtils.mkdir_p(item) if File.directory? item
-          FileUtils.cp(item, item) if File.file? item
+          target_item = item.sub('calatrava', @name)
+          FileUtils.mkdir_p(target_item) if File.directory? item
+          FileUtils.cp(item, target_item) if File.file? item
+        end
+        Dir.chdir "#{@name}/src/com/#{@name}" do
+          FileUtils.mv "Title.java", "#{@title}.java"
         end
 
         FileUtils.rm_rf "calatrava"

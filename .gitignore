@@ -6,3 +6,4 @@ pkg/*
 /lib/calatrava/templates/ios/App/App.xcodeproj/project.xcworkspace/xcuserdata/*
 tmp/*
 test/*
+currencyConverter/*
