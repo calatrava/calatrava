@@ -12,6 +12,6 @@ public class AssetRepository {
   }
 
   public Reader assetReader(String path) throws IOException {
-    return new BufferedReader(new InputStreamReader(appContext.getAssets().open(path)));
+    return new BufferedReader(new InputStreamReader(appContext.getAssets().open(path)), 8192);
   }
 }

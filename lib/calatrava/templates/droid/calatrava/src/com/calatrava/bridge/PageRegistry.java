@@ -34,7 +34,7 @@ public class PageRegistry {
   public void changePage(String target) {
     Log.d(TAG, "changePage('" + target + "')");
     Class activityClass = Object.class;
-    Log.d(TAG, "Activity to be started :" + activityClass.toString());
+    Log.d(TAG, "Activity to be started :" + activityClass.getSimpleName());
     appContext.startActivity(new Intent(appContext, activityClass));
   }
 

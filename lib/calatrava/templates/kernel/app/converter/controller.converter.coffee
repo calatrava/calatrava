@@ -1,3 +1,4 @@
+example ?= {}
 example.converter ?= {}
 
 example.converter.controller = ({views, changePage, ajax}) ->

@@ -150,7 +150,7 @@ public class AjaxRequestManager {
       try {
         HttpEntity entity = response.getEntity();
         InputStream content = entity.getContent();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(content));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(content), 1024);
         String line;
         while ((line = reader.readLine()) != null) {
           builder.append(line);

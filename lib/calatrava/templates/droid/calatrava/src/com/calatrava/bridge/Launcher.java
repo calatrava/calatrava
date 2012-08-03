@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class Launcher {
+  private static String TAG = Launcher.class.getSimpleName();
 
   private static RhinoService rhino;
   private static Context appContext;
@@ -53,13 +54,13 @@ public class Launcher {
     AssetRepository assets = new AssetRepository(appContext);
 
     try {
-      Log.d("AuthenticatedCustomer Activity", "About to prep the rhino");
+      Log.d(TAG, "About to prep the rhino");
       rhino.initRhino();
 
-      Log.d("AuthenticatedCustomer Activity", "About to load and start kernel");
+      Log.d(TAG, "About to load and start kernel");
       // Load all the application JS
       KernelBridge bridge = new KernelBridge(assets, rhino);
-      BufferedReader loadFileReader = new BufferedReader(new InputStreamReader(appContext.getAssets().open("hybrid/load_file.text")));
+      BufferedReader loadFileReader = new BufferedReader(new InputStreamReader(appContext.getAssets().open("hybrid/load_file.text")), 8192);
       String line = null;
       while ((line = loadFileReader.readLine()) != null)
       {
@@ -67,7 +68,7 @@ public class Launcher {
       }
 
     } catch (IOException e) {
-      Log.d("AuthenticatedCustomer Activity", "LauncherActivity failed to start: " + e);
+      Log.d(TAG, "LauncherActivity failed to start: " + e);
     }
   }
 }
