@@ -3,14 +3,25 @@ package com.calatrava.bridge;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ContextWrapper;
 import android.net.Uri;
 import android.util.Log;
+import android.content.pm.PackageManager.NameNotFoundException;
+
 import org.mozilla.javascript.ScriptableObject;
 
-import org.reflections.Reflections;
 import com.calatrava.CalatravaPage;
 
 import java.util.*;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import dalvik.system.DexFile;
+import dalvik.system.PathClassLoader;
+import dalvik.system.DexClassLoader;
+
+import java.lang.annotation.Annotation;
 
 public class PageRegistry {
   public static String TAG = PageRegistry.class.getSimpleName();
@@ -30,27 +41,54 @@ public class PageRegistry {
     sharedRegistry = shared;
   }
 
-  public PageRegistry(String appName, Context appContext, Application app, RhinoService rhino) {
+  public PageRegistry(String appName, Context appContext, Application app, RhinoService rhino)
+    throws IOException, URISyntaxException, ClassNotFoundException, NameNotFoundException
+  {
     this.appContext = appContext;
     this.rhino = rhino;
 
     // Find all the logical page classes in the app
-    Reflections reflector = new Reflections(appName);
-    Set<Class<?>> pageClasses = reflector.getTypesAnnotatedWith(CalatravaPage.class);
-
-    for (Class<?> page : pageClasses)
-    {
-      CalatravaPage calaPage = page.getAnnotation(CalatravaPage.class);
-      String pageName = calaPage.name();
-      Log.d(TAG, "Registering Calatrava page: " + pageName);
-      pageFactories.put(pageName, page);
-    }
+    Log.d(TAG, "Searching for Calatrava pages in '" + appName + "'");
+    addPages(appName, appContext);
   }
 
+  private void addPages(String packageName, Context context)
+    throws IOException, URISyntaxException, ClassNotFoundException, NameNotFoundException
+  {
+    String apkName = context.getPackageManager().getApplicationInfo(packageName, 0).sourceDir;
+    DexFile dexFile = new DexFile(apkName);
+    PathClassLoader classLoader2 = new PathClassLoader(apkName, Thread.currentThread().getContextClassLoader());
+    DexClassLoader classLoader = new DexClassLoader(apkName, new ContextWrapper(context).getCacheDir().getAbsolutePath(), null, classLoader2);
+
+    Enumeration<String> entries = dexFile.entries();
+    while (entries.hasMoreElements())
+    {
+      String entry = entries.nextElement();
+      // only check items that exist in source package and not in libraries, etc.
+      if (entry.startsWith(packageName))
+      {
+        Class<?> entryClass = classLoader.loadClass(entry);
+        if (entryClass != null)
+        {
+          Annotation[] annotations = entryClass.getAnnotations();
+          for (Annotation annotation : annotations)
+          {
+            if (annotation instanceof CalatravaPage)
+            {
+              String pageName = ((CalatravaPage)annotation).name();
+              Log.d(TAG, "Registering Calatrava page: " + pageName);
+              pageFactories.put(pageName, entryClass);
+            }
+          }
+        }
+      }               
+    }
+  }
+  
   public void changePage(String target) {
     Log.d(TAG, "changePage('" + target + "')");
-    Class activityClass = Object.class;
-    Log.d(TAG, "Activity to be started :" + activityClass.getSimpleName());
+    Class activityClass = pageFactories.get(target);
+    Log.d(TAG, "Activity to be started: " + activityClass.getSimpleName());
     appContext.startActivity(new Intent(appContext, activityClass));
   }
 

@@ -22,12 +22,20 @@ public class Launcher {
   private static Runnable startUp;
 
   static ServiceConnection connection = new ServiceConnection() {
-    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-      rhino = ((RhinoService.LocalBinder) iBinder).getService();
-      PageRegistry.setSharedRegistry(new PageRegistry(appName, appContext, application, rhino));
-      AjaxRequestManager.setSharedManager(new AjaxRequestManager(appContext, rhino));
-      initBridge();
-      startUp.run();
+    public void onServiceConnected(ComponentName componentName, IBinder iBinder)
+    {
+      try
+      {
+        rhino = ((RhinoService.LocalBinder) iBinder).getService();
+        PageRegistry.setSharedRegistry(new PageRegistry(appName, appContext, application, rhino));
+        AjaxRequestManager.setSharedManager(new AjaxRequestManager(appContext, rhino));
+        initBridge();
+        startUp.run();
+      }
+      catch (Exception e)
+      {
+        Log.e(TAG, "Unable to start.", e);
+      }
     }
 
     public void onServiceDisconnected(ComponentName componentName) {
