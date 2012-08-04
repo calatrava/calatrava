@@ -94,9 +94,12 @@ module Calatrava
           FileUtils.mkdir_p(target_item) if File.directory? item
           FileUtils.cp(item, target_item) if File.file? item
         end
-        Dir.chdir "#{@name}/src/com/#{@name}" do
-          FileUtils.mv "Title.java", "#{@title}.java"
-          FileUtils.mv "AndroidManifest.xml", "../../../AndroidManifest.xml"
+        Dir.chdir "#{@name}" do
+          Dir.chdir "src/com/#{@name}" do
+            FileUtils.mv "Title.java", "#{@title}.java"
+            FileUtils.mv "AndroidManifest.xml", "../../../AndroidManifest.xml"
+          end
+          FileUtils.mv "calatrava-build.xml", "build.xml"
         end
 
         FileUtils.rm_rf "calatrava"
@@ -136,8 +139,6 @@ module Calatrava
       build_file = public_folder.build_files.new 
 
       shared_phase = Xcodeproj::Project::Object::PBXResourcesBuildPhase.new(proj,nil,{})
-
-      # require 'pry'; binding.pry
 
       shared_phase << build_file
       target.build_phases << shared_phase
@@ -203,7 +204,6 @@ module Calatrava
     def src_paths
       modules.collect { |m| "app/#{m}" }.join(':')
     end
-
 
     def build_ios(options = {})
       proj = Xcode.project("ios/App/App.xcodeproj")

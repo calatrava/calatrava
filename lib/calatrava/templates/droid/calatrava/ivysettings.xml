@@ -1,0 +1,12 @@
+<ivysettings>
+  <property name="repo.dir" value="/var/ivy"/>
+  <resolvers>
+    <ibiblio name="maven2" m2compatible="true" />
+    
+    <chain name="chained" returnFirst="true">
+      <resolver ref="maven2" />
+    </chain>
+  </resolvers>
+
+  <settings defaultResolver="chained" />
+</ivysettings>

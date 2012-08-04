@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 public class Launcher {
   private static String TAG = Launcher.class.getSimpleName();
 
+  private static String appName;
   private static RhinoService rhino;
   private static Context appContext;
   private static Application application;
@@ -23,7 +24,7 @@ public class Launcher {
   static ServiceConnection connection = new ServiceConnection() {
     public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
       rhino = ((RhinoService.LocalBinder) iBinder).getService();
-      PageRegistry.setSharedRegistry(new PageRegistry(appContext, application, rhino));
+      PageRegistry.setSharedRegistry(new PageRegistry(appName, appContext, application, rhino));
       AjaxRequestManager.setSharedManager(new AjaxRequestManager(appContext, rhino));
       initBridge();
       startUp.run();
@@ -34,9 +35,11 @@ public class Launcher {
     }
   };
 
-  public static void launchKernel(Context appContext,
+  public static void launchKernel(String appName,
+                                  Context appContext,
                                   Application application,
                                   Runnable startUp) {
+    Launcher.appName = appName;
     Launcher.appContext = appContext;
     Launcher.application = application;
     Launcher.startUp = startUp;

@@ -1,0 +1,15 @@
+<ivy-module version="2.0">
+  <info organisation="com.example" module="currency-converter" revision="0.1" />
+  <dependencies>
+    <!-- Calatrava dependencies -->
+    <dependency org="org.mozilla" name="rhino" rev="1.7R4" conf="*->*,!sources,!javadoc" />
+    <dependency org="org.codehaus.jackson" name="jackson-mapper-asl" rev="1.9.8"/>
+    <dependency org="org.reflections" name="reflections" rev="0.9.8" conf="*->*,!sources,!javadoc">
+      <exclude module="javassist" />
+      <exclude module="dom4j" />
+      <exclude module="gson" />
+      <exclude module="jboss-vfs" />
+      <exclude module="slf4j-simple" />
+    </dependency>
+  </dependencies>
+</ivy-module>

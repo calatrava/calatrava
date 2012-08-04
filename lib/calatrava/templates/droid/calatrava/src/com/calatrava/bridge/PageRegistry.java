@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.util.Log;
 import org.mozilla.javascript.ScriptableObject;
 
+import org.reflections.Reflections;
+import com.calatrava.CalatravaPage;
+
 import java.util.*;
 
 public class PageRegistry {
@@ -15,6 +18,7 @@ public class PageRegistry {
 
   private Context appContext;
   private RhinoService rhino;
+  private Map<String, Class<?>> pageFactories = new HashMap<String, Class<?>>();
   private Map<String, RegisteredPage> registeredPages = new HashMap<String, RegisteredPage>();
 
   public static PageRegistry sharedRegistry() {
@@ -26,9 +30,21 @@ public class PageRegistry {
     sharedRegistry = shared;
   }
 
-  public PageRegistry(Context appContext, Application app, RhinoService rhino) {
+  public PageRegistry(String appName, Context appContext, Application app, RhinoService rhino) {
     this.appContext = appContext;
     this.rhino = rhino;
+
+    // Find all the logical page classes in the app
+    Reflections reflector = new Reflections(appName);
+    Set<Class<?>> pageClasses = reflector.getTypesAnnotatedWith(CalatravaPage.class);
+
+    for (Class<?> page : pageClasses)
+    {
+      CalatravaPage calaPage = page.getAnnotation(CalatravaPage.class);
+      String pageName = calaPage.name();
+      Log.d(TAG, "Registering Calatrava page: " + pageName);
+      pageFactories.put(pageName, page);
+    }
   }
 
   public void changePage(String target) {

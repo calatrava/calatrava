@@ -14,7 +14,7 @@ public class {{ project_title }} extends Activity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-        Launcher.launchKernel(this, getApplication(), new Runnable() {
+        Launcher.launchKernel("com.test", this, getApplication(), new Runnable() {
           public void run() {
             Launcher.launchFlow("example.converter.start");
           }
