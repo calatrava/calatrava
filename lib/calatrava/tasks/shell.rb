@@ -11,7 +11,7 @@ namespace :shell do
 
   desc "Build shell js files"
   task :coffee => "build/shell/js" do
-    coffee "shell/pages/", "build/shell/js"
+    coffee "shell", "build/shell/js"
   end
 
 end

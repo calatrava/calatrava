@@ -1,13 +1,17 @@
 namespace :droid do
 
   version = "1.0"
+  droid_manifest = Calatrava::Manifest.new('droid')
 
-  html_views = Dir["#{SHELL_VIEWS_DIR}/*.haml"].collect do |haml|
-    pageName = File.basename(haml, '.haml')
-    file "#{CONFIG[:droid][:html]}/#{pageName}.html" => [haml] + FileList['shell/layouts/*.haml'] + FileList['shell/partials/**/*.haml'] do
-      HamlSupport::compile haml, CONFIG[:droid][:html]
+  html_views = droid_manifest.features.collect do |feature|
+    html_dir = "droid/#{Calatrava::Project.current.name}/assets/hybrid/views"
+    Dir["shell/pages/#{feature}/*.haml"].collect do |page|
+      pageName = File.basename(page, '.haml')
+      file "#{html_dir}/#{pageName}.html" => page do
+        HamlSupport::compile_hybrid_page feature, page, html_dir
+      end
     end
-  end
+  end.flatten
 
   desc "Creates html from haml using Android layout"
   task :haml => [CONFIG[:droid][:html]] + html_views
@@ -25,13 +29,13 @@ namespace :droid do
     cp_ne "#{ASSETS_IMG_DIR}/*", CONFIG[:droid][:imgs]
     cp_ne "assets/lib/*.js", CONFIG[:droid][:js]
 
-    droid_manifest = Calatrava::Manifest.new('droid')
     droid_manifest.js_files.each do |js_file|
       sh "cp #{js_file} #{CONFIG[:droid][:js]}"
     end
     droid_manifest.load_file("droid/#{Calatrava::Project.current.name}/assets/hybrid", 'hybrid/scripts', :type => :text, :include_pages => false)
 
-    cp_ne "#{BUILD_CORE_KERNEL_DIR}/*.js", CONFIG[:droid][:js]
+    cp_ne "build/shell/js/**/*.js", CONFIG[:droid][:js]
+    cp_ne "build/kernel/js/*.js", CONFIG[:droid][:js]
     cp_ne "#{ASSETS_FONTS_DIR}/*", CONFIG[:droid][:fonts]
   end
 

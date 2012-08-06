@@ -1,28 +1,23 @@
 !!!
 %html
   %head
-    %link(type="text/css" rel="stylesheet" media="all" href="file:///android_asset/hybrid/styles/reset.css")
-    %link(type="text/css" rel="stylesheet" media="all" href="file:///android_asset/hybrid/styles/app.css")
-    %link(type="text/css" rel="stylesheet" media="all" href="file:///android_asset/hybrid/styles/common.css")
-    %link(type="text/css" rel="stylesheet" media="all" href="file:///android_asset/hybrid/styles/device.css")
+    -%w{reset app common device}.each do |filename|
+      %link(type="text/css" rel="stylesheet" media="all" href="file:///android_asset/hybrid/styles/#{filename}.css")
 
-    %script(src="file:///android_asset/hybrid/scripts/env.js" type="text/javascript")
+    -%w{env zepto ICanHaz underscore calatrava bridge shell pageHelper}.each do |filename|
+      %script(type="text/javascript" src="file:///android_asset/hybrid/scripts/#{filename}.js")
 
-    %script(src="file:///android_asset/hybrid/scripts/zepto.js" type="text/javascript")
-    %script(src="file:///android_asset/hybrid/scripts/ICanHaz.js" type="text/javascript")
-    %script(src="file:///android_asset/hybrid/scripts/underscore.js" type="text/javascript")
-    %script(src="file:///android_asset/hybrid/scripts/dialog.js" type="text/javascript")
+    :javascript
+      $(document).ready(function() {
+        window.batSignal = tw.batSignal();
+      });
 
-    %script(src="file:///android_asset/hybrid/scripts/shell.js" type="text/javascript")
-    %script(src="file:///android_asset/hybrid/scripts/pageHelper.js" type="text/javascript")
-    %script(type="text/javascript")
-      :plain
-        $(document).ready(function() {
-          window.batSignal = tw.batSignal();
-        });
-
-    = content_for :scripts
+    %script(src="file:///android_asset/hybrid/scripts/page.#{page_name}.js" type="text/javascript")
+    :javascript
+      $(document).ready(function() {
+        window.#{page_name}View = calatrava.pageView.#{page_name}();
+      });
 
   %body
     %div#app_container.container
-      = content_for :container
+      = render_page

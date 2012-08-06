@@ -1,4 +1,5 @@
 require 'calatrava/version'
 require 'calatrava/app'
 require 'calatrava/project'
+require 'calatrava/manifest'
 require 'calatrava/template'

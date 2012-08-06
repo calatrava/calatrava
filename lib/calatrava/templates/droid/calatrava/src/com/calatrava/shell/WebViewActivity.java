@@ -132,7 +132,7 @@ public abstract class WebViewActivity extends RegisteredActivity {
     webView.getSettings().setDomStorageEnabled(true);
     webView.setScrollBarStyle(webView.SCROLLBARS_OUTSIDE_OVERLAY);
     webView.setScrollbarFadingEnabled(true);
-    webView.setBackgroundColor(getBackgroundColor());
+    webView.setBackgroundColor(0xffffffff);
     webView.addJavascriptInterface(jsContainer, "container");
 
     webView.setWebViewClient(new WebViewClient() {

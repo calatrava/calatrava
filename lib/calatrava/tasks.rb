@@ -1,5 +1,5 @@
 $: << File.dirname(__FILE__)
-require 'calatrava/project'
+require 'calatrava'
 
 Calatrava::Project.here('.')
 

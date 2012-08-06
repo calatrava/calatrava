@@ -1,10 +1,17 @@
 namespace :ios do
-  html_views = Dir["#{SHELL_VIEWS_DIR}/*.haml"].collect do |haml|
-    pageName = File.basename(haml, '.haml')
-    file "#{CONFIG[:ios][:html]}/#{pageName}.html" => [haml] + FileList['shell/layouts/*.haml'] + FileList['shell/partials/**/*.haml'] do
-      HamlSupport::compile haml, CONFIG[:ios][:html], :platform => 'ios'
+
+
+  ios_manifest = Calatrava::Manifest.new('ios')
+
+  html_views = ios_manifest.features.collect do |feature|
+    html_dir = "ios/public/views"
+    Dir["shell/pages/#{feature}/*.haml"].collect do |page|
+      pageName = File.basename(page, '.haml')
+      file "#{html_dir}/#{pageName}.html" => page do
+        HamlSupport::compile_hybrid_page feature, page, html_dir, :platform => 'ios'
+      end
     end
-  end
+  end.flatten
 
   desc "Creates html from haml using iPhone layout"
   task :haml => [CONFIG[:ios][:html]] + html_views
@@ -19,13 +26,13 @@ namespace :ios do
     cp_ne "assets/lib/*.js", CONFIG[:ios][:js]
     cp_ne "ios/res/js/*.js", CONFIG[:ios][:js]
 
-    ios_manifest = Calatrava::Manifest.new('ios')
     ios_manifest.js_files.each do |js_file|
       sh "cp #{js_file} #{CONFIG[:ios][:js]}"
     end
     ios_manifest.load_file('ios/public/assets', '%@/public/assets/scripts', :type => :text, :include_pages => false)
 
-    cp_ne "#{BUILD_CORE_KERNEL_DIR}/*.js", CONFIG[:ios][:js]
+    cp_ne "build/shell/js/**/*.js", CONFIG[:ios][:js]
+    cp_ne "build/kernel/js/*.js", CONFIG[:ios][:js]
     cp_ne "#{ASSETS_FONTS_DIR}/*", CONFIG[:ios][:fonts]
   end
 

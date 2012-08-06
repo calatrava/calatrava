@@ -3,6 +3,13 @@ require 'haml'
 module HamlSupport
 
   class Helper
+    
+    attr_reader :page_name
+
+    def initialize(feature = nil, page = nil)
+      @feature = feature
+      @page_name = page
+    end
 
     def content_for(named_chunk)
       chunk = @chunks[named_chunk]
@@ -20,7 +27,8 @@ module HamlSupport
       Haml::Engine.new(partial_template).render(self, locals)
     end
 
-    def render_page(page_name, locals = {})
+    def render_page(page_name = nil, locals = {})
+      page_name = File.join(@feature, @page_name) unless page_name
       page_template = IO.read(File.join('shell/pages', "#{page_name}.haml"))
       Haml::Engine.new(page_template).render(self, locals)
     end
@@ -29,18 +37,33 @@ module HamlSupport
 
   class << self
 
+    def compile_hybrid_page(feature, page_path, output_path, options = {})
+      puts "haml page: #{page_path} -> #{output_path}"
+
+      options[:helper] = Helper.new(feature, File.basename(page_path, ".haml"))
+      options[:template] = "shell/layouts/single_page.haml"
+      options[:out] = File.join(output_path, File.basename(page_path, '.*') + '.html')
+
+      render_haml(options)
+    end
+
     def compile(haml_path, html_dir, options = {})
-      html_file = File.basename(haml_path, '.*') + '.html'
-      html_path = File.join(html_dir, html_file)
-      template = IO.read(haml_path)
-      haml_helper = Helper.new
+      puts "haml: #{haml_path} -> #{html_dir}"
 
-      puts "haml: #{haml_path} -> #{html_path}"
+      options[:helper] ||= Helper.new
+      options[:template] = haml_path
+      options[:out] = File.join(html_dir, File.basename(haml_path, '.*') + '.html')
 
-      html = Haml::Engine.new(template).render(haml_helper)
+      render_haml(options)
+    end
+
+    def render_haml(options)
+      html_path = options[:out]
+      template = IO.read(options[:template])
+
+      html = Haml::Engine.new(template).render(options[:helper])
 
       html.gsub!("file:///android_asset/hybrid", "../assets") if options[:platform] == 'ios'
-
       IO.write(html_path, html)
     end
   end

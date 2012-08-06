@@ -5,6 +5,10 @@ module Calatrava
       @feature_list = YAML.load(IO.read("#{app_dir}/manifest.yml"))
     end
 
+    def features
+      @feature_list
+    end
+
     def js_files
       @feature_list.collect { |f| Dir["build/{kernel,shell}/js/#{f}/*.js"] }.flatten
     end
