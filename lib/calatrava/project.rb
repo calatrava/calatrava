@@ -206,8 +206,8 @@ module Calatrava
     end
 
     def build_ios(options = {})
-      proj = Xcode.project("ios/App/App.xcodeproj")
-      builder = proj.target(options[:target]).config(options[:config]).builder
+      proj = Xcode.project("ios/#{@name}.xcodeproj")
+      builder = proj.target(@name).config('Debug').builder
       builder.clean
       builder.sdk = options[:sdk] || :iphonesimulator
       builder.build

@@ -46,18 +46,19 @@ mobile app.
 
 5. `rake bootstrap`
 
-6. `rake configure:development`
+6. `rake build` to build sample apps for all three platforms: iOS,
+   Android and Mobile Web.
 
-7. `rake web:apache:start`
+7. To run the Mobile Web app: `rake web:apache:start`
 
 8. Browse to [`http://localhost:8888`](http://localhost:8888) in your
    favourite browser.
 
 And you're away! Or at least, you should be.
 
-To build the iOS app, open the Xcode project in the iOS directory. To
-build and run the Android app, connect a device or start an emulator
-and then `rake droid:deploy`
+To run the iOS app, open the Xcode project in the iOS directory. To
+run the Android app, connect a device or start an emulator and then
+`rake droid:deploy`
 
 # Working with Calatrava while it's under Development
 
