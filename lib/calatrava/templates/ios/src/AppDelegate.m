@@ -18,9 +18,10 @@
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   [self.window addSubview:self.rootNavController.view];
   [self.window makeKeyAndVisible];
-  
-  [KernelBridge startWith:self.rootNavController];
-  [KernelBridge launch:@"example.converter.start();"];
+
+  KernelBridge *kernel = [KernelBridge sharedKernel];
+  [kernel startWith:self.rootNavController];
+  [kernel launch:@"example.converter.start"];
   
   return YES;
 }

@@ -31,4 +31,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "cucumber"
   s.add_runtime_dependency "frank-cucumber"
   s.add_runtime_dependency "watir-webdriver"
+  s.add_runtime_dependency "cocoapods"
 end

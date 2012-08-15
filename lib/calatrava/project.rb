@@ -162,8 +162,7 @@ module Calatrava
 
         config.build_settings.merge!({
           "GCC_PREFIX_HEADER" => "src/#{@name}-Prefix.pch",
-          "OTHER_LDFLAGS" => ['-ObjC', '-all_load', '-lxml2'],
-          "HEADER_SEARCH_PATHS" => '/usr/include/libxml2',
+          "OTHER_LDFLAGS" => ['-ObjC', '-all_load'],
           "INFOPLIST_FILE" => "src/#{@name}-Info.plist",
           "SKIP_INSTALL" => "NO",
           "IPHONEOS_DEPLOYMENT_TARGET" => "5.0",
@@ -206,7 +205,7 @@ module Calatrava
     end
 
     def build_ios(options = {})
-      proj = Xcode.project("ios/#{@name}.xcodeproj")
+      proj = Xcode.project("ios/#{@name}.xcworkspace")
       builder = proj.target(@name).config('Debug').builder
       builder.clean
       builder.sdk = options[:sdk] || :iphonesimulator
