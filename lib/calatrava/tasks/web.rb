@@ -24,6 +24,7 @@ namespace :web do
 
     web_manifest.load_file('web/app/views', 'scripts', :type => :haml, :include_pages => true)
 
+    cp_ne "build/shell/js/**/*.js", CONFIG[:web][:js]
     cp_ne "build/kernel/js/*.js", CONFIG[:web][:js]
     cp_ne "#{ASSETS_FONTS_DIR}/*", CONFIG[:web][:fonts]
   end
