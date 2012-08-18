@@ -20,3 +20,7 @@ desc "Create a test project"
 task :run do
   sh "bin/calatrava create test --dev"
 end
+
+namespace :gem do
+  Bundler::GemHelper.install_tasks
+end
