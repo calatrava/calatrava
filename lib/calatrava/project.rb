@@ -95,11 +95,14 @@ module Calatrava
           FileUtils.cp(item, target_item) if File.file? item
         end
         Dir.chdir "#{@name}" do
+          Dir.chdir "#{@name}" do
+            FileUtils.mv "build.xml", "../build.xml"
+            FileUtils.mv "AndroidManifest.xml", "../AndroidManifest.xml"
+          end
+          FileUtils.rm_rf "#{@name}"
           Dir.chdir "src/com/#{@name}" do
             FileUtils.mv "Title.java", "#{@title}.java"
-            FileUtils.mv "AndroidManifest.xml", "../../../AndroidManifest.xml"
           end
-          FileUtils.mv "calatrava-build.xml", "build.xml"
         end
 
         FileUtils.rm_rf "calatrava"

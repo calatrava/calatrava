@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- A standard Android ant build file, with changes to support calatrava.
      It incorporates ivy to manage dependencies. -->
-<project name="test" default="help">
+<project name="{{ project_slug }}" default="help">
 
     <!-- The local.properties file is created and updated by the 'android' tool.
          It contains the path to the SDK. It should *NOT* be checked into

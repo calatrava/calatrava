@@ -1,4 +1,4 @@
-package com.{{ project_name }};
+package com.{{ project_slug }};
 
 import com.calatrava.CalatravaPage;
 import com.calatrava.shell.WebViewActivity;
