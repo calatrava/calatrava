@@ -2,4 +2,4 @@ platform :ios, '5.0'
 
 xcodeproj '{{ project_name}}.xcodeproj'
 
-pod 'calatrava', :git => 'https://github.com/calatrava/calatrava-ios'
+pod 'calatrava', :git => 'https://github.com/vivekjain10/calatrava-ios.git'
