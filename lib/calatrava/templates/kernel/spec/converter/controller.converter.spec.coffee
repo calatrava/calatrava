@@ -30,8 +30,8 @@ describe 'converter controller', ->
       views.conversionForm.trigger 'convert'
 
     it 'should get the amount to convert', ->
-      expect(views.conversionForm.get).toHaveBeenCalledWith('amount')
+      expect(views.conversionForm.get).toHaveBeenCalledWith('in_amount')
     it 'should get the starting currency', ->
-      expect(views.conversionForm.get).toHaveBeenCalledWith('start_currency')
+      expect(views.conversionForm.get).toHaveBeenCalledWith('in_currency')
     it 'should get the ending currency', ->
-      expect(views.conversionForm.get).toHaveBeenCalledWith('end_currency')
+      expect(views.conversionForm.get).toHaveBeenCalledWith('out_currency')
