@@ -6,7 +6,9 @@
     {{/currencies}}
 
   %h3 THE BEST CURRENCY CONVERTER EVER
-  %select.in_currency
-  %input.in_amount(type='number' placeholder='amount')
-  %select.out_currency
-  %button GO
+  %select#in_currency
+  %input#in_amount(type='number' placeholder='amount')
+  %select#out_currency
+  %br
+  %button#convert GO
+  %input#out_amount(placeholder='no result' readonly="true" )
