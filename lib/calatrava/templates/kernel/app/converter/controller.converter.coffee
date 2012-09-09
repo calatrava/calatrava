@@ -18,23 +18,6 @@ example.converter.controller = ({views, changePage, ajax}) ->
       enabled: c != unselectableCurrency
       selected: c == selectedCurrency
 
-  renderCurrencyList = ({listName, disabled, selected}) ->
-    viewMessage = {}
-    viewMessage[listName] = currencyDropdownViewMessage(selected, disabled)
-    views.conversionForm.render(viewMessage)
-
-  renderOutCurrencyList = ()->
-    renderCurrencyList
-      listName: 'outCurrencies'
-      disabled: inCurrency
-      selected: outCurrency
-
-  renderInCurrencyList = ()->
-    renderCurrencyList
-      listName: 'inCurrencies'
-      disabled: outCurrency
-      selected: inCurrency
-
   convert = () ->
     inAmount = views.conversionForm.get 'in_amount'
     outRate =  currencyRate[views.conversionForm.get 'out_currency']
@@ -48,16 +31,15 @@ example.converter.controller = ({views, changePage, ajax}) ->
 
   views.conversionForm.bind 'selectedInCurrency', ->
     inCurrency = views.conversionForm.get 'in_currency'
-    renderOutCurrencyList()
-    convert()
+    views.conversionForm.render
+      outCurrency: currencyDropdownViewMessage outCurrency, inCurrency
 
   views.conversionForm.bind 'selectedOutCurrency', ->
     outCurrency = views.conversionForm.get 'out_currency'
-    renderInCurrencyList()
-    convert()
+    views.conversionForm.render
+      inCurrencies: currencyDropdownViewMessage inCurrency, outCurrency
 
-  renderInCurrencyList()
-  renderOutCurrencyList()
   views.conversionForm.render
+    inCurrencies: currencyDropdownViewMessage inCurrency, outCurrency
+    outCurrencies: currencyDropdownViewMessage outCurrency, inCurrency
     in_amount: 1
-  convert()
