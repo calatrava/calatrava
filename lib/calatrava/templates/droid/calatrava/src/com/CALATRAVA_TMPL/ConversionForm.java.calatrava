@@ -17,11 +17,11 @@ public class ConversionForm extends WebViewActivity
 
   @Override
   protected List<String> getEvents() {
-    return Arrays.asList("selectedInCurrency", "selectedOutCurrency");
+    return Arrays.asList("selectedInCurrency", "selectedOutCurrency", "convert");
   }
 
   @Override
   protected List<String> getFields() {
-    return new ArrayList<String>();
+    return Arrays.asList("in_amount", "in_currency", "out_amount", "out_currency");
   }
 }

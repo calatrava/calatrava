@@ -69,7 +69,7 @@ namespace :droid do
 
   desc "Deploy app to device/emulator"
   task :deploy => :publish do
-    sh "adb uninstall com.#{Calatrava::Project.current.name} ; adb install -r artifacts/#{ENV['CALATRAVA_ENV']}/#{Calatrava::Project.current.name}-debug.apk"
+    sh "adb install -r artifacts/#{ENV['CALATRAVA_ENV']}/#{Calatrava::Project.current.name}-debug.apk"
   end
 
   desc "Clean droid public directory"
