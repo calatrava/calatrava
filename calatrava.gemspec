@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.name        = "calatrava"
   s.version     = Calatrava::Version
   s.authors     = ["Giles Alexander"]
-  s.email       = ["gga@thoughtworks.com"]
-  s.homepage    = ""
+  s.email       = ["giles.alexander@gmail.com"]
+  s.homepage    = "http://calatrava.github.com"
   s.summary     = %q{Cross-platform mobile apps with native UIs}
   s.description = %q{A framework to build cross-platform mobile apps with high quality native UIs.}
 

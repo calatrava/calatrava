@@ -9,7 +9,13 @@ namespace :test do
   end
 
   Cucumber::Rake::Task.new(:features) do |t|
-    t.cucumber_opts = "features --format pretty"
+    t.cucumber_opts = "features --format pretty --tags ~@wip"
+  end
+
+  namespace :features do
+    Cucumber::Rake::Task.new(:wip) do |t|
+      t.cucumber_opts = "features --format pretty --tags @wip --wip"
+    end
   end
 end
 

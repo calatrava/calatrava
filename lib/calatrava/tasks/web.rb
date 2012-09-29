@@ -61,6 +61,11 @@ namespace :web do
       launch_apache
     end
 
+    task :background => [:build, 'web/apache/public', APACHE_LOGS_DIR] do
+      configure_apache
+      launch_apache :background => true
+    end
+
     desc "Reload the apache configuration"
     task :reload do
       reload_apache

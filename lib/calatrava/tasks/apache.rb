@@ -16,26 +16,36 @@ else
   LOAD_LOG_MODULE = true
 end
 
-def httpd(command)
-  exec %Q|#{HTTPD} -d #{APACHE_DIR} -f conf/httpd.conf -e DEBUG -k #{command} -DNO_DETACH -DFOREGROUND|
+def httpd(command, opts = {})
+  cmd = %Q{#{HTTPD} -d #{APACHE_DIR} -f conf/httpd.conf -e DEBUG -k #{command} -DNO_DETACH -DFOREGROUND}
+  puts cmd
+  if opts[:background]
+    fork do
+      exec cmd
+    end
+  else
+    exec cmd
+  end
 end
 
 def configure_apache
   cp config_path("httpd.conf"), File.join(APACHE_DIR, 'conf')
 end
 
-def launch_apache
-  puts
-  puts "\t\t" + "*"*40
-  puts "\t\t" + "***   STARTING APACHE ON PORT 8888   ***"
-  puts "\t\t" + "*"*40
-  puts
+def launch_apache(opts = {})
+  if !opts[:background]
+    puts
+    puts "\t\t" + "*"*40
+    puts "\t\t" + "***   STARTING APACHE ON PORT 8888   ***"
+    puts "\t\t" + "*"*40
+    puts
+  end
 
-  httpd :start
+  httpd :start, opts
 end
 
 def stop_apache
-  httpd :stop
+  httpd 'graceful-stop'
 end
 
 def reload_apache
