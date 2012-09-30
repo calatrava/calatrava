@@ -27,11 +27,11 @@ describe 'converter controller', ->
   describe 'converting', ->
 
     beforeEach ->
+      views.conversionForm.fieldContains 'in_currency', 'USD'
+      views.conversionForm.fieldContains 'out_currency', 'AUD'
+      views.conversionForm.fieldContains 'in_amount', 100
       views.conversionForm.trigger 'convert'
 
-    it 'should get the amount to convert', ->
-      expect(views.conversionForm.get).toHaveBeenCalledWith('in_amount')
-    it 'should get the starting currency', ->
-      expect(views.conversionForm.get).toHaveBeenCalledWith('in_currency')
-    it 'should get the ending currency', ->
-      expect(views.conversionForm.get).toHaveBeenCalledWith('out_currency')
+    it 'should render the correctly converted amount', ->
+      expect(views.conversionForm.render).toHaveBeenCalledWith
+        out_amount: 96
