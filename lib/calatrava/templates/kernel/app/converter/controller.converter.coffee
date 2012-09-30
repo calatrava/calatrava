@@ -19,13 +19,12 @@ example.converter.controller = ({views, changePage, ajax}) ->
       selected: c == selectedCurrency
 
   convert = () ->
-    inAmount = views.conversionForm.get 'in_amount'
-    outRate =  currencyRate[views.conversionForm.get 'out_currency']
-    inRate = currencyRate[views.conversionForm.get 'in_currency']
-
-    outAmount = (Math.round(inAmount * (outRate / inRate) * 100)) / 100
-    views.conversionForm.render
-      out_amount: outAmount
+    views.conversionForm.getMany ['in_amount', 'out_currency', 'in_currency'],
+      ({in_amount, out_currency, in_currency}) ->
+        outRate =  currencyRate[out_currency]
+        inRate = currencyRate[in_currency]
+        views.conversionForm.render
+          out_amount: (Math.round(in_amount * (outRate / inRate) * 100)) / 100
 
   views.conversionForm.bind 'convert', convert
 
