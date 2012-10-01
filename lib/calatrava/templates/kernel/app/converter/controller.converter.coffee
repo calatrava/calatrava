@@ -29,14 +29,14 @@ example.converter.controller = ({views, changePage, ajax}) ->
   views.conversionForm.bind 'convert', convert
 
   views.conversionForm.bind 'selectedInCurrency', ->
-    inCurrency = views.conversionForm.get 'in_currency'
-    views.conversionForm.render
-      outCurrency: currencyDropdownViewMessage outCurrency, inCurrency
+    views.conversionForm.get 'in_currency', (inCurrency) ->
+      views.conversionForm.render
+        outCurrencies: currencyDropdownViewMessage outCurrency, inCurrency
 
   views.conversionForm.bind 'selectedOutCurrency', ->
-    outCurrency = views.conversionForm.get 'out_currency'
-    views.conversionForm.render
-      inCurrencies: currencyDropdownViewMessage inCurrency, outCurrency
+    views.conversionForm.get 'out_currency', (outCurrency) ->
+      views.conversionForm.render
+        inCurrencies: currencyDropdownViewMessage inCurrency, outCurrency
 
   views.conversionForm.render
     inCurrencies: currencyDropdownViewMessage inCurrency, outCurrency
