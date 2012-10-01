@@ -73,12 +73,18 @@ public abstract class RegisteredActivity extends Activity {
     super.onDestroy();
     unbindService(connection);
   }
+
+  public void triggerEvent(String event, String... extraArgs) {
+    PageRegistry.sharedRegistry().triggerEvent(getPageName(), event, extraArgs);
+  }
   
   public void invokeWidgetCallback(String...args) {
-    rhino.callJsFunction("tw.bridge.widgets.invokeCallback", args);
+    rhino.callJsFunction("calatrava.inbound.invokeCallback", args);
   }
 
   protected abstract void onRhinoConnected(RhinoService rhino);
+
+  protected abstract String getPageName();
 
   public abstract String getFieldValue(String field);
 

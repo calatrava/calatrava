@@ -31,6 +31,7 @@ public class PageRegistry {
   private RhinoService rhino;
   private Map<String, Class<?>> pageFactories = new HashMap<String, Class<?>>();
   private Map<String, RegisteredPage> registeredPages = new HashMap<String, RegisteredPage>();
+  private Map<String, String> proxyByPage = new HashMap<String, String>();
 
   public static PageRegistry sharedRegistry() {
     return sharedRegistry;
@@ -84,12 +85,23 @@ public class PageRegistry {
       }               
     }
   }
+
+  public void registerProxyForPage(String pageName, String proxyId) {
+    Log.d(TAG, "Attaching proxy '" + proxyId + "' to name '" + pageName + "'");
+    proxyByPage.put(pageName, proxyId);
+  }
   
   public void changePage(String target) {
     Log.d(TAG, "changePage('" + target + "')");
     Class activityClass = pageFactories.get(target);
     Log.d(TAG, "Activity to be started: " + activityClass.getSimpleName());
     appContext.startActivity(new Intent(appContext, activityClass));
+  }
+
+  public void triggerEvent(String pageName, String event, String... extraArgs) {
+    String proxy = proxyByPage.get(pageName);
+    Log.d(TAG, "Dispatching to proxy '" + proxy + "'");
+    rhino.triggerEvent(proxy, event, extraArgs);
   }
 
   public void displayWidget(String name, String options) {
@@ -120,7 +132,7 @@ public class PageRegistry {
       public void run() {
         timer.cancel();
         timer.purge();
-        rhino.callJsFunction("tw.bridge.timers.fireTimer", new String[] {timerId});
+        rhino.callJsFunction("calatrava.inbound.fireTimer", new String[] {timerId});
       }
     }, 1000 * timeout);
   }

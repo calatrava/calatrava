@@ -42,6 +42,7 @@ public class RhinoService extends Service {
 
       Object wrappedRegistry = Context.javaToJS(PageRegistry.sharedRegistry(), mScope);
       ScriptableObject.putProperty(mScope, "pageRegistry", wrappedRegistry);
+      ScriptableObject.putProperty(mScope, "androidRuntime", this);
 
       Object wrappedAjaxRequestManagerRegistry = Context.javaToJS(AjaxRequestManager.sharedManager(), mScope);
       ScriptableObject.putProperty(mScope, "ajaxRequestManagerRegistry", wrappedAjaxRequestManagerRegistry);
@@ -75,8 +76,8 @@ public class RhinoService extends Service {
     evaller.load(source, name);
   }
 
-  public void triggerEvent(String page, String eventId, String[] extraArgs) {
-    evaller.triggerEvent(page, eventId, extraArgs);
+  public void triggerEvent(String proxy, String eventId, String[] extraArgs) {
+    evaller.triggerEvent(proxy, eventId, extraArgs);
   }
 
   public void invokeSuccessCallback(String requestId, String response) {
@@ -85,6 +86,10 @@ public class RhinoService extends Service {
 
   public void invokeFailureCallback(String requestId, int statusCode, String responseBody) {
     evaller.ajaxFailureResponse(requestId, statusCode, responseBody);
+  }
+
+  public void log(String message) {
+    Log.d(TAG, message);
   }
 
   public void callJsFunction(String function) {
@@ -149,15 +154,15 @@ public class RhinoService extends Service {
       dispatchJs(js);
     }
 
-    public void triggerEvent(String page, String eventId, String[] extraArgs) {
+    public void triggerEvent(String proxy, String eventId, String[] extraArgs) {
       StringBuilder sb = new StringBuilder("");
       for (String arg : extraArgs) {
         sb.append(", '");
         sb.append(arg);
         sb.append("'");
       }
-      String js = "tw.bridge.dispatchEvent('{0}', '{1}'{2});"
-          .replace("{0}", page)
+      String js = "calatrava.inbound.dispatchEvent('{0}', '{1}'{2});"
+          .replace("{0}", proxy)
           .replace("{1}", eventId)
           .replace("{2}", sb.toString());
 
@@ -167,14 +172,14 @@ public class RhinoService extends Service {
     }
 
     public void ajaxSuccessfulResponse(String requestId, String json) {
-      String js = "tw.bridge.requests.successfulResponse('{0}', '{1}');"
+      String js = "calatrava.inbound.successfulResponse('{0}', '{1}');"
           .replace("{0}", requestId)
           .replace("{1}", json);
       dispatchJs(js);
     }
 
     public void ajaxFailureResponse(String requestId, int statusCode, String responseBody) {
-      String js = "tw.bridge.requests.failureResponse('{0}', {1}, '{2}');"
+      String js = "calatrava.inbound.failureResponse('{0}', {1}, '{2}');"
           .replace("{0}", requestId)
           .replace("{1}", Integer.toString(statusCode))
           .replace("{2}", responseBody);

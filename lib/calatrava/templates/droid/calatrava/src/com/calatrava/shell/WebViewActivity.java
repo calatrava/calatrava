@@ -112,8 +112,6 @@ public abstract class WebViewActivity extends RegisteredActivity {
     });
   }
 
-  protected abstract String getPageName();
-
   protected abstract List<String> getEvents();
 
   protected abstract List<String> getFields();
@@ -159,7 +157,7 @@ public abstract class WebViewActivity extends RegisteredActivity {
   }
 
   private void pageHasOpened() {
-    rhino.triggerEvent(getPageName(), "pageOpened", new String[] {});
+    triggerEvent("pageOpened", new String[] {});
   }
 
   private void onPageLoadCompleted() {
@@ -230,7 +228,7 @@ public abstract class WebViewActivity extends RegisteredActivity {
       } else {
         Log.d(TAG, "extraArgs were null!");
       }
-      rhino.triggerEvent(pageName, event, extraArgs);
+      triggerEvent(event, extraArgs);
     }
 
     public void onRenderComplete(Object ignored) {

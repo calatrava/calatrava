@@ -17,6 +17,7 @@ public class KernelBridge {
     //load bridge
     loadLibrary("hybrid/scripts/env.js");
     loadLibrary("hybrid/scripts/bridge.js");
+    loadLibrary("hybrid/scripts/calatrava.js");
   }
 
   public void loadLibrary(String libraryName) throws IOException {
