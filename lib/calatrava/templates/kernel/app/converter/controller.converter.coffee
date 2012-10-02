@@ -23,7 +23,7 @@ example.converter.controller = ({views, changePage, ajax}) ->
       outRate = currencyRate[outCurrency]
       inRate = currencyRate[inCurrency]
       views.conversionForm.render
-        out_amount: (Math.round(in_amount * (outRate / inRate) * 100)) / 100
+        out_amount: (Math.round(inAmount * (outRate / inRate) * 100)) / 100
 
   views.conversionForm.bind 'convert', convert
 
