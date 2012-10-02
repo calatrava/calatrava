@@ -17,11 +17,14 @@
 @property (retain, nonatomic) IBOutlet UIPickerView *inCurrencyPicker;
 
 - (void)updateCurrencyPickerSelection:(UIPickerView *)pickerView usingData:(NSArray *)currencyData;
+- (void)hideKeyboard;
 @end
 
 @implementation ConversionFormViewController
 @synthesize outCurrencyPicker;
 @synthesize inCurrencyPicker;
+@synthesize inAmount;
+@synthesize outAmount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -37,6 +40,8 @@
   [inCurrencyPicker release];
   [_inCurrencyData release];
   [_outCurrencyData release];
+  [inAmount release];
+  [outAmount release];
   [super dealloc];
 }
 
@@ -56,6 +61,8 @@
 {
   [self setOutCurrencyPicker:nil];
   [self setInCurrencyPicker:nil];
+  [self setInAmount:nil];
+  [self setOutAmount:nil];
     [super viewDidUnload];
 }
 
@@ -66,7 +73,7 @@
   } else if ([field isEqualToString:@"out_currency"]) {
     return [[_outCurrencyData objectAtIndex:[outCurrencyPicker selectedRowInComponent:0]] objectForKey:@"code"];
   } else if ([field isEqualToString:@"in_amount"]) {
-    return [NSNumber numberWithInt:100];
+    return [NSNumber numberWithInt:[[inAmount text] integerValue]];
   }
 }
 
@@ -87,6 +94,11 @@
   } 
 }
 
+- (void)hideKeyboard
+{
+  [inAmount resignFirstResponder];
+}
+
 - (void)renderCurrencyPicker:(UIPickerView *)pickerView usingData:(NSArray *)currencyData to:(NSArray **)pickerStore
 {
   [*pickerStore release];
@@ -97,16 +109,25 @@
   }
 }
 
+- (IBAction)convert:(id)sender {
+  [self hideKeyboard];
+  [self dispatchEvent:@"convert" withArgs:@[]];
+  return self;
+}
+
 - (void)render:(NSDictionary *)jsViewObject
 {
   for (NSString *key in jsViewObject)
   {
     id value =  [jsViewObject objectForKey:key];
-    if( [key isEqualToString:@"inCurrencies"] )
-    {
+    if ([key isEqualToString:@"inCurrencies"]) {
       [self renderCurrencyPicker:inCurrencyPicker usingData:value to:&_inCurrencyData];
-    }else if( [key isEqualToString:@"outCurrencies"] ){
+    } else if ([key isEqualToString:@"outCurrencies"]) {
       [self renderCurrencyPicker:outCurrencyPicker usingData:value to:&_outCurrencyData];
+    } else if ([key isEqualToString:@"in_amount"]) {
+      [outAmount setText:[NSString stringWithFormat:@"%@", [jsViewObject objectForKey:@"in_amount"]]];
+    } else if ([key isEqualToString:@"out_amount"]) {
+      [outAmount setText:[NSString stringWithFormat:@"%@", [jsViewObject objectForKey:@"out_amount"]]];
     }
   }
 }
@@ -146,6 +167,7 @@
   NSString *event = picker == inCurrencyPicker ? @"selectedInCurrency" : @"selectedOutCurrency";
   
   NSString *currencyCode = [details objectForKey:@"code"];
+  [self hideKeyboard];
   [self dispatchEvent:event withArgs:[NSArray arrayWithObject:currencyCode]];  
 }
 

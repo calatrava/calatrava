@@ -10,6 +10,10 @@
 
 @interface ConversionFormViewController : BaseUIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
 
+@property (retain, nonatomic) IBOutlet UITextField *inAmount;
+@property (retain, nonatomic) IBOutlet UITextField *outAmount;
+
+- (IBAction)convert:(id)sender;
 - (void)render:(NSDictionary *)jsViewObject;
 
 
