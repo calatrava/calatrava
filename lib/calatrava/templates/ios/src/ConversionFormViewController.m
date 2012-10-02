@@ -59,6 +59,17 @@
     [super viewDidUnload];
 }
 
+- (id)valueForField:(NSString *)field
+{
+  if ([field isEqualToString:@"in_currency"]) {
+    return [[_inCurrencyData objectAtIndex:[inCurrencyPicker selectedRowInComponent:0]] objectForKey:@"code"];
+  } else if ([field isEqualToString:@"out_currency"]) {
+    return [[_outCurrencyData objectAtIndex:[outCurrencyPicker selectedRowInComponent:0]] objectForKey:@"code"];
+  } else if ([field isEqualToString:@"in_amount"]) {
+    return [NSNumber numberWithInt:100];
+  }
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
