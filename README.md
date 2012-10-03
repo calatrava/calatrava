@@ -4,6 +4,11 @@ It should be as easy to get started with Calatrava as
 possible. However, there are still a small number of dependencies that
 need to be installed beforehand.
 
+*Note*: Currently, Calatrava only supports development on Macs. this
+ will probably always be the case for iOS apps, but there are plans to
+ at least support Linux for Android and Mobile Web. Windows is a
+ little further off. Pull requests welcomed.
+
 1. [rvm](http://rvm.io). Calatrava projects are configured to use
    `rvm` by default. You could use Calatrava without it, but you will
    then need to make sure you have Ruby 1.9.3 installed however you
