@@ -1,6 +1,5 @@
 require 'mustache'
 require 'yaml'
-require 'xcoder'
 require 'xcodeproj'
 
 require 'calatrava/resources_build_phase'
@@ -205,15 +204,6 @@ module Calatrava
 
     def src_paths
       modules.collect { |m| "app/#{m}" }.join(':')
-    end
-
-    def build_ios(options = {})
-      proj = Xcode.project("ios/#{@name}.xcworkspace")
-      builder = proj.target(@name).config('Debug').builder
-      builder.clean
-      builder.sdk = options[:sdk] || :iphonesimulator
-      builder.build
-      builder.package
     end
 
   end

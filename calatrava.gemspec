@@ -26,10 +26,9 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "haml"
   s.add_runtime_dependency "sass"
   s.add_runtime_dependency "mustache"
-  s.add_runtime_dependency "xcoder"
-  s.add_runtime_dependency "xcodeproj"
   s.add_runtime_dependency "cucumber"
-  s.add_runtime_dependency "frank-cucumber"
   s.add_runtime_dependency "watir-webdriver"
+  s.add_runtime_dependency "frank-cucumber"
+  s.add_runtime_dependency "xcodeproj"
   s.add_runtime_dependency "cocoapods"
 end

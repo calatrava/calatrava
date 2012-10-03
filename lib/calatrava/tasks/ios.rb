@@ -1,6 +1,5 @@
 namespace :ios do
 
-
   ios_manifest = Calatrava::Manifest.new('ios')
 
   html_views = ios_manifest.features.collect do |feature|
@@ -49,7 +48,10 @@ namespace :ios do
   desc "Builds the iOS app"
   task :build => :configured_app do
     ENV['CMDLINE_BUILD'] = 'true'
-    Calatrava::Project.current.build_ios
+    proj_name = Calatrava::Project.current.name
+    cd 'ios' do
+      sh "xcodebuild -workspace #{proj_name}.xcworkspace -scheme #{proj_name} -sdk iphonesimulator"
+    end
   end
 
   desc "Publish the iOS app as an artifact"
