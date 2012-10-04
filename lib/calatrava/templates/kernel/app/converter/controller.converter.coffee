@@ -20,6 +20,9 @@ example.converter.controller = ({views, changePage, ajax}) ->
 
   convert = () ->
     views.conversionForm.get 'in_amount', (inAmount) ->
+      if inAmount == ""
+        calatrava.bridge.alert "Need to enter an amount to convert."
+
       outRate = currencyRate[outCurrency]
       inRate = currencyRate[inCurrency]
       views.conversionForm.render

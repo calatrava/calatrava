@@ -36,7 +36,8 @@ calatrava.bridge.changePage = (target) ->
   target
 
 calatrava.bridge.alert = (message) ->
-  calatrava.bridge.runtime.alert(message)
+  calatrava.bridge.log("WARN: calatrava.bridge.alert is deprecated. Please use calatrava.alert() instead.")
+  calatrava.alert(message)
 
 calatrava.bridge.openUrl = (url) ->
   calatrava.bridge.runtime.openUrl(url)
@@ -174,3 +175,19 @@ calatrava.bridge.timers = (() ->
   clearTimer: (timerId) ->
     delete callbacks[timerId]
 )()
+
+calatrava.bridge.plugins = (() ->
+  registered = {}
+
+  call: (pluginName, method, argMessage) ->
+    calatrava.bridge.runtime.callPlugin(pluginName, method, argMessage)
+
+  register: (pluginName, callback) ->
+    registered[pluginName] = callback
+
+  run: (pluginName, method, argMessage) ->
+    registered[pluginName](method, argMessage)
+)()
+
+calatrava.bridge.plugin = (name, impl) ->
+  calatrava.bridge.plugins.register(name, impl)

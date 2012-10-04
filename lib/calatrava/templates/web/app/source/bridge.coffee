@@ -96,6 +96,7 @@ calatrava.bridge.runtime = (() ->
   pages = {}
   pagesNamed = {}
   currentPage = null
+  plugins = {}
 
   registerProxyForPage: (proxyId, pageName) ->
     pages[proxyId] = calatrava.bridge.web.page(pageName, proxyId)
@@ -123,4 +124,10 @@ calatrava.bridge.runtime = (() ->
 
   startTimerWithTimeout: (timerId, timeout) ->
     window.setTimeout((() -> calatrava.inbound.fireTimer(timerId)), timeout * 1000)
+
+  registerPlugin: (pluginName, callback) ->
+    plugins[pluginName] = callback
+
+  callPlugin: (plugin, method, args) ->
+    plugins[plugin](method, args)
 )()
