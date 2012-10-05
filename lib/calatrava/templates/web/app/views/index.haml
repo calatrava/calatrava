@@ -1,7 +1,10 @@
 !!!
 %html
   %head
-    -%w{env zepto ICanHaz underscore calatrava bridge pageHelper}.each do |filename|
+    -%w{zepto ICanHaz underscore}.each do |filename|
+      %script(type="text/javascript" src="scripts/#{filename}.js")
+
+    -%w{env calatrava bridge pageHelper}.each do |filename|
       %script(type="text/javascript" src="scripts/#{filename}.js")
 
     %script(type="text/javascript" src="scripts/init.js")

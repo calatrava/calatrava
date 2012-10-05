@@ -3,6 +3,7 @@ require 'yaml'
 require 'xcodeproj'
 
 require 'calatrava/resources_build_phase'
+require 'calatrava/kernel'
 
 module Calatrava
 
@@ -21,7 +22,7 @@ module Calatrava
       @@current
     end
 
-    attr_reader :name
+    attr_reader :name, :kernel
 
     def initialize(name, overrides = {})
       @name = name
@@ -34,6 +35,8 @@ module Calatrava
         @name = @options[:project_name]
       end
       @options.merge! overrides
+
+      @kernel = Calatrava::Kernel.new(@path)
     end
 
     def dev?
@@ -196,14 +199,6 @@ module Calatrava
       create_ios_folder_references(base_dir, proj, target)
 
       proj.save_as (base_dir + "#{@name}.xcodeproj").to_s
-    end
-
-    def modules
-      Dir[File.join(@path, 'kernel/app/*')].select { |n| File.directory? n }.collect { |n| File.basename n }
-    end
-
-    def src_paths
-      modules.collect { |m| "app/#{m}" }.join(':')
     end
 
   end

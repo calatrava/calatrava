@@ -87,6 +87,10 @@ directory BUILD_CORE_KERNEL_DIR
 
 Dir["#{File.join(File.dirname(__FILE__), 'tasks')}/*.rb"].each { |t| require t }
 
+namespace :kernel do
+  Calatrava::Project.current.kernel.install_tasks
+end
+
 desc "Clean all directories"
 task :clean => ["core:clean", "ios:clean", "bb:clean", "web:clean", "artifact:clean", "droid:clean"] do
   rm_rf BUILD_DIR
