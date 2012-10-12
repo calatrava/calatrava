@@ -1,13 +1,13 @@
-LoadModule ssl_module        <%=MODULES_PATH%>/mod_ssl.so
-LoadModule proxy_module      <%=MODULES_PATH%>/mod_proxy.so
-LoadModule proxy_http_module <%=MODULES_PATH%>/mod_proxy_http.so
-LoadModule headers_module    <%=MODULES_PATH%>/mod_headers.so
-<% if LOAD_LOG_MODULE %>
-LoadModule log_config_module <%=MODULES_PATH%>/mod_log_config.so
+LoadModule ssl_module        <%=configuration[:modules_path]%>/mod_ssl.so
+LoadModule proxy_module      <%=configuration[:modules_path]%>/mod_proxy.so
+LoadModule proxy_http_module <%=configuration[:modules_path]%>/mod_proxy_http.so
+LoadModule headers_module    <%=configuration[:modules_path]%>/mod_headers.so
+<% if configuration[:load_log_module] %>
+LoadModule log_config_module <%=configuration[:modules_path]%>/mod_log_config.so
 <% end %>
-LoadModule mime_module       <%=MODULES_PATH%>/mod_mime.so
-LoadModule dir_module        <%=MODULES_PATH%>/mod_dir.so
-LoadModule alias_module      <%=MODULES_PATH%>/mod_alias.so
+LoadModule mime_module       <%=configuration[:modules_path]%>/mod_mime.so
+LoadModule dir_module        <%=configuration[:modules_path]%>/mod_dir.so
+LoadModule alias_module      <%=configuration[:modules_path]%>/mod_alias.so
 
 ErrorLog "logs/error.log"
 LogLevel Debug

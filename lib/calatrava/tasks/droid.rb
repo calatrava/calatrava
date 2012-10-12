@@ -1,17 +1,18 @@
 namespace :droid do
 
   version = "1.0"
-  droid_manifest = Calatrava::Manifest.new('droid')
+  # droid_manifest = Calatrava::Manifest.new('droid')
 
-  html_views = droid_manifest.features.collect do |feature|
-    html_dir = "droid/#{Calatrava::Project.current.name}/assets/hybrid/views"
-    Dir["shell/pages/#{feature}/*.haml"].collect do |page|
-      pageName = File.basename(page, '.haml')
-      file "#{html_dir}/#{pageName}.html" => page do
-        HamlSupport::compile_hybrid_page feature, page, html_dir
-      end
-    end
-  end.flatten
+  html_views = []
+  # html_views = droid_manifest.features.collect do |feature|
+  #   html_dir = "droid/#{Calatrava::Project.current.name}/assets/hybrid/views"
+  #   Dir["shell/pages/#{feature}/*.haml"].collect do |page|
+  #     pageName = File.basename(page, '.haml')
+  #     file "#{html_dir}/#{pageName}.html" => page do
+  #       HamlSupport::compile_hybrid_page feature, page, html_dir
+  #     end
+  #   end
+  # end.flatten
 
   desc "Creates html from haml using Android layout"
   task :haml => [CONFIG[:droid][:html]] + html_views

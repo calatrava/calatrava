@@ -23,7 +23,8 @@ module HamlSupport
     end
 
     def render_partial(partial_name, locals = {})
-      partial_template = IO.read("#{partial_name}.haml")
+      partial_name = "#{partial_name}.haml" unless partial_name =~ /haml$/
+      partial_template = IO.read partial_name
       Haml::Engine.new(partial_template).render(self, locals)
     end
 

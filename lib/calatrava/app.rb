@@ -10,8 +10,8 @@ module Calatrava
       die "template must exist" unless File.exist?(options[:template])
       die "template must be a directory" unless File.directory?(options[:template])
 
-      proj = Project.new(project_name,
-                         :is_dev => options.dev?)
+      proj = ProjectScript.new(project_name,
+                               :is_dev => options.dev?)
       proj.create(Template.new(options[:template]))
     end
 

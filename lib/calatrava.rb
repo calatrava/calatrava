@@ -1,5 +1,16 @@
+require 'rake'
+require 'rake/file_list'
+
+require 'calatrava/configuration'
+
 require 'calatrava/version'
+require 'calatrava/apache'
 require 'calatrava/app'
-require 'calatrava/project'
+require 'calatrava/kernel'
 require 'calatrava/manifest'
+require 'calatrava/mobile_web_app'
+require 'calatrava/project'
+require 'calatrava/project_script'
+require 'calatrava/resources_build_phase'
+require 'calatrava/shell'
 require 'calatrava/template'

@@ -1,16 +1,17 @@
 namespace :ios do
 
-  ios_manifest = Calatrava::Manifest.new('ios')
+  # ios_manifest = Calatrava::Manifest.new('ios')
 
-  html_views = ios_manifest.features.collect do |feature|
-    html_dir = "ios/public/views"
-    Dir["shell/pages/#{feature}/*.haml"].collect do |page|
-      pageName = File.basename(page, '.haml')
-      file "#{html_dir}/#{pageName}.html" => page do
-        HamlSupport::compile_hybrid_page feature, page, html_dir, :platform => 'ios'
-      end
-    end
-  end.flatten
+  html_views = []
+  # html_views = ios_manifest.features.collect do |feature|
+  #   html_dir = "ios/public/views"
+  #   Dir["shell/pages/#{feature}/*.haml"].collect do |page|
+  #     pageName = File.basename(page, '.haml')
+  #     file "#{html_dir}/#{pageName}.html" => page do
+  #       HamlSupport::compile_hybrid_page feature, page, html_dir, :platform => 'ios'
+  #     end
+  #   end
+  # end.flatten
 
   desc "Creates html from haml using iPhone layout"
   task :haml => [CONFIG[:ios][:html]] + html_views

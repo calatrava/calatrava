@@ -4,16 +4,13 @@
     -%w{zepto ICanHaz underscore}.each do |filename|
       %script(type="text/javascript" src="scripts/#{filename}.js")
 
-    -%w{env calatrava bridge pageHelper}.each do |filename|
-      %script(type="text/javascript" src="scripts/#{filename}.js")
-
-    %script(type="text/javascript" src="scripts/init.js")
-    -# Load all feature JS files
-    = render_partial 'web/app/views/load_file'
+    - Calatrava::Project.current.mobile_web.scripts.each do |filename|
+      %script(type="text/javascript" src="#{filename}")
 
   %body
     %div#app_container.container
-      = render_page "converter/conversionForm"
+      - Calatrava::Project.current.mobile_web.haml_files.each do |hf|
+        = render_partial hf
 
   :javascript
     $(document).ready(function(){

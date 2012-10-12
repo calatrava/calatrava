@@ -1,45 +1,51 @@
 require 'spec_helper'
 
-require 'aruba/api'
-require 'calatrava/kernel'
-
-describe Kernel do
+describe Calatrava::Kernel do
   include Aruba::Api
 
   before(:each) do
     create_dir 'kernel'
+    create_dir 'kernel/app'
+    write_file 'kernel/app/support.coffee', ''
+
     create_dir 'kernel/app/mod1'
-    create_dir 'kernel/app/mod2'
+    write_file 'kernel/app/mod1/first.coffee', ''
+
+    create_dir 'kernel/plugins'
+    write_file 'kernel/plugins/plugin.one.coffee', ''
+    write_file 'kernel/plugins/two.coffee', ''
   end
 
-  subject { Calatrava::Kernel.new(current_dir) }
+  let(:kernel) { Calatrava::Kernel.new(current_dir) }
 
-  it 'should find the correct two modules' do
-    subject.modules.should have(2).items
-    subject.modules.should include('mod1')
-    subject.modules.should include('mod2')
+  context '#features' do
+    subject { kernel.features }
+
+    it { should have(1).features }
+
+    context 'a single feature' do
+      subject { kernel.features[0] }
+
+      it { should include :name => 'mod1' }
+      it { should include :coffee => ['kernel/app/mod1/first.coffee'] }
+    end
   end
 
-  it 'should provide a single path to all the coffee files' do
-    subject.coffee_path.should include "app/mod1:app/mod2"
+  context '#coffee_files' do
+    subject { kernel.coffee_files }
+
+    it { should have(3).files }
+    it { should include 'kernel/app/support.coffee' }
+    it { should include 'kernel/plugins/plugin.one.coffee' }
+    it { should include 'kernel/plugins/two.coffee' }
   end
 
-  describe 'plugins' do
-    before(:each) do
-      create_dir 'kernel/plugins'
-      write_file 'kernel/plugins/plugin.one.coffee', ''
-      write_file 'kernel/plugins/two.coffee', ''
-    end
+  context '#coffee_path' do
+    subject { kernel.coffee_path }
 
-    it 'should find the two plugins' do
-      subject.plugins.should have(2).items
-      subject.plugins.should include('plugin.one.coffee')
-      subject.plugins.should include('two.coffee')
-    end
-
-    it 'should include the plugins in the coffee path' do
-      subject.coffee_path.should include 'plugins'
-    end
+    it { should include 'app:' }
+    it { should include 'app/mod1' }
+    it { should include 'app/plugins' }
   end
 
 end

@@ -1,3 +1,5 @@
+calatrava.web ?= {}
+
 calatrava.web.alert = (method, {message}) ->
   if method != 'runModal' || !message?
     console.log("Unable to display alert.")

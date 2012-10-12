@@ -1,16 +1,13 @@
 module Calatrava
 
   class Manifest
-    def initialize(app_dir)
-      @feature_list = YAML.load(IO.read("#{app_dir}/manifest.yml"))
+    def initialize(path, app_dir, kernel, shell)
+      @path, @kernel, @shell = path, kernel, shell
+      @feature_list = YAML.load(IO.read("#{@path}/#{app_dir}/manifest.yml"))
     end
 
     def features
       @feature_list
-    end
-
-    def js_files
-      @feature_list.collect { |f| Dir["build/{kernel,shell}/js/#{f}/*.js"] }.flatten
     end
 
     def load_file(target_dir, js_load_path, options)
@@ -24,12 +21,22 @@ module Calatrava
       end
     end
 
-    def coffee_files(feature, opts)
-      coffee_files = Dir["{kernel,shell}/{app,pages}/#{feature}/*.coffee"]
-      if !opts[:include_pages]
-        coffee_files = coffee_files.reject { |f| f =~ /page\./ }
-      end
-      coffee_files
+    def coffee_files
+      [@shell, @kernel].collect do |src|
+        src.coffee_files + feature_files(src, :coffee)
+      end.flatten
+    end
+
+    def haml_files
+      @shell.haml_files + feature_files(@shell, :haml)
+    end
+    
+    def css_files
+      @shell.css_files
+    end
+
+    def feature_files(source, type)
+      source.features.select { |f| @feature_list.include?(f[:name]) }.collect { |f| f[type] }.flatten
     end
 
     def haml(js_src)
