@@ -22,7 +22,10 @@ module Calatrava
     end
 
     def load_instructions
-      @manifest.kernel_bootstrap.collect { |cf| js_file(cf) }.join($/)
+      build_path = Pathname.new(build_dir)
+      @manifest.kernel_bootstrap.collect do |cf|
+        Pathname.new(js_file(cf)).relative_path_from(build_path).to_s
+      end.join($/)
     end
 
     def haml_files
