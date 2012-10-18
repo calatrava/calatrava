@@ -6,9 +6,8 @@ module HamlSupport
     
     attr_reader :page_name
 
-    def initialize(feature = nil, page = nil)
-      @feature = feature
-      @page_name = page
+    def initialize(page_path = nil)
+      @page_path = page_path
     end
 
     def content_for(named_chunk)
@@ -28,9 +27,8 @@ module HamlSupport
       Haml::Engine.new(partial_template).render(self, locals)
     end
 
-    def render_page(page_name = nil, locals = {})
-      page_name = File.join(@feature, @page_name) unless page_name
-      page_template = IO.read(File.join('shell/pages', "#{page_name}.haml"))
+    def render_page(locals = {})
+      page_template = IO.read(@page_path)
       Haml::Engine.new(page_template).render(self, locals)
     end
 
@@ -38,10 +36,10 @@ module HamlSupport
 
   class << self
 
-    def compile_hybrid_page(feature, page_path, output_path, options = {})
+    def compile_hybrid_page(page_path, output_path, options = {})
       puts "haml page: #{page_path} -> #{output_path}"
 
-      options[:helper] = Helper.new(feature, File.basename(page_path, ".haml"))
+      options[:helper] = Helper.new(page_path)
       options[:template] = "shell/layouts/single_page.haml"
       options[:out] = File.join(output_path, File.basename(page_path, '.*') + '.html')
 

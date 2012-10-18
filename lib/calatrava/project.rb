@@ -10,7 +10,7 @@ module Calatrava
       @@current
     end
 
-    attr_reader :name, :config, :kernel, :mobile_web
+    attr_reader :name, :config, :kernel, :mobile_web, :ios
 
     def initialize(name, overrides = {})
       @name = name
@@ -28,6 +28,7 @@ module Calatrava
       @kernel = Calatrava::Kernel.new(@path)
       @shell = Calatrava::Shell.new(@path)
       @mobile_web = Calatrava::MobileWebApp.new(@path, Calatrava::Manifest.new(@path, 'web', @kernel, @shell))
+      @ios = Calatrava::IosApp.new(@path, Calatrava::Manifest.new(@path, 'ios', @kernel, @shell))
     end
 
   end

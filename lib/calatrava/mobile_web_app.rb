@@ -8,13 +8,9 @@ module Calatrava
       @apache = Apache.new
     end
 
-    def build_dir
-      "#{@path}/web/public"
-    end
-
-    def scripts_build_dir
-      "#{build_dir}/scripts"
-    end
+    def build_dir ; "#{@path}/web/public" ; end
+    def scripts_build_dir ; "#{build_dir}/scripts" ; end
+    def styles_build_dir ; "#{build_dir}/styles" ; end
 
     def coffee_files
       Dir.chdir @path do
@@ -48,15 +44,7 @@ module Calatrava
         HamlSupport::compile "web/app/views/index.haml", build_dir
       end
 
-      app_files += @manifest.css_files.collect do |style_file|
-        file "#{styles_build_dir}/#{File.basename(style_file, '.*')}.css" => [styles_build_dir, style_file] do |t|
-          if style_file =~ /css$/
-            cp style_file, styles_build_dir
-          else
-            sh "sass #{style_file} #{t.name}"
-          end
-        end
-      end
+      app_files += @manifest.css_tasks(styles_build_dir)
 
       task :shared do
         cp_ne "#{ASSETS_IMG_DIR}/*", File.join(build_dir, 'images')

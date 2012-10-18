@@ -35,6 +35,18 @@ module Calatrava
       @shell.css_files
     end
 
+    def css_tasks(output_dir)
+      css_files.collect do |style_file|
+        file "#{output_dir}/#{File.basename(style_file, '.*')}.css" => [output_dir, style_file] do |t|
+          if style_file =~ /css$/
+            cp style_file, output_dir
+          else
+            sh "sass #{style_file} #{t.name}"
+          end
+        end
+      end
+    end
+
     def feature_files(source, type)
       source.features.select { |f| @feature_list.include?(f[:name]) }.collect { |f| f[type] }.flatten
     end
