@@ -10,7 +10,7 @@ module Calatrava
       @@current
     end
 
-    attr_reader :name, :config, :kernel, :mobile_web, :ios
+    attr_reader :name, :config, :kernel, :mobile_web, :ios, :droid
 
     def initialize(name, overrides = {})
       @name = name
@@ -24,11 +24,12 @@ module Calatrava
       end
       @options.merge! overrides
 
-      @config = Calatrava::Configuration.new
-      @kernel = Calatrava::Kernel.new(@path)
-      @shell = Calatrava::Shell.new(@path)
-      @mobile_web = Calatrava::MobileWebApp.new(@path, Calatrava::Manifest.new(@path, 'web', @kernel, @shell))
-      @ios = Calatrava::IosApp.new(@path, Calatrava::Manifest.new(@path, 'ios', @kernel, @shell))
+      @config = Configuration.new
+      @kernel = Kernel.new(@path)
+      @shell = Shell.new(@path)
+      @mobile_web = MobileWebApp.new(@path, Manifest.new(@path, 'web', @kernel, @shell))
+      @ios = IosApp.new(@path, Manifest.new(@path, 'ios', @kernel, @shell))
+      @droid = DroidApp.new(@path, @name, Manifest.new(@path, 'droid', @kernel, @shell))
     end
 
   end

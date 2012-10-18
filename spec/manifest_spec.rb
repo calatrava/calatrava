@@ -48,4 +48,11 @@ describe Calatrava::Manifest do
     it { should include 'styles' }
   end
 
+  context '#kernel_bootstrap' do
+    subject { manifest.kernel_bootstrap }
+
+    it { should include 'k_inc' }
+    it { should_not include 'k_exc' }
+  end
+
 end

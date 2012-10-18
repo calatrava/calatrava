@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Calatrava::IosApp do
+describe Calatrava::AppBuilder do
   include Aruba::Api
 
   before(:each) do
-    create_dir 'ios'
+    create_dir 'app'
 
     proj = double('current project', :config => double('cfg', :path => 'env.coffee'))
     Calatrava::Project.stub(:current).and_return(proj)
@@ -12,9 +12,10 @@ describe Calatrava::IosApp do
 
   let(:manifest) { double('web mf',
                           :coffee_files => ['path/to/kernel.coffee', 'diff/path/shell.coffee'],
+                          :kernel_bootstrap => ['path/to/kernel.coffee'],
                           :haml_files => ['diff/path/shell.haml']) }
   
-  let(:app) { Calatrava::IosApp.new(current_dir, manifest) }
+  let(:app) { Calatrava::AppBuilder.new('app/build', manifest) }
 
   context '#coffee_files' do
     subject { app.coffee_files }
@@ -22,6 +23,19 @@ describe Calatrava::IosApp do
     it { should include 'path/to/kernel.coffee' }
     it { should include 'diff/path/shell.coffee' }
     it { should include 'env.coffee' }
+  end
+
+  context '#js_file' do
+    subject { app.js_file('path/to/sample.coffee') }
+
+    it { should == 'app/build/scripts/sample.js' }
+  end
+
+  context '#load_file' do
+    subject { app.load_instructions.lines }
+    
+    it { should include 'app/build/scripts/kernel.js' }
+    it { should_not include 'app/build/scripts/shell.js' }
   end
 
   context '#haml_files' do

@@ -27,6 +27,10 @@ module Calatrava
       end.flatten
     end
 
+    def kernel_bootstrap
+      feature_files(@kernel, :coffee)
+    end
+
     def haml_files
       @shell.haml_files + feature_files(@shell, :haml)
     end
