@@ -30,7 +30,7 @@ module Calatrava
 
       desc "Clean droid"
       task :clean do
-        rm_rf CONFIG[:droid][:public]
+        rm_rf @app_builder.build_dir
         cd "droid/#{@proj_name}" do
           sh "ant clean"
         end

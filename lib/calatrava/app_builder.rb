@@ -55,7 +55,7 @@ module Calatrava
       end
 
       task :shared => [build_images_dir, build_scripts_dir] do
-        cp_ne "#{ASSETS_IMG_DIR}/*", build_images_dir
+        cp_ne "assets/images/*", build_images_dir
         cp_ne "assets/lib/*.js", build_scripts_dir
         cp_ne "ios/res/js/*.js", build_scripts_dir
       end
