@@ -28,7 +28,7 @@ module Calatrava
     end
 
     def kernel_bootstrap
-      feature_files(@kernel, :coffee)
+      @kernel.coffee_files + feature_files(@kernel, :coffee)
     end
 
     def haml_files

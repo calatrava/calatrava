@@ -22,7 +22,7 @@ module Calatrava
     end
 
     def load_instructions
-      build_path = Pathname.new(build_dir)
+      build_path = Pathname.new(File.dirname(build_dir))
       @manifest.kernel_bootstrap.collect do |cf|
         Pathname.new(js_file(cf)).relative_path_from(build_path).to_s
       end.join($/)

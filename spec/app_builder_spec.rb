@@ -34,8 +34,8 @@ describe Calatrava::AppBuilder do
   context '#load_file' do
     subject { app.load_instructions.lines.to_a }
     
-    it { should include 'scripts/kernel.js' }
-    it { should_not include 'scripts/shell.js' }
+    it { should include 'build/scripts/kernel.js' }
+    it { should_not include 'build/scripts/shell.js' }
   end
 
   context '#haml_files' do

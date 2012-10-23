@@ -52,7 +52,11 @@ describe Calatrava::Manifest do
     subject { manifest.kernel_bootstrap }
 
     it { should include 'k_inc' }
+    it { should include 'kernel_everywhere' }
+
     it { should_not include 'k_exc' }
+    it { should_not include 'shell_everywhere' }
+    it { should_not include 'shell_inc' }
   end
 
 end
