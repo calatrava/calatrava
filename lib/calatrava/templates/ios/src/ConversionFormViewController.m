@@ -73,7 +73,7 @@
   } else if ([field isEqualToString:@"out_currency"]) {
     return [[_outCurrencyData objectAtIndex:[outCurrencyPicker selectedRowInComponent:0]] objectForKey:@"code"];
   } else if ([field isEqualToString:@"in_amount"]) {
-    return [NSNumber numberWithInt:[[inAmount text] integerValue]];
+    return [inAmount text];
   }
 }
 
