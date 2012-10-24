@@ -3,7 +3,6 @@ package com.calatrava.bridge;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ContextWrapper;
 import android.net.Uri;
 import android.util.Log;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -16,10 +15,6 @@ import java.util.*;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-
-import dalvik.system.DexFile;
-import dalvik.system.PathClassLoader;
-import dalvik.system.DexClassLoader;
 
 import java.lang.annotation.Annotation;
 
@@ -56,34 +51,18 @@ public class PageRegistry {
   private void addPages(String packageName, Context context)
     throws IOException, URISyntaxException, ClassNotFoundException, NameNotFoundException
   {
-    String apkName = context.getPackageManager().getApplicationInfo(packageName, 0).sourceDir;
-    DexFile dexFile = new DexFile(apkName);
-    PathClassLoader classLoader2 = new PathClassLoader(apkName, Thread.currentThread().getContextClassLoader());
-    DexClassLoader classLoader = new DexClassLoader(apkName, new ContextWrapper(context).getCacheDir().getAbsolutePath(), null, classLoader2);
-
-    Enumeration<String> entries = dexFile.entries();
-    while (entries.hasMoreElements())
-    {
-      String entry = entries.nextElement();
-      // only check items that exist in source package and not in libraries, etc.
-      if (entry.startsWith(packageName))
-      {
-        Class<?> entryClass = classLoader.loadClass(entry);
-        if (entryClass != null)
+    AnnotationRegistrar registrar = new AnnotationRegistrar(packageName, context);
+    registrar.register(new Registration() {
+        public void install(Annotation annotation, Class<?> toRegister)
         {
-          Annotation[] annotations = entryClass.getAnnotations();
-          for (Annotation annotation : annotations)
+          if (annotation instanceof CalatravaPage)
           {
-            if (annotation instanceof CalatravaPage)
-            {
-              String pageName = ((CalatravaPage)annotation).name();
-              Log.d(TAG, "Registering Calatrava page: " + pageName);
-              pageFactories.put(pageName, entryClass);
-            }
+            String pageName = ((CalatravaPage)annotation).name();
+            Log.d(TAG, "Registering Calatrava page: " + pageName);
+            pageFactories.put(pageName, toRegister);
           }
         }
-      }               
-    }
+    });
   }
 
   public void registerProxyForPage(String pageName, String proxyId) {

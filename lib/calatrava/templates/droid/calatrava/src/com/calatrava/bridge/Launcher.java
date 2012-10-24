@@ -28,6 +28,7 @@ public class Launcher {
       {
         rhino = ((RhinoService.LocalBinder) iBinder).getService();
         PageRegistry.setSharedRegistry(new PageRegistry(appName, appContext, application, rhino));
+        PluginRegistry.setSharedRegistry(new PluginRegistry(appName, appContext));
         AjaxRequestManager.setSharedManager(new AjaxRequestManager(appContext, rhino));
         initBridge();
         startUp.run();

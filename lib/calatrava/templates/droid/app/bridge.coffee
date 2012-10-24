@@ -28,4 +28,7 @@ calatrava.bridge.runtime = (() ->
       options.method,
       options.body,
       options.headers)
+
+  callPlugin: (plugin, method, args) ->
+    pluginRegistry.call(plugin, method, JSON.stringify(args))
 )()

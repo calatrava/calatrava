@@ -42,6 +42,7 @@ public class RhinoService extends Service {
 
       Object wrappedRegistry = Context.javaToJS(PageRegistry.sharedRegistry(), mScope);
       ScriptableObject.putProperty(mScope, "pageRegistry", wrappedRegistry);
+      ScriptableObject.putProperty(mScope, "pluginRegistry", Context.javaToJS(PluginRegistry.sharedRegistry(), mScope));
       ScriptableObject.putProperty(mScope, "androidRuntime", this);
 
       Object wrappedAjaxRequestManagerRegistry = Context.javaToJS(AjaxRequestManager.sharedManager(), mScope);
