@@ -71,7 +71,7 @@ public class Launcher {
       Log.d(TAG, "About to load and start kernel");
       // Load all the application JS
       KernelBridge bridge = new KernelBridge(assets, rhino);
-      BufferedReader loadFileReader = new BufferedReader(new InputStreamReader(appContext.getAssets().open("hybrid/load_file.text")), 8192);
+      BufferedReader loadFileReader = new BufferedReader(new InputStreamReader(appContext.getAssets().open("calatrava/load_file.txt")), 8192);
       String line = null;
       while ((line = loadFileReader.readLine()) != null)
       {

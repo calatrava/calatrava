@@ -5,11 +5,15 @@ module Calatrava
 
     def initialize(path, proj_name, manifest)
       @path, @proj_name, @manifest = path, proj_name, manifest
-      @app_builder = AppBuilder.new("droid/#{@proj_name}/assets/hybrid", @manifest)
+      @app_builder = AppBuilder.new("droid/#{@proj_name}/assets/calatrava", @manifest)
     end
 
     def install_tasks
       app_task = @app_builder.builder_task
+
+      app_task.prerequisites << file(@app_builder.js_file('droid/app/bridge.coffee')) do
+        coffee 'droid/app/bridge.coffee', @app_builder.build_scripts_dir
+      end
 
       desc "Builds the Android app"
       task :build => app_task do

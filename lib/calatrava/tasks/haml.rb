@@ -8,6 +8,7 @@ module HamlSupport
 
     def initialize(page_path = nil)
       @page_path = page_path
+      @page_name = File.basename(@page_path, '.haml') if @page_path
     end
 
     def content_for(named_chunk)
@@ -62,7 +63,6 @@ module HamlSupport
 
       html = Haml::Engine.new(template).render(options[:helper])
 
-      html.gsub!("file:///android_asset/hybrid", "../assets") if options[:platform] == 'ios'
       IO.write(html_path, html)
     end
   end

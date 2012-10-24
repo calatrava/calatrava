@@ -2,17 +2,17 @@
 %html
   %head
     -%w{reset app common device}.each do |filename|
-      %link(type="text/css" rel="stylesheet" media="all" href="file:///android_asset/hybrid/styles/#{filename}.css")
+      %link(type="text/css" rel="stylesheet" media="all" href="../styles/#{filename}.css")
 
     -%w{env zepto ICanHaz underscore calatrava bridge shell pageHelper}.each do |filename|
-      %script(type="text/javascript" src="file:///android_asset/hybrid/scripts/#{filename}.js")
+      %script(type="text/javascript" src="../scripts/#{filename}.js")
 
     :javascript
       $(document).ready(function() {
         window.batSignal = tw.batSignal();
       });
 
-    %script(src="file:///android_asset/hybrid/scripts/page.#{page_name}.js" type="text/javascript")
+    %script(src="../scripts/page.#{page_name}.js" type="text/javascript")
     :javascript
       $(document).ready(function() {
         window.#{page_name}View = calatrava.pageView.#{page_name}();

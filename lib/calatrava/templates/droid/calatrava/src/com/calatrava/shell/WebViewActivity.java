@@ -152,7 +152,7 @@ public abstract class WebViewActivity extends RegisteredActivity {
       }
     });
 
-    webView.loadUrl("file:///android_asset/hybrid/views/" + getPageName() + ".html");
+    webView.loadUrl("file:///android_asset/calatrava/views/" + getPageName() + ".html");
     pageHasOpened();
   }
 

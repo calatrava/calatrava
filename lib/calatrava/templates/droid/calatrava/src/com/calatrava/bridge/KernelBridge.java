@@ -12,12 +12,11 @@ public class KernelBridge {
     this.rhinoService = rhinoService;
 
     //load js libraries
-    loadLibrary("hybrid/scripts/underscore.js");
+    loadLibrary("calatrava/scripts/underscore.js");
 
     //load bridge
-    loadLibrary("hybrid/scripts/env.js");
-    loadLibrary("hybrid/scripts/bridge.js");
-    loadLibrary("hybrid/scripts/calatrava.js");
+    loadLibrary("calatrava/scripts/env.js");
+    loadLibrary("calatrava/scripts/bridge.js");
   }
 
   public void loadLibrary(String libraryName) throws IOException {
