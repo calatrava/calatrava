@@ -1,7 +1,6 @@
 package com.calatrava.bridge;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.*;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -31,18 +30,8 @@ public abstract class RegisteredActivity extends Activity {
         spinner.onLoadingStart();
       } else if (intent.getAction().endsWith("finish")) {
         spinner.onLoadingFinish();
-      } else {
-        AlertDialog.Builder builder = new AlertDialog.Builder(RegisteredActivity.this);
-        builder.setMessage(intent.getExtras().getString("message"))
-            .setCancelable(false)
-            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-              @Override
-              public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-              }
-            });
-        AlertDialog dialog = builder.create();
-        dialog.show();
+      } else if (intent.getAction().equals("com.calatrava.command")) {
+        PluginRegistry.sharedRegistry().runCommand(intent, RegisteredActivity.this);
       }
     }
   };
@@ -59,7 +48,7 @@ public abstract class RegisteredActivity extends Activity {
     super.onResume();
     registerReceiver(receiver, new IntentFilter("com.calatrava.ajax.start"));
     registerReceiver(receiver, new IntentFilter("com.calatrava.ajax.finish"));
-    registerReceiver(receiver, new IntentFilter("com.calatrava.alert"));
+    registerReceiver(receiver, new IntentFilter("com.calatrava.command"));
   }
 
   @Override

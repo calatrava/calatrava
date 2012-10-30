@@ -5,6 +5,6 @@ import java.util.Map;
 
 interface RegisteredPlugin
 {
-  void setContext(Context ctxt);
+  void setContext(PluginRegistry registry, Context ctxt);
   void call(String method, Map<String, Object> args);
 }

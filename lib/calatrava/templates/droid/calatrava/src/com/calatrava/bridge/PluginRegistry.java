@@ -1,6 +1,7 @@
 package com.calatrava.bridge;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.content.pm.PackageManager.NameNotFoundException;
 
@@ -20,6 +21,7 @@ public class PluginRegistry {
 
   private Context appContext;
   private Map<String, RegisteredPlugin> registeredPlugins = new HashMap<String, RegisteredPlugin>();
+  private Map<String, PluginCommand> installedCmds = new HashMap<String, PluginCommand>();
   private ObjectMapper jsonMapper = new ObjectMapper();
 
   public static PluginRegistry sharedRegistry() {
@@ -44,7 +46,7 @@ public class PluginRegistry {
     throws IOException, URISyntaxException, ClassNotFoundException, NameNotFoundException
   {
     Log.d(TAG, "Searching for Calatrava plugins in '" + packageName + "'");
-    AnnotationRegistrar registrar = new AnnotationRegistrar(packageName, context);
+    AnnotationRegistrar registrar = new AnnotationRegistrar(packageName, context, "com.calatrava.bridge");
     registrar.register(new Registration() {
         public void install(Annotation annotation, Class<?> toRegister)
         {
@@ -54,7 +56,9 @@ public class PluginRegistry {
             Log.d(TAG, "Registering Calatrava plugin: " + pluginName);
             try
             {
-              registeredPlugins.put(pluginName, (RegisteredPlugin)toRegister.newInstance());
+              RegisteredPlugin plugin = (RegisteredPlugin)toRegister.newInstance();
+              plugin.setContext(PluginRegistry.this, appContext);
+              registeredPlugins.put(pluginName, plugin);
             }
             catch (Exception e)
             {
@@ -63,6 +67,21 @@ public class PluginRegistry {
           }
         }
     });
+  }
+
+  public void installCommand(String cmd, PluginCommand handler)
+  {
+    installedCmds.put(cmd, handler);
+  }
+
+  public void runCommand(Intent intent, RegisteredActivity frontmost)
+  {
+    installedCmds.get(intent.getExtras().getString("command")).execute(intent, frontmost);
+  }
+
+  public Intent pluginCommand(String cmd)
+  {
+    return new Intent("com.calatrava.command").putExtra("command", cmd);
   }
 
   public void call(String plugin, String method, String argsJson)
