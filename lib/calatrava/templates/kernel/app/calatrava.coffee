@@ -149,6 +149,8 @@ calatrava.bridge.requests = (() ->
       method: method
       body: bodyStr
       headers: customHeaders
+      success: success
+      failure: failure
 
   successfulResponse: (requestId, response) ->
     successHandlersById[requestId](response)
