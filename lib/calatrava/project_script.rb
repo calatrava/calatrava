@@ -119,7 +119,6 @@ module Calatrava
     end
 
     def create_ios_folder_references(base_dir, proj, target)
-      FileUtils.mkdir_p "ios/public"
       public_folder = proj.main_group.create_file "public"
       public_folder.last_known_file_type = 'folder'
       build_file = public_folder.build_files.new 
