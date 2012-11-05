@@ -18,7 +18,7 @@ calatrava.inbound =
     proxyPage = calatrava.bridge.pages.pageByProxyId(proxyId)
     proxyPage.fieldRead(getId, fieldValue)
 
-  successfulRespone: (requestId, response) ->
+  successfulResponse: (requestId, response) ->
     calatrava.bridge.requests.successfulResponse(requestId, response)
 
   failureResponse: (requestId, errorCode, response) ->
