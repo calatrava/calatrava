@@ -162,6 +162,7 @@ module Calatrava
       target.build_phase_references.insert(0,calatrava_phase.uuid) # hacky manual way to get build phase inserted in the right place
 
       calatrava_phase.name = "Build Calatrava Kernel & Shell"
+      calatrava_phase.shell_path = '/bin/bash'
       calatrava_phase.shell_script = <<-EOS.split("\n").collect(&:strip).join("\n")
         source ${SRCROOT}/../build_env.sh
         bundle exec rake ios:xcode:prebuild
