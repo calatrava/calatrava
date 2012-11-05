@@ -47,7 +47,7 @@ module Calatrava
       app_files += @manifest.css_tasks(styles_build_dir)
 
       task :shared do
-        cp_ne "#{ASSETS_IMG_DIR}/*", File.join(build_dir, 'images')
+        cp_ne "assets/images/*", File.join(build_dir, 'images')
         cp_ne "assets/lib/*.js", scripts_build_dir
       end        
 
