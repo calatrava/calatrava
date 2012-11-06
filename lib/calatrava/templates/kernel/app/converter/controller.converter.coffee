@@ -18,15 +18,19 @@ example.converter.controller = ({views, changePage, ajax}) ->
       enabled: c != unselectableCurrency
       selected: c == selectedCurrency
 
+  performConversion = (amount) ->
+    outRate = currencyRate[outCurrency]
+    inRate = currencyRate[inCurrency]
+    views.conversionForm.render
+      out_amount: (Math.round(amount * (outRate / inRate) * 100)) / 100
+
   convert = () ->
     views.conversionForm.get 'in_amount', (inAmount) ->
       if inAmount == ""
-        calatrava.bridge.alert "Need to enter an amount to convert."
-
-      outRate = currencyRate[outCurrency]
-      inRate = currencyRate[inCurrency]
-      views.conversionForm.render
-        out_amount: (Math.round(inAmount * (outRate / inRate) * 100)) / 100
+        calatrava.confirm "No amount to convert. Convert one instead?", (convertOne) ->
+          performConversion(1) if convertOne
+      else
+        performConversion(inAmount)
 
   views.conversionForm.bind 'convert', convert
 

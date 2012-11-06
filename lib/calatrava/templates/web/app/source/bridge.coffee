@@ -130,4 +130,7 @@ calatrava.bridge.runtime = (() ->
 
   callPlugin: (plugin, method, args) ->
     plugins[plugin](method, args)
+
+  invokePluginCallback: (handle, data) ->
+    calatrava.inbound.invokePluginCallback(handle, data)
 )()

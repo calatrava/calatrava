@@ -27,9 +27,8 @@ calatrava.inbound =
   fireTimer: (timerId) ->
     calatrava.bridge.timers.fireTimer(timerId)
 
-  invokeCallback: (widgetName) ->
-    extraArgs = _.map(_.toArray(arguments).slice(1), ((obj) -> obj.valueOf() if obj?))
-    calatrava.bridge.widgets.callback(widgetName).apply(this, extraArgs)
+  invokePluginCallback: (handle, data) ->
+    calatrava.bridge.plugins.invokeCallback(handle, data)
 
 calatrava.bridge.changePage = (target) ->
   calatrava.bridge.runtime.changePage(target)
@@ -180,6 +179,7 @@ calatrava.bridge.timers = (() ->
 
 calatrava.bridge.plugins = (() ->
   registered = {}
+  callbacks = {}
 
   call: (pluginName, method, argMessage) ->
     calatrava.bridge.runtime.callPlugin(pluginName, method, argMessage)
@@ -189,6 +189,14 @@ calatrava.bridge.plugins = (() ->
 
   run: (pluginName, method, argMessage) ->
     registered[pluginName](method, argMessage)
+
+  rememberCallback: (callback) ->
+    _.tap calatravaId(), (handle) ->
+      callbacks[handle] = callback
+
+  invokeCallback: (handle, data) ->
+    callbacks[handle](data)
+    delete callbacks[handle]
 )()
 
 calatrava.bridge.plugin = (name, impl) ->
