@@ -20,6 +20,7 @@ public class PluginRegistry {
   private static PluginRegistry sharedRegistry;
 
   private Context appContext;
+  private RhinoService rhino;
   private Map<String, RegisteredPlugin> registeredPlugins = new HashMap<String, RegisteredPlugin>();
   private Map<String, PluginCommand> installedCmds = new HashMap<String, PluginCommand>();
   private ObjectMapper jsonMapper = new ObjectMapper();
@@ -33,10 +34,11 @@ public class PluginRegistry {
     sharedRegistry = shared;
   }
 
-  public PluginRegistry(String packageName, Context appContext)
+  public PluginRegistry(String packageName, Context appContext, RhinoService rhino)
     throws IOException, URISyntaxException, ClassNotFoundException, NameNotFoundException
   {
     this.appContext = appContext;
+    this.rhino = rhino;
 
     // Find all the plugins to register in the app
     addPlugins(packageName, appContext);
@@ -101,5 +103,10 @@ public class PluginRegistry {
     {
       Log.e(TAG, "Unable to deserialize JSON for plugin args.", e);
     }
+  }
+
+  public void invokeCallback(String callbackHandle, Object data)
+  {
+    rhino.callJsFunction("calatrava.inbound.invokePluginCallback", new String[] {callbackHandle, data.toString()});
   }
 }
