@@ -17,8 +17,8 @@ Bugs fixed:
   Bundler
 * [Issue #14][i14]: Cosmetic: ios/public misplaced during calatrava
   create
-* [Issue #15][i15]: Uncaught TypeError: Object #<Object> has no method
-  'success'
+* [Issue #15][i15]: Uncaught TypeError: Object #&lt;Object&gt; has no
+  method 'success'
   
 Changes that will affect existing projects:
 * Edited httpd conf template: `config/templates/httpd.conf.erb`
