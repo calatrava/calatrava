@@ -123,9 +123,8 @@ module Calatrava
       public_folder.last_known_file_type = 'folder'
       build_file = public_folder.build_files.new 
 
-      shared_phase = Xcodeproj::Project::Object::PBXResourcesBuildPhase.new(proj,nil,{})
-
-      shared_phase << build_file
+      shared_phase = Xcodeproj::Project::Object::PBXResourcesBuildPhase.new
+      shared_phase.add_file_reference(build_file)
       target.build_phases << shared_phase
 
     end
