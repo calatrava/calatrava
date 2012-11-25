@@ -94,7 +94,6 @@ module Calatrava
 
     def create_ios_project
       Xcodeproj::Project.new
-      end
     end
 
     def create_ios_project_groups(base_dir, proj, target)
