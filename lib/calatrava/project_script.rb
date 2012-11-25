@@ -93,8 +93,7 @@ module Calatrava
     end
 
     def create_ios_project
-      Xcodeproj::Project.new.tap do |proj|
-        %w{Foundation UIKit CoreGraphics}.each { |fw| proj.add_system_framework fw }
+      Xcodeproj::Project.new
       end
     end
 
@@ -104,70 +103,69 @@ module Calatrava
       walker = lambda do |item, group|
         if item.directory?
           group_name = item.basename
-          child_group = group.create_group group_name
+          child_group = group.new_group(group_name.to_s)
           item.each_child { |item| walker.call(item, child_group) }
         elsif item.file?
           file_path = item.relative_path_from(base_dir)
-          group.create_file file_path.to_s
-          source_files_for_target << Xcodeproj::Project::Object::PBXNativeTarget::SourceFileDescription.new(file_path, "", nil)
+          source_files_for_target << group.new_file(file_path.to_s)
         else
           raise 'what is it then?!'
         end
       end
       (base_dir + "src").each_child { |item| walker.call(item, proj.main_group) }
-      target.add_source_files source_files_for_target
+      target.add_file_references source_files_for_target
     end
 
     def create_ios_folder_references(base_dir, proj, target)
-      public_folder = proj.main_group.create_file "public"
+      public_folder = proj.main_group.new_file "public"
       public_folder.last_known_file_type = 'folder'
-      build_file = public_folder.build_files.new 
 
-      shared_phase = Xcodeproj::Project::Object::PBXResourcesBuildPhase.new
-      shared_phase.add_file_reference(build_file)
+      shared_phase = Xcodeproj::Project::Object::PBXResourcesBuildPhase.new(proj, nil)
+      shared_phase.add_file_reference(public_folder)
       target.build_phases << shared_phase
 
     end
 
     def create_ios_project_target(proj)
-      target = Xcodeproj::Project::Object::PBXNativeTarget.new(proj,
-        nil,
-        'productType' => 'com.apple.product-type.application',
-        'productName' => @name)
+      proj.new_target(:application, @name, :ios).tap do |target|
 
-      target.build_configurations.each do |config|
-        config.build_settings.merge!(Xcodeproj::Project::Object::XCBuildConfiguration::COMMON_BUILD_SETTINGS[:ios])
+        target.build_configurations.each do |config|
+          config.build_settings.merge!({
+                                         "GCC_PREFIX_HEADER" => "src/#{@name}-Prefix.pch",
+                                         "OTHER_LDFLAGS" => ['-ObjC', '-all_load'],
+                                         "INFOPLIST_FILE" => "src/#{@name}-Info.plist",
+                                         "SKIP_INSTALL" => "NO",
+                                         "IPHONEOS_DEPLOYMENT_TARGET" => "5.0",
+                                       })
+          config.build_settings.delete "DSTROOT"
+          config.build_settings.delete "INSTALL_PATH"
 
-        # E.g. [:ios, :release]
-        extra_settings_key = [:ios, config.name.downcase.to_sym]
-        if extra_settings = Xcodeproj::Project::Object::XCBuildConfiguration::COMMON_BUILD_SETTINGS[extra_settings_key]
-          config.build_settings.merge!(extra_settings)
         end
 
-        config.build_settings.merge!({
-          "GCC_PREFIX_HEADER" => "src/#{@name}-Prefix.pch",
-          "OTHER_LDFLAGS" => ['-ObjC', '-all_load'],
-          "INFOPLIST_FILE" => "src/#{@name}-Info.plist",
-          "SKIP_INSTALL" => "NO",
-          "IPHONEOS_DEPLOYMENT_TARGET" => "5.0",
-        })
-        config.build_settings.delete "DSTROOT"
-        config.build_settings.delete "INSTALL_PATH"
+        %w{UIKit CoreGraphics}.each do |name|
+          fw = proj.frameworks_group.new_file("System/Library/Frameworks/#{name}.framework")
+          fw.name = "#{name}.framework"
+          fw.source_tree = 'SDKROOT'
 
+          bf = proj.new(Xcodeproj::Project::Object::PBXBuildFile)
+          bf.file_ref = fw
+          target.frameworks_build_phase.files << bf
+        end
+
+
+        calatrava_phase = proj.new(Xcodeproj::Project::Object::PBXShellScriptBuildPhase)
+
+        # hacky manual way to get build phase inserted in the right place
+        target.build_phases.insert(0, calatrava_phase) 
+        calatrava_phase.add_referrer(target.build_phases.owner)
+
+        calatrava_phase.name = "Build Calatrava Kernel & Shell"
+        calatrava_phase.shell_path = '/bin/bash'
+        calatrava_phase.shell_script = <<-EOS.split("\n").collect(&:strip).join("\n")
+          source ${SRCROOT}/../build_env.sh
+          bundle exec rake ios:xcode:prebuild
+        EOS
       end
-
-      calatrava_phase = Xcodeproj::Project::Object::PBXShellScriptBuildPhase.new(proj,nil,{})
-      target.build_phase_references.insert(0,calatrava_phase.uuid) # hacky manual way to get build phase inserted in the right place
-
-      calatrava_phase.name = "Build Calatrava Kernel & Shell"
-      calatrava_phase.shell_path = '/bin/bash'
-      calatrava_phase.shell_script = <<-EOS.split("\n").collect(&:strip).join("\n")
-        source ${SRCROOT}/../build_env.sh
-        bundle exec rake ios:xcode:prebuild
-      EOS
-
-      proj.targets << target
-      target
     end
 
     def create_ios_tree(template)
