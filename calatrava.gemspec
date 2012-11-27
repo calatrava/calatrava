@@ -28,7 +28,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "mustache", "~> 0.99.4"
   s.add_runtime_dependency "cucumber", "~> 1.2.1"
   s.add_runtime_dependency "watir-webdriver", "~> 0.6.1"
-  s.add_runtime_dependency "frank-cucumber", "~> 1.1.1"
   s.add_runtime_dependency "xcodeproj", "~> 0.4.0"
   s.add_runtime_dependency "cocoapods", "~> 0.16.0"
 end
