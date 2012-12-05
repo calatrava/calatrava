@@ -34,15 +34,16 @@ module Calatrava
     def haml_files
       @shell.haml_files + feature_files(@shell, :haml)
     end
-    
+
     def css_files
       @shell.css_files
     end
 
     def css_tasks(output_dir)
+      directory output_dir
       css_files.collect do |style_file|
         file "#{output_dir}/#{File.basename(style_file, '.*')}.css" => [output_dir, style_file] do |t|
-          if style_file =~ /css$/
+          if style_file =~ /\.css$/
             cp style_file, output_dir
           else
             sh "sass #{style_file} #{t.name}"
