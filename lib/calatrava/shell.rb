@@ -19,7 +19,7 @@ module Calatrava
 
     def css_files
       Dir.chdir @path do
-        Dir["shell/stylesheets/*.sass"] + Dir["shell/stylesheets/*.css"]
+        Dir["shell/stylesheets/*.sass"] + Dir["shell/stylesheets/*.scss"] + Dir["shell/stylesheets/*.css"]
       end
     end
 
