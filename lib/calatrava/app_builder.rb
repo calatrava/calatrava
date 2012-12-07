@@ -36,6 +36,7 @@ module Calatrava
       directory build_html_dir
       directory build_images_dir
       directory build_scripts_dir
+      directory build_styles_dir
 
       app_files = haml_files.collect do |hf|
         file "#{build_html_dir}/#{File.basename(hf, '.haml')}.html" => [build_html_dir, hf] do
