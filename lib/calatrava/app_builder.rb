@@ -48,7 +48,7 @@ module Calatrava
         end
       end
 
-      puts "JSFiles is #{js_files}, Build scripts #{build_scripts_dir}"
+      #puts "JSFiles is #{js_files}, Build scripts #{build_scripts_dir}"
       js_files.collect do |jf|
         FileUtils.mkdir_p("#{build_scripts_dir}")  # Force this to exist
         FileUtils.copy(jf, "#{build_scripts_dir}/#{File.basename(jf)}")

@@ -23,7 +23,7 @@ module Calatrava
     end
 
     def js_files
-      Dir.chdir @path do                  f
+      Dir.chdir @path do
         web_js = Dir['web/app/source/*.js']
         mf_js = @manifest.js_files
         web_js + mf_js
@@ -35,7 +35,9 @@ module Calatrava
     end
 
     def scripts
-      coffee_files.collect { |cf| "scripts/#{File.basename(cf, '.coffee')}.js" }        #TODO: Merge JS files into this
+      scripts = js_files.collect { |jf| "scripts/#{File.basename(jf)}" unless jf.nil? }
+      scripts << coffee_files.collect { |cf| "scripts/#{File.basename(cf, '.coffee')}.js" }
+      scripts
     end
 
     def install_tasks
@@ -49,8 +51,6 @@ module Calatrava
         end
       end
 
-
-      puts "JSFILES = #{js_files}"
       js_files.collect do | jf |
         FileUtils.mkdir_p("#{scripts_build_dir}")
         FileUtils.copy(jf, "#{scripts_build_dir}/#{File.basename(jf)}") unless jf.nil?
