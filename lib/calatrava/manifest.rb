@@ -21,6 +21,13 @@ module Calatrava
       end
     end
 
+    def js_files
+      [@shell, @kernel].collect do |src|
+        puts "JSFiles!!!! #{src.js_files} + #{feature_files(src, :js)}"
+        src.js_files + feature_files(src, :js)
+      end.flatten
+    end
+
     def coffee_files
       [@shell, @kernel].collect do |src|
         src.coffee_files + feature_files(src, :coffee)

@@ -20,6 +20,12 @@ module Calatrava
       end
     end
 
+    def js_files
+      Dir.chdir @path do
+        Dir["kernel/app/*.js"] + Dir["kernel/plugins/*.js"]
+      end
+    end
+
     def coffee_files
       Dir.chdir @path do
         Dir["kernel/app/*.coffee"] + Dir["kernel/plugins/*.coffee"]

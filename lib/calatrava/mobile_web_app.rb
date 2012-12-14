@@ -22,12 +22,20 @@ module Calatrava
       end
     end
 
+    def js_files
+      Dir.chdir @path do                  f
+        web_js = Dir['web/app/source/*.js']
+        mf_js = @manifest.js_files
+        web_js + mf_js
+      end
+    end
+
     def haml_files
       Dir.chdir(@path) { @manifest.haml_files }
     end
 
     def scripts
-      coffee_files.collect { |cf| "scripts/#{File.basename(cf, '.coffee')}.js" }
+      coffee_files.collect { |cf| "scripts/#{File.basename(cf, '.coffee')}.js" }        #TODO: Merge JS files into this
     end
 
     def install_tasks
@@ -39,6 +47,13 @@ module Calatrava
         file "#{scripts_build_dir}/#{File.basename(cf, '.coffee')}.js" => [scripts_build_dir, cf] do
           coffee cf, scripts_build_dir
         end
+      end
+
+
+      puts "JSFILES = #{js_files}"
+      js_files.collect do | jf |
+        FileUtils.mkdir_p("#{scripts_build_dir}")
+        FileUtils.copy(jf, "#{scripts_build_dir}/#{File.basename(jf)}") unless jf.nil?
       end
 
       app_files << file("#{build_dir}/index.html" => ["web/app/views/index.haml"] + haml_files) do
