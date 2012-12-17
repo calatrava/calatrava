@@ -27,9 +27,14 @@ module Calatrava
 
     def load_instructions
       build_path = Pathname.new(File.dirname(build_dir))
-      @manifest.kernel_bootstrap.collect do |cf|
+      results = @manifest.kernel_bootstrap_js.collect do |jf|
+        name = "#{build_scripts_dir}/#{File.basename(jf)}"
+        Pathname.new(name).relative_path_from(build_path).to_s
+      end
+      results += @manifest.kernel_bootstrap.collect do |cf|
         Pathname.new(js_file(cf)).relative_path_from(build_path).to_s
-      end.join($/)
+      end
+      results.join($/)
     end
 
     def haml_files

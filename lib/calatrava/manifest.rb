@@ -37,6 +37,10 @@ module Calatrava
       @kernel.coffee_files + feature_files(@kernel, :coffee)
     end
 
+    def kernel_bootstrap_js
+      (@kernel.js_files + feature_files(@kernel, :js)).uniq
+    end
+
     def haml_files
       @shell.haml_files + feature_files(@shell, :haml)
     end
