@@ -24,9 +24,9 @@ module Calatrava
 
     def js_files
       Dir.chdir @path do
-        web_js = Dir['web/app/source/*.js']
         mf_js = @manifest.js_files
-        web_js + mf_js
+        web_js = Dir['web/app/source/*.js']
+        mf_js + web_js
       end
     end
 
@@ -35,8 +35,8 @@ module Calatrava
     end
 
     def scripts
-      scripts = js_files.collect { |jf| "scripts/#{File.basename(jf)}" unless jf.nil? }
-      scripts << coffee_files.collect { |cf| "scripts/#{File.basename(cf, '.coffee')}.js" }
+      scripts = coffee_files.collect { |cf| "scripts/#{File.basename(cf, '.coffee')}.js" }
+      scripts << js_files.collect { |jf| "scripts/#{File.basename(jf)}" unless jf.nil? }
       scripts.reject { | x | x.nil? }.flatten.uniq
     end
 
