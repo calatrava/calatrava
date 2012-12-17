@@ -23,8 +23,12 @@ module Calatrava
 
     def nested_js_files(folder)
       Dir.chdir @path do
-        Dir["#{folder}/*"].select { |n| File.directory? n }.collect do |n|
-          Dir["#{n}/*.js"]
+        Dir["#{folder}/*"].collect do |file|
+          if File.directory? file
+            nested_js_files(file)
+          elsif file.end_with?(".js")
+            file
+          end
         end.reject{|x| x.nil?}
       end
     end
