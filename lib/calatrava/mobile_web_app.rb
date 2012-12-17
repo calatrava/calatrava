@@ -37,7 +37,7 @@ module Calatrava
     def scripts
       scripts = js_files.collect { |jf| "scripts/#{File.basename(jf)}" unless jf.nil? }
       scripts << coffee_files.collect { |cf| "scripts/#{File.basename(cf, '.coffee')}.js" }
-      scripts.flatten
+      scripts.reject { | x | x.nil? }.flatten
     end
 
     def install_tasks
