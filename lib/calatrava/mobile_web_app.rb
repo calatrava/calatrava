@@ -40,6 +40,13 @@ module Calatrava
       scripts.reject { | x | x.nil? }.flatten.uniq
     end
 
+    def copy_js_files
+      js_files.collect do | jf |
+        FileUtils.mkdir_p("#{scripts_build_dir}")
+        FileUtils.copy(jf, "#{scripts_build_dir}/#{File.basename(jf)}") unless jf.nil?
+      end
+    end
+
     def install_tasks
       directory build_dir
       directory scripts_build_dir
@@ -51,11 +58,6 @@ module Calatrava
         end
       end
 
-      js_files.collect do | jf |
-        FileUtils.mkdir_p("#{scripts_build_dir}")
-        FileUtils.copy(jf, "#{scripts_build_dir}/#{File.basename(jf)}") unless jf.nil?
-      end
-
       app_files << file("#{build_dir}/index.html" => ["web/app/views/index.haml"] + haml_files) do
         HamlSupport::compile "web/app/views/index.haml", build_dir
       end
@@ -65,6 +67,7 @@ module Calatrava
       task :shared do
         cp_ne "assets/images/*", File.join(build_dir, 'images')
         cp_ne "assets/lib/*.js", scripts_build_dir
+        copy_js_files
       end        
 
       desc "Build the web app"
