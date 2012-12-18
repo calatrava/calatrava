@@ -1,3 +1,25 @@
+## v0.6.3
+
+Bugs fixed:
+* [Issue #22][i22] and [Issue #23][i23]: Support `*.scss` files as
+  well as `*.sass` files.
+* [Issue #24][i24]: Create the stylesheet output directories as part
+  of the build process.
+* [Issue #25][i25]: Recreate the `load_file.txt` when the feature
+  manifest changes.
+* iOS was correctly dispatching timer firings back to the controller
+  code.
+
+## v0.6.2
+
+* Moving to a more recent version of the `xcodeproj` gem caused a
+  conflict with Frank that needed to be resolved.
+
+## v0.6.1
+
+* iOS was not correctly loading HTML UIs. Fixing this also required
+  re-working the project creation.
+
 ## v0.6.0
 
 * Added
@@ -38,3 +60,7 @@ Changes that will affect existing projects:
 [i13]: https://github.com/calatrava/calatrava/issues/13
 [i14]: https://github.com/calatrava/calatrava/issues/14
 [i15]: https://github.com/calatrava/calatrava/issues/15
+[i22]: https://github.com/calatrava/calatrava/issues/22
+[i23]: https://github.com/calatrava/calatrava/issues/23
+[i24]: https://github.com/calatrava/calatrava/issues/24
+[i25]: https://github.com/calatrava/calatrava/issues/25
