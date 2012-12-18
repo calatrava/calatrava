@@ -9,7 +9,7 @@
     , "jsdom"         : "latest"
     , "mime"          : "latest"
     , "ws"            : "0.4.8"
-    , "jasmine-node"  : "*"
+    , "jasmine-node"  : "1.0.26"
     , "should"        : "*"
     , "jasmine-reporters" : "*"
     , "walkdir"       : "*"
