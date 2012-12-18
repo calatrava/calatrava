@@ -52,8 +52,10 @@ Changes that will affect existing projects:
 
 ## Contributors:
 * [Giles Alexander](https://github.com/gga)
+* [Pete Hodgson](https://github.com/moredip)
 * [Vivek Jain](https://github.com/vivekjain10)
 * [Renaud Tircher](https://github.com/rtircher)
+* [Marcin Kwiatkowski](https://github.com/marcinkwiatkowski)
 
 [i5]: https://github.com/calatrava/calatrava/issues/5
 [i12]: https://github.com/calatrava/calatrava/issues/12
