@@ -41,7 +41,7 @@ module Calatrava
         end
       end
 
-      app_files << file("#{build_dir}/index.html" => ["web/app/views/index.haml"] + haml_files) do
+      app_files << file("#{build_dir}/index.html" => [@manifest.src_file, "web/app/views/index.haml"] + haml_files) do
         HamlSupport::compile "web/app/views/index.haml", build_dir
       end
 

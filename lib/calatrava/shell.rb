@@ -19,7 +19,9 @@ module Calatrava
 
     def css_files
       Dir.chdir @path do
-        Dir["shell/stylesheets/*.sass"] + Dir["shell/stylesheets/*.css"]
+        ["sass", "scss", "css"].collect do |ext|
+          Dir["shell/stylesheets/*.#{ext}"]
+        end.flatten
       end
     end
 
