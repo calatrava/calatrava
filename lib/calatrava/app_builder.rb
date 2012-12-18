@@ -50,7 +50,7 @@ module Calatrava
       end
 
       app_files += @manifest.css_tasks(build_styles_dir)
-      app_files << file("#{build_dir}/load_file.txt" => build_dir) do |t|
+      app_files << file("#{build_dir}/load_file.txt" => [build_dir, @manifest.file]) do |t|
         File.open(t.name, "w+") { |f| f.puts load_instructions }
       end
 

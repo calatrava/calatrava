@@ -1,9 +1,14 @@
 module Calatrava
 
   class Manifest
+    include Rake::DSL
+
+    attr_reader :file
+
     def initialize(path, app_dir, kernel, shell)
       @path, @kernel, @shell = path, kernel, shell
-      @feature_list = YAML.load(IO.read("#{@path}/#{app_dir}/manifest.yml"))
+      @file = "#{app_dir}/manifest.yml"
+      @feature_list = YAML.load(IO.read("#{@path}/#{@file}"))
     end
 
     def features
@@ -40,6 +45,7 @@ module Calatrava
     end
 
     def css_tasks(output_dir)
+      mkdir_p output_dir
       css_files.collect do |style_file|
         file "#{output_dir}/#{File.basename(style_file, '.*')}.css" => [output_dir, style_file] do |t|
           if style_file =~ /css$/
