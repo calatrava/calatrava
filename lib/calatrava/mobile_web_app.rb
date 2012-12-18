@@ -33,6 +33,7 @@ module Calatrava
     def install_tasks
       directory build_dir
       directory scripts_build_dir
+      directory styles_build_dir
 
       app_files = coffee_files.collect do |cf|
         file "#{scripts_build_dir}/#{File.basename(cf, '.coffee')}.js" => [scripts_build_dir, cf] do
