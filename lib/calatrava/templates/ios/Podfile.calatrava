@@ -3,7 +3,7 @@ platform :ios, '5.0'
 xcodeproj '{{ project_name}}.xcodeproj'
 
 {{^dev?}}
-pod 'calatrava', :git => 'https://github.com/calatrava/calatrava-ios', :commit => '51391eb66a605801351e65a670b9466082623a3c'
+pod 'calatrava', :git => 'https://github.com/calatrava/calatrava-ios', :commit => 'ba10050a6f565d7ac10b541ffe6164174db11376'
 {{/dev?}}
 {{#dev?}}
 pod 'calatrava', :local => '../../../calatrava-ios'
