@@ -14,7 +14,7 @@ module Calatrava
     def build_styles_dir ; "#{build_dir}/styles" ; end
 
     def js_files
-      @manifest.js_files.reject { |x| x.nil?} # PAT: TODO: Need to find a substitute for env.coffee
+      @manifest.js_files.reject { |x| x.nil?}
     end
 
     def coffee_files
@@ -53,11 +53,10 @@ module Calatrava
         end
       end
 
-      #puts "JSFiles is #{js_files}, Build scripts #{build_scripts_dir}"
       js_files.collect do |jf|
         FileUtils.mkdir_p("#{build_scripts_dir}")  # Force this to exist
         FileUtils.copy(jf, "#{build_scripts_dir}/#{File.basename(jf)}")
-      end   #PAT: TODO: Adding this to add_files causes a build problem
+      end
 
       app_files += coffee_files.collect do |cf|
         file js_file(cf) => [build_scripts_dir, cf] do
