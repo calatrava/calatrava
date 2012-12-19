@@ -4,10 +4,10 @@ It should be as easy to get started with Calatrava as
 possible. However, there are still a small number of dependencies that
 need to be installed beforehand.
 
-*Note*: Currently, Calatrava only supports development on Macs. this
- will probably always be the case for iOS apps, but there are plans to
- at least support Linux for Android and Mobile Web. Windows is a
- little further off. Pull requests welcomed.
+*Note*: Currently, Calatrava only supports fully-featured development on Macs. this
+ will probably always be the case for iOS apps. Linux support for Android and Mobile Web is in progress. Windows is a little further off. Pull requests welcomed.
+
+## Mac dependencies  
 
 1. [rvm](http://rvm.io). Calatrava projects are configured to use
    `rvm` by default. You could use Calatrava without it, but you will
@@ -32,6 +32,29 @@ need to be installed beforehand.
 5. [Node.js](http://nodejs.org/). Only used to run tests, not part of
    any production code. Again, if you're on a Mac I recommend
    installing using homebrew.
+   
+## Linux
+
+*Note:* Support for Linux is limited to running the Android and Mobile Web builds. Please note the following restrictions:
+
+* If you generate a new project using calatrava, the iOS part will not be generated
+* Only the `web:\*` and `droid:\*` and `kernel:\*` tasks will work  
+
+Here are the known dependencies for Linux:
+
+1. [rvm](http://rvm.io). Calatrava projects are configured to use
+   `rvm` by default. You could use Calatrava without it, but you will
+   then need to make sure you have Ruby 1.9.3 installed however you
+   prefer.
+2. [bundler](http://gembundler.com/). Install in either your `rvm`
+   global gemset, or wherever else makes sense for your setup.
+4. [Android SDK](http://developer.android.com/sdk/index.html) - The `android` command is
+   expected to be on the path.
+5. [Node.js](http://nodejs.org/) and [NPM](https://npmjs.org/). Only used to run tests, not part of
+   any production code. 
+6. [Apache2](http://httpd.apache.org/). Used for hosting the mobile versions. Some flavours of Linux will not come with this shipped. On ubuntu systems, this can be installed with the following command: `sudo apt-get install apache2` (from [this page](https://help.ubuntu.com/10.04/serverguide/httpd.html))
+
+
 
 # Getting Started
 
