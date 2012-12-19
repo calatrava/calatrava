@@ -13,6 +13,10 @@ module Calatrava
     def build_images_dir ; "#{build_dir}/images" ; end
     def build_styles_dir ; "#{build_dir}/styles" ; end
 
+    def js_files
+      @manifest.js_files.reject { |x| x.nil?}
+    end
+
     def coffee_files
       @manifest.coffee_files + [Calatrava::Project.current.config.path('env.coffee')]
     end
@@ -23,9 +27,14 @@ module Calatrava
 
     def load_instructions
       build_path = Pathname.new(File.dirname(build_dir))
-      @manifest.kernel_bootstrap.collect do |cf|
+      results = @manifest.kernel_bootstrap_js.collect do |jf|
+        name = "#{build_scripts_dir}/#{File.basename(jf)}"
+        Pathname.new(name).relative_path_from(build_path).to_s
+      end
+      results += @manifest.kernel_bootstrap.collect do |cf|
         Pathname.new(js_file(cf)).relative_path_from(build_path).to_s
-      end.join($/)
+      end
+      results.join($/)
     end
 
     def haml_files
@@ -42,6 +51,11 @@ module Calatrava
         file "#{build_html_dir}/#{File.basename(hf, '.haml')}.html" => [build_html_dir, hf] do
           HamlSupport::compile_hybrid_page hf, build_html_dir, :platform => 'ios'
         end
+      end
+
+      js_files.collect do |jf|
+        FileUtils.mkdir_p("#{build_scripts_dir}")  # Force this to exist
+        FileUtils.copy(jf, "#{build_scripts_dir}/#{File.basename(jf)}")
       end
 
       app_files += coffee_files.collect do |cf|

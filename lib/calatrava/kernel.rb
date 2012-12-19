@@ -14,10 +14,27 @@ module Calatrava
         Dir['kernel/app/*'].select { |n| File.directory? n }.collect do |n|
           {
             :name => File.basename(n),
-            :coffee => Dir["#{n}/*.coffee"]
+            :coffee => Dir["#{n}/*.coffee"],
+            :js => Dir["#{n}/*.js"]
           }
         end
       end
+    end
+
+    def nested_js_files(folder)
+      Dir.chdir @path do
+        Dir["#{folder}/*"].collect do |file|
+          if File.directory? file
+            nested_js_files(file)
+          elsif file.end_with?(".js")
+            file
+          end
+        end.reject{|x| x.nil?}
+      end
+    end
+
+    def js_files
+      (nested_js_files("kernel/app") + nested_js_files("kernel/plugins")).flatten
     end
 
     def coffee_files

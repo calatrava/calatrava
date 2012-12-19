@@ -5,6 +5,12 @@ module Calatrava
       @path = proj_path
     end
 
+    def js_files
+      Dir.chdir @path do
+        Dir["shell/support/*.js"] + Dir["shell/support/*.js"]
+      end
+    end
+
     def coffee_files
       Dir.chdir @path do
         Dir["shell/support/*.coffee"] + Dir["shell/support/*.coffee"]
@@ -31,6 +37,7 @@ module Calatrava
           if File.directory?(f)
             {
               :name => File.basename(f),
+              :js => Dir["#{f}/*.js"],
               :coffee => Dir["#{f}/*.coffee"],
               :haml => Dir["#{f}/*.haml"]
             }
