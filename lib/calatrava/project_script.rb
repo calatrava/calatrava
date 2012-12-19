@@ -1,6 +1,6 @@
 require 'mustache'
 require 'yaml'
-require 'xcodeproj'
+require 'xcodeproj' if RUBY_PLATFORM =~ /darwin/
 
 module Calatrava
 
@@ -30,7 +30,7 @@ module Calatrava
       create_files(template)
 
       create_android_tree(template)
-      create_ios_tree(template)
+      create_ios_tree(template) if RUBY_PLATFORM =~ /darwin/
     end
 
     def create_project(template)
