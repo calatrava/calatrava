@@ -3,7 +3,7 @@ root.calatrava ?= {}
 calatrava = root.calatrava
 
 # Hide all the sub-pages when first launching the app
-$(document.ready) ->
+$(document).ready ->
   $('body > .container > .page').hide()
 
 window.onpopstate = (event) ->
