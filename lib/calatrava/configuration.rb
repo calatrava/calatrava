@@ -6,6 +6,7 @@ module Calatrava
     include Rake::DSL
 
     @@extras = []
+
     def self.extra(&configurator)
       @@extras << configurator
     end
@@ -17,19 +18,30 @@ module Calatrava
     def config_result_dir
       "config/result"
     end
+
     def config_yaml
       "config/environments.yml"
     end
+
     def config_template_dir
       "config/templates"
     end
+
     def templates
       Rake::FileList["#{config_template_dir}/*.erb"]
     end
 
     def config_for(environment)
       @@extras.each { |e| e.call(self) }
-      @runtime.merge(YAML::load(File.open(config_yaml))[environment])
+      @runtime.merge(environments_yml[environment])
+    end
+
+    def environment_names
+      environments_yml.keys
+    end
+
+    def environments_yml
+      @environments_yml ||= YAML::load(File.open(config_yaml))
     end
 
     def runtime(key, value)
@@ -53,7 +65,7 @@ module Calatrava
     def install_tasks
       directory config_result_dir
 
-      %w{local development test automation production}.each do |environment|
+      environment_names.each do |environment|
         desc "Create config files for #{environment} environment"
         task environment.to_sym => [:clean, config_result_dir] do
           configuration = config_for(environment)
