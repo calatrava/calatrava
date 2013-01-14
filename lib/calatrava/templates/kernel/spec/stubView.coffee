@@ -4,8 +4,8 @@ stubView =
   create: (name) ->
     boundEvents: {}
     fieldValues: {}
-    trigger: (event) ->
-      @boundEvents[event]()
+    trigger: (event, args...) ->
+      @boundEvents[event](args...)
 
     bind: (event, handler) ->
       @boundEvents[event] = handler
