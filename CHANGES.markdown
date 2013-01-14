@@ -4,6 +4,13 @@ Bugs fixed:
 * [Issue #28][i28]: Support Linux for creating projects and running
   the build.
 * [Issue #35][i35]: Allow app specific environment keys.
+* [Issue #31][i31]: Working with image assets will break the
+  web:apache:start task. Now creates the `images` output directory as
+  required.
+* [Issue #26][i26]: Empty JS strings passed to JS functions are not
+  escaped properly.
+* [iOS Issue #3][ios-i3]: Prevent app from crashing when invoking
+  plugin callback.
 
 ## v0.6.3
 
@@ -76,3 +83,6 @@ Changes that will affect existing projects:
 [i25]: https://github.com/calatrava/calatrava/issues/25
 [i28]: https://github.com/calatrava/calatrava/pull/28
 [i35]: https://github.com/calatrava/calatrava/pull/35
+[i31]: https://github.com/calatrava/calatrava/issues/31
+[i26]: https://github.com/calatrava/calatrava/issues/26
+[ios-i3]: https://github.com/calatrava/calatrava-ios/pull/3
