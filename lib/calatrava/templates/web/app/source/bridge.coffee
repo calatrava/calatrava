@@ -48,18 +48,18 @@ calatrava.bridge.web.ajax = (options) ->
     data: options.body
     contentType: (() ->
       customHeaderTemp = {}
-      for key of options.customHeaders
+      for key of options.headers
         if key is "Content-Type"
-          contentTypeHeader = options.customHeaders[key]
+          contentTypeHeader = options.headers[key]
         else
-          customHeaderTemp[key] = options.customHeaders[key]
+          customHeaderTemp[key] = options.headers[key]
 
-      options.customHeaders = customHeaderTemp
+      options.headers = customHeaderTemp
       contentTypeHeader;
     )()
     beforeSend: (xhr) ->
-      if options.customHeaders
-        setCustomHeaders(xhr, options.customHeaders)
+      if options.headers
+        setCustomHeaders(xhr, options.headers)
       showLoader()
     success: (response) ->
       goToTop()

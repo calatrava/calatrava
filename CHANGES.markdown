@@ -11,6 +11,8 @@ Bugs fixed:
   escaped properly.
 * [iOS Issue #3][ios-i3]: Prevent app from crashing when invoking
   plugin callback.
+* [Issue #34][i34]: [web] Custom headers are not propagated to the
+  ajax request.
 
 ## v0.6.3
 
@@ -86,3 +88,4 @@ Changes that will affect existing projects:
 [i31]: https://github.com/calatrava/calatrava/issues/31
 [i26]: https://github.com/calatrava/calatrava/issues/26
 [ios-i3]: https://github.com/calatrava/calatrava-ios/pull/3
+[i34]: https://github.com/calatrava/calatrava/issues/34
