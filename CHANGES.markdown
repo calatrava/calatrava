@@ -1,3 +1,9 @@
+## v0.6.4
+
+Bugs fixed:
+* [Issue #28][i28]: Support Linux for creating projects and running
+  the build.
+
 ## v0.6.3
 
 Bugs fixed:
@@ -56,6 +62,7 @@ Changes that will affect existing projects:
 * [Vivek Jain](https://github.com/vivekjain10)
 * [Renaud Tircher](https://github.com/rtircher)
 * [Marcin Kwiatkowski](https://github.com/marcinkwiatkowski)
+* [Pat Kua](https://github.com/thekua)
 
 [i5]: https://github.com/calatrava/calatrava/issues/5
 [i12]: https://github.com/calatrava/calatrava/issues/12
@@ -66,3 +73,4 @@ Changes that will affect existing projects:
 [i23]: https://github.com/calatrava/calatrava/issues/23
 [i24]: https://github.com/calatrava/calatrava/issues/24
 [i25]: https://github.com/calatrava/calatrava/issues/25
+[i28]: https://github.com/calatrava/calatrava/pull/28
