@@ -11,6 +11,7 @@ module Calatrava
     def build_dir ; "#{@path}/web/public" ; end
     def scripts_build_dir ; "#{build_dir}/scripts" ; end
     def styles_build_dir ; "#{build_dir}/styles" ; end
+    def images_build_dir ; "#{build_dir}/images" ; end
 
     def coffee_files
       Dir.chdir @path do
@@ -34,6 +35,7 @@ module Calatrava
       directory build_dir
       directory scripts_build_dir
       directory styles_build_dir
+      directory images_build_dir
 
       app_files = coffee_files.collect do |cf|
         file "#{scripts_build_dir}/#{File.basename(cf, '.coffee')}.js" => [scripts_build_dir, cf] do
@@ -47,7 +49,7 @@ module Calatrava
 
       app_files += @manifest.css_tasks(styles_build_dir)
 
-      task :shared do
+      task :shared => [images_build_dir, scripts_build_dir] do
         cp_ne "assets/images/*", File.join(build_dir, 'images')
         cp_ne "assets/lib/*.js", scripts_build_dir
       end        
