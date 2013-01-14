@@ -3,6 +3,7 @@ require 'rake/file_list'
 
 require 'calatrava/configuration'
 
+require 'calatrava/platform'
 require 'calatrava/version'
 require 'calatrava/apache'
 require 'calatrava/app'

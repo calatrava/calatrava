@@ -1,10 +1,7 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
 require "calatrava/version"
-
-def is_mac
-  RUBY_PLATFORM =~ /darwin/ 
-end
+require "calatrava/platform"
 
 Gem::Specification.new do |s|
   s.name        = "calatrava"
@@ -33,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "cucumber", "~> 1.2.1"
   s.add_runtime_dependency "watir-webdriver", "~> 0.6.1"
 
-  if is_mac
+  if Calatrava.platform == :mac
     s.add_runtime_dependency "xcodeproj", "~> 0.4.0" 
     s.add_runtime_dependency "cocoapods", "~> 0.16.0"
   end
