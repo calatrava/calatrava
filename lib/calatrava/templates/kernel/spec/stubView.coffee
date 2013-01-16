@@ -2,6 +2,8 @@ stubView ?= {}
 
 stubView =
   create: (name) ->
+    lastMessage = null
+
     boundEvents: {}
     fieldValues: {}
     trigger: (event, args...) ->
@@ -10,7 +12,10 @@ stubView =
     bind: (event, handler) ->
       @boundEvents[event] = handler
 
-    render: jasmine.createSpy("#{name} render")
+    render: (viewMessage) ->
+      lastMessage = viewMessage
+
+    lastMessage: () -> lastMessage
 
     fieldContains: (name, value) -> @fieldValues[name] = value
     get: (name, callback) ->
