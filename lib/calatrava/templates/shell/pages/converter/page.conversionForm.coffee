@@ -32,5 +32,10 @@ calatrava.pageView.conversionForm = ->
     console.log('getting...', field)
     $page.find("#" + field).val()
 
-  show: -> console.log('showing...')
-  hide: -> console.log('hiding...')
+  show: ->
+    console.log('showing...')
+    $page.show()
+
+  hide: ->
+    console.log('hiding...')
+    $page.hide()
