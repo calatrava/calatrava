@@ -1,5 +1,9 @@
 ## v0.6.4
 
+Minor improvements:
+* The `stubView` for stubbing pages when testing controllers now
+  provides more direct access to the last render view message.
+
 Bugs fixed:
 * [Issue #28][i28]: Support Linux for creating projects and running
   the build.
@@ -13,6 +17,15 @@ Bugs fixed:
   plugin callback.
 * [Issue #34][i34]: [web] Custom headers are not propagated to the
   ajax request.
+* [Issue #32][i32]: calatrava.bridge.request() seems to require an
+  optional "body" under iOS. One of `contentType` or `customHeaders`
+  was also required, this too has been fixed.
+* [Issue #39][i39]: [ios] Network activity spinner
+* [Issue #40][i40]: calatrava.bridge.request() seems to require a
+  "failure" callback in the browser, although documented as "optional"
+* [Issue #42][i42]: Fixes the MobileWeb app loading issue. Pages were
+  hidden by default, but the `show` and `hide` implementations for the
+  converter page were incomplete.
 
 ## v0.6.3
 
@@ -73,6 +86,8 @@ Changes that will affect existing projects:
 * [Renaud Tircher](https://github.com/rtircher)
 * [Marcin Kwiatkowski](https://github.com/marcinkwiatkowski)
 * [Pat Kua](https://github.com/thekua)
+* [Maria Gomez](https://github.com/mariagomez)
+* [Kalyan Akella](https://github.com/KalyanAkella)
 
 [i5]: https://github.com/calatrava/calatrava/issues/5
 [i12]: https://github.com/calatrava/calatrava/issues/12
@@ -89,3 +104,7 @@ Changes that will affect existing projects:
 [i26]: https://github.com/calatrava/calatrava/issues/26
 [ios-i3]: https://github.com/calatrava/calatrava-ios/pull/3
 [i34]: https://github.com/calatrava/calatrava/issues/34
+[i32]: https://github.com/calatrava/calatrava/issues/32
+[i39]: https://github.com/calatrava/calatrava/issues/39
+[i40]: https://github.com/calatrava/calatrava/issues/40
+[i42]: https://github.com/calatrava/calatrava/issues/42
