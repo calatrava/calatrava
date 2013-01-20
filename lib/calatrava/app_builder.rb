@@ -14,14 +14,14 @@ module Calatrava
     def build_styles_dir ; "#{build_dir}/styles" ; end
 
     def js_files
-      @manifest.js_files.reject { |x| x.nil?}
+      @manifest.js_files
     end
 
     def coffee_files
       @manifest.coffee_files + [Calatrava::Project.current.config.path('env.coffee')]
     end
 
-    def js_file(cf)
+    def as_js_file(cf)
       "#{build_scripts_dir}/#{File.basename(cf, '.coffee')}.js"
     end
 
@@ -32,7 +32,7 @@ module Calatrava
         Pathname.new(name).relative_path_from(build_path).to_s
       end
       results += @manifest.kernel_bootstrap.collect do |cf|
-        Pathname.new(js_file(cf)).relative_path_from(build_path).to_s
+        Pathname.new(as_js_file(cf)).relative_path_from(build_path).to_s
       end
       results.join($/)
     end
@@ -59,7 +59,7 @@ module Calatrava
       end
 
       app_files += coffee_files.collect do |cf|
-        file js_file(cf) => [build_scripts_dir, cf] do
+        file as_js_file(cf) => [build_scripts_dir, cf] do
           coffee cf, build_scripts_dir
         end
       end

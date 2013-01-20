@@ -11,7 +11,7 @@ module Calatrava
     def install_tasks
       app_task = @app_builder.builder_task
 
-      app_task.prerequisites << file(@app_builder.js_file('droid/app/bridge.coffee') => 'droid/app/bridge.coffee') do
+      app_task.prerequisites << file(@app_builder.as_js_file('droid/app/bridge.coffee') => 'droid/app/bridge.coffee') do
         coffee 'droid/app/bridge.coffee', @app_builder.build_scripts_dir
       end
 

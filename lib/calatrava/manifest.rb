@@ -22,7 +22,7 @@ module Calatrava
     end
 
     def js_files
-      [@kernel, @shell].collect do |src|
+      [@shell, @kernel].collect do |src|
         src.js_files + feature_files(src, :js)
       end.flatten
     end
@@ -44,7 +44,7 @@ module Calatrava
     def haml_files
       @shell.haml_files + feature_files(@shell, :haml)
     end
-    
+
     def css_files
       @shell.css_files
     end

@@ -7,6 +7,7 @@ describe Calatrava::MobileWebApp do
     create_dir 'web'
     create_dir 'web/app/source'
     write_file 'web/app/source/support.coffee', ''
+    write_file 'web/app/source/support.js', ''
 
     proj = double('current project', :config => double('cfg', :path => 'env.coffee'))
     Calatrava::Project.stub(:current).and_return(proj)
@@ -14,6 +15,7 @@ describe Calatrava::MobileWebApp do
 
   let(:manifest) { double('web mf',
                           :coffee_files => ['path/to/kernel.coffee', 'diff/path/shell.coffee'],
+                          :js_files => ['path/to/kernel.js', 'diff/path/shell.js'],
                           :haml_files => ['diff/path/shell.haml']) }
 
   let(:mobile_web) { Calatrava::MobileWebApp.new(current_dir, manifest) }
@@ -30,6 +32,14 @@ describe Calatrava::MobileWebApp do
     it { should include 'diff/path/shell.coffee' }
     it { should include 'web/app/source/support.coffee' }
     it { should include 'env.coffee' }
+  end
+
+  context '#js_files' do
+    subject { mobile_web.js_files }
+
+    it { should include 'path/to/kernel.js' }
+    it { should include 'diff/path/shell.js' }
+    it { should include 'web/app/source/support.js' }
   end
 
   context '#scripts' do

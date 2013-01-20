@@ -7,13 +7,17 @@ describe Calatrava::Kernel do
     create_dir 'kernel'
     create_dir 'kernel/app'
     write_file 'kernel/app/support.coffee', ''
+    write_file 'kernel/app/support.js', ''
 
     create_dir 'kernel/app/mod1'
     write_file 'kernel/app/mod1/first.coffee', ''
+    write_file 'kernel/app/mod1/first.js', ''
 
     create_dir 'kernel/plugins'
     write_file 'kernel/plugins/plugin.one.coffee', ''
+    write_file 'kernel/plugins/plugin.one.js', ''
     write_file 'kernel/plugins/two.coffee', ''
+    write_file 'kernel/plugins/two.js', ''
   end
 
   let(:kernel) { Calatrava::Kernel.new(current_dir) }
@@ -28,6 +32,7 @@ describe Calatrava::Kernel do
 
       it { should include :name => 'mod1' }
       it { should include :coffee => ['kernel/app/mod1/first.coffee'] }
+      it { should include :js => ['kernel/app/mod1/first.js'] }
     end
   end
 
@@ -38,6 +43,15 @@ describe Calatrava::Kernel do
     it { should include 'kernel/app/support.coffee' }
     it { should include 'kernel/plugins/plugin.one.coffee' }
     it { should include 'kernel/plugins/two.coffee' }
+  end
+
+  context '#js_files' do
+    subject { kernel.js_files }
+
+    it { should have(3).files }
+    it { should include 'kernel/app/support.js' }
+    it { should include 'kernel/plugins/plugin.one.js' }
+    it { should include 'kernel/plugins/two.js' }
   end
 
   context '#coffee_path' do

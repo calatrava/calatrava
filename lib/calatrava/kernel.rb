@@ -21,20 +21,10 @@ module Calatrava
       end
     end
 
-    def nested_js_files(folder)
-      Dir.chdir @path do
-        Dir["#{folder}/*"].collect do |file|
-          if File.directory? file
-            nested_js_files(file)
-          elsif file.end_with?(".js")
-            file
-          end
-        end.reject{|x| x.nil?}
-      end
-    end
-
     def js_files
-      (nested_js_files("kernel/app") + nested_js_files("kernel/plugins")).flatten
+      Dir.chdir @path do
+        Dir["kernel/app/*.js"] + Dir["kernel/plugins/*.js"]
+      end
     end
 
     def coffee_files

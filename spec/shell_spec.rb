@@ -8,9 +8,11 @@ describe Calatrava::Shell do
   before(:each) do
     create_dir 'shell/support'
     write_file 'shell/support/shell.coffee', ''
+    write_file 'shell/support/shell.js', ''
     write_file 'shell/support/fragment.haml', ''
     create_dir 'shell/pages/example'
     write_file 'shell/pages/example/page.coffee', ''
+    write_file 'shell/pages/example/page.js', ''
     write_file 'shell/pages/example/page.haml', ''
 
     create_dir 'shell/stylesheets'
@@ -22,6 +24,12 @@ describe Calatrava::Shell do
     subject { shell.coffee_files }
 
     it { should include 'shell/support/shell.coffee' }
+  end
+
+  context 'js files' do
+    subject { shell.js_files }
+
+    it { should include 'shell/support/shell.js' }
   end
 
   context 'haml files' do
@@ -47,6 +55,7 @@ describe Calatrava::Shell do
 
       it { should include :name => 'example' }
       it { should include :coffee => ['shell/pages/example/page.coffee'] }
+      it { should include :js => ['shell/pages/example/page.js'] }
       it { should include :haml => ['shell/pages/example/page.haml'] }
     end
   end
