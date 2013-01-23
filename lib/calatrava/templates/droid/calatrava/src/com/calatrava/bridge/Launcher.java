@@ -10,6 +10,7 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class Launcher {
@@ -22,10 +23,8 @@ public class Launcher {
   private static Runnable startUp;
 
   static ServiceConnection connection = new ServiceConnection() {
-    public void onServiceConnected(ComponentName componentName, IBinder iBinder)
-    {
-      try
-      {
+    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+      try {
         rhino = ((RhinoService.LocalBinder) iBinder).getService();
         PageRegistry.setSharedRegistry(new PageRegistry(appName, appContext, application, rhino));
         PluginRegistry.setSharedRegistry(new PluginRegistry(appName, appContext, rhino));
@@ -33,8 +32,7 @@ public class Launcher {
         initBridge();
         startUp.run();
       }
-      catch (Exception e)
-      {
+      catch (Exception e) {
         Log.e(TAG, "Unable to start.", e);
       }
     }
@@ -57,30 +55,33 @@ public class Launcher {
     appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
   }
 
-  public static void launchFlow(String flow)
-  {
+  public static void launchFlow(String flow) {
     rhino.callJsFunction(flow);
   }
 
   private static void initBridge() {
     AssetRepository assets = new AssetRepository(appContext);
 
+    BufferedReader loadFileReader = null;
     try {
-      Log.d(TAG, "About to prep the rhino");
-      rhino.initRhino();
-
-      Log.d(TAG, "About to load and start kernel");
       // Load all the application JS
+      InputStream inputStream = appContext.getAssets().open("calatrava/load_file.txt");
+      loadFileReader = new BufferedReader(new InputStreamReader(inputStream), 8192);
       KernelBridge bridge = new KernelBridge(assets, rhino);
-      BufferedReader loadFileReader = new BufferedReader(new InputStreamReader(appContext.getAssets().open("calatrava/load_file.txt")), 8192);
-      String line = null;
-      while ((line = loadFileReader.readLine()) != null)
-      {
+      String line;
+      while ((line = loadFileReader.readLine()) != null) {
         bridge.loadLibrary(line);
       }
-
     } catch (IOException e) {
-      Log.d(TAG, "LauncherActivity failed to start: " + e);
+      Log.e(TAG, "LauncherActivity failed to start", e);
+    } finally {
+      if (loadFileReader != null) {
+        try {
+          loadFileReader.close();
+        } catch (IOException e) {
+          Log.e(TAG, "Unable to close the load_file.txt", e);
+        }
+      }
     }
   }
 }
