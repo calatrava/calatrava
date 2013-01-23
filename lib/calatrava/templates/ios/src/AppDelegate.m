@@ -18,6 +18,8 @@
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   [self.window addSubview:self.rootNavController.view];
   [self.window makeKeyAndVisible];
+  
+  outstandingAjaxRequests = 0;
 
   KernelBridge *kernel = [KernelBridge sharedKernel];
   [kernel startWith:self.rootNavController];
@@ -51,6 +53,24 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)ajaxRequestStarted:(AJAXConnection *)request
+{
+  ++outstandingAjaxRequests;
+  if (outstandingAjaxRequests == 1)
+  {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+  }
+}
+
+- (void)ajaxRequestCompleted:(AJAXConnection *)request
+{
+  --outstandingAjaxRequests;
+  if (outstandingAjaxRequests == 0)
+  {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+  }
 }
 
 @end
