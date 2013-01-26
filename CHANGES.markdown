@@ -32,6 +32,10 @@ Bugs fixed:
   converter page were incomplete.
 * [Issue #43][i43]: Close the load_file.txt reader after loading
   files, on Android.
+* [iOS Issue #1][ios-i1]: Don't trigger all JS file loads at the same
+  time as this can fail to load some files in large sets.
+* [iOS Issue #4][ios-i4]: Calatrava apps should be able to open URLs
+  using other apps on iOS.
 
 ## v0.6.3
 
@@ -115,3 +119,5 @@ Changes that will affect existing projects:
 [i40]: https://github.com/calatrava/calatrava/issues/40
 [i42]: https://github.com/calatrava/calatrava/issues/42
 [i43]: https://github.com/calatrava/calatrava/issues/43
+[ios-i1]: https://github.com/calatrava/calatrava-ios/issues/1
+[ios-i4]: https://github.com/calatrava/calatrava-ios/pull/4
