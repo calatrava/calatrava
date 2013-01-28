@@ -10,6 +10,7 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class Launcher {
@@ -65,22 +66,35 @@ public class Launcher {
   private static void initBridge() {
     AssetRepository assets = new AssetRepository(appContext);
 
+    BufferedReader loadFileReader = null;
     try {
-      Log.d(TAG, "About to prep the rhino");
       rhino.initRhino();
-
-      Log.d(TAG, "About to load and start kernel");
       // Load all the application JS
+      InputStream inputStream = appContext.getAssets().open("calatrava/load_file.txt");
+      loadFileReader = new BufferedReader(new InputStreamReader(inputStream), 8192);
       KernelBridge bridge = new KernelBridge(assets, rhino);
-      BufferedReader loadFileReader = new BufferedReader(new InputStreamReader(appContext.getAssets().open("calatrava/load_file.txt")), 8192);
-      String line = null;
+      String line;
       while ((line = loadFileReader.readLine()) != null)
       {
         bridge.loadLibrary(line);
       }
 
     } catch (IOException e) {
-      Log.d(TAG, "LauncherActivity failed to start: " + e);
+      Log.d(TAG, "LauncherActivity failed to start", e);
+    }
+    finally
+    {
+      if (loadFileReader != null)
+      {
+        try
+        {
+          loadFileReader.close();
+        }
+        catch(IOException e)
+        {
+          Log.e(TAG, "Unable to close load_file.txt", e);
+        }
+      }
     }
   }
 }
