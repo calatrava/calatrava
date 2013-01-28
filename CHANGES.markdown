@@ -26,6 +26,8 @@ Bugs fixed:
 * [Issue #42][i42]: Fixes the MobileWeb app loading issue. Pages were
   hidden by default, but the `show` and `hide` implementations for the
   converter page were incomplete.
+* [Issue #43][i43]: Close the load_file.txt reader after loading
+  files, on Android.
 
 ## v0.6.3
 
@@ -108,3 +110,4 @@ Changes that will affect existing projects:
 [i39]: https://github.com/calatrava/calatrava/issues/39
 [i40]: https://github.com/calatrava/calatrava/issues/40
 [i42]: https://github.com/calatrava/calatrava/issues/42
+[i43]: https://github.com/calatrava/calatrava/issues/43
