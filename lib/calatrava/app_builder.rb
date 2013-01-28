@@ -7,18 +7,35 @@ module Calatrava
       @output_dir, @manifest = output_dir, manifest
     end
 
-    def build_dir ; @output_dir ; end
-    def build_html_dir ; "#{build_dir}/views" ; end
-    def build_scripts_dir ; "#{build_dir}/scripts" ; end
-    def build_images_dir ; "#{build_dir}/images" ; end
-    def build_styles_dir ; "#{build_dir}/styles" ; end
+    def build_dir;
+      @output_dir;
+    end
+
+    def build_html_dir;
+      "#{build_dir}/views";
+    end
+
+    def build_scripts_dir;
+      "#{build_dir}/scripts";
+    end
+
+    def build_images_dir;
+      "#{build_dir}/images";
+    end
+
+    def build_styles_dir;
+      "#{build_dir}/styles";
+    end
 
     def js_files
       @manifest.js_files
     end
 
     def coffee_files
-      @manifest.coffee_files + [Calatrava::Project.current.config.path('env.coffee')]
+      coffee_files = @manifest.coffee_files + [Calatrava::Project.current.config.path('env.coffee')]
+      coffee_files.each do |cf|
+        raise "error" if js_files.include?(File.basename(cf, '.coffee'))
+      end
     end
 
     def as_js_file(cf)
@@ -41,6 +58,14 @@ module Calatrava
       @manifest.haml_files
     end
 
+    def check_if_javascript_already_exist(cf)
+      js_files.each do |js_file|
+        js_file_name = File.basename(js_file, '.js')
+        cf_file_name = File.basename(cf, '.coffee')
+        raise "Cannot compile the file. There is an existing JavaScript file with the same name: '#{js_file_name}'" if js_file_name == cf_file_name
+      end
+    end
+
     def builder_task
       directory build_html_dir
       directory build_images_dir
@@ -53,13 +78,15 @@ module Calatrava
         end
       end
 
-      js_files.collect do |jf|
-        FileUtils.mkdir_p("#{build_scripts_dir}")  # Force this to exist
-        FileUtils.copy(jf, "#{build_scripts_dir}/#{File.basename(jf)}")
+      app_files += js_files.collect do |jf|
+        file "#{build_scripts_dir}/#{File.basename(jf)}" => [build_scripts_dir, jf] do
+          FileUtils.copy(jf, "#{build_scripts_dir}/#{File.basename(jf)}")
+        end
       end
 
       app_files += coffee_files.collect do |cf|
         file as_js_file(cf) => [build_scripts_dir, cf] do
+          check_if_javascript_already_exist cf
           coffee cf, build_scripts_dir
         end
       end
@@ -77,6 +104,7 @@ module Calatrava
 
       task :app => [:shared] + app_files
     end
+
 
   end
 
