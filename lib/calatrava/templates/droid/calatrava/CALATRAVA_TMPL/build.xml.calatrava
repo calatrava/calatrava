@@ -48,11 +48,7 @@
     />
 
     <!-- Load the calatrava additions -->
-    <import file="ant/calatrava.xml" />
-
-    <!-- Calatrava configuration -->
-    <target name="-pre-build" depends="resolve">
-    </target>
+    <import file="ivy/calatrava.xml" />
 
 <!-- extension targets. Uncomment the ones where you want to do custom work
      in between standard targets -->
