@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/KalyanAkella/calatrava.png)](https://travis-ci.org/KalyanAkella/calatrava)
+
 # Dependencies
 
 It should be as easy to get started with Calatrava as
@@ -109,3 +111,4 @@ mobile app.
 The `--dev` switch will create a new project that refers to the
 `calatrava` gem as a path on disk. This is much more convenient if
 you're experimenting with Calatrava, or working on it.
+
