@@ -5,7 +5,7 @@ before_script:
 script: 
   - bundle exec rake test
 after_script:
-  - bin/calatrava create test --dev
+  - bin/calatrava create test --dev --no-android --no-ios
   - rvm rvmrc trust test/
   - cd test
   - bundle install
