@@ -153,11 +153,11 @@ calatrava.bridge.requests = (() ->
       failure: failure
 
   successfulResponse: (requestId, response) ->
-    successHandlersById[requestId](response)
+    successHandlersById[requestId](response) if successHandlersById[requestId]
     clearHandlers(requestId)
 
   failureResponse: (requestId, response) ->
-    failureHandlersById[requestId](response)
+    failureHandlersById[requestId](response) if failureHandlersById[requestId]
     clearHandlers(requestId)
 )()
 
