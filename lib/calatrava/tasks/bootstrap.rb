@@ -5,6 +5,9 @@ task :bootstrap do
   cd "ios" do
     sh "pod install" if RUBY_PLATFORM =~ /darwin/
   end
+  cd "droid/#{Calatrava::Project.current.name}" do
+    sh "ant -f ivy/calatrava.xml resolve"
+  end
 
   Rake::Task['configure:development'].invoke
 end
