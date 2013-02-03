@@ -29,6 +29,7 @@ Feature: Projects
      | android | droid     |
      | web     | web       |
 
+  @travis
   Scenario: Templates can have deeply nested directories and files
     Given the following directories exist:
       | nested         |
@@ -38,7 +39,7 @@ Feature: Projects
       | nested/sample          |
       | nested/.config         |
       | nested/dir/sub/sample2 |
-    When  I run `calatrava create proj --template nested`
+    When  I run `calatrava create proj --template nested --no-android`
     Then  the following directories should exist:
       | proj         |
       | proj/dir     |
@@ -48,12 +49,13 @@ Feature: Projects
       | proj/.config         |
       | proj/dir/sub/sample2 |
 
+  @travis
   Scenario: Template files can themselves be templates
     Given a directory named "template"
     And   a file named "template/.tmpl.calatrava" with:
       """
       Sample {{ project_name }}
       """
-    When  I run `calatrava create templatized --template template`
+    When  I run `calatrava create templatized --template template --no-android`
     Then  a file named "templatized/.tmpl" should exist
     And   the file "templatized/.tmpl" should contain "Sample templatized"

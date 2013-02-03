@@ -3,7 +3,7 @@ rvm: 1.9.3
 before_script:
   - rm -rf test/
 script: 
-  - bundle exec rake test
+  - bundle exec rake test:rspec test:features:travis
 after_script:
   - bin/calatrava create test --dev --no-android --no-ios
   - rvm rvmrc trust test/
