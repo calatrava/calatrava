@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/KalyanAkella/calatrava.png)](https://travis-ci.org/KalyanAkella/calatrava)
+[![Build Status](https://travis-ci.org/calatrava/calatrava.png)](https://travis-ci.org/calatrava/calatrava)
 
 # Dependencies
 
