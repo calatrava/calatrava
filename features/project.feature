@@ -18,6 +18,17 @@ Feature: Projects
       | simple/web      |
     And  the file "simple/calatrava.yml" should contain "project_name: simple"
 
+  Scenario Outline: Should allow app types to be excluded
+    When I run `calatrava create simple --no-<app>`
+    Then the exit status should be 0
+    And  a directory named "simple/<directory>" should not exist
+
+    Examples:
+     | app     | directory |
+     | ios     | ios       |
+     | android | droid     |
+     | web     | web       |
+
   Scenario: Templates can have deeply nested directories and files
     Given the following directories exist:
       | nested         |

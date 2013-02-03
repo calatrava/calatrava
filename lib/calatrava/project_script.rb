@@ -13,6 +13,7 @@ module Calatrava
       @slug = name.gsub(" ", "_").downcase
       @title = @name[0..0].upcase + @name[1..-1]
       @options = overrides
+      puts @options
     end
 
     def sh(cmd)
@@ -21,7 +22,7 @@ module Calatrava
     end
 
     def dev?
-      @options[:is_dev]
+      @options.dev?
     end
 
     def create(template)
@@ -29,8 +30,12 @@ module Calatrava
       create_directory_tree(template)
       create_files(template)
 
-      create_android_tree(template)
-      create_ios_tree(template) if Calatrava.platform == :mac
+      create_android_tree(template) unless @options['no-android']
+      create_ios_tree(template) if Calatrava.platform == :mac && !@options['no-ios']
+
+      {droid: 'no-android', ios: 'no-ios', web: 'no-web'}.each do |app, flag|
+        FileUtils.rm_rf(File.join(@name, app.to_s)) if @options[flag]
+      end
     end
 
     def create_project(template)

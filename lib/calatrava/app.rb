@@ -5,13 +5,16 @@ module Calatrava
   class App < Thor
 
     desc "create <project-name>", "creates a new calatrava app project"
-    method_options :template => File.join(File.dirname(__FILE__), 'templates'), :dev => false
+    method_options :template => File.join(File.dirname(__FILE__), 'templates'),
+                   :dev => false,
+                   :'no-ios' => false,
+                   :'no-android' => false,
+                   :'no-web' => false
     def create(project_name)
       die "template must exist" unless File.exist?(options[:template])
       die "template must be a directory" unless File.directory?(options[:template])
 
-      proj = ProjectScript.new(project_name,
-                               :is_dev => options.dev?)
+      proj = ProjectScript.new(project_name, options)
       proj.create(Template.new(options[:template]))
     end
 
