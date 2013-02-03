@@ -13,7 +13,6 @@ module Calatrava
       @slug = name.gsub(" ", "_").downcase
       @title = @name[0..0].upcase + @name[1..-1]
       @options = overrides
-      puts @options
     end
 
     def sh(cmd)
