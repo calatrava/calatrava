@@ -1,14 +1,14 @@
 language: ruby
 rvm: 1.9.3
 before_script:
-  - rm -rf sample/
+  - rm -rf test/
 script: 
-  - bundle exec rake build test
+  - bundle exec rake test
 after_script:
-  - bin/calatrava create sample --dev
-  - rvm rvmrc trust sample/
-  - cd sample
+  - bin/calatrava create test --dev
+  - rvm rvmrc trust test/
+  - cd test
   - bundle install
   - bundle exec rake bootstrap
-  - bundle exec rake clean precommit:mw
-  - bundle exec rake droid:build ios:build web:build
+  - bundle exec rake kernel:spec
+  - bundle exec rake web:build
