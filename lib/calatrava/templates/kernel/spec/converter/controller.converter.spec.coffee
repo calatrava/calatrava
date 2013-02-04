@@ -33,5 +33,5 @@ describe 'converter controller', ->
       views.conversionForm.trigger 'convert'
 
     it 'should render the correctly converted amount', ->
-      expect(views.conversionForm.render).toHaveBeenCalledWith
+      expect(views.conversionForm.lastMessage()).toEqual
         out_amount: 96
