@@ -20,6 +20,13 @@ module Calatrava
         end
       end
 
+      desc "Bootstraps the iOS app"
+      task :bootstrap do
+        cd "ios" do
+          sh "pod install" if Calatrava.platform == :mac
+        end
+      end
+
       desc "Clean ios public directory"
       task :clean do
         sh "rm -rf #{@app_builder.build_dir}"

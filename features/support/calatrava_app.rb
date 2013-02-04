@@ -7,7 +7,7 @@ class CalatravaApp
 
   def initialize(name)
     @name = name
-    run_simple("calatrava create #{@name} --no-android --no-ios")
+    run_simple("calatrava create #{@name} --no-droid --no-ios")
   end
 
   def start_apache

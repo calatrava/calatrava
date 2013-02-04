@@ -21,13 +21,13 @@ Feature: Projects
   Scenario Outline: Should allow app types to be excluded
     When I run `calatrava create simple --no-<app>`
     Then the exit status should be 0
-    And  a directory named "simple/<directory>" should not exist
+    And  a directory named "simple/<app>" should not exist
 
     Examples:
-     | app     | directory |
-     | ios     | ios       |
-     | android | droid     |
-     | web     | web       |
+     | app   |
+     | ios   |
+     | droid |
+     | web   |
 
   @travis
   Scenario: Templates can have deeply nested directories and files

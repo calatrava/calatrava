@@ -2,9 +2,7 @@ desc "Installs all required Ruby gems and Node.js packages for your new Calatrav
 task :bootstrap do
   sh "bundle install"
   sh "npm install"
-  cd "ios" do
-    sh "pod install" if RUBY_PLATFORM =~ /darwin/
-  end
+  Rake::Task['ios:bootstrap'].invoke if Rake::Task.task_defined? 'ios:bootstrap'
 
   Rake::Task['configure:development'].invoke
 end

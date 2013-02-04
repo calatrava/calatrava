@@ -8,7 +8,7 @@ module Calatrava
     method_options :template => File.join(File.dirname(__FILE__), 'templates'),
                    :dev => false,
                    :'no-ios' => false,
-                   :'no-android' => false,
+                   :'no-droid' => false,
                    :'no-web' => false
     def create(project_name)
       die "template must exist" unless File.exist?(options[:template])

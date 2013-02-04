@@ -13,6 +13,10 @@ module Calatrava
       @slug = name.gsub(" ", "_").downcase
       @title = @name[0..0].upcase + @name[1..-1]
       @options = overrides
+
+      @platforms = ['ios', 'droid', 'web'].select do |platform|
+        !@options["no-#{platform}"]
+      end
     end
 
     def sh(cmd)
@@ -29,18 +33,18 @@ module Calatrava
       create_directory_tree(template)
       create_files(template)
 
-      create_android_tree(template) unless @options['no-android']
-      create_ios_tree(template) if Calatrava.platform == :mac && !@options['no-ios']
+      create_android_tree(template) if @platforms.include?('droid')
+      create_ios_tree(template) if Calatrava.platform == :mac && @platforms.include?('ios')
 
-      {droid: 'no-android', ios: 'no-ios', web: 'no-web'}.each do |app, flag|
-        FileUtils.rm_rf(File.join(@name, app.to_s)) if @options[flag]
+      ['droid', 'ios', 'web'].each do |app|
+        FileUtils.rm_rf(File.join(@name, app)) unless @platforms.include?(app)
       end
     end
 
     def create_project(template)
       FileUtils.mkdir_p @name
       File.open(File.join(@name, 'calatrava.yml'), "w+") do |f|
-        f.print({:project_name => @name}.to_yaml)
+        f.print({project_name: @name, platforms: @platforms}.to_yaml)
       end
     end
 
