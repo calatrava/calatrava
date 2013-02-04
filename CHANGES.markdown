@@ -1,5 +1,9 @@
 ## v0.6.4
 
+New features:
+* All app types are now optional: disable app types with `--no-web`,
+  `--no-droid` and `--no-ios` when creating your Calatrava project.
+
 Minor improvements:
 * The `stubView` for stubbing pages when testing controllers now
   provides more direct access to the last render view message.
