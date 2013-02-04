@@ -1,14 +1,4 @@
 language: ruby
 rvm: 1.9.3
-before_script:
-  - rm -rf test/
 script: 
   - bundle exec rake test:rspec test:features:travis
-after_script:
-  - bin/calatrava create test --dev --no-droid --no-ios
-  - rvm rvmrc trust test/
-  - cd test
-  - bundle install
-  - bundle exec rake bootstrap
-  - bundle exec rake kernel:spec
-  - bundle exec rake web:build

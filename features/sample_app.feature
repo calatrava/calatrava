@@ -27,4 +27,5 @@ Feature: Sample App
     And  I cd to "sample"
     And  I run `bundle install`
     And  I run `rake bootstrap`
-    And  I start apache
+    And  I run `rake web:build`
+    Then the exit status should be 0
