@@ -39,7 +39,7 @@ Feature: Projects
       | nested/sample          |
       | nested/.config         |
       | nested/dir/sub/sample2 |
-    When  I run `calatrava create proj --template nested --no-android`
+    When  I run `calatrava create proj --template nested --no-droid --no-ios`
     Then  the following directories should exist:
       | proj         |
       | proj/dir     |
@@ -56,6 +56,6 @@ Feature: Projects
       """
       Sample {{ project_name }}
       """
-    When  I run `calatrava create templatized --template template --no-android`
+    When  I run `calatrava create templatized --template template --no-droid --no-ios`
     Then  a file named "templatized/.tmpl" should exist
     And   the file "templatized/.tmpl" should contain "Sample templatized"
