@@ -15,8 +15,17 @@ module Calatrava
         coffee 'droid/app/bridge.coffee', @app_builder.build_scripts_dir
       end
 
+      task :resolve => "droid/#{@proj_name}/ivy/ivy.xml" do
+        cd "droid/#{@proj_name}" do
+          sh "ant -f ant/calatrava.xml resolve"
+        end
+      end
+
+      desc "Bootstraps the Droid app"
+      task :bootstrap => :resolve
+
       desc "Builds the Android app"
-      task :build => app_task do
+      task :build => [:resolve, app_task] do
         cd "droid/#{@proj_name}" do
           sh "ant clean debug"
         end

@@ -3,8 +3,12 @@
   <!-- here is the version of ivy we will use. change this property to try a newer 
          version if you want -->
   <property name="ivy.install.version" value="2.3.0-rc1" />
-  <property name="ivy.jar.dir" value="${basedir}/ivy" />
-  <property name="ivy.jar.file" value="${ivy.jar.dir}/ivy.jar" />
+
+  <!-- Paths to various ivy pieces. You probably don't need to change these -->
+  <property name="ivy.jar.dir"         value="${basedir}/../ivy" />
+  <property name="ivy.jar.file"        value="${ivy.jar.dir}/ivy.jar" />
+  <property name="ivy.dep.file"        value="${ivy.jar.dir}/ivy.xml" />
+  <property name="ivy.settings.file"   value="${ivy.jar.dir}/ivysettings.xml" />
 
   <property name="build.dir" value="build" />
   <property name="src.dir" value="src" />
@@ -34,7 +38,7 @@
 
     <ivy:report />
     
-    <ivy:retrieve pattern="libs/[artifact]-[revision](-[classifier]).[ext]" conf="${ivy.configurations}" />
+    <ivy:retrieve pattern="../libs/[artifact]-[revision](-[classifier]).[ext]" conf="${ivy.configurations}" />
 	</target>
 
   <target name="clean-ivy" description="--> clean the ivy installation">
