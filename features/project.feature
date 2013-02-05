@@ -11,7 +11,6 @@ Feature: Projects
       | simple          |
       | simple/config   |
       | simple/droid    |
-      | simple/features |
       | simple/ios      |
       | simple/kernel   |
       | simple/shell    |
