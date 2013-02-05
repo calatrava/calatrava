@@ -7,6 +7,8 @@ New features:
 Minor improvements:
 * The `stubView` for stubbing pages when testing controllers now
   provides more direct access to the last render view message.
+* Android dependencies are resolved during bootstrap, and then
+  externally to the `ant` build to avoid `CLASSPATH` issues.
 
 Bugs fixed:
 * [Issue #28][i28]: Support Linux for creating projects and running
