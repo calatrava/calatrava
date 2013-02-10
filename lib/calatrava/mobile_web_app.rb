@@ -19,7 +19,8 @@ module Calatrava
         core_coffee += @manifest.coffee_files.select { |cf| cf =~ /calatrava.coffee$/ }
         web_coffee = Dir['web/app/source/*.coffee'] - core_coffee
         mf_coffee = @manifest.coffee_files.reject { |cf| cf =~ /calatrava.coffee$/ }
-        core_coffee + web_coffee + [Calatrava::Project.current.config.path('env.coffee')] + mf_coffee
+        env_file = OutputFile.new(scripts_build_dir, Calatrava::Project.current.config.path('env.coffee'), ['configure:calatrava_env'])
+        (core_coffee + web_coffee + mf_coffee).collect { |cf| OutputFile.new(scripts_build_dir, cf) } + [env_file]
       end
     end
 
@@ -28,7 +29,9 @@ module Calatrava
     end
 
     def scripts
-      coffee_files.collect { |cf| "scripts/#{File.basename(cf, '.coffee')}.js" }
+      coffee_files.collect do |cf|
+        cf.output_path.gsub("#{build_dir}/", "")
+      end
     end
 
     def install_tasks
@@ -37,13 +40,12 @@ module Calatrava
       directory styles_build_dir
       directory images_build_dir
 
-      app_files = coffee_files.collect do |cf|
-        file "#{scripts_build_dir}/#{File.basename(cf, '.coffee')}.js" => [scripts_build_dir, cf] do
-          coffee cf, scripts_build_dir
-        end
-      end
+      app_files = coffee_files.collect { |cf| cf.to_task }
 
-      app_files << file("#{build_dir}/index.html" => [@manifest.src_file, "web/app/views/index.haml"] + haml_files) do
+      app_files << file("#{build_dir}/index.html" => [@manifest.src_file,
+                                                      "web/app/views/index.haml",
+                                                      transient('web_coffee', coffee_files),
+                                                      transient('web_haml', haml_files)] + haml_files) do
         HamlSupport::compile "web/app/views/index.haml", build_dir
       end
 

@@ -15,10 +15,10 @@ describe Calatrava::AppBuilder do
                           :kernel_bootstrap => ['path/to/kernel.coffee'],
                           :haml_files => ['diff/path/shell.haml']) }
   
-  let(:app) { Calatrava::AppBuilder.new('app/build', manifest) }
+  let(:app) { Calatrava::AppBuilder.new('app', 'app/build', manifest) }
 
   context '#coffee_files' do
-    subject { app.coffee_files }
+    subject { app.coffee_files.collect { |cf| cf.source_file.to_s } }
     
     it { should include 'path/to/kernel.coffee' }
     it { should include 'diff/path/shell.coffee' }

@@ -18,21 +18,10 @@ module Calatrava
       end
     end
     
-    def apache_dir
-      "web/apache"
-    end
-
-    def apache_public_dir
-      "#{apache_dir}/public"
-    end
-
-    def apache_logs_dir
-      "#{apache_dir}/logs"
-    end
-
-    def apache_conf_dir
-      "#{apache_dir}/conf"
-    end
+    def apache_dir ; "web/apache" ; end
+    def apache_public_dir ; "#{apache_dir}/public" ; end
+    def apache_logs_dir ; "#{apache_dir}/logs" ; end
+    def apache_conf_dir ; "#{apache_dir}/conf"; end
 
     def httpd(command, opts = {})
       ensure_httpd
@@ -47,19 +36,7 @@ module Calatrava
       end
     end
 
-    def configure_apache
-      cp Calatrava::Project.current.config.path("httpd.conf"), apache_conf_dir
-    end
-
     def launch_apache(opts = {})
-      if !opts[:background]
-        puts
-        puts "\t\t" + "*"*40
-        puts "\t\t" + "***   STARTING APACHE ON PORT 8888   ***"
-        puts "\t\t" + "*"*40
-        puts
-      end
-
       httpd :start, opts
     end
 
@@ -93,14 +70,16 @@ module Calatrava
         end
       end
 
+      file "#{apache_conf_dir}/httpd.conf" => 'configure:calatrava_env' do
+        cp Calatrava::Project.current.config.path("httpd.conf"), apache_conf_dir
+      end
+
       desc "launch a non-daemon apache instance on port 8888 which will serve our local app and also proxy to backend services"
-      task :start => ['web:build', apache_public_dir, apache_logs_dir] do
-        configure_apache
+      task :start => ['web:build', apache_public_dir, apache_logs_dir, "#{apache_conf_dir}/httpd.conf"] do
         launch_apache
       end
 
-      task :background => ['web:build', apache_public_dir, apache_logs_dir] do
-        configure_apache
+      task :background => ['web:build', apache_public_dir, apache_logs_dir, "#{apache_conf_dir}/httpd.conf"] do
         launch_apache :background => true
       end
 

@@ -5,7 +5,7 @@ module Calatrava
 
     def initialize(path, manifest)
       @path, @manifest = path, manifest
-      @app_builder = AppBuilder.new('ios/public', @manifest)
+      @app_builder = AppBuilder.new('ios', 'ios/public', @manifest)
     end
 
     def install_tasks

@@ -6,9 +6,14 @@ module Calatrava
     include Rake::DSL
 
     @@extras = []
+    @@env = ENV['CALATRAVA_ENV'] || 'development'
 
     def self.extra(&configurator)
       @@extras << configurator
+    end
+
+    def self.env
+      @@env
     end
 
     def initialize
@@ -56,14 +61,14 @@ module Calatrava
     end
 
     def path(file)
-      env = ENV['CALATRAVA_ENV'] || "development"
-      puts "CALATRAVA_ENV = '#{env}'"
-      full_path = artifact_path(File.join(env, file))
-      full_path
+      artifact_path(File.join(Configuration.env, file))
     end
 
     def install_tasks
       directory config_result_dir
+
+      puts "CALATRAVA_ENV = '#{Configuration.env}'"
+      transient :calatrava_env, Configuration.env
 
       environment_names.each do |environment|
         desc "Create config files for #{environment} environment"

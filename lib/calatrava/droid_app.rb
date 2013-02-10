@@ -5,7 +5,7 @@ module Calatrava
 
     def initialize(path, proj_name, manifest)
       @path, @proj_name, @manifest = path, proj_name, manifest
-      @app_builder = AppBuilder.new("droid/#{@proj_name}/assets/calatrava", @manifest)
+      @app_builder = AppBuilder.new('droid', "droid/#{@proj_name}/assets/calatrava", @manifest)
     end
 
     def install_tasks

@@ -3,6 +3,8 @@ require 'rake/file_list'
 
 require 'calatrava/configuration'
 
+require 'calatrava/tasks/rake'
+
 require 'calatrava/platform'
 require 'calatrava/version'
 require 'calatrava/apache'
@@ -13,6 +15,7 @@ require 'calatrava/ios_app'
 require 'calatrava/kernel'
 require 'calatrava/manifest'
 require 'calatrava/mobile_web_app'
+require 'calatrava/output_file'
 require 'calatrava/project'
 require 'calatrava/project_script'
 require 'calatrava/shell'

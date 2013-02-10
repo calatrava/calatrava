@@ -24,7 +24,7 @@ describe Calatrava::MobileWebApp do
   end
 
   context '#coffee_files' do
-    subject { mobile_web.coffee_files }
+    subject { mobile_web.coffee_files.collect { |cf| cf.source_file.to_s } }
 
     it { should include 'path/to/kernel.coffee' }
     it { should include 'diff/path/shell.coffee' }

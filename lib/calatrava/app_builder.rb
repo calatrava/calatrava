@@ -3,8 +3,8 @@ module Calatrava
   class AppBuilder
     include Rake::DSL
 
-    def initialize(output_dir, manifest)
-      @output_dir, @manifest = output_dir, manifest
+    def initialize(platform, output_dir, manifest)
+      @platform, @output_dir, @manifest = platform, output_dir, manifest
     end
 
     def build_dir ; @output_dir ; end
@@ -14,7 +14,8 @@ module Calatrava
     def build_styles_dir ; "#{build_dir}/styles" ; end
 
     def coffee_files
-      @manifest.coffee_files + [Calatrava::Project.current.config.path('env.coffee')]
+      env_file = OutputFile.new(build_scripts_dir, Calatrava::Project.current.config.path('env.coffee'), ['configure:calatrava_env'])
+      @manifest.coffee_files.collect { |cf| OutputFile.new(build_scripts_dir, cf) } + [env_file]
     end
 
     def js_file(cf)
@@ -40,25 +41,23 @@ module Calatrava
 
       app_files = haml_files.collect do |hf|
         file "#{build_html_dir}/#{File.basename(hf, '.haml')}.html" => [build_html_dir, hf] do
-          HamlSupport::compile_hybrid_page hf, build_html_dir, :platform => 'ios'
+          HamlSupport::compile_hybrid_page hf, build_html_dir, :platform => @platform
         end
       end
 
-      app_files += coffee_files.collect do |cf|
-        file js_file(cf) => [build_scripts_dir, cf] do
-          coffee cf, build_scripts_dir
-        end
-      end
-
+      app_files += coffee_files.collect { |cf| cf.to_task }
       app_files += @manifest.css_tasks(build_styles_dir)
-      app_files << file("#{build_dir}/load_file.txt" => [build_dir, @manifest.src_file]) do |t|
+      app_files << file("#{build_dir}/load_file.txt" => [build_dir,
+                                                         @manifest.src_file,
+                                                         transient("#{@platform}_coffee", @manifest.kernel_bootstrap)
+                                                        ]) do |t|
         File.open(t.name, "w+") { |f| f.puts load_instructions }
       end
 
       task :shared => [build_images_dir, build_scripts_dir] do
         cp_ne "assets/images/*", build_images_dir
         cp_ne "assets/lib/*.js", build_scripts_dir
-        cp_ne "ios/res/js/*.js", build_scripts_dir
+        cp_ne "#{@platform}/res/js/*.js", build_scripts_dir
       end
 
       task :app => [:shared] + app_files
