@@ -38,6 +38,9 @@ Bugs fixed:
   time as this can fail to load some files in large sets.
 * [iOS Issue #4][ios-i4]: Calatrava apps should be able to open URLs
   using other apps on iOS.
+* [Issue #25][i25]: Recreate `load_file.txt` during the build, if new
+  files have been added. Also will re-copy configuration files if you
+  change environments.
 
 ## v0.6.3
 
