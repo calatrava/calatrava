@@ -9,7 +9,8 @@ module Calatrava
                    :dev => false,
                    :'no-ios' => false,
                    :'no-droid' => false,
-                   :'no-web' => false
+                   :'no-web' => false,
+                   :'android' => '17'
     def create(project_name)
       die "template must exist" unless File.exist?(options[:template])
       die "template must be a directory" unless File.directory?(options[:template])
