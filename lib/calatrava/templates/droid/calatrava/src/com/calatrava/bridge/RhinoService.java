@@ -183,7 +183,7 @@ public class RhinoService extends Service {
       String js = "calatrava.inbound.failureResponse('{0}', {1}, '{2}');"
           .replace("{0}", requestId)
           .replace("{1}", Integer.toString(statusCode))
-          .replace("{2}", responseBody);
+          .replace("{2}", responseBody.replace("'", "\\'"));
       dispatchJs(js);
     }
 
