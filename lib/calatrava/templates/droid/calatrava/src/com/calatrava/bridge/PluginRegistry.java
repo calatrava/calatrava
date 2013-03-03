@@ -19,7 +19,7 @@ public class PluginRegistry {
   public static String TAG = PluginRegistry.class.getSimpleName();
   private static PluginRegistry sharedRegistry;
 
-  private Context appContext;
+  private Context activityContext;
   private RhinoService rhino;
   private Map<String, RegisteredPlugin> registeredPlugins = new HashMap<String, RegisteredPlugin>();
   private Map<String, PluginCommand> installedCmds = new HashMap<String, PluginCommand>();
@@ -37,7 +37,6 @@ public class PluginRegistry {
   public PluginRegistry(String packageName, Context appContext, RhinoService rhino)
     throws IOException, URISyntaxException, ClassNotFoundException, NameNotFoundException
   {
-    this.appContext = appContext;
     this.rhino = rhino;
 
     // Find all the plugins to register in the app
@@ -58,9 +57,7 @@ public class PluginRegistry {
             Log.d(TAG, "Registering Calatrava plugin: " + pluginName);
             try
             {
-              RegisteredPlugin plugin = (RegisteredPlugin)toRegister.newInstance();
-              plugin.setContext(PluginRegistry.this, appContext);
-              registeredPlugins.put(pluginName, plugin);
+              registeredPlugins.put(pluginName, (RegisteredPlugin)toRegister.newInstance());
             }
             catch (Exception e)
             {
@@ -108,5 +105,14 @@ public class PluginRegistry {
   public void invokeCallback(String callbackHandle, Object data)
   {
     rhino.callJsFunction("calatrava.inbound.invokePluginCallback", new String[] {callbackHandle, data.toString()});
+  }
+
+  public void updateContext(Context activityContext)
+  {
+    this.activityContext = activityContext;
+    for (RegisteredPlugin plugin : registeredPlugins.values())
+    {
+      plugin.setContext(PluginRegistry.this, activityContext);
+    }
   }
 }

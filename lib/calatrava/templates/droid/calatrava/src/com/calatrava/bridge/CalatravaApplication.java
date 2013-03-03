@@ -35,6 +35,7 @@ public class CalatravaApplication extends Application
   public void provideActivityContext(Context activityContext)
   {
     PageRegistry.sharedRegistry().updateContext(activityContext);
+    PluginRegistry.sharedRegistry().updateContext(activityContext);
   }
 
   public void launchFlow(String flow)
