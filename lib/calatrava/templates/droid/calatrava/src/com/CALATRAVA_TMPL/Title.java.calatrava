@@ -12,8 +12,5 @@ public class {{ project_title }} extends CalatravaApplication
   {
     // Call this to start Calatrava
     bootCalatrava("com.{{ project_slug }}");
-
-    // And then start your first feature
-    launchFlow("example.converter.start");
   }
 }
