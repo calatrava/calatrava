@@ -1,8 +1,9 @@
 package com.calatrava.bridge;
 
-import android.app.Service;
-import android.content.Intent;
-import android.os.*;
+import android.app.Activity;
+import android.content.AbstractThreadedSyncAdapter;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
@@ -14,46 +15,43 @@ import java.lang.String;
 import java.lang.ThreadGroup;
 import java.util.concurrent.CountDownLatch;
 
-public class RhinoService extends Service {
+public class RhinoService {
   public static String TAG = RhinoService.class.getSimpleName();
 
   private Scriptable mScope;
   private JSEvalThread evaller = new JSEvalThread();
 
-  private final IBinder mBinder = new LocalBinder();
-  
   CountDownLatch countDownLatch = new CountDownLatch(1);
 
-  @Override
-  public IBinder onBind(Intent intent) {
-    return mBinder;
+  public RhinoService(android.content.Context activity) {
+    initRhino(activity);
   }
 
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    Log.d(TAG, "RhinoService created.");
-  }
-
-  public void initRhino() {
+  public void initRhino(android.content.Context homeContext) {
     Context ctxt = enterContext();
     try {
       mScope = ctxt.initStandardObjects();
 
-      Object wrappedRegistry = Context.javaToJS(PageRegistry.sharedRegistry(), mScope);
-      ScriptableObject.putProperty(mScope, "pageRegistry", wrappedRegistry);
-      ScriptableObject.putProperty(mScope, "pluginRegistry", Context.javaToJS(PluginRegistry.sharedRegistry(), mScope));
-      ScriptableObject.putProperty(mScope, "androidRuntime", this);
+      ScriptableObject.putProperty(mScope,
+                                   "pageRegistry",
+                                   Context.javaToJS(PageRegistry.sharedRegistry(), mScope));
+      ScriptableObject.putProperty(mScope,
+                                   "pluginRegistry",
+                                   Context.javaToJS(PluginRegistry.sharedRegistry(), mScope));
+      ScriptableObject.putProperty(mScope,
+                                   "ajaxRequestManagerRegistry",
+                                   Context.javaToJS(AjaxRequestManager.sharedManager(), mScope));
+      ScriptableObject.putProperty(mScope,
+                                   "androidRuntime",
+                                   this);
 
-      Object wrappedAjaxRequestManagerRegistry = Context.javaToJS(AjaxRequestManager.sharedManager(), mScope);
-      ScriptableObject.putProperty(mScope, "ajaxRequestManagerRegistry", wrappedAjaxRequestManagerRegistry);
-
-      evaller.start();
-      try {
+      if (!evaller.isAlive())
+        evaller.start();
+      try
+      {
         countDownLatch.await();
       } catch (InterruptedException e) {
-        Log.d(TAG, "Interrupted Exception when waiting for JSEvalThread");
-        e.printStackTrace();
+        Log.d(TAG, "Interrupted Exception when waiting for JSEvalThread", e);
       }
     } finally {
       Context.exit();
@@ -65,12 +63,6 @@ public class RhinoService extends Service {
     // No pre-compilation
     ctxt.setOptimizationLevel(-1);
     return ctxt;
-  }
-
-  @Override
-  public void onDestroy() {
-    Log.d(TAG, "RhinoService destroyed.");
-    super.onDestroy();
   }
 
   public void load(Reader source, String name) {
@@ -99,12 +91,6 @@ public class RhinoService extends Service {
 
   public void callJsFunction(String function, String[] args) {
     evaller.callJsFunction(function, args);
-  }
-
-  public class LocalBinder extends Binder {
-    public RhinoService getService() {
-      return RhinoService.this;
-    }
   }
 
   class JSEvalThread extends Thread {

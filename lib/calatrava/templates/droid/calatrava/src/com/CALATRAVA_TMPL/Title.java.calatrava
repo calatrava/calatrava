@@ -3,21 +3,17 @@ package com.{{ project_slug }};
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.calatrava.bridge.Launcher;
+import com.calatrava.bridge.CalatravaApplication;
 
-public class {{ project_title }} extends Activity
+public class {{ project_title }} extends CalatravaApplication
 {
-    /** Called when the activity is first created. */
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+  @Override
+  public void onCreate()
+  {
+    // Call this to start Calatrava
+    bootCalatrava("com.{{ project_slug }}");
 
-        Launcher.launchKernel("com.{{ project_slug }}", this, getApplication(), new Runnable() {
-          public void run() {
-            Launcher.launchFlow("example.converter.start");
-          }
-        });
-    }
+    // And then start your first feature
+    launchFlow("example.converter.start");
+  }
 }

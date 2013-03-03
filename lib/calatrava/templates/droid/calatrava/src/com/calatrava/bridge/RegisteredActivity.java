@@ -11,16 +11,6 @@ public abstract class RegisteredActivity extends Activity {
 
   private RhinoService rhino;
   private RequestLoader spinner = new RequestLoader(this);
-  private ServiceConnection connection = new ServiceConnection() {
-    public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-      rhino = ((RhinoService.LocalBinder) iBinder).getService();
-      RegisteredActivity.this.onRhinoConnected(rhino);
-    }
-
-    public void onServiceDisconnected(ComponentName componentName) {
-
-    }
-  };
 
   private BroadcastReceiver receiver = new BroadcastReceiver() {
     @Override
@@ -39,8 +29,7 @@ public abstract class RegisteredActivity extends Activity {
   @Override
   protected void onCreate(Bundle availableData) {
     super.onCreate(availableData);
-    Intent serviceIntent = new Intent(this, RhinoService.class);
-    bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
+    rhino = ((CalatravaApplication)getApplication()).getRhino();
   }
 
   @Override
@@ -60,7 +49,6 @@ public abstract class RegisteredActivity extends Activity {
   @Override
   public void onDestroy() {
     super.onDestroy();
-    unbindService(connection);
   }
 
   public void triggerEvent(String event, String... extraArgs) {
@@ -71,11 +59,14 @@ public abstract class RegisteredActivity extends Activity {
     rhino.callJsFunction("calatrava.inbound.invokeCallback", args);
   }
 
-  protected abstract void onRhinoConnected(RhinoService rhino);
-
   protected abstract String getPageName();
 
   public abstract String getFieldValue(String field);
 
   public abstract void render(final String json);
+
+  public RhinoService getRhino()
+  {
+    return rhino;
+  }
 }

@@ -1,6 +1,5 @@
 package com.calatrava.bridge;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -22,7 +21,7 @@ public class PageRegistry {
   public static String TAG = PageRegistry.class.getSimpleName();
   private static PageRegistry sharedRegistry;
 
-  private Context appContext;
+  private Context activityContext;
   private RhinoService rhino;
   private Map<String, Class<?>> pageFactories = new HashMap<String, Class<?>>();
   private Map<String, RegisteredPage> registeredPages = new HashMap<String, RegisteredPage>();
@@ -37,15 +36,19 @@ public class PageRegistry {
     sharedRegistry = shared;
   }
 
-  public PageRegistry(String appName, Context appContext, Application app, RhinoService rhino)
+  public PageRegistry(String appName, Context appContext, RhinoService rhino)
     throws IOException, URISyntaxException, ClassNotFoundException, NameNotFoundException
   {
-    this.appContext = appContext;
     this.rhino = rhino;
 
     // Find all the logical page classes in the app
     Log.d(TAG, "Searching for Calatrava pages in '" + appName + "'");
     addPages(appName, appContext);
+  }
+
+  public void updateContext(Context activityContext)
+  {
+    this.activityContext = activityContext;
   }
 
   private void addPages(String packageName, Context context)
@@ -74,7 +77,7 @@ public class PageRegistry {
     Log.d(TAG, "changePage('" + target + "')");
     Class activityClass = pageFactories.get(target);
     Log.d(TAG, "Activity to be started: " + activityClass.getSimpleName());
-    appContext.startActivity(new Intent(appContext, activityClass));
+    activityContext.startActivity(new Intent(activityContext, activityClass));
   }
 
   public void triggerEvent(String pageName, String event, String... extraArgs) {
@@ -84,21 +87,21 @@ public class PageRegistry {
   }
 
   public void displayWidget(String name, String options) {
-    appContext.sendBroadcast(new Intent("com.calatrava.widget").putExtra("name", name).putExtra("options", options));
+    activityContext.sendBroadcast(new Intent("com.calatrava.widget").putExtra("name", name).putExtra("options", options));
   }
 
   public void displayDialog(String dialogName) {
-    appContext.sendBroadcast(new Intent("com.calatrava.dialog").putExtra("name", dialogName));
+    activityContext.sendBroadcast(new Intent("com.calatrava.dialog").putExtra("name", dialogName));
   }
 
   public void alert(String message) {
     Log.d(TAG, "Broadcasting alert message: '" + message + "'");
-    appContext.sendBroadcast(new Intent("com.calatrava.alert").putExtra("message", message));
+    activityContext.sendBroadcast(new Intent("com.calatrava.alert").putExtra("message", message));
   }
 
   public void openUrl(String url) {
     Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-    appContext.startActivity(browser);
+    activityContext.startActivity(browser);
   }
 
   public void track(String pageName, String channel, String eventName, Object variables, Object properties) {

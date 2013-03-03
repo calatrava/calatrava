@@ -5,12 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.util.Log;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.calatrava.bridge.CalatravaApplication;
 import com.calatrava.bridge.RegisteredActivity;
 import com.calatrava.bridge.RhinoService;
 import com.calatrava.bridge.PageRegistry;
@@ -28,7 +30,6 @@ public abstract class WebViewActivity extends RegisteredActivity {
   private JSContainer jsContainer;
   private WebView webView;
   private boolean pageReady = false;
-  private RhinoService rhino;
 
   private BroadcastReceiver receiver = new BroadcastReceiver() {
     @Override
@@ -41,9 +42,10 @@ public abstract class WebViewActivity extends RegisteredActivity {
   };
 
   @Override
-  protected void onRhinoConnected(RhinoService rhino) {
-    this.rhino = rhino;
-    jsContainer = new JSContainer(rhino, getPageName());
+  protected void onCreate(Bundle data)
+  {
+    super.onCreate(data);
+    jsContainer = new JSContainer(getRhino(), getPageName());
     loadPage();
   }
 
@@ -52,10 +54,8 @@ public abstract class WebViewActivity extends RegisteredActivity {
     super.onResume();
 
     onPageLoadCompleted();
+    pageHasOpened();
 
-    if (rhino != null) {
-      pageHasOpened();
-    }
     registerReceiver(receiver, new IntentFilter("com.calatrava.dialog"));
   }
 
@@ -130,7 +130,6 @@ public abstract class WebViewActivity extends RegisteredActivity {
     webView.getSettings().setDomStorageEnabled(true);
     webView.setScrollBarStyle(webView.SCROLLBARS_OUTSIDE_OVERLAY);
     webView.setScrollbarFadingEnabled(true);
-    webView.setBackgroundColor(0xffffffff);
     webView.addJavascriptInterface(jsContainer, "container");
 
     webView.setWebViewClient(new WebViewClient() {

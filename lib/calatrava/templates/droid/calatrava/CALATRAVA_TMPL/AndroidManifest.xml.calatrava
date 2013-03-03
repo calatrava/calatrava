@@ -3,8 +3,9 @@
       package="com.{{ project_slug }}"
       android:versionCode="1"
       android:versionName="1.0">
-    <application android:label="@string/app_name" >
-        <activity android:name="com.{{ project_slug }}.{{ project_title }}"
+    <application android:label="@string/app_name"
+                 android:name="{{ project_title }}">
+        <activity android:name=".Bootstrap"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -14,7 +15,5 @@
         <activity android:name=".ConversionForm"
                   android:label="@string/app_name">
         </activity>
-        <service android:enabled="true"
-                 android:name="com.calatrava.bridge.RhinoService"/>
     </application>
 </manifest> 
