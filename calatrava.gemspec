@@ -22,7 +22,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec"
   s.add_development_dependency "aruba"
 
-  s.add_runtime_dependency "rake", "~> 0.9.5"
+  s.add_runtime_dependency "rake", ">= 0.9.5"
+  
   s.add_runtime_dependency "thor", "~> 0.16.0"
   s.add_runtime_dependency "haml", "~> 3.1.7"
   s.add_runtime_dependency "sass", "~> 3.2.3"
@@ -31,7 +32,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "watir-webdriver", "~> 0.6.1"
 
   if Calatrava.platform == :mac
-    s.add_runtime_dependency "xcodeproj", "~> 0.4.0" 
+    s.add_runtime_dependency "xcodeproj", ">= 0.4.0" 
     s.add_runtime_dependency "cocoapods", "~> 0.16.0"
   end
 end
