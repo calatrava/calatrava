@@ -9,6 +9,15 @@ stubView =
     trigger: (event, args...) ->
       @boundEvents[event](args...)
 
+    after: (event, handler) ->
+      priorHandler = @boundEvents[event]
+      if priorHandler?
+        @boundEvents[event] = (args...) ->
+          priorHandler(args...)
+          handler(args...)
+      else
+        @bind(event, handler)
+
     bind: (event, handler) ->
       @boundEvents[event] = handler
 

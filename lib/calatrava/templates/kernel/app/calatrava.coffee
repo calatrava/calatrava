@@ -75,6 +75,15 @@ calatrava.bridge.pageObject = (pageName) ->
 
   calatrava.bridge.runtime.registerProxyForPage(proxyId, pageName)
 
+  after: (event, handler) ->
+    priorHandler = handlerRegistry[event]
+    if priorHandler?
+      handlerRegistry[event] = (args...) ->
+        priorHandler(args...)
+        handler(args...)
+    else
+      @bind(event, handler)
+
   bind: (event, handler) ->
     handlerRegistry[event] = handler
     calatrava.bridge.runtime.attachProxyEventHandler(proxyId, event)
@@ -194,9 +203,8 @@ calatrava.bridge.plugins = (() ->
     _.tap calatravaId(), (handle) ->
       callbacks[handle] = callback
 
-  invokeCallback: (handle, data) ->
-    callbacks[handle](data)
-    delete callbacks[handle]
+  invokeCallback: (handle, data) -> callbacks[handle](data)
+  deleteCallback: (handle) -> delete callbacks[handle]
 )()
 
 calatrava.bridge.plugin = (name, impl) ->
