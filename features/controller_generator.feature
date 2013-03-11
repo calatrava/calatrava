@@ -2,7 +2,7 @@ Feature: Controller generator
 
   In order to avoid repetative tasks and speed up my workflow
   As a cross-platform mobile developer
-  I want to use Calatrava to generate placeholder code-files
+  I want to use Calatrava to generate placeholder controller files
 
   Scenario: Create a controller using the Standard template
     When I run `calatrava generate controller simple`

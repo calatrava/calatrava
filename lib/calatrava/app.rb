@@ -19,14 +19,17 @@ module Calatrava
       proj.create(Template.new(options[:template]))
     end
 
-    desc "generate controller <name>", "generates placeholder files for controllers"
-    method_options :template => File.join(File.dirname(__FILE__), 'generators/templates/controller'),
+    desc "generate <controller|page> <name>", "generates placeholder files for controllers or pages"
+    method_options :template => File.join(File.dirname(__FILE__), 'generators/templates'),
                    :namespace => 'example'
     def generate(type, name)
-      die "type must be controller" unless type == "controller"
+      die "type must be controller or page" unless %w(controller page).include? type
 
-      gen = ControllerGenerator.new(options[:namespace], name)
-      gen.generate(Template.new(options[:template]))
+      gen = case type
+        when 'controller' then ControllerGenerator.new(options[:namespace], name)
+        when 'page' then PageGenerator.new(name)
+      end
+      gen.generate(Template.new(File.join(options[:template], type)))
     end
 
     no_tasks do
