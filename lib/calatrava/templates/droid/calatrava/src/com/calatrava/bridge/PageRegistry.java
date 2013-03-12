@@ -9,6 +9,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import org.mozilla.javascript.ScriptableObject;
 
 import com.calatrava.CalatravaPage;
+import com.calatrava.shell.WebViewActivity;
 
 import java.util.*;
 
@@ -76,8 +77,13 @@ public class PageRegistry {
   public void changePage(String target) {
     Log.d(TAG, "changePage('" + target + "')");
     Class activityClass = pageFactories.get(target);
+
+    if (activityClass == null) {
+      activityClass = WebViewActivity.class;
+    }
+
     Log.d(TAG, "Activity to be started: " + activityClass.getSimpleName());
-    activityContext.startActivity(new Intent(activityContext, activityClass));
+    activityContext.startActivity(new Intent(activityContext, activityClass).putExtra("pageName", target));
   }
 
   public void triggerEvent(String pageName, String event, String... extraArgs) {
