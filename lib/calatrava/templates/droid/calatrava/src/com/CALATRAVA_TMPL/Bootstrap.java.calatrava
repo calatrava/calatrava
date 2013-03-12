@@ -13,9 +13,10 @@ public class Bootstrap extends Activity
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
 
-    ((CalatravaApplication)getApplication()).provideActivityContext(this);
+    CalatravaApplication app = (CalatravaApplication)getApplication();
+    app.provideActivityContext(this);
 
     // And then start your first feature
-    launchFlow("example.converter.start");
+    app.launchFlow("example.converter.start");
   }
 }
