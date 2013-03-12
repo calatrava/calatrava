@@ -110,7 +110,7 @@ public class AjaxRequestManager {
       } catch (IOException e) {
         Log.d(TAG, "Request threw exception", e);
         Log.d(TAG, "requestId: " + requestId);
-        rhino.invokeFailureCallback(requestId, 500, "IOException");
+        rhino.invokeFailureCallback(requestId, 500, e.toString());
       } finally {
         Log.d(TAG, "About to hide loader");
         context.sendBroadcast(new Intent("com.calatrava.ajax.finish"));
