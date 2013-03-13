@@ -40,7 +40,7 @@ module Calatrava
       directory build_styles_dir
 
       app_files = haml_files.collect do |hf|
-        file "#{build_html_dir}/#{File.basename(hf, '.haml')}.html" => [build_html_dir, hf] do
+        task do
           HamlSupport::compile_hybrid_page hf, build_html_dir, :platform => @platform
         end
       end
