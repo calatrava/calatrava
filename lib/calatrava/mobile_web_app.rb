@@ -41,12 +41,13 @@ module Calatrava
       directory images_build_dir
 
       app_files = coffee_files.collect { |cf| cf.to_task }
+      css_files = @manifest.css_files.map { |x| File.basename(x, '.*') + '.css' }
 
       app_files << file("#{build_dir}/index.html" => [@manifest.src_file,
                                                       "web/app/views/index.haml",
                                                       transient('web_coffee', coffee_files),
                                                       transient('web_haml', haml_files)] + haml_files) do
-        HamlSupport::compile "web/app/views/index.haml", build_dir
+        HamlSupport::compile "web/app/views/index.haml", build_dir, css_files
       end
 
       app_files += @manifest.css_tasks(styles_build_dir)

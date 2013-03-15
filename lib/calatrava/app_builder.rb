@@ -39,9 +39,10 @@ module Calatrava
       directory build_scripts_dir
       directory build_styles_dir
 
+      css_files = @manifest.css_files.map { |x| File.basename(x, '.*') + '.css' }
       app_files = haml_files.collect do |hf|
         file "#{build_html_dir}/#{File.basename(hf, '.haml')}.html" => [build_html_dir, hf] do
-          HamlSupport::compile_hybrid_page hf, build_html_dir, :platform => @platform
+          HamlSupport::compile_hybrid_page hf, build_html_dir, css_files, :platform => @platform
         end
       end
 
