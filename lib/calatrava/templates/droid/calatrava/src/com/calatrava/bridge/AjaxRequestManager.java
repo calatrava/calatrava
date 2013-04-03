@@ -153,7 +153,7 @@ public class AjaxRequestManager {
         BufferedReader reader = new BufferedReader(new InputStreamReader(content), 1024);
         String line;
         while ((line = reader.readLine()) != null) {
-          builder.append(line);
+          builder.append(line.replace("'", "\\'").replace("\"", "\\\"").replace("\\n", "\\\\n"));
         }
 
       } catch (Exception e) {
