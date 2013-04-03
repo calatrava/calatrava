@@ -1,6 +1,6 @@
-tw ?= {}
+calatrava ?= {}
 
-tw =
+calatrava =
   bridge:
     environment: () ->
       serviceEndpoint: "test env"
@@ -22,4 +22,4 @@ tw =
     dialog:
       display: () ->
 
-exports.tw = tw
+exports.calatrava = calatrava
