@@ -1,4 +1,4 @@
-example ?= {}
+example = this.example = this.example or {}
 example.converter ?= {}
 
 example.converter.start = ->

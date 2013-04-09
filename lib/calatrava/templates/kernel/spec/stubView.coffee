@@ -1,32 +1,32 @@
-stubView ?= {}
+stubView = this.stubView = this.stubView or {}
 
 stubView =
-  create: (name) ->
+  create: (name)->
     lastMessage = null
 
     boundEvents: {}
     fieldValues: {}
-    trigger: (event, args...) ->
+    trigger: (event, args...)->
       @boundEvents[event](args...)
 
-    bind: (event, handler) ->
+    bind: (event, handler)->
       @boundEvents[event] = handler
 
-    render: (viewMessage) ->
+    render: (viewMessage)->
       lastMessage = viewMessage
 
-    lastMessage: () -> lastMessage
+    lastMessage: ()-> lastMessage
 
-    fieldContains: (name, value) -> @fieldValues[name] = value
-    get: (name, callback) ->
+    fieldContains: (name, value)-> @fieldValues[name] = value
+    get: (name, callback)->
       callback(@fieldValues[name])
 
-    getMany: (fields, callback) ->
+    getMany: (fields, callback)->
       results = {}
-      getManyPrime = (remaining) =>
+      getManyPrime = (remaining)=>
         if (remaining.length > 0)
           field = _.first(remaining)
-          @get field, (fieldValue) ->
+          @get field, (fieldValue)->
             results[field] = fieldValue
             getManyPrime(_.rest(remaining))
         else

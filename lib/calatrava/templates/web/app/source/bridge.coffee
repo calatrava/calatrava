@@ -1,27 +1,27 @@
-calatrava ?= {}
+calatrava = this.calatrava = this.calatrava or {}
 calatrava.bridge = calatrava.bridge ? {}
 calatrava.bridge.web = calatrava.bridge.web ? {}
 
-calatrava.bridge.environment = () ->
+calatrava.bridge.environment = ()->
   sessionTimeout: 600
-  serviceEndpoint: ""
-  apiEndpoint: ""
+  serviceEndpoint: ''
+  apiEndpoint: ''
 
-calatrava.bridge.web.ajax = (options) ->
+calatrava.bridge.web.ajax = (options)->
   loader = $("#loader")
 
-  errorHandler = () ->
+  errorHandler = ()->
     loader.find('.load').hide()
     loader.find('.error').show()
     loader.find('.error a').bind 'click', hideLoader
     loader.show()
 
-  setCustomHeaders = (xhr, headers) ->
-    _.map(headers, (value, key) ->
+  setCustomHeaders = (xhr, headers)->
+    _.map(headers, (value, key)->
       xhr.setRequestHeader(key, value)
     )
 
-  showLoader = () ->
+  showLoader = ()->
     loader.css({
       height: $(document.offset).height
       width: $(document.offset).width
@@ -35,7 +35,7 @@ calatrava.bridge.web.ajax = (options) ->
     $(document.body).css overflow: 'hidden'
     loader.show()
 
-  hideLoader = () ->
+  hideLoader = ()->
     $(document.body).css overflow: 'auto'
     loader.hide()
 
@@ -46,7 +46,7 @@ calatrava.bridge.web.ajax = (options) ->
     url: options.url
     type: options.method
     data: options.body
-    contentType: (() ->
+    contentType: (()->
       customHeaderTemp = {}
       for key of options.headers
         if key is "Content-Type"
@@ -57,80 +57,80 @@ calatrava.bridge.web.ajax = (options) ->
       options.headers = customHeaderTemp
       contentTypeHeader;
     )()
-    beforeSend: (xhr) ->
+    beforeSend: (xhr)->
       if options.headers
         setCustomHeaders(xhr, options.headers)
       showLoader()
-    success: (response) ->
+    success: (response)->
       goToTop()
       options.success(response)
-    error: () ->
+    error: ()->
       showLoader()
       options.failure() if options.failure?
     complete: hideLoader
 
-calatrava.bridge.web.page = (pageName, proxyId) ->
+calatrava.bridge.web.page = (pageName, proxyId)->
   real = calatrava.pageView[pageName]()
   handlers = {}
   methods =
-    bind: (event, callback) ->
+    bind: (event, callback)->
       if event == 'pageOpened'
         handlers.pageOpened = callback
       else
         real.bind(event, callback)
 
-    trigger: (event) ->
+    trigger: (event)->
       handlers[event]() if handlers[event]?
 
-    get: (field, getId) ->
+    get: (field, getId)->
       calatrava.inbound.fieldRead(proxyId, getId, String(real.get(field)))
 
   # Most functions just route through to the original
-  _.each ['render', 'show', 'hide'], (method) ->
-    methods[method] = () -> real[method].apply(real, arguments)
+  _.each ['render', 'show', 'hide'], (method)->
+    methods[method] = ()-> real[method].apply(real, arguments)
 
   methods
 
-calatrava.bridge.runtime = (() ->
+calatrava.bridge.runtime = (()->
 
   pages = {}
   pagesNamed = {}
   currentPage = null
   plugins = {}
 
-  registerProxyForPage: (proxyId, pageName) ->
+  registerProxyForPage: (proxyId, pageName)->
     pages[proxyId] = calatrava.bridge.web.page(pageName, proxyId)
     pagesNamed[pageName] = pages[proxyId]
 
-  changePage: (page, options = {}) ->
+  changePage: (page, options = {})->
     pageObject = pagesNamed[page]
     if !options.back
-      history.pushState({page: page}, "", "")
+      history.pushState({page: page}, '', '')
     currentPage.hide() if currentPage
     pageObject.show()
     currentPage = pageObject
     pageObject.trigger 'pageOpened'
 
-  attachProxyEventHandler: (proxyId, event) ->
-    pages[proxyId].bind event, () ->
+  attachProxyEventHandler: (proxyId, event)->
+    pages[proxyId].bind event, ()->
       args = [proxyId, event].concat(_.toArray(arguments))
       calatrava.inbound.dispatchEvent.apply(calatrava.inbound, args)
 
-  valueOfProxyField: (proxyId, field, getId) -> pages[proxyId].get(field, getId)
-  renderProxy: (viewObject, proxyId) -> pages[proxyId].render(viewObject)
+  valueOfProxyField: (proxyId, field, getId)-> pages[proxyId].get(field, getId)
+  renderProxy: (viewObject, proxyId)-> pages[proxyId].render(viewObject)
   issueRequest: calatrava.bridge.web.ajax
-  openUrl: (url) -> window.open(url)
-  log: (message) -> console.log(message)
+  openUrl: (url)-> window.open(url)
+  log: (message)-> console.log(message)
 
-  startTimerWithTimeout: (timerId, timeout) ->
-    window.setTimeout((() -> calatrava.inbound.fireTimer(timerId)), timeout * 1000)
+  startTimerWithTimeout: (timerId, timeout)->
+    window.setTimeout((()-> calatrava.inbound.fireTimer(timerId)), timeout * 1000)
 
-  registerPlugin: (pluginName, callback) ->
+  registerPlugin: (pluginName, callback)->
     plugins[pluginName] = callback
 
-  callPlugin: (plugin, method, args) ->
+  callPlugin: (plugin, method, args)->
     plugins[plugin](method, args)
 
-  invokePluginCallback: (handle, data) ->
+  invokePluginCallback: (handle, data)->
     calatrava.inbound.invokePluginCallback(handle, data)
 )()

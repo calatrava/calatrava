@@ -1,75 +1,75 @@
-tw ?= {}
+tw = this.tw = this.tw or {}
 tw.bridge = tw.bridge ? {}
 
-generateRandomString = () ->
+generateRandomString = ()->
   str = ''
   for i in [0..32]
     r = Math.floor(Math.random() * 16)
     str = str + r.toString(16)
   return str.toUpperCase();
 
-tw.bridge.environment = () ->
+tw.bridge.environment = ()->
   serviceEndpoint: "http://localhost:4568"
   apiEndpoint: "http://localhost:4568"
   sessionTimeout: 10
 
-tw.bridge.dispatchEvent = (page, event) ->
+tw.bridge.dispatchEvent = (page, event)->
   tw.bridge.pages.pageNamed(page).dispatch(event)
 
 class tw.bridge.Page
-  constructor: (@pageName) ->
+  constructor: (@pageName)->
     @fieldValues = {}
     @handlerRegistry = {}
     @renderObjects = []
 
-  bind: (event, handler) ->
+  bind: (event, handler)->
     @handlerRegistry[event] = handler
 
-  trigger: (event) ->
+  trigger: (event)->
     @handlerRegistry[event]()
 
-  dispatch: (event) ->
+  dispatch: (event)->
     args = _.toArray(arguments).slice(2)
     @handlerRegistry[event].apply(this, args)
 
-  get: (field) ->
+  get: (field)->
     @fieldValues[field]
 
-  stubField: (field, value) ->
+  stubField: (field, value)->
     @fieldValues[field] = value
 
-  render: (viewObject) ->
+  render: (viewObject)->
     @renderObjects.push(viewObject)
     that = this
-    _.map(viewObject, (value, key) ->
+    _.map(viewObject, (value, key)->
       that.stubField(key, value)
     )
 
-  lastRender: () ->
+  lastRender: ()->
     @renderObjects[@renderObjects.length - 1]
 
-  allRenderObjects: () ->
+  allRenderObjects: ()->
     @renderObjects
 
-tw.bridge.changePage = (target) ->
+tw.bridge.changePage = (target)->
   tw.bridge.pages.setCurrent(target)
   tw.bridge.changedPage = target
 
-tw.bridge.pages = (() ->
+tw.bridge.pages = (()->
   pagesByName = {}
-  current = ""
+  current = ''
 
-  pageNamed: (pageName) ->
+  pageNamed: (pageName)->
     if (!pagesByName[pageName])
       pagesByName[pageName] = new tw.bridge.Page(pageName)
     pagesByName[pageName]
 
-  current: () -> pagesByName[current]
-  setCurrent: (newPage) -> current = newPage
+  current: ()-> pagesByName[current]
+  setCurrent: (newPage)-> current = newPage
 )()
 
 class tw.bridge.Widget
-  constructor: (@name, @options, @callback) ->
+  constructor: (@name, @options, @callback)->
 
   getCallback: ->
     @callback
@@ -79,29 +79,29 @@ class tw.bridge.Widget
 
 tw.bridge.widgets = (()->
   widgets = {}
-  display: (name, options, callback) ->
+  display: (name, options, callback)->
     widgets[name] = new tw.bridge.Widget(name, options, callback)
 
-  widget: (name) ->
+  widget: (name)->
     widgets[name]
 )()
 
-tw.bridge.timers = (() ->
+tw.bridge.timers = (()->
   timers = {}
-  start: (timeout, callback) ->
+  start: (timeout, callback)->
     timers["searchResultsExpired"] = callback
 
-  clearTimer: () ->
+  clearTimer: ()->
 
-  triggerTimer: (name) ->
+  triggerTimer: (name)->
     timers[name]()
 )()
 
-tw.bridge.dialog = (() ->
-  display: (name) ->
+tw.bridge.dialog = (()->
+  display: (name)->
 )()
 
-tw.bridge.request = (reqOptions) ->
+tw.bridge.request = (reqOptions)->
   # mock this for kernel features
   response = tw.bridge.requests.issue reqOptions
   if response.status == 'successful'
@@ -109,16 +109,16 @@ tw.bridge.request = (reqOptions) ->
   else
     reqOptions.failure(response.body)
 
-tw.bridge.requests = (() ->
+tw.bridge.requests = (()->
   storedRequests = []
 
-  stubRequest: (options) ->
+  stubRequest: (options)->
     storedRequests.push(options)
 
-  issue: (options) ->
-    _.tap _.chain(storedRequests).filter((sr) -> sr.url.test(options.url)).last().value().response, (v) ->
+  issue: (options)->
+    _.tap _.chain(storedRequests).filter( (sr)-> sr.url.test(options.url)).last().value().response, (v)->
 )()
 
-tw.bridge.alert = (message) ->
+tw.bridge.alert = (message)->
 
-tw.bridge.trackEvent = () ->
+tw.bridge.trackEvent = ()->
