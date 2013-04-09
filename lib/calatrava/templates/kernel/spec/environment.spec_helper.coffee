@@ -1,25 +1,25 @@
-tw ?= {}
+tw = tw or {}
 
 tw =
   bridge:
-    environment: () ->
+    environment: ()->
       serviceEndpoint: "test env"
       sessionTimeout: 10
 
-    changePage: (page) ->
+    changePage: (page)->
       page.show()
 
-    alert: (msg) ->
+    alert: (msg)->
       console.log("alerting: #{msg}")
 
-    openUrl: (url) ->
+    openUrl: (url)->
       console.log("launching url: #{url}")
 
     timers:
-      start: () ->
-      clearTimer: () ->
+      start: ()->
+      clearTimer: ()->
 
     dialog:
-      display: () ->
+      display: ()->
 
 exports.tw = tw
