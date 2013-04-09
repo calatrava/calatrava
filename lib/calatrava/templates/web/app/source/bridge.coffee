@@ -1,4 +1,4 @@
-calatrava = calatrava or {}
+calatrava = this.calatrava = this.calatrava or {}
 calatrava.bridge = calatrava.bridge ? {}
 calatrava.bridge.web = calatrava.bridge.web ? {}
 

@@ -1,4 +1,4 @@
-tw = tw or {}
+tw = this.tw = this.tw or {}
 
 tw =
   bridge:

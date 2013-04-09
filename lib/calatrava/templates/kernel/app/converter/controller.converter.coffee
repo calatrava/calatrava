@@ -1,4 +1,4 @@
-example = example or {}
+example = this.example = this.example or {}
 example.converter ?= {}
 
 example.converter.controller = ({views, changePage, ajax})->

@@ -1,4 +1,4 @@
-stubView = stubView or {}
+stubView = this.stubView = this.stubView or {}
 
 stubView =
   create: (name)->
