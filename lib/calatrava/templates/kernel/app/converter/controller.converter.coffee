@@ -1,7 +1,7 @@
-example ?= {}
+example = example or {}
 example.converter ?= {}
 
-example.converter.controller = ({views, changePage, ajax}) ->
+example.converter.controller = ({views, changePage, ajax})->
   currencies = ['USD', 'AUD', 'GBP', 'INR']
   currencyRate =
     USD: 1
@@ -12,22 +12,22 @@ example.converter.controller = ({views, changePage, ajax}) ->
   inCurrency = "USD"
   outCurrency = "AUD"
 
-  currencyDropdownViewMessage = (selectedCurrency, unselectableCurrency) ->
-    _.map currencies, (c) ->
+  currencyDropdownViewMessage = (selectedCurrency, unselectableCurrency)->
+    _.map currencies, (c)->
       code: c,
       enabled: c != unselectableCurrency
       selected: c == selectedCurrency
 
-  performConversion = (amount) ->
+  performConversion = (amount)->
     outRate = currencyRate[outCurrency]
     inRate = currencyRate[inCurrency]
     views.conversionForm.render
       out_amount: (Math.round(amount * (outRate / inRate) * 100)) / 100
 
-  convert = () ->
-    views.conversionForm.get 'in_amount', (inAmount) ->
-      if inAmount == ""
-        calatrava.confirm "No amount to convert. Convert one instead?", (convertOne) ->
+  convert = ()->
+    views.conversionForm.get 'in_amount', (inAmount)->
+      if inAmount == ''
+        calatrava.confirm "No amount to convert. Convert one instead?", (convertOne)->
           performConversion(1) if convertOne
       else
         performConversion(inAmount)
@@ -35,13 +35,13 @@ example.converter.controller = ({views, changePage, ajax}) ->
   views.conversionForm.bind 'convert', convert
 
   views.conversionForm.bind 'selectedInCurrency', ->
-    views.conversionForm.get 'in_currency', (in_currency) ->
+    views.conversionForm.get 'in_currency', (in_currency)->
       inCurrency = in_currency
       views.conversionForm.render
         outCurrencies: currencyDropdownViewMessage outCurrency, inCurrency
 
   views.conversionForm.bind 'selectedOutCurrency', ->
-    views.conversionForm.get 'out_currency', (out_currency) ->
+    views.conversionForm.get 'out_currency', (out_currency)->
       outCurrency = out_currency
       views.conversionForm.render
         inCurrencies: currencyDropdownViewMessage inCurrency, outCurrency
