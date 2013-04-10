@@ -79,7 +79,7 @@ module Calatrava
 
     def create_android_tree(template)
       Dir.chdir(File.join(@name, "droid")) do
-        sh "android create project --name '#{@slug}' --path '#{@name}' --package com.#{@slug} --target android-#{@options[:android]} --activity #{@title}"
+        sh "android create project --name '#{@slug}' --path '#{@name}' --package com.#{@slug} --target android-#{@options[:'android-api']} --activity #{@title}"
 
         Dir.walk("calatrava") do |item|
           target_item = item.sub('calatrava', @name)
