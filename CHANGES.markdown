@@ -11,6 +11,7 @@ Minor improvements:
   provides more direct access to the last render view message.
 * Android dependencies are resolved during bootstrap, and then
   externally to the `ant` build to avoid `CLASSPATH` issues.
+* Fail the build if a CoffeeScript file fails to compile.
 
 Bugs fixed:
 * [Issue #28][i28]: Support Linux for creating projects and running
@@ -106,6 +107,7 @@ Changes that will affect existing projects:
 * [Maria Gomez](https://github.com/mariagomez)
 * [Kalyan Akella](https://github.com/KalyanAkella)
 * [Filipe Esperandio](https://github.com/filipesperandio)
+* [Christoph Burgmer](https://github.com/cburgmer)
 
 [i5]: https://github.com/calatrava/calatrava/issues/5
 [i12]: https://github.com/calatrava/calatrava/issues/12
