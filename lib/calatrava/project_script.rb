@@ -13,6 +13,7 @@ module Calatrava
       @slug = name.gsub(" ", "_").downcase
       @title = @name[0..0].upcase + @name[1..-1]
       @options = overrides
+      puts @options
 
       @platforms = ['ios', 'droid', 'web'].select do |platform|
         !@options["no-#{platform}"]
@@ -78,7 +79,7 @@ module Calatrava
 
     def create_android_tree(template)
       Dir.chdir(File.join(@name, "droid")) do
-        sh "android create project --name '#{@slug}' --path '#{@name}' --package com.#{@slug} --target android-10 --activity #{@title}"
+        sh "android create project --name '#{@slug}' --path '#{@name}' --package com.#{@slug} --target android-#{@options[:android]} --activity #{@title}"
 
         Dir.walk("calatrava") do |item|
           target_item = item.sub('calatrava', @name)
