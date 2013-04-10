@@ -3,6 +3,8 @@
 New features:
 * All app types are now optional: disable app types with `--no-web`,
   `--no-droid` and `--no-ios` when creating your Calatrava project.
+* You can specify the Android API version when creating a project with
+  `--android-api <version>`. It currently defaults to API 17.
 
 Minor improvements:
 * The `stubView` for stubbing pages when testing controllers now
@@ -103,6 +105,7 @@ Changes that will affect existing projects:
 * [Pat Kua](https://github.com/thekua)
 * [Maria Gomez](https://github.com/mariagomez)
 * [Kalyan Akella](https://github.com/KalyanAkella)
+* [Filipe Esperandio](https://github.com/filipesperandio)
 
 [i5]: https://github.com/calatrava/calatrava/issues/5
 [i12]: https://github.com/calatrava/calatrava/issues/12
