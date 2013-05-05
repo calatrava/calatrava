@@ -3,12 +3,15 @@
 New features:
 * All app types are now optional: disable app types with `--no-web`,
   `--no-droid` and `--no-ios` when creating your Calatrava project.
+* You can specify the Android API version when creating a project with
+  `--android-api <version>`. It currently defaults to API 17.
 
 Minor improvements:
 * The `stubView` for stubbing pages when testing controllers now
   provides more direct access to the last render view message.
 * Android dependencies are resolved during bootstrap, and then
   externally to the `ant` build to avoid `CLASSPATH` issues.
+* Fail the build if a CoffeeScript file fails to compile.
 
 Bugs fixed:
 * [Issue #28][i28]: Support Linux for creating projects and running
@@ -103,6 +106,8 @@ Changes that will affect existing projects:
 * [Pat Kua](https://github.com/thekua)
 * [Maria Gomez](https://github.com/mariagomez)
 * [Kalyan Akella](https://github.com/KalyanAkella)
+* [Filipe Esperandio](https://github.com/filipesperandio)
+* [Christoph Burgmer](https://github.com/cburgmer)
 
 [i5]: https://github.com/calatrava/calatrava/issues/5
 [i12]: https://github.com/calatrava/calatrava/issues/12
