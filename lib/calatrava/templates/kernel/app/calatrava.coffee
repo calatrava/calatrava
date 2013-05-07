@@ -89,7 +89,7 @@ calatrava.bridge.pageObject = (pageName) ->
     calatrava.bridge.runtime.attachProxyEventHandler(proxyId, event)
 
   bindAll: (options) ->
-    _.each options, (handler, event) => pageObject.bind event, handler
+    _.each options, (handler, event) => @bind event, handler
 
   dispatch: (event) ->
     args = _.toArray(arguments).slice(1)
