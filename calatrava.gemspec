@@ -33,6 +33,6 @@ Gem::Specification.new do |s|
 
   if Calatrava.platform == :mac
     s.add_runtime_dependency "xcodeproj", ">= 0.4.0" 
-    s.add_runtime_dependency "cocoapods", "~> 0.16.0"
+    s.add_runtime_dependency "cocoapods", ">= 0.16.0"
   end
 end
