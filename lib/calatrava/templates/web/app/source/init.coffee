@@ -8,4 +8,4 @@ $(document).ready ->
 
 window.onpopstate = (event) ->
   if event.state
-    tw.bridge.changePage event.state.page
+    calatrava.bridge.changePage event.state.page
