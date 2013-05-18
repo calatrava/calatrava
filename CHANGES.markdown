@@ -1,3 +1,6 @@
+## v0.6.6
+* Fix to add mac specific dependencies conditionally
+
 ## v0.6.5
 
 Bugs fixed:
