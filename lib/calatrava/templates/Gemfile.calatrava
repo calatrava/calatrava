@@ -2,3 +2,5 @@ source :rubygems
 
 gem "rake"
 gem "calatrava"{{#dev?}}, :path => '../'{{/dev?}}
+{{#mac?}}gem "xcodeproj"
+gem "cocoapods"{{/mac?}}

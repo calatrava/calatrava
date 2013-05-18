@@ -29,6 +29,10 @@ module Calatrava
       @options.dev?
     end
 
+    def mac?
+      Calatrava.platform == :mac
+    end
+
     def create(template)
       create_project(template)
       create_directory_tree(template)
@@ -68,7 +72,8 @@ module Calatrava
                                        :project_name => @name,
                                        :project_slug => @slug,
                                        :project_title => @title,
-                                       :dev? => dev?)
+                                       :dev? => dev?,
+                                       :mac? => mac?)
             f.print(expanded)
           end
         else

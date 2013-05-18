@@ -8,3 +8,4 @@ test/*
 currencyConverter/*
 /.rake
 /.vagrant
+/.idea
