@@ -1,3 +1,13 @@
+## v0.6.5
+
+Bugs fixed:
+* Fix for Android not compiling out of the box
+* [Issue #72][i72]: Fix for cocoapods dependency issue
+* Fix for back button being broken in web apps
+* Pull in fix for calatrava-ios (request body encoding should be UTF-8)
+* Fix for bindAll not working
+* [Issue #67][i67]: Make gemspec more Linux-friendly
+
 ## v0.6.4
 
 New features:
@@ -108,6 +118,9 @@ Changes that will affect existing projects:
 * [Kalyan Akella](https://github.com/KalyanAkella)
 * [Filipe Esperandio](https://github.com/filipesperandio)
 * [Christoph Burgmer](https://github.com/cburgmer)
+* [James Gregory](https://github.com/jagregory)
+* [Sneha Venkatesh](https://github.com/snehayv)
+* [Dan Tao](https://github.com/dtao)
 
 [i5]: https://github.com/calatrava/calatrava/issues/5
 [i12]: https://github.com/calatrava/calatrava/issues/12
