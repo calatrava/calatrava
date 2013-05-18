@@ -1,7 +1,6 @@
 # -*- encoding: utf-8; mode: ruby -*-
 $:.push File.expand_path("../lib", __FILE__)
 require "calatrava/version"
-require "calatrava/platform"
 
 Gem::Specification.new do |s|
   s.name        = "calatrava"
@@ -31,8 +30,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "cucumber", "~> 1.2.1"
   s.add_runtime_dependency "watir-webdriver", "~> 0.6.1"
 
-  if Calatrava.platform == :mac
-    s.add_runtime_dependency "xcodeproj", ">= 0.4.0" 
-    s.add_runtime_dependency "cocoapods", ">= 0.16.0"
-  end
+  s.extensions = ["ext/mkrf_conf.rb"]
 end
