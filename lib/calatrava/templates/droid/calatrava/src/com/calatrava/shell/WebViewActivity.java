@@ -17,6 +17,7 @@ import com.calatrava.bridge.RegisteredActivity;
 import com.calatrava.bridge.RhinoService;
 import com.calatrava.bridge.PageRegistry;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.Semaphore;
 
-public abstract class WebViewActivity extends RegisteredActivity {
+public class WebViewActivity extends RegisteredActivity {
   private String TAG = WebViewActivity.class.getSimpleName();
 
   private JSContainer jsContainer;
@@ -74,6 +75,11 @@ public abstract class WebViewActivity extends RegisteredActivity {
     PageRegistry.sharedRegistry().unregisterPage(getPageName());
   }
 
+  @Override
+  protected String getPageName() {
+    return getIntent().getStringExtra("pageName");
+  }
+
   public String getFieldValue(final String field) {
     assert (getFields().contains(field));
 
@@ -112,9 +118,13 @@ public abstract class WebViewActivity extends RegisteredActivity {
     });
   }
 
-  protected abstract List<String> getEvents();
+  protected List<String> getEvents() {
+    return new ArrayList<String>();
+  }
 
-  protected abstract List<String> getFields();
+  protected List<String> getFields() {
+    return new ArrayList<String>();
+  }
     
   protected int getBackgroundColor(){
     return Color.TRANSPARENT;
