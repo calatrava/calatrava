@@ -66,7 +66,7 @@ calatrava.bridge.web.ajax = (options) ->
       options.success(response)
     error: (response) ->
       showLoader()
-      options.failure(response) if options.failure?
+      options.failure(response.status, response.responseText) if options.failure?
     complete: hideLoader
 
 calatrava.bridge.web.page = (pageName, proxyId) ->
