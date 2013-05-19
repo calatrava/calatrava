@@ -22,7 +22,7 @@ calatrava.inbound =
     calatrava.bridge.requests.successfulResponse(requestId, response)
 
   failureResponse: (requestId, errorCode, response) ->
-    calatrava.bridge.requests.failureResponse(requestId,errorCode, response)
+    calatrava.bridge.requests.failureResponse(requestId, errorCode, response)
 
   fireTimer: (timerId) ->
     calatrava.bridge.timers.fireTimer(timerId)
@@ -165,8 +165,8 @@ calatrava.bridge.requests = (() ->
     successHandlersById[requestId](response) if successHandlersById[requestId]
     clearHandlers(requestId)
 
-  failureResponse: (requestId, response) ->
-    failureHandlersById[requestId](response) if failureHandlersById[requestId]
+  failureResponse: (requestId, errorCode, response) ->
+    failureHandlersById[requestId](errorCode, response) if failureHandlersById[requestId]
     clearHandlers(requestId)
 )()
 
