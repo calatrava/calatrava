@@ -3,9 +3,9 @@ calatrava.alert = (message) ->
     message: message
 
 calatrava.confirm = (message, onOkExecute) ->
-  okCallbackHandle = calatrava.bridge.plugins.rememberCallback () ->
+  okCallbackHandle = calatrava.bridge.plugins.rememberCallback (result) ->
     calatrava.bridge.plugins.deleteCallback(okCallbackHandle)
-    onOkExecute()
+    onOkExecute(result)
 
   calatrava.bridge.plugins.call 'alert', 'displayConfirm',
     message: message
