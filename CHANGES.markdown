@@ -1,3 +1,9 @@
+## v0.6.7
+
+Bugs Fixed:
+* [Issue #54][i54]: [droid] Ajax IOExceptions aren't properly passed around
+* [Issue #71][i71]: [web] Passed forward the error response in a ajax call failure 
+
 ## v0.6.6
 * Fix to add mac specific dependencies conditionally
 
@@ -124,6 +130,7 @@ Changes that will affect existing projects:
 * [James Gregory](https://github.com/jagregory)
 * [Sneha Venkatesh](https://github.com/snehayv)
 * [Dan Tao](https://github.com/dtao)
+* [Priyank Gupta](https://github.com/priyaaank)
 
 [i5]: https://github.com/calatrava/calatrava/issues/5
 [i12]: https://github.com/calatrava/calatrava/issues/12
@@ -147,3 +154,7 @@ Changes that will affect existing projects:
 [i43]: https://github.com/calatrava/calatrava/issues/43
 [ios-i1]: https://github.com/calatrava/calatrava-ios/issues/1
 [ios-i4]: https://github.com/calatrava/calatrava-ios/pull/4
+[i67]: https://github.com/calatrava/calatrava/pull/67
+[i72]: https://github.com/calatrava/calatrava/issues/72
+[i71]: https://github.com/calatrava/calatrava/pull/71
+[i54]: https://github.com/calatrava/calatrava/pull/54
