@@ -4,6 +4,7 @@ Bugs Fixed:
 * [Issue #54][i54]: [droid] Ajax IOExceptions aren't properly passed around
 * [Issue #71][i71]: [web] Passed forward the error response in a ajax call failure 
 * [iOS Issue #9][ios-i9]: Fixes a startup crash
+* [Issue #75][i75]: calatrava.confirm callback argument is not defined
 
 ## v0.6.6
 * Fix to add mac specific dependencies conditionally
@@ -161,3 +162,4 @@ Changes that will affect existing projects:
 [i71]: https://github.com/calatrava/calatrava/pull/71
 [i54]: https://github.com/calatrava/calatrava/pull/54
 [ios-i9]: https://github.com/calatrava/calatrava-ios/pull/9
+[i75]: https://github.com/calatrava/calatrava/issues/75
