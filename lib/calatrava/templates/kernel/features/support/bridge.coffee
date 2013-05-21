@@ -1,5 +1,5 @@
-tw ?= {}
-tw.bridge = tw.bridge ? {}
+calatrava ?= {}
+calatrava.bridge = calatrava.bridge ? {}
 
 generateRandomString = () ->
   str = ''
@@ -8,15 +8,15 @@ generateRandomString = () ->
     str = str + r.toString(16)
   return str.toUpperCase();
 
-tw.bridge.environment = () ->
+calatrava.bridge.environment = () ->
   serviceEndpoint: "http://localhost:4568"
   apiEndpoint: "http://localhost:4568"
   sessionTimeout: 10
 
-tw.bridge.dispatchEvent = (page, event) ->
-  tw.bridge.pages.pageNamed(page).dispatch(event)
+calatrava.bridge.dispatchEvent = (page, event) ->
+  calatrava.bridge.pages.pageNamed(page).dispatch(event)
 
-class tw.bridge.Page
+class calatrava.bridge.Page
   constructor: (@pageName) ->
     @fieldValues = {}
     @handlerRegistry = {}
@@ -51,24 +51,24 @@ class tw.bridge.Page
   allRenderObjects: () ->
     @renderObjects
 
-tw.bridge.changePage = (target) ->
-  tw.bridge.pages.setCurrent(target)
-  tw.bridge.changedPage = target
+calatrava.bridge.changePage = (target) ->
+  calatrava.bridge.pages.setCurrent(target)
+  calatrava.bridge.changedPage = target
 
-tw.bridge.pages = (() ->
+calatrava.bridge.pages = (() ->
   pagesByName = {}
   current = ""
 
   pageNamed: (pageName) ->
     if (!pagesByName[pageName])
-      pagesByName[pageName] = new tw.bridge.Page(pageName)
+      pagesByName[pageName] = new calatrava.bridge.Page(pageName)
     pagesByName[pageName]
 
   current: () -> pagesByName[current]
   setCurrent: (newPage) -> current = newPage
 )()
 
-class tw.bridge.Widget
+class calatrava.bridge.Widget
   constructor: (@name, @options, @callback) ->
 
   getCallback: ->
@@ -77,16 +77,16 @@ class tw.bridge.Widget
   getOptions: ->
     @options
 
-tw.bridge.widgets = (()->
+calatrava.bridge.widgets = (()->
   widgets = {}
   display: (name, options, callback) ->
-    widgets[name] = new tw.bridge.Widget(name, options, callback)
+    widgets[name] = new calatrava.bridge.Widget(name, options, callback)
 
   widget: (name) ->
     widgets[name]
 )()
 
-tw.bridge.timers = (() ->
+calatrava.bridge.timers = (() ->
   timers = {}
   start: (timeout, callback) ->
     timers["searchResultsExpired"] = callback
@@ -97,19 +97,19 @@ tw.bridge.timers = (() ->
     timers[name]()
 )()
 
-tw.bridge.dialog = (() ->
+calatrava.bridge.dialog = (() ->
   display: (name) ->
 )()
 
-tw.bridge.request = (reqOptions) ->
+calatrava.bridge.request = (reqOptions) ->
   # mock this for kernel features
-  response = tw.bridge.requests.issue reqOptions
+  response = calatrava.bridge.requests.issue reqOptions
   if response.status == 'successful'
     reqOptions.success(response.body)
   else
     reqOptions.failure(response.body)
 
-tw.bridge.requests = (() ->
+calatrava.bridge.requests = (() ->
   storedRequests = []
 
   stubRequest: (options) ->
@@ -119,6 +119,6 @@ tw.bridge.requests = (() ->
     _.tap _.chain(storedRequests).filter((sr) -> sr.url.test(options.url)).last().value().response, (v) ->
 )()
 
-tw.bridge.alert = (message) ->
+calatrava.bridge.alert = (message) ->
 
-tw.bridge.trackEvent = () ->
+calatrava.bridge.trackEvent = () ->
