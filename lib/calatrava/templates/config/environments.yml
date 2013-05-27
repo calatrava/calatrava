@@ -1,17 +1,17 @@
 local:
-  api_endpoint    : "http://localhost:8081"
+  api_endpoint    : "http://rate-exchange.appspot.com"
   web_port        : 8888
 
 development:
-  api_endpoint    : "http://localhost:8081"
+  api_endpoint    : "http://rate-exchange.appspot.com"
   web_port        : 8888
 
 test:
-  api_endpoint    : "http://localhost:8081"
+  api_endpoint    : "http://rate-exchange.appspot.com"
   web_port        : 8888
 
 automation:
-  api_endpoint    : "http://localhost:8081"
+  api_endpoint    : "http://rate-exchange.appspot.com"
   web_port        : 8889
 
 production:
