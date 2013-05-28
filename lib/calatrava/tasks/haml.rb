@@ -4,9 +4,10 @@ module HamlSupport
 
   class Helper
     
-    attr_reader :page_name
+    attr_reader :page_name, :style_files
 
-    def initialize(page_path = nil)
+    def initialize(style_files, page_path = nil)
+      @style_files = style_files
       @page_path = page_path
       @page_name = File.basename(@page_path, '.haml') if @page_path
     end
@@ -37,20 +38,20 @@ module HamlSupport
 
   class << self
 
-    def compile_hybrid_page(page_path, output_path, options = {})
+    def compile_hybrid_page(page_path, output_path, style_files, options = {})
       puts "haml page: #{page_path} -> #{output_path}"
 
-      options[:helper] = Helper.new(page_path)
+      options[:helper] = Helper.new(style_files, page_path)
       options[:template] = "shell/layouts/single_page.haml"
       options[:out] = File.join(output_path, File.basename(page_path, '.*') + '.html')
 
       render_haml(options)
     end
 
-    def compile(haml_path, html_dir, options = {})
+    def compile(haml_path, html_dir, style_files, options = {})
       puts "haml: #{haml_path} -> #{html_dir}"
 
-      options[:helper] ||= Helper.new
+      options[:helper] ||= Helper.new style_files
       options[:template] = haml_path
       options[:out] = File.join(html_dir, File.basename(haml_path, '.*') + '.html')
 

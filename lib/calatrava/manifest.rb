@@ -3,11 +3,14 @@ module Calatrava
   class Manifest
     include Rake::DSL
 
+    DEVICE_PREFIXES = ['ios', 'droid', 'web']
+
     attr_reader :src_file
 
-    def initialize(path, app_dir, kernel, shell)
+    def initialize(path, app_type, kernel, shell)
+      @app_type = app_type
       @path, @kernel, @shell = path, kernel, shell
-      @src_file = "#{app_dir}/manifest.yml"
+      @src_file = "#{app_type}/manifest.yml"
       @feature_list = YAML.load(IO.read("#{@path}/#{@src_file}"))
     end
 
@@ -30,7 +33,11 @@ module Calatrava
     end
     
     def css_files
-      @shell.css_files
+      rejected_prefixes = DEVICE_PREFIXES - [@app_type]
+      all_files = @shell.css_files.reject { |f| rejected_prefixes.any? { |prefix| File.basename(f).start_with? prefix } }
+      device_files = all_files.select { |f| File.basename(f).start_with? @app_type }
+
+      (all_files - device_files) + device_files # push device files to the end
     end
 
     def css_tasks(output_dir)
