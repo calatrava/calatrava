@@ -8,11 +8,6 @@ generateRandomString = () ->
     str = str + r.toString(16)
   return str.toUpperCase();
 
-tw.bridge.environment = () ->
-  serviceEndpoint: "http://localhost:4568"
-  apiEndpoint: "http://localhost:4568"
-  sessionTimeout: 10
-
 tw.bridge.dispatchEvent = (page, event) ->
   tw.bridge.pages.pageNamed(page).dispatch(event)
 

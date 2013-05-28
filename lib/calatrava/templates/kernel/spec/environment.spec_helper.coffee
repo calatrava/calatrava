@@ -2,10 +2,6 @@ tw ?= {}
 
 tw =
   bridge:
-    environment: () ->
-      serviceEndpoint: "test env"
-      sessionTimeout: 10
-
     changePage: (page) ->
       page.show()
 
