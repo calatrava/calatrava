@@ -1,6 +1,6 @@
-tw ?= {}
+calatrava ?= {}
 
-tw =
+calatrava =
   bridge:
     changePage: (page) ->
       page.show()
@@ -18,4 +18,4 @@ tw =
     dialog:
       display: () ->
 
-exports.tw = tw
+exports.calatrava = calatrava
