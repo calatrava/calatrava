@@ -8,9 +8,10 @@ import android.util.Log;
 
 public abstract class RegisteredActivity extends Activity {
   private String TAG = RegisteredActivity.class.getSimpleName();
-
   private RhinoService rhino;
+
   private RequestLoader spinner = new RequestLoader(this);
+  protected PageStateManager pageStateManager;
 
   private BroadcastReceiver receiver = new BroadcastReceiver() {
     @Override
@@ -29,7 +30,13 @@ public abstract class RegisteredActivity extends Activity {
   @Override
   protected void onCreate(Bundle availableData) {
     super.onCreate(availableData);
+    initializePageStateManager();
     rhino = ((CalatravaApplication)getApplication()).getRhino();
+    pageStateManager.onCreateProcessing();
+  }
+
+  protected void initializePageStateManager() {
+    pageStateManager = new NativePageStateManager(this);
   }
 
   @Override
@@ -38,25 +45,44 @@ public abstract class RegisteredActivity extends Activity {
     registerReceiver(receiver, new IntentFilter("com.calatrava.ajax.start"));
     registerReceiver(receiver, new IntentFilter("com.calatrava.ajax.finish"));
     registerReceiver(receiver, new IntentFilter("com.calatrava.command"));
+    pageStateManager.onResumeProcessing();
   }
 
   @Override
   protected void onPause() {
     super.onPause();
     unregisterReceiver(receiver);
+    pageStateManager.onPauseProcessing();
   }
 
   @Override
   public void onDestroy() {
     super.onDestroy();
+    pageStateManager.onDestroyProcessing();
   }
 
   public void triggerEvent(String event, String... extraArgs) {
     PageRegistry.sharedRegistry().triggerEvent(getPageName(), event, extraArgs);
   }
-  
+
   public void invokeWidgetCallback(String...args) {
     rhino.callJsFunction("calatrava.inbound.invokeCallback", args);
+  }
+
+  public void pageOnScreen() {
+    PageRegistry.sharedRegistry().pageOnscreen(getPageName());
+  }
+
+  public void pageOffScreen() {
+    PageRegistry.sharedRegistry().pageOffscreen(getPageName());
+  }
+
+  public void registerPage() {
+    PageRegistry.sharedRegistry().registerPage(getPageName(), this);
+  }
+
+  public void unRegisterPage() {
+    PageRegistry.sharedRegistry().unregisterPage(getPageName());
   }
 
   protected abstract String getPageName();
