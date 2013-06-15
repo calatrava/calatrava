@@ -7,15 +7,10 @@ import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.webkit.JsResult;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
-
-import com.calatrava.bridge.CalatravaApplication;
+import com.calatrava.bridge.PageStateManager;
 import com.calatrava.bridge.RegisteredActivity;
 import com.calatrava.bridge.RhinoService;
-import com.calatrava.bridge.PageRegistry;
 
 import java.util.HashMap;
 import java.util.List;
@@ -45,17 +40,18 @@ public abstract class WebViewActivity extends RegisteredActivity {
   protected void onCreate(Bundle data)
   {
     super.onCreate(data);
+  }
+
+  @Override
+  protected void initializePageStateManager() {
     jsContainer = new JSContainer(getRhino(), getPageName());
-    loadPage();
+    webView = new WebView(this);
+    pageStateManager = new WebViewPageStateManager(this, jsContainer, getPageName(), webView);
   }
 
   @Override
   protected void onResume() {
     super.onResume();
-
-    onPageLoadCompleted();
-    pageHasOpened();
-
     registerReceiver(receiver, new IntentFilter("com.calatrava.dialog"));
   }
 
@@ -63,15 +59,12 @@ public abstract class WebViewActivity extends RegisteredActivity {
   protected void onPause() {
     super.onPause();
 
-    PageRegistry.sharedRegistry().pageOffscreen(getPageName());
     unregisterReceiver(receiver);
   }
 
   @Override
   public void onDestroy() {
     super.onDestroy();
-
-    PageRegistry.sharedRegistry().unregisterPage(getPageName());
   }
 
   public String getFieldValue(final String field) {
@@ -115,60 +108,17 @@ public abstract class WebViewActivity extends RegisteredActivity {
   protected abstract List<String> getEvents();
 
   protected abstract List<String> getFields();
-    
+
   protected int getBackgroundColor(){
     return Color.TRANSPARENT;
   }
 
-  protected void loadPage() {
-    PageRegistry.sharedRegistry().registerPage(getPageName(), this);
-
-    webView = new WebView(this);
-    setContentView(webView);
-
-    webView.getSettings().setJavaScriptEnabled(true);
-    webView.getSettings().setDomStorageEnabled(true);
-    webView.setScrollBarStyle(webView.SCROLLBARS_OUTSIDE_OVERLAY);
-    webView.setScrollbarFadingEnabled(true);
-    webView.addJavascriptInterface(jsContainer, "container");
-
-    webView.setWebViewClient(new WebViewClient() {
-      @Override
-      public void onPageFinished(WebView view, String url) {
-        super.onPageFinished(view, url);
-        Log.d(TAG, "Webview finished loading a URL");
-
-        pageReady = true;
-        onPageLoadCompleted();
-      }
-    });
-
-    webView.setWebChromeClient(new WebChromeClient() {
-      @Override
-      public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-        Log.d(TAG, "Received JS alert: '" + message + "'");
-        return false;
-      }
-    });
-
-    webView.loadUrl("file:///android_asset/calatrava/views/" + getPageName() + ".html");
-    pageHasOpened();
+  public void pageReadiness(boolean pageState) {
+    this.pageReady = pageState;
   }
 
-  private void pageHasOpened() {
-    triggerEvent("pageOpened", new String[] {});
-  }
-
-  private void onPageLoadCompleted() {
-    if (jsContainer != null && pageReady) {
-      jsContainer.onRenderComplete(null);
-
-      for (String field : getFields()) {
-        jsContainer.hasField(field);
-      }
-
-      PageRegistry.sharedRegistry().pageOnscreen(getPageName());
-    }
+  public boolean pageState() {
+    return pageReady;
   }
 
   public class JSContainer {
