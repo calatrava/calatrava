@@ -75,7 +75,7 @@ module Calatrava
       end
 
       desc "launch a non-daemon apache instance on port 8888 which will serve our local app and also proxy to backend services"
-      task :start => ['web:build', apache_public_dir, apache_logs_dir, "#{apache_conf_dir}/httpd.conf"] do
+      task :start => ['web:build', apache_public_dir, apache_logs_dir, "#{apache_conf_dir}/httpd.conf", 'web:autocompile'] do
         launch_apache
       end
 
