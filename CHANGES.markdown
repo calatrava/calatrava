@@ -1,11 +1,18 @@
 ## v0.6.7
 
+New features:
+* Compile Kernel/Shell coffeescript files automatically upon change,
+  when apache is running
+
 Bugs Fixed:
-* [Issue #54][i54]: [droid] Ajax IOExceptions aren't properly passed around
-* [Issue #71][i71]: [web] Passed forward the error response in a ajax call failure 
+* [Issue #54][i54]: [droid] Ajax IOExceptions aren't properly passed
+  around
+* [Issue #71][i71]: [web] Passed forward the error response in a ajax
+  call failure
 * [iOS Issue #9][ios-i9]: Fixes a startup crash
 * [Issue #75][i75]: calatrava.confirm callback argument is not defined
-* [Issue #63][i63]: Update stub namespace of the calatrava brigde for template spec files
+* [Issue #63][i63]: Update stub namespace of the calatrava brigde for
+  template spec files
 * [Issue #76][i76]: Enable render for Native Android views
 
 ## v0.6.6
