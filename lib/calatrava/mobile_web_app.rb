@@ -69,6 +69,13 @@ module Calatrava
         rm_rf build_dir
       end
 
+      desc "Auto compile shell and kernel files"
+      task :autocompile do
+        fork do
+          exec "ruby ./.auto_compile.rb"
+        end
+      end
+
       namespace :apache do
         @apache.install_tasks
       end
