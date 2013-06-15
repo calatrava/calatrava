@@ -6,6 +6,7 @@ Bugs Fixed:
 * [iOS Issue #9][ios-i9]: Fixes a startup crash
 * [Issue #75][i75]: calatrava.confirm callback argument is not defined
 * [Issue #63][i63]: Update stub namespace of the calatrava brigde for template spec files
+* [Issue #76][i76]: Enable render for Native Android views
 
 ## v0.6.6
 * Fix to add mac specific dependencies conditionally
@@ -166,3 +167,4 @@ Changes that will affect existing projects:
 [ios-i9]: https://github.com/calatrava/calatrava-ios/pull/9
 [i75]: https://github.com/calatrava/calatrava/issues/75
 [i63]: https://github.com/calatrava/calatrava/pull/63
+[i76]: https://github.com/calatrava/calatrava/pull/76
