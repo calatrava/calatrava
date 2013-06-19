@@ -1,7 +1,7 @@
 example ?= {}
 example.converter ?= {}
 
-example.converter.controller = ({views, changePage, ajax}) ->
+example.converter.controller = ({views, changePage, repository}) ->
   currencies = ['USD', 'AUD', 'GBP', 'INR']
   currencyRate =
     USD: 1
@@ -19,10 +19,12 @@ example.converter.controller = ({views, changePage, ajax}) ->
       selected: c == selectedCurrency
 
   performConversion = (amount) ->
-    outRate = currencyRate[outCurrency]
-    inRate = currencyRate[inCurrency]
-    views.conversionForm.render
-      out_amount: (Math.round(amount * (outRate / inRate) * 100)) / 100
+    repository.exchangeRate
+      from: inCurrency
+      to: outCurrency
+      ifSucceeded: (rate) ->
+        views.conversionForm.render
+          out_amount: (Math.round(amount * rate * 100)) / 100
 
   convert = () ->
     views.conversionForm.get 'in_amount', (inAmount) ->
