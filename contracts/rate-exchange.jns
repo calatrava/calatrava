@@ -1,0 +1,12 @@
+(service
+  "Rate Exchange"
+
+  (contract "Get currency exchange rate"
+    (method :get)
+    (url "http://rate-exchange.appspot.com/currency?from=USD&to=INR")
+
+    (should-have :path "$.to" :equal-to "INR")
+    (should-have :path "$.from" :equal-to "USD")
+    (should-have :path "$.rate" :of-type :number)
+  )
+)
