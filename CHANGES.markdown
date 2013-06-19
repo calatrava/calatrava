@@ -3,6 +3,7 @@
 New features:
 * Compile Kernel/Shell coffeescript files automatically upon change,
   when apache is running
+* Enhance currency converter sample app to start using a remote service
 
 Bugs Fixed:
 * [Issue #54][i54]: [droid] Ajax IOExceptions aren't properly passed
