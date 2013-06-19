@@ -14,6 +14,8 @@ Bugs Fixed:
 * [Issue #63][i63]: Update stub namespace of the calatrava brigde for
   template spec files
 * [Issue #76][i76]: Enable render for Native Android views
+* [Issue #33][i33]: 'env: node: No such file or directory" build error
+  in xcode trying to run base project
 
 ## v0.6.6
 * Fix to add mac specific dependencies conditionally
@@ -144,6 +146,7 @@ Changes that will affect existing projects:
 * [Priyank Gupta](https://github.com/priyaaank)
 * [Rick Carragher](https://github.com/rcarragher)
 * [Pedro Leal](https://github.com/pedrombl)
+* [Prasanna Pendse](https://github.com/prasanna)
 
 [i5]: https://github.com/calatrava/calatrava/issues/5
 [i12]: https://github.com/calatrava/calatrava/issues/12
@@ -175,3 +178,4 @@ Changes that will affect existing projects:
 [i75]: https://github.com/calatrava/calatrava/issues/75
 [i63]: https://github.com/calatrava/calatrava/pull/63
 [i76]: https://github.com/calatrava/calatrava/pull/76
+[i33]: https://github.com/calatrava/calatrava/issues/33
