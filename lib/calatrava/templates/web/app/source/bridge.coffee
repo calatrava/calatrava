@@ -58,6 +58,7 @@ calatrava.bridge.web.ajax = (options) ->
       showLoader()
     success: (response) ->
       goToTop()
+      response = JSON.stringify(response) if  _.isObject(response)
       options.success(response)
     error: (response) ->
       showLoader()

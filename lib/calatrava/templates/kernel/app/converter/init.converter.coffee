@@ -6,6 +6,6 @@ example.converter.start = ->
     views:
       conversionForm: calatrava.bridge.pages.pageNamed "conversionForm"
     changePage: calatrava.bridge.changePage
-    ajax: calatrava.bridge.request
+    repository: example.converter.repository calatrava.bridge.request
 
   calatrava.bridge.changePage "conversionForm"
