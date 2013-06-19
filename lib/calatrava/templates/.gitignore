@@ -2,14 +2,14 @@ artifacts/
 config/result/
 droid/*/ant/
 droid/*/ivy/
-droid/*/assets/
+droid/*/assets/calatrava/
 droid/*/bin/
 droid/*/gen/
 node_modules/
 .idea/
 .node_updated
 ios/public/
-ios/*.xworkspace/
+ios/*.xcworkspace/
 .sass-cache/
 .rake/
 web/apache/conf/httpd.conf
