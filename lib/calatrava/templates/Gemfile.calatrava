@@ -1,9 +1,9 @@
 source :rubygems
 
-gem "rake"
+gem "rake", ">= 0.9.5"
 gem "calatrava"{{#dev?}}, :path => '../'{{/dev?}}
-{{#mac?}}gem "xcodeproj"
-gem "cocoapods"{{/mac?}}
+{{#mac?}}gem "xcodeproj", ">= 0.4.0"
+gem "cocoapods", ">= 0.16.0"{{/mac?}}
 
 #auto compile shell and kernel for webapp. If you remove this, it'll stop auto compiling
 gem "filewatcher"
