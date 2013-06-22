@@ -17,6 +17,7 @@ Bugs Fixed:
 * [Issue #76][i76]: Enable render for Native Android views
 * [Issue #33][i33]: 'env: node: No such file or directory" build error
   in xcode trying to run base project
+* [Issue #83][i83]: Bundler might install multiple cocoapods version
 
 ## v0.6.6
 * Fix to add mac specific dependencies conditionally
@@ -180,3 +181,4 @@ Changes that will affect existing projects:
 [i63]: https://github.com/calatrava/calatrava/pull/63
 [i76]: https://github.com/calatrava/calatrava/pull/76
 [i33]: https://github.com/calatrava/calatrava/issues/33
+[i83]: https://github.com/calatrava/calatrava/issues/83
