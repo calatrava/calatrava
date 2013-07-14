@@ -7,3 +7,7 @@ gem "cocoapods", ">= 0.16.0"{{/mac?}}
 
 #auto compile shell and kernel for webapp. If you remove this, it'll stop auto compiling
 gem "filewatcher"
+
+group :test do
+  gem 'rspec'
+end
