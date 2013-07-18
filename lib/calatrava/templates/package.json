@@ -8,7 +8,7 @@
     , "cucumber"      : "latest"
     , "jsdom"         : "latest"
     , "mime"          : "latest"
-    , "jasmine-node"  : "1.0.26"
+    , "jasmine-node"  : "1.5.0"
     , "should"        : "*"
     , "jasmine-reporters" : "*"
     , "walkdir"       : "*"
