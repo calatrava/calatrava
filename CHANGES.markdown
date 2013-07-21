@@ -5,6 +5,8 @@ Bugs Fixed:
   jasmine-node version number
 * [Issue #86][i86]: Files and folders under asset folders are not
   copied recursively
+* [Issue #84][i84]: Clean up automation tasks (a sample feature
+  also implemented).
 
 ## v0.6.7
 
@@ -192,3 +194,4 @@ Changes that will affect existing projects:
 [i83]: https://github.com/calatrava/calatrava/issues/83
 [i87]: https://github.com/calatrava/calatrava/pull/87
 [i86]: https://github.com/calatrava/calatrava/pull/86
+[i84]: https://github.com/calatrava/calatrava/pull/84
