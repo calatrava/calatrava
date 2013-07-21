@@ -1,3 +1,9 @@
+## v0.6.8
+
+Bugs Fixed:
+* [Issue #87][i87]: Fixing Calatrava build errors by changing 
+  jasmine-node version number
+
 ## v0.6.7
 
 New features:
@@ -182,3 +188,4 @@ Changes that will affect existing projects:
 [i76]: https://github.com/calatrava/calatrava/pull/76
 [i33]: https://github.com/calatrava/calatrava/issues/33
 [i83]: https://github.com/calatrava/calatrava/issues/83
+[i87]: https://github.com/calatrava/calatrava/pull/87
