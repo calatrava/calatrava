@@ -8,7 +8,13 @@ module Calatrava
     def initialize(path, app_dir, kernel, shell)
       @path, @kernel, @shell = path, kernel, shell
       @src_file = "#{app_dir}/manifest.yml"
-      @feature_list = YAML.load(IO.read("#{@path}/#{@src_file}"))
+      files_to_load = YAML.load(IO.read("#{@path}/#{@src_file}"))
+      @feature_list = files_to_load["features"]
+      @kernel_libraries = files_to_load["kernel_libs"] || []
+    end
+
+    def kernel_libraries
+      @kernel_libraries
     end
 
     def features
