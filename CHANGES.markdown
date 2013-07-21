@@ -3,6 +3,8 @@
 Bugs Fixed:
 * [Issue #87][i87]: Fixing Calatrava build errors by changing 
   jasmine-node version number
+* [Issue #86][i86]: Files and folders under asset folders are not
+  copied recursively
 
 ## v0.6.7
 
@@ -189,3 +191,4 @@ Changes that will affect existing projects:
 [i33]: https://github.com/calatrava/calatrava/issues/33
 [i83]: https://github.com/calatrava/calatrava/issues/83
 [i87]: https://github.com/calatrava/calatrava/pull/87
+[i86]: https://github.com/calatrava/calatrava/pull/86
