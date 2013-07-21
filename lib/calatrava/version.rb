@@ -1,3 +1,3 @@
 module Calatrava
-  Version = "0.6.7"
+  Version = "0.6.8"
 end
