@@ -13,7 +13,8 @@ describe Calatrava::AppBuilder do
   let(:manifest) { double('web mf',
                           :coffee_files => ['path/to/kernel.coffee', 'diff/path/shell.coffee'],
                           :kernel_bootstrap => ['path/to/kernel.coffee'],
-                          :haml_files => ['diff/path/shell.haml']) }
+                          :haml_files => ['diff/path/shell.haml'],
+                          :kernel_libraries => ['path/to/external/kernel_lib.js']) }
   
   let(:app) { Calatrava::AppBuilder.new('app', 'app/build', manifest) }
 
@@ -32,9 +33,10 @@ describe Calatrava::AppBuilder do
   end
 
   context '#load_file' do
-    subject { app.load_instructions.lines.to_a }
+    subject { app.load_instructions.lines.to_a.each(&:chomp!) }
     
     it { should include 'build/scripts/kernel.js' }
+    it { should include 'build/scripts/kernel_lib.js' }
     it { should_not include 'build/scripts/shell.js' }
   end
 
@@ -43,4 +45,5 @@ describe Calatrava::AppBuilder do
 
     it { should include 'diff/path/shell.haml' }
   end
+
 end

@@ -6,7 +6,7 @@ describe Calatrava::Manifest do
 
   before(:each) do
     create_dir 'app'
-    write_file 'app/manifest.yml', ['included'].to_yaml
+    write_file 'app/manifest.yml', {'features' => ['included'], 'kernel_libs' => ['kernel_lib.js']}.to_yaml
   end
 
   let(:features) {  }
@@ -57,6 +57,24 @@ describe Calatrava::Manifest do
     it { should_not include 'k_exc' }
     it { should_not include 'shell_everywhere' }
     it { should_not include 'shell_inc' }
+  end
+
+  context '#kernel_libraries' do
+    context "#when present" do
+      subject { manifest.kernel_libraries }
+
+      it { should include 'kernel_lib.js'}
+    end
+
+    context "#when not present" do
+      before do
+        write_file 'app/manifest.yml', {'features' => ['included'], 'kernel_libs' => nil}.to_yaml
+      end
+
+      subject { manifest.kernel_libraries }
+
+      it { should be_empty}
+    end
   end
 
 end

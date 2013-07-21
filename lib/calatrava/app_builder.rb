@@ -22,11 +22,27 @@ module Calatrava
       "#{build_scripts_dir}/#{File.basename(cf, '.coffee')}.js"
     end
 
-    def load_instructions
+    def change_path_to_relative files, &change_file_path
       build_path = Pathname.new(File.dirname(build_dir))
-      @manifest.kernel_bootstrap.collect do |cf|
-        Pathname.new(js_file(cf)).relative_path_from(build_path).to_s
-      end.join($/)
+      files.collect do |file_to_add|
+        Pathname.new(change_file_path.call(file_to_add)).relative_path_from(build_path).to_s
+      end
+    end
+
+    def library_files
+      change_path_to_relative @manifest.kernel_libraries do |js_library|
+        "#{build_scripts_dir}/#{File.basename(js_library)}"
+      end
+    end
+
+    def feature_files
+      change_path_to_relative @manifest.kernel_bootstrap do |coffee_file|
+        js_file(coffee_file)
+      end
+    end
+
+    def load_instructions
+      feature_files.concat(library_files).join($/)
     end
 
     def haml_files
