@@ -1,5 +1,10 @@
 ## v0.6.8
 
+New features:
+* Ability to specify js libraries that need to be loaded with js
+  runtime running kernel code.
+  Note: This changes the format of manifest.yml
+
 Bugs Fixed:
 * [Issue #87][i87]: Fixing Calatrava build errors by changing 
   jasmine-node version number
