@@ -1,5 +1,5 @@
 def cp_ne(source, dest_dir)
-  cp Dir[source], dest_dir
+  cp_r Dir[source], dest_dir, :remove_destination => true
 end
 
 def coffee(in_dir_or_file, out_dir)
