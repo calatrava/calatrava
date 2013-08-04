@@ -9,3 +9,4 @@ currencyConverter/*
 /.rake
 /.vagrant
 /.idea
+Gemfile.lock
