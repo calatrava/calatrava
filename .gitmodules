@@ -3,16 +3,16 @@
 	url = git://github.com/blt04/puppet-rvm.git
 [submodule "puppet/modules/stdlib"]
 	path = puppet/modules/stdlib
-	url = https://github.com/puppetlabs/puppetlabs-stdlib
+	url = git://github.com/puppetlabs/puppetlabs-stdlib.git
 [submodule "puppet/modules/android"]
 	path = puppet/modules/android
-	url = git@github.com:maestrodev/puppet-android.git
+	url = git://github.com/maestrodev/puppet-android.git
 [submodule "puppet/modules/wget"]
 	path = puppet/modules/wget
-	url = https://github.com/maestrodev/puppet-wget
+	url = git://github.com/maestrodev/puppet-wget.git
 [submodule "puppet/modules/java"]
 	path = puppet/modules/java
-	url = git@github.com:puppetlabs/puppetlabs-java.git
+	url = git://github.com/puppetlabs/puppetlabs-java.git
 [submodule "puppet/modules/nodejs"]
 	path = puppet/modules/nodejs
 	url = git://github.com/willdurand/puppet-nodejs.git
