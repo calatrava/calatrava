@@ -4,15 +4,9 @@
   , "private": true
   , "dependencies" : {
       "coffee-script" : "1.2.0"
-    , "sinon"         : "*"
-    , "cucumber"      : "latest"
-    , "jsdom"         : "latest"
-    , "mime"          : "latest"
+    , "sinon"         : "1.7.3"
+    , "cucumber"      : "0.3.1"
     , "jasmine-node"  : "1.5.0"
-    , "should"        : "*"
-    , "jasmine-reporters" : "*"
-    , "walkdir"       : "*"
-    , "request"       : "*"
-    , "cssom"       : "*"
+    , "should"        : "1.2.2"
   }
 }
