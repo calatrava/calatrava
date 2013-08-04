@@ -5,7 +5,7 @@ ENV['PATH'] = "#{File.expand_path(File.dirname(__FILE__) + '/../../bin')}#{File:
 ENV['RUBYLIB'] = "#{File.expand_path(File.dirname(__FILE__) + '/../../lib')}#{File::PATH_SEPARATOR}#{ENV['RUBYLIB']}"
 
 Before do
-  @aruba_timeout_seconds = 120
+  @aruba_timeout_seconds = 80
 end
 
 class CalatravaWorld
