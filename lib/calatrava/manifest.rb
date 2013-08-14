@@ -39,8 +39,12 @@ module Calatrava
       @shell.css_files
     end
 
-    def css_tasks(output_dir)
+    def css_tasks(base_output_dir)
       css_files.collect do |style_file|
+        #drop shell/stylesheets in order to preserve sub-directories 
+        sub_path = style_file.split("/")[2..-2].join("/")
+        output_dir = "#{base_output_dir}/#{sub_path}"
+        directory output_dir
         file "#{output_dir}/#{File.basename(style_file, '.*')}.css" => [output_dir, style_file] do |t|
           if style_file =~ /\.css$/
             cp style_file, output_dir
