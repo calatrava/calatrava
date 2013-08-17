@@ -1,3 +1,13 @@
+## v0.6.9
+
+Bugs Fixed:
+* [Issue #58][i58] Sass/Scss Partials shouldn't be compiled, and
+  sub-directories should be preserved
+* [Issue #96][i96] Android Plugin callback handle is overridden
+  on quick successive calls to plugin
+* [Issue #94][i94] Android Plugin callback errors out if returned
+  data is null
+
 ## v0.6.8
 
 New features:
@@ -200,3 +210,6 @@ Changes that will affect existing projects:
 [i87]: https://github.com/calatrava/calatrava/pull/87
 [i86]: https://github.com/calatrava/calatrava/pull/86
 [i84]: https://github.com/calatrava/calatrava/pull/84
+[i58]: https://github.com/calatrava/calatrava/issues/58
+[i96]: https://github.com/calatrava/calatrava/issues/96
+[i94]: https://github.com/calatrava/calatrava/issues/94
