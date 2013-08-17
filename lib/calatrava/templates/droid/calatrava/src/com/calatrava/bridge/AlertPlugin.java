@@ -14,7 +14,6 @@ public class AlertPlugin implements RegisteredPlugin
 {
   private PluginRegistry registry;
   private Context ctxt;
-  private String currentOkCallbackHandle;
   
   public void setContext(PluginRegistry registry, Context ctxt)
   {
@@ -24,6 +23,7 @@ public class AlertPlugin implements RegisteredPlugin
         @Override
         public void execute(Intent action, RegisteredActivity frontmost)
         {
+          String currentOkCallbackHandle = action.getExtras().getString("okCallbackHandle");
           AlertDialog.Builder builder = new AlertDialog.Builder(frontmost);
           final boolean isConfirmDialog = action.getExtras().getString("method").equals("displayConfirm");
           builder.setMessage(action.getExtras().getString("message"))
@@ -53,9 +53,9 @@ public class AlertPlugin implements RegisteredPlugin
   
   public void call(String method, Map<String, Object> args)
   {
-    currentOkCallbackHandle = (String)args.get("okHandler");
     ctxt.sendBroadcast(registry.pluginCommand("alert")
                        .putExtra("method", method)
-                       .putExtra("message", (String)args.get("message")));
+                       .putExtra("message", (String)args.get("message"))
+                       .putExtra("okCallbackHandle", (String)args.get("okHandler")));
   }
 }
