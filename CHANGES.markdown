@@ -1,12 +1,13 @@
 ## v0.6.9
 
 Bugs Fixed:
-* [Issue #58][i58] Sass/Scss Partials shouldn't be compiled, and
+* [Issue #58][i58]: Sass/Scss Partials shouldn't be compiled, and
   sub-directories should be preserved
-* [Issue #96][i96] Android Plugin callback handle is overridden
+* [Issue #96][i96]: Android Plugin callback handle is overridden
   on quick successive calls to plugin
-* [Issue #94][i94] Android Plugin callback errors out if returned
+* [Issue #94][i94]: Android Plugin callback errors out if returned
   data is null
+* [Issue #100][i100]: Avoid closing a null ProgressDialog object
 
 ## v0.6.8
 
@@ -213,3 +214,4 @@ Changes that will affect existing projects:
 [i58]: https://github.com/calatrava/calatrava/issues/58
 [i96]: https://github.com/calatrava/calatrava/issues/96
 [i94]: https://github.com/calatrava/calatrava/issues/94
+[i100]: https://github.com/calatrava/calatrava/pull/100
