@@ -23,7 +23,7 @@ public class AlertPlugin implements RegisteredPlugin
         @Override
         public void execute(Intent action, RegisteredActivity frontmost)
         {
-          String currentOkCallbackHandle = action.getExtras().getString("okCallbackHandle");
+          final String currentOkCallbackHandle = action.getExtras().getString("okCallbackHandle");
           AlertDialog.Builder builder = new AlertDialog.Builder(frontmost);
           final boolean isConfirmDialog = action.getExtras().getString("method").equals("displayConfirm");
           builder.setMessage(action.getExtras().getString("message"))
