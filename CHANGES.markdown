@@ -8,6 +8,7 @@ Bugs Fixed:
 * [Issue #94][i94]: Android Plugin callback errors out if returned
   data is null
 * [Issue #100][i100]: Avoid closing a null ProgressDialog object
+* Handle the API changes in the latest versions of xcodeproj.
 
 ## v0.6.8
 
