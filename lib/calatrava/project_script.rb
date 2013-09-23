@@ -106,8 +106,8 @@ module Calatrava
       end
     end
 
-    def create_ios_project
-      Xcodeproj::Project.new
+    def create_ios_project(path)
+      Xcodeproj::Project.new(path)
     end
 
     def create_ios_project_groups(base_dir, proj, target)
@@ -182,14 +182,14 @@ module Calatrava
     end
 
     def create_ios_tree(template)
-      proj = create_ios_project
       base_dir = Pathname.new(@name) + "ios"
+      proj = create_ios_project((base_dir + "#{@name}.xcodeproj").to_s)
 
       target = create_ios_project_target(proj)
       create_ios_project_groups(base_dir, proj, target)
       create_ios_folder_references(base_dir, proj, target)
 
-      proj.save_as (base_dir + "#{@name}.xcodeproj").to_s
+      proj.save
     end
   end
 
