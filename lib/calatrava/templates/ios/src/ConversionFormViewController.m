@@ -9,8 +9,8 @@
 #import "ConversionFormViewController.h"
 
 @interface ConversionFormViewController (){
-  NSArray *_inCurrencyData; 
-  NSArray *_outCurrencyData;
+  NSMutableArray *_inCurrencyData;
+  NSMutableArray *_outCurrencyData;
 }
 
 @property (retain, nonatomic) IBOutlet UIPickerView *outCurrencyPicker;
@@ -29,20 +29,10 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
-    _inCurrencyData = [[NSArray alloc] init];
-    _outCurrencyData = [[NSArray alloc] init]; 
+    _inCurrencyData = [[NSMutableArray alloc] init];
+    _outCurrencyData = [[NSMutableArray alloc] init];
   }
   return self; 
-}
-
-- (void)dealloc {
-  [outCurrencyPicker release];
-  [inCurrencyPicker release];
-  [_inCurrencyData release];
-  [_outCurrencyData release];
-  [inAmount release];
-  [outAmount release];
-  [super dealloc];
 }
 
 -(void)viewDidLoad{
@@ -75,6 +65,7 @@
   } else if ([field isEqualToString:@"in_amount"]) {
     return [inAmount text];
   }
+  return nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -99,10 +90,10 @@
   [inAmount resignFirstResponder];
 }
 
-- (void)renderCurrencyPicker:(UIPickerView *)pickerView usingData:(NSArray *)currencyData to:(NSArray **)pickerStore
+- (void)renderCurrencyPicker:(UIPickerView *)pickerView usingData:(NSArray *)currencyData to:(NSMutableArray *)pickerStore
 {
-  [*pickerStore release];
-  *pickerStore = [currencyData copy];
+  [pickerStore removeAllObjects];
+  [pickerStore addObjectsFromArray:currencyData];
   if( pickerView ){
     [pickerView reloadComponent:0];
     [self updateCurrencyPickerSelection:pickerView usingData:currencyData];
@@ -112,7 +103,6 @@
 - (IBAction)convert:(id)sender {
   [self hideKeyboard];
   [self dispatchEvent:@"convert" withArgs:@[]];
-  return self;
 }
 
 - (void)render:(NSDictionary *)jsViewObject
@@ -121,9 +111,9 @@
   {
     id value =  [jsViewObject objectForKey:key];
     if ([key isEqualToString:@"inCurrencies"]) {
-      [self renderCurrencyPicker:inCurrencyPicker usingData:value to:&_inCurrencyData];
+      [self renderCurrencyPicker:inCurrencyPicker usingData:value to:_inCurrencyData];
     } else if ([key isEqualToString:@"outCurrencies"]) {
-      [self renderCurrencyPicker:outCurrencyPicker usingData:value to:&_outCurrencyData];
+      [self renderCurrencyPicker:outCurrencyPicker usingData:value to:_outCurrencyData];
     } else if ([key isEqualToString:@"in_amount"]) {
       [outAmount setText:[NSString stringWithFormat:@"%@", [jsViewObject objectForKey:@"in_amount"]]];
     } else if ([key isEqualToString:@"out_amount"]) {
