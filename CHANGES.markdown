@@ -1,3 +1,10 @@
+## v0.6.10
+
+Bugs Fixed:
+* [Issue #103][i103]: Fix file references in generated iOS project
+* [Issue #104][i104]: Fix Xcode 5 compilation errors for sample
+  project
+
 ## v0.6.9
 
 Bugs Fixed:
@@ -216,3 +223,5 @@ Changes that will affect existing projects:
 [i96]: https://github.com/calatrava/calatrava/issues/96
 [i94]: https://github.com/calatrava/calatrava/issues/94
 [i100]: https://github.com/calatrava/calatrava/pull/100
+[i103]: https://github.com/calatrava/calatrava/pull/103
+[i104]: https://github.com/calatrava/calatrava/pull/104
