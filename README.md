@@ -36,6 +36,11 @@ need to be installed beforehand.
 5. [Node.js](http://nodejs.org/). Only used to run tests, not part of
    any production code. Again, if you're on a Mac I recommend
    installing using homebrew.
+
+6. [ant](http://ant.apache.org/). Up until Mac OS X 10.9 Mavericks this
+   was included. However, it has now been removed. It can be [installed with
+   homebrew](http://superuser.com/questions/610157/how-do-i-install-ant-on-os-x-mavericks),
+   however. Only required for Droid projects.
    
 ## Linux
 
@@ -67,6 +72,9 @@ Here are the dependencies for Linux:
    shipped. On Ubuntu systems, this can be installed with the
    following command: `sudo apt-get install apache2` (from
    [this page](https://help.ubuntu.com/10.04/serverguide/httpd.html))
+
+7. [ant](http://ant.apache.org/). You'll probably pick this up when you
+   install the Android tools. Only required for Droid projects.
 
 # Getting Started
 
