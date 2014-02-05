@@ -197,7 +197,12 @@ public class RhinoService {
     }
 
     private void eval(String jsCode) {
-      ctxt.evaluateString(mScope, jsCode, "<Bridge>", 1, null);
+      String safe = "(function() { try { return " + jsCode + "; } catch (ex) { return '@@EX@@' + ex.toString() + '\\n' + ex.stack.toString(); } })()";
+      Object result = ctxt.evaluateString(mScope, safe, "<Bridge>", 1, null);
+
+      if (result != null && result.toString().startsWith("@@EX@@")) {
+        throw new RuntimeException("JavaScript Unhandled Exception\n"+result.toString().substring(6));
+      }
     }
 
   }

@@ -31,7 +31,7 @@ public abstract class WebViewActivity extends RegisteredActivity {
     public void onReceive(Context context, Intent intent) {
       if ("com.calatrava.dialog".equals(intent.getAction())) {
         String name = intent.getExtras().getString("name");
-        webView.loadUrl("javascript:window." + getPageName() + "View.showDialog('" + name + "');");
+        safeExecuteJavaScript("window." + getPageName() + "View.showDialog('" + name + "');");
       }
     }
   };
@@ -74,7 +74,7 @@ public abstract class WebViewActivity extends RegisteredActivity {
 
     FutureTask<String> fieldValue = new FutureTask<String>(new Callable<String>() {
       public String call() throws Exception {
-        webView.loadUrl("javascript:container.provideValueFor('" + field + "', window." + getPageName() + "View.get('" + field + "'));");
+        safeExecuteJavaScript("container.provideValueFor('" + field + "', window." + getPageName() + "View.get('" + field + "'));");
         return jsContainer.retrieveValueFor(field);
       }
     });
@@ -100,7 +100,7 @@ public abstract class WebViewActivity extends RegisteredActivity {
         jsContainer.setJsObject(json);
         Log.d(TAG, "render page: " + getPageName());
 
-        webView.loadUrl("javascript:container.onRenderComplete(window." + getPageName() + "View.render(JSON.parse(container.getJsObject())));");
+        safeExecuteJavaScript("container.onRenderComplete(window." + getPageName() + "View.render(JSON.parse(container.getJsObject())));");
       }
     });
   }
@@ -119,6 +119,14 @@ public abstract class WebViewActivity extends RegisteredActivity {
 
   public boolean pageState() {
     return pageReady;
+  }
+
+  private void safeExecuteJavaScript(String javascript) {
+    webView.loadUrl("javascript:" + makeSafe(javascript));
+  }
+
+  private static String makeSafe(String javascript) {
+    return "(function() { try { " + javascript + "; } catch (ex) { container.rethrowException(ex.stack.toString()); } })()";
   }
 
   public class JSContainer {
@@ -180,12 +188,21 @@ public abstract class WebViewActivity extends RegisteredActivity {
       triggerEvent(event, extraArgs);
     }
 
+    public void rethrowException(final String exception) {
+      runOnUiThread(new Runnable() {
+        @Override
+        public void run() {
+          throw new RuntimeException("JavaScript Unhandled Exception\n" + exception);
+        }
+      });
+    }
+
     public void onRenderComplete(Object ignored) {
       runOnUiThread(new Runnable() {
         public void run() {
           for (String event : getEvents()) {
             Log.d(TAG, "About to bind event '" + event + "'");
-            webView.loadUrl("javascript:window." + getPageName() + "View.bind('" + event + "', function() { container.handleEvent('" + event + "', _.toArray(arguments)); });");
+            safeExecuteJavaScript("window." + getPageName() + "View.bind('" + event + "', function() { container.handleEvent('" + event + "', _.toArray(arguments)); });");
           }
         }
       });
