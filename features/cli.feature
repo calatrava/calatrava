@@ -6,7 +6,8 @@ Feature: Command line interface
 
   Scenario: Command-line validations
     When I run `calatrava create`
-    Then the output should contain "calatrava create requires at least 1 argument"
+    Then the output should contain "was called with no arguments"
+    And  the output should contain "calatrava create <project-name>"
     When I run `calatrava create project --template nonexistentdirectory`
     Then the output should contain "template must exist"
     Given an empty file named "alt-template-file"

@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
 
   s.add_runtime_dependency "rake", ">= 0.9.5"
   
-  s.add_runtime_dependency "thor", "~> 0.16.0"
+  s.add_runtime_dependency "thor", ">= 0.16.0"
   s.add_runtime_dependency "haml", "~> 3.1.7"
   s.add_runtime_dependency "sass", "~> 3.2.3"
   s.add_runtime_dependency "mustache", "~> 0.99.4"
