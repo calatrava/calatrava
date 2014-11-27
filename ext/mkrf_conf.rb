@@ -13,8 +13,8 @@ begin
   # I don't *think* you can use Calatrava.platform == :mac here as it seems
   # RubyGems builds Ruby extensions without the dependencies declared in the gemspec.
   if RUBY_PLATFORM =~ /darwin/
-    installer.install "xcodeproj", ">= 0.4.0"
-    installer.install "cocoapods", ">= 0.16.0"
+    installer.install "xcodeproj", ">= 0.11.0"
+    installer.install "cocoapods", ">= 0.25.0"
   end
 
 rescue Exception => ex
