@@ -10,22 +10,26 @@ describe Calatrava::OutputFile do
     describe '#output_path' do
       subject { file.output_path }
 
-      it { should start_with("output directory/") }
-      it { should end_with("coffee file.js") }
+      it { is_expected.to start_with("output directory/") }
+      it { is_expected.to end_with("coffee file.js") }
     end
 
     describe '#dependencies' do
       subject { file.dependencies }
 
-      it { should have(2).dependencies }
-      it { should include('coffee file.coffee') }
-      it { should include('output directory') }
+      it 'has 2 dependencies' do
+        expect(subject.size).to eq(2)
+      end
+      it { is_expected.to include('coffee file.coffee') }
+      it { is_expected.to include('output directory') }
 
       context 'with additional' do
         let(:dependencies) { [:environment] }
 
-        it { should have(3).dependencies }
-        it { should include(:environment) }
+        it 'has 3 dependencies' do
+          expect(subject.size).to eq(3)
+        end
+        it { is_expected.to include(:environment) }
       end
     end
   end

@@ -9,7 +9,7 @@ describe Calatrava::MobileWebApp do
     write_file 'web/app/source/support.coffee', ''
 
     proj = double('current project', :config => double('cfg', :path => 'env.coffee'))
-    Calatrava::Project.stub(:current).and_return(proj)
+    allow(Calatrava::Project).to receive(:current).and_return(proj)
   end
 
   let(:manifest) { double('web mf',
@@ -19,31 +19,31 @@ describe Calatrava::MobileWebApp do
   let(:mobile_web) { Calatrava::MobileWebApp.new(current_dir, manifest) }
 
   it 'should define the correct output directories' do
-    mobile_web.build_dir.should match %r{web/public$}
-    mobile_web.scripts_build_dir.should match %r{web/public/scripts$}
+    expect(mobile_web.build_dir).to match %r{web/public$}
+    expect(mobile_web.scripts_build_dir).to match %r{web/public/scripts$}
   end
 
   context '#coffee_files' do
     subject { mobile_web.coffee_files.collect { |cf| cf.source_file.to_s } }
 
-    it { should include 'path/to/kernel.coffee' }
-    it { should include 'diff/path/shell.coffee' }
-    it { should include 'web/app/source/support.coffee' }
-    it { should include 'env.coffee' }
+    it { is_expected.to include 'path/to/kernel.coffee' }
+    it { is_expected.to include 'diff/path/shell.coffee' }
+    it { is_expected.to include 'web/app/source/support.coffee' }
+    it { is_expected.to include 'env.coffee' }
   end
 
   context '#scripts' do
     subject { mobile_web.scripts }
 
-    it { should include 'scripts/kernel.js' }
-    it { should include 'scripts/shell.js' }
-    it { should include 'scripts/support.js' }
+    it { is_expected.to include 'scripts/kernel.js' }
+    it { is_expected.to include 'scripts/shell.js' }
+    it { is_expected.to include 'scripts/support.js' }
   end
 
   context '#haml_files' do
     subject { mobile_web.haml_files }
 
-    it { should include 'diff/path/shell.haml' }
+    it { is_expected.to include 'diff/path/shell.haml' }
   end
 
 end

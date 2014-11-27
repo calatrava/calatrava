@@ -25,45 +25,45 @@ describe Calatrava::Manifest do
   context 'coffee files' do
     subject { manifest.coffee_files }
 
-    it { should include 'kernel_everywhere' }
-    it { should include 'shell_everywhere' }
+    it { is_expected.to include 'kernel_everywhere' }
+    it { is_expected.to include 'shell_everywhere' }
 
-    it { should include 'k_inc' }
-    it { should_not include 'k_exc' }
-    it { should include 'shell_inc' }
-    it { should_not include 'shell_exc' }
+    it { is_expected.to include 'k_inc' }
+    it { is_expected.not_to include 'k_exc' }
+    it { is_expected.to include 'shell_inc' }
+    it { is_expected.not_to include 'shell_exc' }
   end
 
   context 'haml files' do
     subject { manifest.haml_files }
 
-    it { should include 'fragment' }
-    it { should include 'inc' }
-    it { should_not include 'exc' }
+    it { is_expected.to include 'fragment' }
+    it { is_expected.to include 'inc' }
+    it { is_expected.not_to include 'exc' }
   end
 
   context '#css_files' do
     subject { manifest.css_files }
 
-    it { should include 'styles' }
+    it { is_expected.to include 'styles' }
   end
 
   context '#kernel_bootstrap' do
     subject { manifest.kernel_bootstrap }
 
-    it { should include 'k_inc' }
-    it { should include 'kernel_everywhere' }
+    it { is_expected.to include 'k_inc' }
+    it { is_expected.to include 'kernel_everywhere' }
 
-    it { should_not include 'k_exc' }
-    it { should_not include 'shell_everywhere' }
-    it { should_not include 'shell_inc' }
+    it { is_expected.not_to include 'k_exc' }
+    it { is_expected.not_to include 'shell_everywhere' }
+    it { is_expected.not_to include 'shell_inc' }
   end
 
   context '#kernel_libraries' do
     context "#when present" do
       subject { manifest.kernel_libraries }
 
-      it { should include 'kernel_lib.js'}
+      it { is_expected.to include 'kernel_lib.js'}
     end
 
     context "#when not present" do
@@ -73,7 +73,7 @@ describe Calatrava::Manifest do
 
       subject { manifest.kernel_libraries }
 
-      it { should be_empty}
+      it { is_expected.to be_empty}
     end
   end
 

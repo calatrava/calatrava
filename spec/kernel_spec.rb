@@ -21,31 +21,35 @@ describe Calatrava::Kernel do
   context '#features' do
     subject { kernel.features }
 
-    it { should have(1).features }
+    it 'has 1 feature' do
+      expect(subject.size).to eq(1)
+    end
 
     context 'a single feature' do
       subject { kernel.features[0] }
 
-      it { should include :name => 'mod1' }
-      it { should include :coffee => ['kernel/app/mod1/first.coffee'] }
+      it { is_expected.to include :name => 'mod1' }
+      it { is_expected.to include :coffee => ['kernel/app/mod1/first.coffee'] }
     end
   end
 
   context '#coffee_files' do
     subject { kernel.coffee_files }
 
-    it { should have(3).files }
-    it { should include 'kernel/app/support.coffee' }
-    it { should include 'kernel/plugins/plugin.one.coffee' }
-    it { should include 'kernel/plugins/two.coffee' }
+    it 'has 3 files' do
+      expect(subject.size).to eq(3)
+    end
+    it { is_expected.to include 'kernel/app/support.coffee' }
+    it { is_expected.to include 'kernel/plugins/plugin.one.coffee' }
+    it { is_expected.to include 'kernel/plugins/two.coffee' }
   end
 
   context '#coffee_path' do
     subject { kernel.coffee_path }
 
-    it { should include 'app:' }
-    it { should include 'app/mod1' }
-    it { should include 'app/plugins' }
+    it { is_expected.to include 'app:' }
+    it { is_expected.to include 'app/mod1' }
+    it { is_expected.to include 'app/plugins' }
   end
 
 end

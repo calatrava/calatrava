@@ -21,33 +21,35 @@ describe Calatrava::Shell do
   context 'coffee files' do
     subject { shell.coffee_files }
 
-    it { should include 'shell/support/shell.coffee' }
+    it { is_expected.to include 'shell/support/shell.coffee' }
   end
 
   context 'haml files' do
     subject { shell.haml_files }
 
-    it { should include 'shell/support/fragment.haml' }
+    it { is_expected.to include 'shell/support/fragment.haml' }
   end
 
   context 'css files' do
     subject { shell.css_files }
     
-    it { should include 'shell/stylesheets/shell.css' }
-    it { should include 'shell/stylesheets/template.sass' }
+    it { is_expected.to include 'shell/stylesheets/shell.css' }
+    it { is_expected.to include 'shell/stylesheets/template.sass' }
   end
 
   context 'features' do
     subject { shell.features }
 
-    it { should have(1).feature }
+    it 'has 1 feature' do
+      expect(subject.size).to eq(1)
+    end
 
     context 'a single feature' do
       subject { shell.features[0] }
 
-      it { should include :name => 'example' }
-      it { should include :coffee => ['shell/pages/example/page.coffee'] }
-      it { should include :haml => ['shell/pages/example/page.haml'] }
+      it { is_expected.to include :name => 'example' }
+      it { is_expected.to include :coffee => ['shell/pages/example/page.coffee'] }
+      it { is_expected.to include :haml => ['shell/pages/example/page.haml'] }
     end
   end
   

@@ -7,7 +7,7 @@ describe Calatrava::AppBuilder do
     create_dir 'app'
 
     proj = double('current project', :config => double('cfg', :path => 'env.coffee'))
-    Calatrava::Project.stub(:current).and_return(proj)
+    allow(Calatrava::Project).to receive(:current).and_return(proj)
   end
 
   let(:manifest) { double('web mf',
@@ -21,29 +21,29 @@ describe Calatrava::AppBuilder do
   context '#coffee_files' do
     subject { app.coffee_files.collect { |cf| cf.source_file.to_s } }
     
-    it { should include 'path/to/kernel.coffee' }
-    it { should include 'diff/path/shell.coffee' }
-    it { should include 'env.coffee' }
+    it { is_expected.to include 'path/to/kernel.coffee' }
+    it { is_expected.to include 'diff/path/shell.coffee' }
+    it { is_expected.to include 'env.coffee' }
   end
 
   context '#js_file' do
     subject { app.js_file('path/to/sample.coffee') }
 
-    it { should == 'app/build/scripts/sample.js' }
+    it { is_expected.to eq('app/build/scripts/sample.js') }
   end
 
   context '#load_file' do
     subject { app.load_instructions.lines.to_a.each(&:chomp!) }
     
-    it { should include 'build/scripts/kernel.js' }
-    it { should include 'build/scripts/kernel_lib.js' }
-    it { should_not include 'build/scripts/shell.js' }
+    it { is_expected.to include 'build/scripts/kernel.js' }
+    it { is_expected.to include 'build/scripts/kernel_lib.js' }
+    it { is_expected.not_to include 'build/scripts/shell.js' }
   end
 
   context '#haml_files' do
     subject { app.haml_files }
 
-    it { should include 'diff/path/shell.haml' }
+    it { is_expected.to include 'diff/path/shell.haml' }
   end
 
 end
