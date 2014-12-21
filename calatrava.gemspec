@@ -22,12 +22,12 @@ Gem::Specification.new do |s|
   s.add_development_dependency "aruba"
 
   s.add_runtime_dependency "rake", ">= 0.9.5"
-  
+
   s.add_runtime_dependency "thor", ">= 0.16.0"
   s.add_runtime_dependency "haml", "~> 3.1.7"
   s.add_runtime_dependency "sass", "~> 3.2.3"
   s.add_runtime_dependency "mustache", "~> 0.99.4"
-  s.add_runtime_dependency "cucumber", "~> 1.2.1"
+  s.add_runtime_dependency "cucumber", "~> 1.3.17"
   s.add_runtime_dependency "watir-webdriver", "~> 0.6.1"
 
   s.extensions = ["ext/mkrf_conf.rb"]
