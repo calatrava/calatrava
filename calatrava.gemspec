@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "haml", "~> 3.1.7"
   s.add_runtime_dependency "sass", "~> 3.2.3"
   s.add_runtime_dependency "mustache", "~> 0.99.4"
-  s.add_runtime_dependency "cucumber", "~> 1.2.1"
+  s.add_runtime_dependency "cucumber", "~> 1.3.19"
   s.add_runtime_dependency "watir-webdriver", "~> 0.6.1"
 
   s.extensions = ["ext/mkrf_conf.rb"]
