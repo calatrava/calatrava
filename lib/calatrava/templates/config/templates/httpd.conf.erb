@@ -8,6 +8,11 @@ LoadModule log_config_module <%=configuration[:modules_path]%>/mod_log_config.so
 LoadModule mime_module       <%=configuration[:modules_path]%>/mod_mime.so
 LoadModule dir_module        <%=configuration[:modules_path]%>/mod_dir.so
 LoadModule alias_module      <%=configuration[:modules_path]%>/mod_alias.so
+<% unless configuration[:apache_2_dot_2] %>
+LoadModule filter_module <%=configuration[:modules_path]%>/mod_filter.so
+LoadModule unixd_module <%=configuration[:modules_path]%>/mod_unixd.so
+LoadModule authz_core_module <%=configuration[:modules_path]%>/mod_authz_core.so
+<% end %>
 
 ErrorLog "logs/error.log"
 LogLevel Debug
@@ -16,7 +21,13 @@ LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\"" combined
 CustomLog "logs/access.log" combined
 
 PidFile logs/httpd.pid
+
+<% if configuration[:apache_2_dot_2] %>
 LockFile logs/run.lock
+<% else %>
+Mutex default:/tmp
+<% end %>
+
 
 TypesConfig conf/mime.types 
 
@@ -25,6 +36,13 @@ Listen <%= configuration['web_port'] %>
 ProxyRequests off
 
 ProxyPass /currency <%= configuration['api_endpoint'] %>/currency
+
+<% unless configuration[:apache_2_dot_2] %>
+<Directory />
+    Require all granted
+</Directory>
+<% end %>
+
 
 SSLProxyEngine On
 
