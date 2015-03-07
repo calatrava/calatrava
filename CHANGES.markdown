@@ -1,3 +1,8 @@
+## v0.6.11
+
+Bugs Fixed:
+* [Issue #106][i106]: Stability fixes
+
 ## v0.6.10
 
 Bugs Fixed:
@@ -225,3 +230,4 @@ Changes that will affect existing projects:
 [i100]: https://github.com/calatrava/calatrava/pull/100
 [i103]: https://github.com/calatrava/calatrava/pull/103
 [i104]: https://github.com/calatrava/calatrava/pull/104
+[i106]: https://github.com/calatrava/calatrava/pull/106
