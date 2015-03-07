@@ -15,8 +15,7 @@ import com.calatrava.bridge.RhinoService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
 
 public abstract class WebViewActivity extends RegisteredActivity {
@@ -72,18 +71,20 @@ public abstract class WebViewActivity extends RegisteredActivity {
 
     Log.d(TAG, "Get value for field: " + field + " on page '" + getPageName() + "'");
 
-    FutureTask<String> fieldValue = new FutureTask<String>(new Callable<String>() {
-      public String call() throws Exception {
+    final CountDownLatch countDownLatch = new CountDownLatch(1);
+
+    runOnUiThread(new Runnable() {
+      @Override
+      public void run() {
         webView.loadUrl("javascript:container.provideValueFor('" + field + "', window." + getPageName() + "View.get('" + field + "'));");
-        return jsContainer.retrieveValueFor(field);
+        countDownLatch.countDown();
       }
     });
 
-    runOnUiThread(fieldValue);
-
     String value;
     try {
-      value = fieldValue.get();
+      countDownLatch.await();
+      value = jsContainer.retrieveValueFor(field);
     } catch (Exception e) {
       e.printStackTrace();
       // TODO: Signal failure to the UI thread

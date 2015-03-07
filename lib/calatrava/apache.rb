@@ -4,6 +4,7 @@ module Calatrava
     include Rake::DSL
 
     Calatrava::Configuration.extra do |c|
+      c.runtime :apache_2_dot_2, system('httpd -v | grep Apache/2.2 >> /dev/null')
       if `uname -a`.chomp["amzn1"]
         c.runtime :modules_path, "/usr/lib64/httpd/modules"
         c.runtime :load_log_module, true

@@ -145,10 +145,8 @@ module Calatrava
         target.build_configurations.each do |config|
           config.build_settings.merge!({
                                          "GCC_PREFIX_HEADER" => "src/#{@name}-Prefix.pch",
-                                         "OTHER_LDFLAGS" => ['-ObjC', '-all_load'],
                                          "INFOPLIST_FILE" => "src/#{@name}-Info.plist",
-                                         "SKIP_INSTALL" => "NO",
-                                         "IPHONEOS_DEPLOYMENT_TARGET" => "5.0",
+                                         "SKIP_INSTALL" => "NO"
                                        })
           config.build_settings.delete "DSTROOT"
           config.build_settings.delete "INSTALL_PATH"

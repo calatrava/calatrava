@@ -25,6 +25,8 @@ example.converter.controller = ({views, changePage, repository}) ->
       ifSucceeded: (rate) ->
         views.conversionForm.render
           out_amount: (Math.round(amount * rate * 100)) / 100
+      elseFailed: (status) ->
+        calatrava.alert "Currency conversation API failed (#{status})"
 
   convert = () ->
     views.conversionForm.get 'in_amount', (inAmount) ->
