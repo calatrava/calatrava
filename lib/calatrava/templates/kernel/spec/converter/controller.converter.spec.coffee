@@ -58,3 +58,10 @@ describe 'converter controller', ->
       expect(@views.conversionForm.lastMessage()).toEqual
         out_amount: 0.96
 
+    it 'should show alert message if conversion fails', ->
+      calatrava.alert = jasmine.createSpy("alert dialog")
+      @views.conversionForm.fieldContains 'in_amount', 1
+      @views.conversionForm.trigger 'convert'
+      @exchangeRateRepository.mostRecentCall.args[0].elseFailed(500)
+
+      expect(calatrava.alert).toHaveBeenCalled()
