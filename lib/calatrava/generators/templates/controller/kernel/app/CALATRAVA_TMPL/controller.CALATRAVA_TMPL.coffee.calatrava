@@ -1,0 +1,5 @@
+{{ namespace }} ?= {}
+{{ namespace }}.{{ controller_name }} ?= {}
+
+{{ namespace }}.{{ controller_name }}.controller = ({views, changePage, ajax}) ->
+  # views.yourView.render

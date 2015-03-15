@@ -1,0 +1,24 @@
+calatrava.pageView ?= {}
+calatrava.pageView.{{ page_name }} = ->
+  $page = $('#{{ page_name }}')
+  $p = (sel)-> $(sel, $page)
+
+  bind: (event, handler) ->
+    console.log "event: #{event}"
+    # bind your events here
+
+  render: (message) ->
+    console.log('rendering...', message)
+    # render your view here
+
+  get: (field) ->
+    console.log('getting...', field)
+    $page.find("#" + field).val()
+
+  show: ->
+    console.log('showing...')
+    $page.show()
+
+  hide: ->
+    console.log('hiding...')
+    $page.hide()

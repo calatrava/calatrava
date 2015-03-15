@@ -1,0 +1,11 @@
+{{ namespace }} ?= {}
+{{ namespace }}.{{ controller_name }} ?= {}
+
+{{ namespace }}.{{ controller_name }}.start = ->
+  {{ namespace }}.{{ controller_name }}.controller
+    views: {}
+      # yourView: calatrava.bridge.pages.pageNamed "yourView"
+    changePage: calatrava.bridge.changePage
+    ajax: calatrava.bridge.request
+
+  # calatrava.bridge.changePage "yourView"
