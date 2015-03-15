@@ -40,7 +40,7 @@ module Calatrava
     alias :to_s :output_path
 
     def to_task
-      file(output_path => @dependencies) do
+      task do
         OutputFile.action(@source_file).call(output_path.to_s, @source_file.to_s)
       end
     end
