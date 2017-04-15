@@ -84,10 +84,15 @@ public class AjaxRequestManager {
         if(method.equals("GET")) {
           request = new HttpGet(url);
         } else {
-          HttpPost httpPost = new HttpPost(url);
-          httpPost.setEntity(new StringEntity(body));
-          httpPost.setHeaders(addHeaders(customHeaders));
-          request = httpPost;
+          HttpEntityEnclosingRequestBase httpRequestBase = null;
+          if (method.equals("POST"))
+            httpRequestBase = new HttpPost(url);
+          else
+            httpRequestBase = new HttpPut(url);
+
+          httpRequestBase.setEntity(new StringEntity(body));
+          httpRequestBase.setHeaders(addHeaders(customHeaders));
+          request = httpRequestBase;
         }
 
         HttpConnectionParams.setConnectionTimeout(httpclient.getParams(), CONNECTION_TIMEOUT * 1000);
@@ -153,7 +158,7 @@ public class AjaxRequestManager {
         BufferedReader reader = new BufferedReader(new InputStreamReader(content), 1024);
         String line;
         while ((line = reader.readLine()) != null) {
-          builder.append(line);
+          builder.append(line.replace("'", "\\'").replace("\"", "\\\"").replace("\\n", "\\\\n"));
         }
 
       } catch (Exception e) {
